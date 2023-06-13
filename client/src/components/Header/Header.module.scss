@@ -1,0 +1,28 @@
+@use '../../common/styles/colors';
+@use '../../common/styles/fonts';
+
+.header {
+  background-color: colors.$blue-normal;
+  padding: 14px 60px;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: block;
+  background: url('../../images/Header/logo.svg') no-repeat 0 0 / contain;
+  text-decoration: none;
+  margin-right: 60px;
+  width: 70px;
+  height: 70px;
+}
+
+.nav {
+  display: flex;
+}
+
+.navLink {
+  @include fonts.navText;
+  margin-right: 60px;
+  text-decoration: none;
+}

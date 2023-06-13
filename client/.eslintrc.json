@@ -1,0 +1,174 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true
+  },
+  "settings": {
+    "react": {
+      "createClass": "createReactClass", // Regex for Component Factory to use, default to "createReactClass"
+      "pragma": "React", // Pragma to use, default to "React"
+      "fragment": "Fragment", // Fragment to use (may be a property of <pragma>), default to "Fragment"
+      "version": "detect", // React version. "detect" automatically picks the version you have installed.
+      // You can also use `16.0`, `16.3`, etc, if you want to override the detected value.
+      // It will default to "latest" and warn if missing, and to "detect" in the future
+      "flowVersion": "0.53" // Flow version
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "import",
+    "eslint-plugin-no-inline-styles"
+  ],
+  "rules": {
+    // common eslint rules https://eslint.org/docs/latest/rules/
+    "prefer-rest-params": "warn",
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "never",
+        "exports": "never",
+        "functions": "never"
+      }
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 120,
+        "ignoreComments": true,
+        "ignoreStrings": true,
+        "ignorePattern": "d=\"([\\s\\S]*?)\"" // for SVG 'd' attribute
+      }
+    ],
+    "implicit-arrow-linebreak": "off",
+    "object-curly-newline": [
+      "error",
+      {
+        "multiline": true,
+        "consistent": true
+      }
+    ],
+    "operator-linebreak": [
+      "error",
+      "after",
+      {
+        "overrides": {
+          "&&": "after"
+        }
+      }
+    ],
+    "linebreak-style": [
+      "off"
+    ],
+    "no-trailing-spaces": [
+      "error",
+      {
+        "ignoreComments": true
+      }
+    ],
+    "no-constant-binary-expression": "error",
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": [
+          "state"
+        ]
+      }
+    ],
+    // eslint-plugin-react https://github.com/jsx-eslint/eslint-plugin-react
+    "react/jsx-filename-extension": "off",
+    "react/prop-types": "off",
+    "react/no-array-index-key": "warn",
+    "react/no-unknown-property": [
+      "error",
+      {
+        "ignore": [
+          "focused"
+        ]
+      }
+    ],
+    "react/jsx-one-expression-per-line": [
+      "error",
+      {
+        "allow": "single-child"
+      }
+    ],
+    "react/forbid-component-props": "error",
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": "arrow-function"
+      }
+    ],
+    // "react/destructuring-assignment": ["error", "always", { "destructureInSignature": "always" }],
+    "react/no-multi-comp": [
+      "error",
+      {
+        "ignoreStateless": true
+      }
+    ],
+    "react/no-unstable-nested-components": "error",
+    "react/jsx-child-element-spacing": "error",
+    "react/require-default-props": "off",
+    // eslint-plugin-import https://github.com/import-js/eslint-plugin-import
+    "import/no-cycle": "off",
+    "import/order": [
+      "error",
+      {
+        "warnOnUnassignedImports": true,
+        "newlines-between": "always",
+        "pathGroups": [
+          {
+            "pattern": "./**/*.@(css)",
+            "group": "unknown",
+            "position": "before"
+          },
+          {
+            "pattern": "../../../**/*.@(png|svg|jpg)",
+            "group": "unknown",
+            "position": "after"
+          },
+          {
+            "pattern": "../../**/*.@(png|svg|jpg)",
+            "group": "unknown",
+            "position": "after"
+          },
+          {
+            "pattern": "**/*.@(png|svg|jpg)",
+            "group": "unknown",
+            "position": "after"
+          }
+        ],
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "unknown"
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    // eslint-plugin-no-inline-styles https://github.com/nmanthena18/eslint-no-inline-styles
+    "no-inline-styles/no-inline-styles": "warn"
+  }
+}

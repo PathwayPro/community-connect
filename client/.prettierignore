@@ -1,0 +1,11 @@
+# Ignore artifacts:
+/build
+README.md
+package.json
+package-lock.json
+yarn.lock
+
+**/.git
+**/.svn
+**/.hg
+**/node_modules
