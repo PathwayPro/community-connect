@@ -1,11 +1,34 @@
-# Dependencies
-node_modules
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# yarn error logs
-yarn-error.log
+# dependencies
+/node_modules
+/client/node_modules
+/server/node_modules
+/.pnp
+.pnp.js
 
-# Environment varibales
+# testing
+/coverage
 
+# production
+/build
 
-# Code coverage
-coverage
+# misc
+.DS_Store
+.env*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+### VisualStudioCode ###
+.vscode/*
+.vscode/settings.json
+.vscode/**/*
+
+### IntelliJ ###
+.idea
