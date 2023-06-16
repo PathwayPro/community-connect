@@ -1,28 +1,37 @@
 import React, { FC } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import Header from './components/Header/Header';
 import Events from './pages/Events/Events';
+import Faq from './pages/FAQ/Faq';
+import Layout from './pages/Layout/Layout';
 import Main from './pages/Main/Main';
+import Mentorship from './pages/Mentorship/Mentorship';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Main />,
-  },
-  {
-    path: 'events',
-    element: <Events />,
+    Component: Layout,
+    children: [
+      {
+        index: true,
+        Component: Main,
+      },
+      {
+        path: 'events',
+        Component: Events,
+      },
+      {
+        path: 'mentorship',
+        Component: Mentorship,
+      },
+      {
+        path: 'faq',
+        Component: Faq,
+      },
+    ],
   },
 ]);
 
-const App: FC = () => {
-  return (
-    <div className="App">
-      <Header />
-      <RouterProvider router={router} />
-    </div>
-  );
-};
+const App: FC = () => <RouterProvider router={router} />;
 
 export default App;

@@ -1,0 +1,50 @@
+/* EXTENDS */
+
+%reset-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+%reset-h {
+  padding: 0;
+  margin: 0;
+  font-weight: normal;
+  font-size: inherit;
+}
+
+%reset-p {
+  padding: 0;
+  margin: 0;
+}
+
+%flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+%flex-left-center {
+  display: flex;
+  align-items: center;
+}
+
+%abs-pos-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+%truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+/* MIXINS */
+
+@mixin common-transition($properties: all) {
+  transition: $properties 0.2s ease-in-out;
+}

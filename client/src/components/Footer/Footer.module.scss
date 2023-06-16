@@ -1,0 +1,7 @@
+@use '../../common/styles/colors';
+
+.footer {
+  background-color: colors.$blue-normal;
+  margin-top: auto;
+  padding: 60px;
+}

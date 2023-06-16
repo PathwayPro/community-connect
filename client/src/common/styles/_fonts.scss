@@ -4,7 +4,23 @@
   font-family: 'Open Sans', sans-serif;
 }
 
-@mixin navText($font-weight: 700, $color: colors.$white-light, $font-size: 23px) {
+@mixin mainText($font-size: 16px, $font-weight: 400, $color: colors.$black-normal) {
+  @extend %font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: 1.5;
+  color: $color;
+}
+
+@mixin navText($font-size: 23px, $font-weight: 700, $color: colors.$white-light) {
+  @extend %font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: 1.5;
+  color: $color;
+}
+
+@mixin buttonText($font-size: 19px, $font-weight: 700, $color: colors.$black-normal) {
   @extend %font-family;
   font-size: $font-size;
   font-weight: $font-weight;
