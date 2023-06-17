@@ -1,7 +1,6 @@
 const express = require('express');
 const helmet = require('helmet');
 const xss = require('xss-clean');
-const mongoSanitize = require('express-mongo-sanitize');
 const compression = require('compression');
 const cors = require('cors');
 const httpStatus = require('http-status');
@@ -36,13 +35,6 @@ app.use(compression());
 app.use(cors());
 app.options('*', cors());
 
-// jwt authentication
-//app.use(passport.initialize());
-
-// limit repeated failed requests to auth endpoints
-if (config.env === 'production') {
-    app.use('/v1/auth', authLimiter);
-}
 
 
 // send back a 404 error for any unknown api request
