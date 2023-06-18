@@ -7,11 +7,11 @@ import Input from '../../common/components/Input/Input';
 import {
   NAME_REGEX,
   ERROR_MESSAGE_NAME,
+  EMAIL_REGEX,
+  ERROR_MESSAGE_EMAIL,
   PASS_REGEX,
   ERROR_MESSAGE_PASSWORD,
   ERROR_MESSAGE_REPASSWORD,
-  EMAIL_REGEX,
-  ERROR_MESSAGE_EMAIL,
 } from '../../common/utils/formComponentsUtils';
 
 import styles from './RegisterForm.module.scss';
@@ -66,12 +66,13 @@ const RegisterForm: FC = () => {
   });
 
   const rePassword = register('rePassword', {
-    required: 'Re-entered Password is required.',
+    required: 'Re-enter password is required.',
     pattern: {
       value: PASS_REGEX,
       message: ERROR_MESSAGE_REPASSWORD,
     },
   });
+
   // TODO: send data to the API
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
     console.log(JSON.stringify(values, undefined, 2));
@@ -159,7 +160,8 @@ const RegisterForm: FC = () => {
             )}
           />
           <label htmlFor="agreement">
-            Do&nbsp;you agree to&nbsp;our Terms and Conditions, Privacy Statement, and Security Policy
+            {'Do&nbsp;you agree to&nbsp;our '}
+            <a href="#">Terms and Conditions, Privacy Statement, and Security Policy</a>
           </label>
         </fieldset>
       </div>
@@ -167,6 +169,10 @@ const RegisterForm: FC = () => {
       <div className={styles.formButton}>
         <Button label="Sign Up" isSubmit onClick={handleSubmit(onSubmit)} size="small" />
       </div>
+      <p className={styles.formBottomText}>
+        {'Already have an account? '}
+        <a href="#">Sign&nbsp;in&nbsp;now.</a>
+      </p>
     </form>
   );
 };

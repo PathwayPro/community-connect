@@ -6,6 +6,8 @@
   margin: 0;
   padding: 0;
   width: 100%;
+  display: flex;
+  flex-direction: column;
   position: relative;
 }
 
@@ -18,6 +20,7 @@
   padding: 12px;
   appearance: none;
   outline: none;
+  @include fonts.mainText;
 
   &::placeholder {
     color: colors.$grey;
@@ -30,6 +33,8 @@
 
   &.error {
     border: 1px solid colors.$error;
+    margin-bottom: 20px;
+    background-color: colors.$error-bg;
   }
 }
 
@@ -41,5 +46,5 @@
 .errorMessage {
   @include fonts.hintText($color: colors.$error);
   position: absolute;
-  top: 73px;
+  top: 85px;
 }

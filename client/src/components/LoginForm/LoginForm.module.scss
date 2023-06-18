@@ -1,0 +1,43 @@
+@use '../../common/styles/colors';
+@use '../../common/styles/fonts';
+@use '../../common/styles/mixins';
+
+.form {
+  flex-direction: column;
+  row-gap: 15px;
+  @extend %flex-center-center;
+}
+
+.formTitle {
+  margin-bottom: 10px;
+  @include fonts.mainText($font-size: 27.5px, $font-weight: 700, $line-height: 41px, $color: colors.$black);
+}
+
+.formRow {
+  @extend %flex;
+  width: 300px;
+
+  &.error {
+    padding-bottom: 10px;
+  }
+}
+
+.input {
+  width: 270px;
+}
+
+.formButton {
+  margin: 10px;
+}
+
+.formBottomPart {
+  @extend %flex-center-center;
+}
+
+.formBottomText {
+  margin: 0px;
+}
+
+.link {
+  text-decoration: underline;
+}
