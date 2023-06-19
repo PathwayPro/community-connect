@@ -1,5 +1,6 @@
 @use '../../common/styles/colors';
 @use '../../common/styles/fonts';
+@use '../../common/styles/mixins';
 
 .header {
   background-color: colors.$blue-normal;
@@ -25,4 +26,18 @@
   @include fonts.navText;
   margin-right: 60px;
   text-decoration: none;
+
+  &.active,
+  &.pending {
+    text-decoration: underline;
+  }
+}
+
+.buttons {
+  margin-left: auto;
+  @extend %flex-left-center;
+}
+
+.navButton {
+  margin-right: 16px;
 }

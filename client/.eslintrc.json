@@ -107,7 +107,14 @@
         "allow": "single-child"
       }
     ],
-    "react/forbid-component-props": "error",
+    "react/forbid-component-props": [
+      "error",
+      {
+        "forbid": [
+          "style"
+        ]
+      }
+    ],
     "react/function-component-definition": [
       "error",
       {

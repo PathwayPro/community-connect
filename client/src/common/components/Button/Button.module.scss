@@ -1,0 +1,83 @@
+@use '../../styles/colors';
+@use '../../styles/fonts';
+@use '../../styles/mixins';
+
+@mixin disabled-styles {
+  border: none;
+  cursor: default;
+  pointer-events: none;
+  background-color: colors.$white-normal-hover;
+  color: colors.$white-dark-active;
+}
+
+.button {
+  padding: 0 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  @extend %flex-center;
+
+  &.normal {
+    height: 64px;
+    min-width: 150px;
+    @include fonts.buttonText;
+  }
+
+  &.small {
+    height: 48px;
+    min-width: 120px;
+    @include fonts.buttonText($font-size: 16px);
+  }
+
+  &.orange {
+    background-color: colors.$orange-normal;
+
+    &:disabled {
+      @include disabled-styles;
+    }
+
+    &:hover {
+      background-color: colors.$orange-normal-hover;
+    }
+
+    &:active {
+      background-color: colors.$orange-normal-active;
+    }
+  }
+
+  &.orangeLight {
+    background-color: colors.$orange-light;
+
+    &:disabled {
+      @include disabled-styles;
+    }
+
+    &:hover {
+      background-color: colors.$orange-light-hover;
+    }
+
+    &:active {
+      background-color: colors.$orange-light-active;
+    }
+  }
+
+  &.hollow {
+    color: colors.$orange-normal;
+    border: 3px solid colors.$orange-normal;
+    background-color: transparent;
+
+    &:disabled {
+      @include disabled-styles;
+    }
+
+    &:hover {
+      color: colors.$orange-normal-hover;
+      border: 3px solid colors.$orange-normal-hover;
+    }
+
+    &:active {
+      color: colors.$orange-normal-active;
+      border: 3px solid colors.$orange-normal-active;
+    }
+  }
+}
