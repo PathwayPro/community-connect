@@ -1,0 +1,19 @@
+.icon {
+  display: block;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+
+  &.in {
+    background: url('/images/Icon/in.svg');
+  }
+
+  &.fb {
+    background: url('/images/Icon/fb.svg');
+  }
+
+  &.inst {
+    background: url('/images/Icon/inst.svg');
+  }
+}

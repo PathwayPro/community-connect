@@ -4,7 +4,7 @@
   font-family: 'Open Sans', sans-serif;
 }
 
-@mixin mainText($font-size: 16px, $font-weight: 400, $color: colors.$black-normal) {
+@mixin mainText($font-size: 16px, $font-weight: 400, $color: colors.$black) {
   @extend %font-family;
   font-size: $font-size;
   font-weight: $font-weight;
@@ -20,7 +20,7 @@
   color: $color;
 }
 
-@mixin buttonText($font-size: 19px, $font-weight: 700, $color: colors.$black-normal) {
+@mixin buttonText($font-size: 19px, $font-weight: 700, $color: colors.$black) {
   @extend %font-family;
   font-size: $font-size;
   font-weight: $font-weight;
