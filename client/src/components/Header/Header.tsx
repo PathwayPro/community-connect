@@ -48,7 +48,7 @@ const Header: FC = () => {
       </nav>
       <div className={styles.buttons}>
         <Button label="Login" color="hollow" onClick={onLoginClick} className={styles.navButton} />
-        <Button label="Register" color="light" onClick={onRegisterClick} />
+        <Button label="Register" color="orangeLight" onClick={onRegisterClick} />
       </div>
     </header>
   );

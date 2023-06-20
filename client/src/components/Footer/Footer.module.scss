@@ -1,7 +1,56 @@
 @use '../../common/styles/colors';
+@use '../../common/styles/mixins';
+@use '../../common/styles/fonts';
 
 .footer {
   background-color: colors.$blue-normal;
   margin-top: auto;
   padding: 60px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 7.5%;
+}
+
+.container {
+  background-color: colors.$blue-normal-active;
+  border-radius: 15px;
+  padding: 26px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include fonts.mainText($font-size: 19px, $color: colors.$white);
+}
+
+.heading {
+  @extend %reset-h;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.list {
+  @extend %reset-list;
+}
+
+.listColumn {
+  text-align: center;
+  margin-bottom: 8px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.link {
+  color: colors.$white;
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.socials {
+  display: flex;
+  gap: 16px;
+  margin-top: auto;
 }
