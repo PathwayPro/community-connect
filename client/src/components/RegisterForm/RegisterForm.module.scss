@@ -1,0 +1,51 @@
+@use '../../common/styles/colors';
+@use '../../common/styles/fonts';
+
+.form {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.formRow {
+  display: flex;
+  column-gap: 16px;
+  margin-bottom: 18px;
+
+  &.error {
+    padding-bottom: 30px;
+  }
+  &.errorCheckbox {
+    padding-top: 15px;
+  }
+}
+
+.formField {
+  width: 277px;
+}
+
+.formButton {
+  width: 100%;
+  margin-top: 26px;
+  display: flex;
+  justify-content: center;
+}
+
+.checkboxField {
+  display: flex;
+  align-items: center;
+  border: none;
+  margin: 0;
+  padding: 0;
+  @include fonts.hintText;
+}
+
+.checkbox {
+  display: block;
+  background: colors.$blue-light;
+  border: 2px solid colors.$blue-darker;
+  border-radius: 20px;
+  height: 18px;
+  width: 18px;
+  margin-right: 8px;
+}
