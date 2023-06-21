@@ -15,10 +15,6 @@
     "dev-backendonly": "yarn workspace server dev"
   },
   "devDependencies": {
-    "@types/react": "^18.2.14",
     "concurrently": "^8.2.0"
-  },
-  "dependencies": {
-    "react": "^18.2.0"
   }
 }
