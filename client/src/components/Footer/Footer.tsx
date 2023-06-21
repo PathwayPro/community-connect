@@ -37,6 +37,14 @@ const socialsList: iconProps[] = [
   { href: '/', type: 'inst' },
 ];
 
+const onClickUpButton = () => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth',
+  });
+};
+
 const Footer: FC = () => {
   return (
     <footer className={styles.footer}>
@@ -58,15 +66,14 @@ const Footer: FC = () => {
               </li>
             ))}
           </ul>
-          {element.heading === 'Contacts' && (
-            <div className={styles.socials}>
-              {socialsList.map((item) => (
-                <Icon key={item.type} href={item.href} type={item.type} />
-              ))}
-            </div>
-          )}
         </div>
       ))}
+      <div className={styles.socials}>
+        {socialsList.map((item) => (
+          <Icon key={item.type} href={item.href} type={item.type} />
+        ))}
+      </div>
+      <button className={styles.upButton} onClick={onClickUpButton} />
     </footer>
   );
 };

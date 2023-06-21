@@ -1,0 +1,19 @@
+@use './common/styles/fonts';
+@import '~@csstools/normalize.css/normalize';
+
+body,
+html {
+  margin: 0;
+  @include fonts.mainText;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  @extend %font-family;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

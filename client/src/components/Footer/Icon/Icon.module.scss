@@ -6,14 +6,14 @@
   overflow: hidden;
 
   &.in {
-    background: url('/images/Icon/in.svg');
+    background: url('/images/Icon/in.svg') no-repeat center center / cover;
   }
 
   &.fb {
-    background: url('/images/Icon/fb.svg');
+    background: url('/images/Icon/fb.svg') no-repeat center center / cover;
   }
 
   &.inst {
-    background: url('/images/Icon/inst.svg');
+    background: url('/images/Icon/inst.svg') no-repeat center center / cover;
   }
 }

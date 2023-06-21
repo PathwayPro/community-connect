@@ -3,22 +3,22 @@
 @use '../../common/styles/fonts';
 
 .footer {
-  background-color: colors.$blue-normal;
+  background: url('/images/Footer/footer-bg.png') no-repeat 0 0 / cover;
   margin-top: auto;
-  padding: 60px;
+  padding: 80px 60px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 7.5%;
+  position: relative;
 }
 
 .container {
-  background-color: colors.$blue-normal-active;
-  border-radius: 15px;
-  padding: 26px 10px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   @include fonts.mainText($font-size: 19px, $color: colors.$white);
+  line-height: 1.25;
 }
 
 .heading {
@@ -53,4 +53,20 @@
   display: flex;
   gap: 16px;
   margin-top: auto;
+  position: absolute;
+  top: -25px;
+  left: 60px;
+  z-index: 10;
+}
+
+.upButton {
+  position: absolute;
+  top: -25px;
+  right: 60px;
+  height: 50px;
+  width: 50px;
+  border: none;
+  cursor: pointer;
+  background: url('/images/Icon/button-up.svg') no-repeat center center / cover;
+  z-index: 10;
 }
