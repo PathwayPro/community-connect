@@ -29,6 +29,12 @@
   align-items: center;
 }
 
+%flex-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 %abs-pos-center {
   position: absolute;
   top: 50%;

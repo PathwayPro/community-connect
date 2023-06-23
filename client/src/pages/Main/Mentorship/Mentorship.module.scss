@@ -1,0 +1,40 @@
+@use '../../../common/styles/colors';
+@use '../../../common/styles/fonts';
+@use '../../../common/styles/mixins';
+
+.inner {
+  gap: 30px;
+  @extend %flex-space-between;
+}
+
+.part {
+  max-width: 43%;
+  width: 100%;
+
+  &:nth-child(2) {
+    max-width: 57%;
+  }
+}
+
+.heading {
+  margin: 0 0 26px;
+  @include fonts.headingText($color: inherit);
+}
+
+.subheading {
+  margin: 0 0 26px;
+  @include fonts.navText($color: colors.$black);
+}
+
+.text {
+  max-width: 400px;
+  margin-bottom: 26px;
+  @include fonts.mainText($color: inherit);
+}
+
+.image {
+  display: block;
+  width: 100%;
+  max-width: 730px;
+  margin-left: auto;
+}

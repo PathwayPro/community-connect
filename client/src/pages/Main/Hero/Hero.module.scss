@@ -1,0 +1,43 @@
+@use '../../../common/styles/colors';
+@use '../../../common/styles/fonts';
+@use '../../../common/styles/mixins';
+
+.inner {
+  gap: 20px;
+  @extend %flex-space-between;
+}
+
+.part {
+  max-width: 50%;
+  width: 100%;
+  z-index: 1;
+
+  &:nth-child(2) {
+    z-index: 0;
+  }
+}
+
+.heading {
+  margin: 0 0 16px;
+  font-size: 58px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.subheading {
+  margin: 0 0 26px;
+  @include fonts.navText($color: colors.$black);
+}
+
+.text {
+  max-width: 95%;
+  margin-bottom: 50px;
+  @include fonts.mainText;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  max-width: 660px;
+  margin-left: auto;
+}
