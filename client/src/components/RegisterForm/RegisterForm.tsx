@@ -11,6 +11,7 @@ import {
   ERROR_MESSAGE_PASSWORD,
   ERROR_MESSAGE_REPASSWORD,
   EMAIL_REGEX,
+  ERROR_MESSAGE_EMAIL,
 } from '../../common/utils/formComponentsUtils';
 
 import styles from './RegisterForm.module.scss';
@@ -18,7 +19,6 @@ import styles from './RegisterForm.module.scss';
 interface IFormInput {
   firstName: string;
   lastName: string;
-  userName: string;
   email: string;
   password: string;
   rePassword: string;
@@ -34,7 +34,7 @@ const RegisterForm: FC = () => {
   } = useForm<IFormInput>();
 
   const firstName = register('firstName', {
-    required: 'Name is required.',
+    required: 'First name is required.',
     pattern: {
       value: NAME_REGEX,
       message: ERROR_MESSAGE_NAME,
@@ -42,15 +42,7 @@ const RegisterForm: FC = () => {
   });
 
   const lastName = register('lastName', {
-    required: 'Lastname is required.',
-    pattern: {
-      value: NAME_REGEX,
-      message: ERROR_MESSAGE_NAME,
-    },
-  });
-
-  const userName = register('userName', {
-    required: 'Username is required.',
+    required: 'Last name is required.',
     pattern: {
       value: NAME_REGEX,
       message: ERROR_MESSAGE_NAME,
@@ -61,7 +53,7 @@ const RegisterForm: FC = () => {
     required: 'Email is required.',
     pattern: {
       value: EMAIL_REGEX,
-      message: ERROR_MESSAGE_NAME,
+      message: ERROR_MESSAGE_EMAIL,
     },
   });
 
@@ -74,7 +66,7 @@ const RegisterForm: FC = () => {
   });
 
   const rePassword = register('rePassword', {
-    required: 'Password is required.',
+    required: 'Re-entered Password is required.',
     pattern: {
       value: PASS_REGEX,
       message: ERROR_MESSAGE_REPASSWORD,
@@ -102,7 +94,7 @@ const RegisterForm: FC = () => {
         <div className={styles.formField}>
           <Input
             name={lastName.name}
-            label="First name"
+            label="Last name"
             autoComplete="on"
             onChange={lastName.onChange}
             onBlur={lastName.onBlur}
@@ -111,17 +103,7 @@ const RegisterForm: FC = () => {
           />
         </div>
       </div>
-      <div className={classNames(styles.formRow, (errors.userName || errors.email) && styles.error)}>
-        <div className={styles.formField}>
-          <Input
-            name={userName.name}
-            label="Username"
-            onChange={userName.onChange}
-            onBlur={userName.onBlur}
-            ref={userName.ref}
-            errorMessage={errors.userName?.message}
-          />
-        </div>
+      <div className={classNames(styles.formRow, errors.email && styles.error)}>
         <div className={styles.formField}>
           <Input
             name={email.name}
@@ -168,7 +150,13 @@ const RegisterForm: FC = () => {
             rules={{
               required: true,
             }}
-            render={({ field }) => <input type="checkbox" {...field} className={styles.checkbox} />}
+            render={({ field, fieldState }) => (
+              <input
+                type="checkbox"
+                {...field}
+                className={classNames(styles.checkbox, fieldState.error && styles.error)}
+              />
+            )}
           />
           <label htmlFor="agreement">
             Do&nbsp;you agree to&nbsp;our Terms and Conditions, Privacy Statement, and Security Policy

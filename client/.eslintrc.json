@@ -42,7 +42,7 @@
         "arrays": "always-multiline",
         "objects": "always-multiline",
         "imports": "always-multiline",
-        "exports": "never",
+        "exports": "always-multiline",
         "functions": "never"
       }
     ],
@@ -52,7 +52,7 @@
         "arrays": "always-multiline",
         "objects": "always-multiline",
         "imports": "always-multiline",
-        "exports": "never",
+        "exports": "always-multiline",
         "functions": "never"
       }
     ],
