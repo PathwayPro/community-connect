@@ -1,7 +1,37 @@
 @use './colors';
 
+/* light */
+@font-face {
+  font-family: 'poppins';
+  src: url('/common/styles/fonts/poppins-light-webfont.woff') format('woff');
+  src: url('/common/styles/fonts/poppins-light-webfont.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* regular */
+@font-face {
+  font-family: 'poppins';
+  src: url('/common/styles/fonts/poppins-regular-webfont.woff') format('woff');
+  src: url('/common/styles/fonts/poppins-regular-webfont.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+/* bold */
+@font-face {
+  font-family: 'poppins';
+  src: url('/common/styles/fonts/poppins-bold-webfont.woff') format('woff');
+  src: url('/common/styles/fonts/poppins-bold-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+// STYLES
 %font-family {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'poppins', sans-serif;
 }
 
 @mixin mainText($font-size: 16px, $font-weight: 400, $color: colors.$black) {
