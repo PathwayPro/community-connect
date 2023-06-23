@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 import ButtonLink from '../../../common/components/ButtonLink/ButtonLink';
 import Section from '../../../common/components/Section/Section';

@@ -1,4 +1,4 @@
-import React, { MouseEvent, FC } from 'react';
+import { MouseEvent, FC } from 'react';
 
 import Button from '../../../common/components/Button/Button';
 import Section from '../../../common/components/Section/Section';
