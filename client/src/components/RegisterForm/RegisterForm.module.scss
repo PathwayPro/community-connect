@@ -1,0 +1,83 @@
+@use '../../common/styles/colors';
+@use '../../common/styles/fonts';
+
+.form {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.formRow {
+  display: flex;
+  column-gap: 16px;
+  margin-bottom: 18px;
+
+  &.error {
+    padding-bottom: 30px;
+  }
+
+  &.errorCheckbox {
+    padding-top: 15px;
+  }
+}
+
+.formField {
+  width: 277px;
+}
+
+.formButton {
+  width: 100%;
+  margin-top: 26px;
+  display: flex;
+  justify-content: center;
+}
+
+.checkboxField {
+  display: flex;
+  align-items: center;
+  border: none;
+  margin: 0;
+  padding: 0;
+  @include fonts.hintText;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 2px solid colors.$grey-dark;
+  border-radius: 3px;
+  height: 18px;
+  width: 18px;
+  margin-right: 8px;
+  appearance: none;
+  position: relative;
+  z-index: 1;
+
+  &:checked {
+    background: colors.$focus;
+    border: none;
+
+    &::before {
+      position: absolute;
+      content: url('/images/Icon/check.svg');
+      height: 15px;
+      width: 15px;
+      z-index: 10;
+    }
+  }
+
+  &.error {
+    border-color: colors.$error;
+
+    &::after {
+      display: block;
+      content: '*';
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      color: colors.$error;
+    }
+  }
+}
