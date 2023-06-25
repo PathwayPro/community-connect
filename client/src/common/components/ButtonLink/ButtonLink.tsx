@@ -26,12 +26,7 @@ const ButtonLink: FC<ButtonLinkProps> = ({
   // Use a standard anchor tag for external links
   if (external) {
     return (
-      <a
-        href={to}
-        className={linkClass}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a href={to} className={linkClass} target="_blank" rel="noopener noreferrer">
         {label}
       </a>
     );
@@ -39,10 +34,7 @@ const ButtonLink: FC<ButtonLinkProps> = ({
 
   // Use a Link for internal routes
   return (
-    <Link
-      to={to}
-      className={linkClass}
-    >
+    <Link to={to} className={linkClass}>
       {label}
     </Link>
   );
