@@ -56,7 +56,6 @@
   font-weight: $font-weight;
   line-height: 1.5;
   color: $color;
-  text-align: center;
 }
 
 @mixin navText($font-size: 23px, $font-weight: 700, $color: colors.$white-light) {
