@@ -1,0 +1,48 @@
+@use '../../../common/styles/colors';
+@use '../../../common/styles/fonts';
+@use '../../../common/styles/mixins';
+
+.inner {
+  gap: 30px;
+  @extend %flex-space-between;
+}
+
+.part {
+  max-width: 60%;
+  width: 100%;
+
+  &:nth-child(2) {
+    max-width: 40%;
+  }
+}
+
+.heading {
+  margin: 0 0 26px;
+  text-align: center;
+  @include fonts.headingText($color: inherit);
+}
+
+.subheading {
+  margin: 0 0 26px;
+  @include fonts.navText($color: colors.$black);
+}
+
+.text {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 26px;
+  text-align: center;
+  @include fonts.mainText($color: inherit);
+}
+
+.link {
+  margin: 0 auto;
+}
+
+.image {
+  display: block;
+  max-width: 760px;
+  width: 100%;
+  margin-right: auto;
+}

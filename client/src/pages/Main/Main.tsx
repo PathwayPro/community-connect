@@ -1,10 +1,18 @@
 import { FC } from 'react';
 
+import Education from './Education/Education';
+import Events from './Events/Events';
+import Hero from './Hero/Hero';
+import Mentorship from './Mentorship/Mentorship';
+
 const Main: FC = () => {
   return (
-    <div>
-      <h1>Hello, this is the Main page</h1>
-    </div>
+    <>
+      <Hero />
+      <Events />
+      <Mentorship />
+      <Education />
+    </>
   );
 };
 
