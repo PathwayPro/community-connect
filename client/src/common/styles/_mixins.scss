@@ -52,5 +52,5 @@
 /* MIXINS */
 
 @mixin common-transition($properties: all) {
-  transition: $properties 0.2s ease-in-out;
+  transition: $properties 0.5s ease;
 }

@@ -1,0 +1,7 @@
+@use '../../../common/styles/fonts';
+
+.heading {
+  margin: 0 0 26px;
+  text-align: center;
+  @include fonts.headingText($color: inherit);
+}

@@ -1,0 +1,69 @@
+@use '../../common/styles/colors';
+@use '../../common/styles/mixins';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: colors.$blue-normal;
+  overflow: hidden;
+}
+
+.slide {
+  flex: 0 0 auto;
+  opacity: 0;
+  width: 100%;
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+.slides {
+  display: flex;
+  @include mixins.common-transition;
+}
+
+.buttonsWrapper {
+  @extend %flex-space-between;
+}
+
+.button {
+  bottom: 0;
+  border: none;
+  padding: 0;
+  appearance: none;
+  height: 42px;
+  width: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+
+  &.left {
+    background: url('/images/Icon/arrow-right.svg') no-repeat center center / cover;
+    transform: rotate(180deg);
+  }
+
+  &.right {
+    background: url('/images/Icon/arrow-right.svg') no-repeat center center / cover;
+  }
+}
+
+.dots {
+  display: flex;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: colors.$grey-light;
+  margin-right: 8px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &.active {
+    background-color: colors.$orange-normal;
+  }
+}
