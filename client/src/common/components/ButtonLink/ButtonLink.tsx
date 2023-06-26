@@ -21,19 +21,15 @@ const ButtonLink: FC<ButtonLinkProps> = ({
   className,
   external = false,
 }) => {
-  const linkClass = classNames(className, styles.link, size && styles[size], color && styles[color]);
+  const linkClass = classNames(className, styles.link, styles[size], styles[color]);
 
-  // Use a standard anchor tag for external links
-  if (external) {
-    return (
-      <a href={to} className={linkClass} target="_blank" rel="noopener noreferrer">
-        {label}
-      </a>
-    );
-  }
-
-  // Use a Link for internal routes
-  return (
+  return external ? (
+    // Use a standard anchor tag for external links
+    <a href={to} className={linkClass} target="_blank" rel="noopener noreferrer">
+      {label}
+    </a>
+  ) : (
+    // Use a Link for internal routes
     <Link to={to} className={linkClass}>
       {label}
     </Link>
