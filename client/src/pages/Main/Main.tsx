@@ -4,6 +4,7 @@ import Education from './Education/Education';
 import Events from './Events/Events';
 import Hero from './Hero/Hero';
 import Mentorship from './Mentorship/Mentorship';
+import Partners from './Partners/Partners';
 
 const Main: FC = () => {
   return (
@@ -11,6 +12,7 @@ const Main: FC = () => {
       <Hero />
       <Events />
       <Mentorship />
+      <Partners />
       <Education />
     </>
   );

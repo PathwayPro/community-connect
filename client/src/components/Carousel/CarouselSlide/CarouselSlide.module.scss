@@ -1,0 +1,5 @@
+@use '../../../common/styles/mixins';
+
+.container {
+  @extend %flex-space-between;
+}
