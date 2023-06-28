@@ -20,6 +20,7 @@
   &.small {
     height: 48px;
     min-width: 120px;
+    width: fit-content;
     @include fonts.buttonText($font-size: 16px);
   }
 
