@@ -21,7 +21,7 @@ const Events: FC = () => {
             for cultural celebrations, workshops, seminars, and community gatherings to embrace your heritage and forge
             connections with like-minded individuals. Together, let&apos;s build a brighter future!
           </p>
-          <ButtonLink to="/events" label="Explore Upcoming Events" color="orange" className={styles.link} />
+          <ButtonLink to="/events" label="Explore Upcoming Events" color="orange" size="small" className={styles.link} />
         </div>
       </div>
     </Section>
