@@ -1,0 +1,19 @@
+@use '../../common/styles/colors';
+@use '../../common/styles/media';
+
+.section {
+  padding: 80px 0;
+
+  &:nth-child(odd) {
+    color: colors.$white;
+    background-color: colors.$blue-normal;
+  }
+
+  @include media.media-l {
+    padding: 40px 0;
+  }
+
+  @include media.media-s {
+    padding: 26px 0;
+  }
+}

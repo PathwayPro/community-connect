@@ -1,9 +1,16 @@
+@use '../../../common/styles/media.scss';
+
 .icon {
   display: block;
   height: 50px;
   width: 50px;
   border-radius: 50%;
   overflow: hidden;
+
+  @include media.media-s {
+    width: 40px;
+    height: 40px;
+  }
 
   &.in {
     background: url('/images/Icon/in.svg') no-repeat center center / cover;

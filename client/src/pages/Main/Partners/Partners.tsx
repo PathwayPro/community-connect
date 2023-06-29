@@ -1,8 +1,9 @@
 import { FC } from 'react';
 
-import Section from '../../../common/components/Section/Section';
+import Heading from '../../../common/components/Heading/Heading';
 import Carousel from '../../../components/Carousel/Carousel';
 import CarouselSlide from '../../../components/Carousel/CarouselSlide/CarouselSlide';
+import SectionMain from '../../../components/SectionMain/SectionMain';
 
 import styles from './Partners.module.scss';
 
@@ -18,14 +19,16 @@ const partnersList = {
 
 const Partners: FC = () => {
   return (
-    <Section>
-      <h2 className={styles.heading}>Our partners</h2>
+    <SectionMain>
+      <Heading tagType="h2" className={styles.heading}>
+        Our partners
+      </Heading>
       <Carousel>
         <CarouselSlide slidesList={partnersList.slide1} />
         <CarouselSlide slidesList={partnersList.slide2} />
         <CarouselSlide slidesList={partnersList.slide3} />
       </Carousel>
-    </Section>
+    </SectionMain>
   );
 };
 

@@ -30,8 +30,8 @@ const RegisterForm: FC = () => {
     register,
     handleSubmit,
     control,
-    formState: { errors },
-  } = useForm<IFormInput>();
+    formState: { errors, isValid, isDirty },
+  } = useForm<IFormInput>({ mode: 'onTouched' });
 
   const firstName = register('firstName', {
     required: 'First name is required',
@@ -83,7 +83,7 @@ const RegisterForm: FC = () => {
       <div className={styles.formRow}>
         <Input
           name={firstName.name}
-          label="First name"
+          label="First name *"
           autoComplete="on"
           className={styles.formField}
           onChange={firstName.onChange}
@@ -93,7 +93,7 @@ const RegisterForm: FC = () => {
         />
         <Input
           name={lastName.name}
-          label="Last name"
+          label="Last name *"
           autoComplete="on"
           className={styles.formField}
           onChange={lastName.onChange}
@@ -105,7 +105,7 @@ const RegisterForm: FC = () => {
       <div className={styles.formRow}>
         <Input
           name={email.name}
-          label="Email"
+          label="Email *"
           type="email"
           autoComplete="on"
           className={styles.formField}
@@ -118,9 +118,9 @@ const RegisterForm: FC = () => {
       <div className={classNames(styles.formRow, (errors.password || errors.rePassword) && styles.error)}>
         <Input
           name={password.name}
-          label="Password"
+          label="Password *"
           type="password"
-          className={styles.formField}
+          className={classNames(styles.formField, errors.password && styles.formFieldPassword)}
           onChange={password.onChange}
           onBlur={password.onBlur}
           ref={password.ref}
@@ -128,7 +128,7 @@ const RegisterForm: FC = () => {
         />
         <Input
           name={rePassword.name}
-          label="Re-enter Password"
+          label="Re-enter Password *"
           type="password"
           className={styles.formField}
           onChange={rePassword.onChange}
@@ -162,7 +162,13 @@ const RegisterForm: FC = () => {
       </div>
 
       <div className={styles.formButton}>
-        <Button label="Sign Up" isSubmit onClick={handleSubmit(onSubmit)} size="small" />
+        <Button
+          label="Sign Up"
+          isSubmit
+          isDisabled={!isValid || !isDirty}
+          onClick={handleSubmit(onSubmit)}
+          size="small"
+        />
       </div>
       <p className={styles.formBottomText}>
         <span>Already have an account? </span>

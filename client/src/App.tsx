@@ -1,11 +1,13 @@
 import { FC } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import AboutUs from './pages/AboutUs/AboutUs';
 import Events from './pages/Events/Events';
 import Faq from './pages/FAQ/Faq';
 import Layout from './pages/Layout/Layout';
 import Main from './pages/Main/Main';
 import Mentorship from './pages/Mentorship/Mentorship';
+import Resources from './pages/Resources/Resources';
 
 const router = createBrowserRouter([
   {
@@ -21,12 +23,20 @@ const router = createBrowserRouter([
         Component: Events,
       },
       {
+        path: 'resources',
+        Component: Resources,
+      },
+      {
         path: 'mentorship',
         Component: Mentorship,
       },
       {
         path: 'faq',
         Component: Faq,
+      },
+      {
+        path: 'about',
+        Component: AboutUs,
       },
     ],
   },
