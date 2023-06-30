@@ -10,7 +10,6 @@ import RegisterForm from '../RegisterForm/RegisterForm';
 import styles from './Header.module.scss';
 
 const Header: FC = () => {
-
   const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
   const [registerModalIsOpen, setRegisterModalIsOpen] = useState(false);
 
@@ -58,27 +57,15 @@ const Header: FC = () => {
       <div className={styles.buttons}>
         <Button label="Login" color="hollow" onClick={onLoginClick} className={styles.navButton} />
 
-        <Modal
-          isModalOpen={loginModalIsOpen}
-          setIsModalOpen={setLoginModalIsOpen}
-          size='small'
-          >
-            <LoginForm
-              isFormOpen={setLoginModalIsOpen}
-            />
+        <Modal isModalOpen={loginModalIsOpen} setIsModalOpen={setLoginModalIsOpen}>
+          <LoginForm isFormOpen={setLoginModalIsOpen} />
         </Modal>
 
         <Button label="Register" color="orangeLight" onClick={onRegisterClick} />
 
-        <Modal
-          isModalOpen={registerModalIsOpen}
-          setIsModalOpen={setRegisterModalIsOpen}
-          size='normal'
-          // eslint-disable-next-line react/no-children-prop
-          children={<RegisterForm/>}
-
-        />
-
+        <Modal isModalOpen={registerModalIsOpen} setIsModalOpen={setRegisterModalIsOpen}>
+          <RegisterForm />
+        </Modal>
       </div>
     </header>
   );

@@ -17,7 +17,7 @@
   background-color: colors.$white;
   border: 1px solid colors.$grey-light;
   border-radius: 8px;
-  padding: 12px;
+  padding: 0 12px;
   appearance: none;
   outline: none;
   @include fonts.mainText;
@@ -33,7 +33,7 @@
 
   &.error {
     border: 1px solid colors.$error;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     background-color: colors.$error-bg;
   }
 }

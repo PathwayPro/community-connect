@@ -7,25 +7,19 @@ import styles from './Modal.module.scss';
 interface ModalProps {
   isModalOpen?: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  size?: 'normal' | 'small';
   className?: string;
-  children?: JSX.Element;
+  children: React.ReactNode;
 }
+ReactModal.setAppElement('#root');
 
-const Modal: FC<ModalProps> = ({
-  isModalOpen = false,
-  size = 'normal',
-  className,
-  children,
-}) => {
-
-  return(
+const Modal: FC<ModalProps> = ({ isModalOpen = false, setIsModalOpen, className, children }) => {
+  return (
     <>
       <ReactModal
         isOpen={isModalOpen}
-        className={classNames(className, styles.modal, size && styles[size])}
+        className={classNames(className, styles.modal)}
         overlayClassName={styles.overlay}
-        ariaHideApp={false}
+        onRequestClose={() => setIsModalOpen(false)}
       >
         <div>{children}</div>
       </ReactModal>

@@ -3,9 +3,9 @@
 @use '../../common/styles/mixins';
 
 .form {
+  @extend %flex-center;
   flex-direction: column;
-  row-gap: 15px;
-  @extend %flex-center-center;
+  row-gap: 16px;
 }
 
 .formTitle {
@@ -13,31 +13,29 @@
   @include fonts.mainText($font-size: 27.5px, $font-weight: 700, $line-height: 41px, $color: colors.$black);
 }
 
-.formRow {
-  @extend %flex;
-  width: 300px;
-
-  &.error {
-    padding-bottom: 10px;
-  }
-}
-
 .input {
-  width: 270px;
+  width: 280px;
 }
 
 .formButton {
-  margin: 10px;
+  margin: 10px 0;
 }
 
 .formBottomPart {
-  @extend %flex-center-center;
+  display: flex;
+  flex-direction: column;
 }
 
 .formBottomText {
-  margin: 0px;
+  @extend %reset-p;
+  margin-bottom: 4px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
-.link {
+.formBottomLink {
   text-decoration: underline;
+  @include fonts.mainText($font-weight: 400);
 }

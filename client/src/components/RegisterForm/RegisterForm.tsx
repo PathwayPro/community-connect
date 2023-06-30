@@ -34,7 +34,7 @@ const RegisterForm: FC = () => {
   } = useForm<IFormInput>();
 
   const firstName = register('firstName', {
-    required: 'First name is required.',
+    required: 'First name is required',
     pattern: {
       value: NAME_REGEX,
       message: ERROR_MESSAGE_NAME,
@@ -42,7 +42,7 @@ const RegisterForm: FC = () => {
   });
 
   const lastName = register('lastName', {
-    required: 'Last name is required.',
+    required: 'Last name is required',
     pattern: {
       value: NAME_REGEX,
       message: ERROR_MESSAGE_NAME,
@@ -50,7 +50,7 @@ const RegisterForm: FC = () => {
   });
 
   const email = register('email', {
-    required: 'Email is required.',
+    required: 'Email is required',
     pattern: {
       value: EMAIL_REGEX,
       message: ERROR_MESSAGE_EMAIL,
@@ -58,7 +58,7 @@ const RegisterForm: FC = () => {
   });
 
   const password = register('password', {
-    required: 'Password is required.',
+    required: 'Password is required',
     pattern: {
       value: PASS_REGEX,
       message: ERROR_MESSAGE_PASSWORD,
@@ -66,7 +66,7 @@ const RegisterForm: FC = () => {
   });
 
   const rePassword = register('rePassword', {
-    required: 'Re-enter password is required.',
+    required: 'Re-enter password is required',
     pattern: {
       value: PASS_REGEX,
       message: ERROR_MESSAGE_REPASSWORD,
@@ -80,67 +80,62 @@ const RegisterForm: FC = () => {
 
   return (
     <form className={styles.form}>
-      <div className={classNames(styles.formRow, (errors.firstName || errors.lastName) && styles.error)}>
-        <div className={styles.formField}>
-          <Input
-            name={firstName.name}
-            label="First name"
-            autoComplete="on"
-            onChange={firstName.onChange}
-            onBlur={firstName.onBlur}
-            ref={firstName.ref}
-            errorMessage={errors.firstName?.message}
-          />
-        </div>
-        <div className={styles.formField}>
-          <Input
-            name={lastName.name}
-            label="Last name"
-            autoComplete="on"
-            onChange={lastName.onChange}
-            onBlur={lastName.onBlur}
-            ref={lastName.ref}
-            errorMessage={errors.lastName?.message}
-          />
-        </div>
+      <div className={styles.formRow}>
+        <Input
+          name={firstName.name}
+          label="First name"
+          autoComplete="on"
+          className={styles.formField}
+          onChange={firstName.onChange}
+          onBlur={firstName.onBlur}
+          ref={firstName.ref}
+          errorMessage={errors.firstName?.message}
+        />
+        <Input
+          name={lastName.name}
+          label="Last name"
+          autoComplete="on"
+          className={styles.formField}
+          onChange={lastName.onChange}
+          onBlur={lastName.onBlur}
+          ref={lastName.ref}
+          errorMessage={errors.lastName?.message}
+        />
       </div>
-      <div className={classNames(styles.formRow, errors.email && styles.error)}>
-        <div className={styles.formField}>
-          <Input
-            name={email.name}
-            label="Email"
-            type="email"
-            autoComplete="on"
-            onChange={email.onChange}
-            onBlur={email.onBlur}
-            ref={email.ref}
-            errorMessage={errors.email?.message}
-          />
-        </div>
+      <div className={styles.formRow}>
+        <Input
+          name={email.name}
+          label="Email"
+          type="email"
+          autoComplete="on"
+          className={styles.formField}
+          onChange={email.onChange}
+          onBlur={email.onBlur}
+          ref={email.ref}
+          errorMessage={errors.email?.message}
+        />
       </div>
       <div className={classNames(styles.formRow, (errors.password || errors.rePassword) && styles.error)}>
-        <div className={styles.formField}>
-          <Input
-            name={password.name}
-            label="Password"
-            type="password"
-            onChange={password.onChange}
-            onBlur={password.onBlur}
-            ref={password.ref}
-            errorMessage={errors.password?.message}
-          />
-        </div>
-        <div className={styles.formField}>
-          <Input
-            name={rePassword.name}
-            label="Re-enter Password"
-            type="password"
-            onChange={rePassword.onChange}
-            onBlur={rePassword.onBlur}
-            ref={rePassword.ref}
-            errorMessage={errors.rePassword?.message}
-          />
-        </div>
+        <Input
+          name={password.name}
+          label="Password"
+          type="password"
+          className={styles.formField}
+          onChange={password.onChange}
+          onBlur={password.onBlur}
+          ref={password.ref}
+          errorMessage={errors.password?.message}
+        />
+        <Input
+          name={rePassword.name}
+          label="Re-enter Password"
+          type="password"
+          className={styles.formField}
+          onChange={rePassword.onChange}
+          onBlur={rePassword.onBlur}
+          ref={rePassword.ref}
+          errorMessage={errors.rePassword?.message}
+        />
       </div>
 
       <div className={classNames(styles.formRow, (errors.password || errors.rePassword) && styles.errorCheckbox)}>
@@ -160,7 +155,7 @@ const RegisterForm: FC = () => {
             )}
           />
           <label htmlFor="agreement">
-            {'Do&nbsp;you agree to&nbsp;our '}
+            <span>Do&nbsp;you agree to&nbsp;our </span>
             <a href="#">Terms and Conditions, Privacy Statement, and Security Policy</a>
           </label>
         </fieldset>
@@ -170,8 +165,10 @@ const RegisterForm: FC = () => {
         <Button label="Sign Up" isSubmit onClick={handleSubmit(onSubmit)} size="small" />
       </div>
       <p className={styles.formBottomText}>
-        {'Already have an account? '}
-        <a href="#">Sign&nbsp;in&nbsp;now.</a>
+        <span>Already have an account? </span>
+        <a href="#" className={styles.formBottomLink}>
+          Sign&nbsp;in&nbsp;now
+        </a>
       </p>
     </form>
   );
