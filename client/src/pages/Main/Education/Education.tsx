@@ -22,7 +22,13 @@ const Education: FC = () => {
             educational grants, and mentoring programs. Users can expand their knowledge, acquire new skills, and pursue
             educational advancement opportunities.
           </p>
-          <ButtonLink to="/events" label="Unlock Your Potential Now" color="orange" size="small" className={styles.link} />
+          <ButtonLink
+            to="/events"
+            label="Unlock Your Potential Now"
+            color="orange"
+            size="small"
+            className={styles.link}
+          />
         </div>
       </div>
     </Section>

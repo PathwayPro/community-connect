@@ -30,7 +30,7 @@ const InputInner = (
   ref: React.ForwardedRef<HTMLInputElement>
 ) => {
   return (
-    <fieldset className={styles.fieldset}>
+    <fieldset className={classNames(styles.fieldset, className)}>
       {label && (
         <label htmlFor={name} className={styles.label}>
           {label}
@@ -41,7 +41,7 @@ const InputInner = (
         type={type}
         placeholder={placeholder}
         autoComplete={autoComplete}
-        className={classNames(styles.input, className, errorMessage && styles.error)}
+        className={classNames(styles.input, errorMessage && styles.error)}
         onChange={onChange}
         onBlur={onBlur}
         ref={ref}
