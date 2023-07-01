@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
-import Education from './Education/Education';
 import Events from './Events/Events';
 import Hero from './Hero/Hero';
 import Mentorship from './Mentorship/Mentorship';
 import Partners from './Partners/Partners';
+import Resources from './Resources/Resources';
 
 const Main: FC = () => {
   return (
@@ -13,7 +13,7 @@ const Main: FC = () => {
       <Events />
       <Mentorship />
       <Partners />
-      <Education />
+      <Resources />
     </>
   );
 };

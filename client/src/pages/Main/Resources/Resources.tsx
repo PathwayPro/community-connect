@@ -1,21 +1,24 @@
 import { FC } from 'react';
 
 import ButtonLink from '../../../common/components/ButtonLink/ButtonLink';
-import Section from '../../../common/components/Section/Section';
+import Heading from '../../../common/components/Heading/Heading';
+import SectionMain from '../../../components/SectionMain/SectionMain';
 
-import styles from './Education.module.scss';
+import styles from './Resources.module.scss';
 
 import sectionImg from '../../../images/Main/education.png';
 
-const Education: FC = () => {
+const Resources: FC = () => {
   return (
-    <Section>
+    <SectionMain>
       <div className={styles.inner}>
         <div className={styles.part}>
-          <img className={styles.image} src={sectionImg} alt="image of human and laptop" />
+          <img src={sectionImg} alt="image of human and laptop" />
         </div>
         <div className={styles.part}>
-          <h2 className={styles.heading}>Resource Hub</h2>
+          <Heading tagType="h2" className={styles.heading}>
+            Resource Hub
+          </Heading>
           <p className={styles.text}>
             Access to quality education is essential for personal and professional growth. The Resource Hub offers a
             curated collection of educational resources, including scholarship opportunities, online courses,
@@ -27,12 +30,12 @@ const Education: FC = () => {
             label="Unlock Your Potential Now"
             color="orange"
             size="small"
-            className={styles.link}
+            className={styles.linkResources}
           />
         </div>
       </div>
-    </Section>
+    </SectionMain>
   );
 };
 
-export default Education;
+export default Resources;

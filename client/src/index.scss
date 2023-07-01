@@ -8,6 +8,8 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
+  min-width: 320px;
+  overflow-x: hidden;
 }
 
 code {

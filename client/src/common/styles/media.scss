@@ -1,0 +1,30 @@
+// Based on https://getbootstrap.com/docs/5.0/layout/breakpoints/
+@mixin media-xs {
+  @media (max-width: 576px) {
+    @content;
+  }
+}
+
+@mixin media-s {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin media-m {
+  @media (max-width: 992px) {
+    @content;
+  }
+}
+
+@mixin media-l {
+  @media (max-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin media-xl {
+  @media (max-width: 1400px) {
+    @content;
+  }
+}

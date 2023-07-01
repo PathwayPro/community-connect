@@ -1,0 +1,96 @@
+@use '../../../common/styles/colors';
+@use '../../../common/styles/fonts';
+@use '../../../common/styles/mixins';
+@use '../../../common/styles/media';
+
+@mixin margin-right {
+  margin-right: 3.5rem;
+
+  @include media.media-xl {
+    margin-right: 2rem;
+  }
+  @include media.media-s {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.wrapper {
+  @extend %flex-left-center;
+  flex: 1;
+
+  @include media.media-s {
+    position: absolute;
+    flex-direction: column;
+    top: 52px;
+    right: 0;
+    width: 50%;
+    background-color: colors.$blue-normal;
+    border-top: 2px solid colors.$orange-normal;
+    z-index: 10;
+    padding: 30px;
+  }
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+
+  @include media.media-s {
+    flex-direction: column;
+  }
+}
+
+.navLink {
+  @include fonts.navText;
+  @include margin-right;
+  text-decoration: none;
+
+  &.active,
+  &.pending {
+    text-decoration: underline;
+  }
+}
+
+.buttons {
+  margin-left: auto;
+  @extend %flex-left-center;
+
+  @include media.media-s {
+    flex-direction: column;
+    margin: 20px 0 0;
+  }
+}
+
+.navButton {
+  margin-right: 1rem;
+
+  @include media.media-s {
+    margin-right: 0;
+    margin-bottom: 16px;
+  }
+}
+
+.title {
+  color: colors.$orange-normal;
+  line-height: 1;
+}
+
+.mobileButton {
+  display: block;
+  width: 24px;
+  height: 20px;
+  background: url('/images/Header/menu.svg') no-repeat 0 0 / cover;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  @include mixins.common-transition;
+
+  &.active {
+    transform: rotate(90deg);
+  }
+}
+
+.hidden {
+  display: none;
+}

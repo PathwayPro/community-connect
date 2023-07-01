@@ -1,20 +1,24 @@
 @use '../../common/styles/colors';
 @use '../../common/styles/fonts';
 @use '../../common/styles/mixins';
+@use '../../common/styles/media';
 
 .form {
   @extend %flex-center;
   flex-direction: column;
-  row-gap: 16px;
+  row-gap: 1rem;
 }
 
 .formTitle {
   margin-bottom: 10px;
-  @include fonts.mainText($font-size: 27.5px, $font-weight: 700, $line-height: 41px, $color: colors.$black);
 }
 
 .input {
   width: 280px;
+
+  @include media.media-s {
+    width: 250px;
+  }
 }
 
 .formButton {

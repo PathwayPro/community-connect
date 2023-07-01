@@ -1,7 +1,8 @@
 import { FC } from 'react';
 
 import ButtonLink from '../../../common/components/ButtonLink/ButtonLink';
-import Section from '../../../common/components/Section/Section';
+import Heading from '../../../common/components/Heading/Heading';
+import SectionMain from '../../../components/SectionMain/SectionMain';
 
 import styles from './Events.module.scss';
 
@@ -9,13 +10,15 @@ import sectionImg from '../../../images/Main/events.png';
 
 const Events: FC = () => {
   return (
-    <Section>
+    <SectionMain>
       <div className={styles.inner}>
         <div className={styles.part}>
-          <img className={styles.image} src={sectionImg} alt="peple behind a calendar" />
+          <img src={sectionImg} alt="peple behind a calendar" />
         </div>
         <div className={styles.part}>
-          <h2 className={styles.heading}>Events and Activities</h2>
+          <Heading tagType="h2" className={styles.heading}>
+            Events and Activities
+          </Heading>
           <p className={styles.text}>
             Discover a vibrant calendar of events on CommunityConnect, the innovative web app for immigrants. Join us
             for cultural celebrations, workshops, seminars, and community gatherings to embrace your heritage and forge
@@ -26,11 +29,11 @@ const Events: FC = () => {
             label="Explore Upcoming Events"
             color="orange"
             size="small"
-            className={styles.link}
+            className={styles.linkEvent}
           />
         </div>
       </div>
-    </Section>
+    </SectionMain>
   );
 };
 

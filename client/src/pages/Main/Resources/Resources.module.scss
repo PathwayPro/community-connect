@@ -13,7 +13,7 @@
 }
 
 .part {
-  max-width: 60%;
+  max-width: 56%;
   width: 100%;
 
   @include media.media-s {
@@ -21,7 +21,7 @@
   }
 
   &:nth-child(2) {
-    max-width: 40%;
+    max-width: 44%;
 
     @include media.media-s {
       max-width: 100%;
@@ -43,9 +43,14 @@
   @include media.media-s {
     max-width: 100%;
     text-align: left;
+    margin-bottom: 16px;
   }
 }
 
-.linkEvent {
+.linkResources {
   margin: 0 auto;
+
+  @include media.media-s {
+    margin-bottom: 16px;
+  }
 }

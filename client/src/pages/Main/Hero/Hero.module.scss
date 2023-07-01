@@ -1,10 +1,15 @@
 @use '../../../common/styles/colors';
 @use '../../../common/styles/fonts';
 @use '../../../common/styles/mixins';
+@use '../../../common/styles/media';
 
 .inner {
   gap: 20px;
   @extend %flex-space-between;
+
+  @include media.media-s {
+    flex-direction: column;
+  }
 }
 
 .part {
@@ -12,32 +17,49 @@
   width: 100%;
   z-index: 1;
 
+  @include media.media-s {
+    max-width: 100%;
+    order: 2;
+  }
+
   &:nth-child(2) {
     z-index: 0;
+
+    @include media.media-s {
+      order: 1;
+    }
   }
 }
 
 .heading {
-  margin: 0 0 16px;
-  font-size: 58px;
-  line-height: 1;
-  font-weight: 700;
+  margin-bottom: 1rem;
+
+  @include media.media-s {
+    text-align: center;
+  }
 }
 
 .subheading {
-  margin: 0 0 26px;
-  @include fonts.navText($color: colors.$black);
+  margin-bottom: 1.6rem;
+
+  @include media.media-s {
+    text-align: center;
+  }
 }
 
 .text {
   max-width: 95%;
   margin-bottom: 50px;
   @include fonts.mainText;
+
+  @include media.media-s {
+    max-width: 100%;
+    margin-bottom: 16px;
+  }
 }
 
-.image {
-  display: block;
-  width: 100%;
-  max-width: 660px;
-  margin-left: auto;
+.buttonHero {
+  @include media.media-s {
+    margin: 0 auto;
+  }
 }

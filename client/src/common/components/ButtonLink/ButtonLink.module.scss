@@ -1,6 +1,7 @@
 @use '../../styles/colors';
 @use '../../styles/fonts';
 @use '../../styles/mixins';
+@use '../../styles/media';
 
 .link {
   padding: 0 30px;
@@ -8,20 +9,39 @@
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
+  width: fit-content;
+  white-space: nowrap;
   @extend %flex-center;
 
   &.normal {
     height: 64px;
     min-width: 150px;
-    width: fit-content;
     @include fonts.buttonText;
+
+    @include media.media-l {
+      height: 60px;
+      min-width: 120px;
+    }
+
+    @include media.media-s {
+      height: 58px;
+      min-width: 100px;
+    }
   }
 
   &.small {
     height: 48px;
     min-width: 120px;
-    width: fit-content;
-    @include fonts.buttonText($font-size: 16px);
+    @include fonts.buttonText($font-size: 1rem);
+
+    @include media.media-l {
+      height: 46px;
+      min-width: 100px;
+    }
+
+    @include media.media-s {
+      height: 42px;
+    }
   }
 
   &.orange {

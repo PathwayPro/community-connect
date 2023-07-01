@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import Button from '../../common/components/Button/Button';
+import Heading from '../../common/components/Heading/Heading';
 import Input from '../../common/components/Input/Input';
 import { EMAIL_REGEX, ERROR_MESSAGE_EMAIL } from '../../common/utils/formComponentsUtils';
 
@@ -20,8 +21,8 @@ const LoginForm: FC<LoginProps> = ({ isFormOpen }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<IFormInput>();
+    formState: { errors, isValid, isDirty },
+  } = useForm<IFormInput>({ mode: 'onTouched' });
 
   const email = register('email', {
     required: 'Email is required',
@@ -43,10 +44,12 @@ const LoginForm: FC<LoginProps> = ({ isFormOpen }) => {
 
   return (
     <form className={styles.form}>
-      <header className={styles.formTitle}>Welcome Back!</header>
+      <Heading tagType="h5" className={styles.formTitle}>
+        Welcome Back!
+      </Heading>
       <Input
         name={email.name}
-        label="Email"
+        label="Email *"
         type="email"
         autoComplete="on"
         className={styles.input}
@@ -57,7 +60,7 @@ const LoginForm: FC<LoginProps> = ({ isFormOpen }) => {
       />
       <Input
         name={password.name}
-        label="Password"
+        label="Password *"
         type="password"
         className={styles.input}
         onChange={password.onChange}
@@ -67,7 +70,13 @@ const LoginForm: FC<LoginProps> = ({ isFormOpen }) => {
       />
 
       <div className={styles.formButton}>
-        <Button label="Sign Up" isSubmit onClick={handleSubmit(onSubmit)} size="small" />
+        <Button
+          label="Sign Up"
+          isSubmit
+          isDisabled={!isValid || !isDirty}
+          onClick={handleSubmit(onSubmit)}
+          size="small"
+        />
       </div>
       <div className={styles.formBottomPart}>
         <p className={styles.formBottomText}>

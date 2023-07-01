@@ -1,40 +1,57 @@
 @use '../../../common/styles/colors';
 @use '../../../common/styles/fonts';
 @use '../../../common/styles/mixins';
+@use '../../../common/styles/media';
 
 .inner {
   gap: 30px;
   @extend %flex-space-between;
+
+  @include media.media-s {
+    flex-direction: column;
+  }
 }
 
 .part {
   max-width: 43%;
   width: 100%;
 
+  @include media.media-s {
+    max-width: 100%;
+    order: 2;
+  }
+
   &:nth-child(2) {
     max-width: 57%;
+
+    @include media.media-s {
+      max-width: 100%;
+      order: 1;
+    }
   }
 }
 
 .heading {
-  margin: 0 0 26px;
-  @include fonts.headingText($color: inherit);
-}
+  margin-bottom: 1.6rem;
 
-.subheading {
-  margin: 0 0 26px;
-  @include fonts.navText($color: colors.$black);
+  @include media.media-s {
+    text-align: center;
+  }
 }
 
 .text {
   max-width: 400px;
-  margin-bottom: 26px;
+  margin-bottom: 1.6rem;
   @include fonts.mainText($color: inherit);
+
+  @include media.media-s {
+    max-width: 100%;
+    margin-bottom: 16px;
+  }
 }
 
-.image {
-  display: block;
-  width: 100%;
-  max-width: 730px;
-  margin-left: auto;
+.buttonMentorship {
+  @include media.media-s {
+    margin: 0 auto;
+  }
 }
