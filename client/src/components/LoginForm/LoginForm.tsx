@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
+import { useAppDispatch } from '../../app/hooks';
+import { closeModal, showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 import Heading from '../../common/components/Heading/Heading';
 import Input from '../../common/components/Input/Input';
@@ -13,11 +15,9 @@ interface IFormInput {
   password: string;
 }
 
-interface LoginProps {
-  isFormOpen: (input: boolean) => void;
-}
+const LoginForm: FC = () => {
+  const dispatch = useAppDispatch();
 
-const LoginForm: FC<LoginProps> = ({ isFormOpen }) => {
   const {
     register,
     handleSubmit,
@@ -39,7 +39,7 @@ const LoginForm: FC<LoginProps> = ({ isFormOpen }) => {
   // TODO: send data to the API
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
     console.log(JSON.stringify(values, undefined, 2));
-    isFormOpen(false);
+    dispatch(closeModal());
   };
 
   return (
@@ -87,7 +87,14 @@ const LoginForm: FC<LoginProps> = ({ isFormOpen }) => {
         </p>
         <p className={styles.formBottomText}>
           <span>Don&apos;t have an&nbsp;account? </span>
-          <a href="#" className={styles.formBottomLink}>
+          <a
+            href="#"
+            className={styles.formBottomLink}
+            onClick={(e) => {
+              e.preventDefault;
+              dispatch(showModal({ content: MODAL_TYPE.REGISTER }));
+            }}
+          >
             Sign&nbsp;up&nbsp;now.
           </a>
         </p>
