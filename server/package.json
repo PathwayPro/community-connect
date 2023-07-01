@@ -1,25 +1,51 @@
 {
   "name": "server",
   "version": "1.0.0",
+  "description": "Server for Community Builders Application",
+  "bin": "bin/",
   "main": "src/index.js",
-  "license": "MIT",
+  "repository": "https://github.com/PathwayPro/community-builders.git",
+  "author": "Multiple Authors",
+  "license": "Private",
+  "engines": {
+    "node": ">=12.0.0"
+  },
   "scripts": {
     "start": "pm2 start ecosystem.config.json --no-daemon",
-    "dev": "cross-env NODE_ENV=development nodemon src/index.js"
+    "dev": "cross-env NODE_ENV=development nodemon src/index.js",
+    "test": "jest -i --colors --verbose --detectOpenHandles",
+    "test:watch": "jest -i --watchAll",
+    "coverage": "jest -i --coverage",
+    "coverage:coveralls": "jest -i --coverage --coverageReporters=text-lcov | coveralls",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prettier": "prettier --check **/*.js",
+    "prettier:fix": "prettier --write **/*.js",
+    "docker:prod": "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up",
+    "docker:dev": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml up",
+    "docker:test": "docker-compose -f docker-compose.yml -f docker-compose.test.yml up",
+    "prepare": "husky install"
   },
+  "keywords": [
+    "immigrant-techies",
+    "community-builders"
+  ],
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
-    "dotenv": "^16.1.4",
+    "cross-spawn": "^7.0.3",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "express-mongo-sanitize": "^2.2.0",
     "express-rate-limit": "^6.7.0",
     "helmet": "^7.0.0",
     "http-status": "^1.6.2",
     "joi": "^17.9.2",
     "jsonwebtoken": "^9.0.0",
     "moment": "^2.29.4",
+    "mongoose": "^7.3.0",
     "morgan": "^1.10.0",
     "nodemailer": "^6.9.3",
     "passport": "^0.6.0",
@@ -33,11 +59,11 @@
   },
   "devDependencies": {
     "coveralls": "^3.1.1",
-    "eslint": "^8.42.0",
+    "eslint": "^8.43.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jest": "^27.2.1",
+    "eslint-plugin-jest": "^27.2.2",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-security": "^1.7.1",
     "faker": "^6.6.6",
@@ -46,7 +72,6 @@
     "lint-staged": "^13.2.2",
     "node-mocks-http": "^1.12.2",
     "nodemon": "^2.0.22",
-    "prettier": "^2.8.8",
-    "supertest": "^6.3.3"
+    "prettier": "^2.8.8"
   }
 }
