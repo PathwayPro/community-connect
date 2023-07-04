@@ -1,18 +1,30 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { default as ReactModal } from 'react-modal';
 
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { closeModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
+import ForgotPasswordForm from '../../../components/ForgotPasswordForm/ForgotPasswordForm';
 import LoginForm from '../../../components/LoginForm/LoginForm';
 import RegisterForm from '../../../components/RegisterForm/RegisterForm';
+import ResetPasswordForm from '../../../components/ResetPasswordForm/ResetPasswordForm';
 
 import styles from './Modal.module.scss';
 
 ReactModal.setAppElement('#root');
 
 const Modal: FC = () => {
-  const { content, isOpen } = useAppSelector((state) => state.modal);
   const dispatch = useAppDispatch();
+  const { content, isOpen } = useAppSelector((state) => state.modal);
+
+  const ModalContent = useMemo(() => {
+    if (content) {
+      if (content === MODAL_TYPE.LOGIN) return <LoginForm />;
+      if (content === MODAL_TYPE.REGISTER) return <RegisterForm />;
+      if (content === MODAL_TYPE.FROGOT_PASSWORD) return <ForgotPasswordForm />;
+      if (content === MODAL_TYPE.RESET_PASSWORD) return <ResetPasswordForm />;
+    }
+    return null;
+  }, [content]);
 
   return (
     <>
@@ -22,8 +34,7 @@ const Modal: FC = () => {
         overlayClassName={styles.overlay}
         onRequestClose={() => dispatch(closeModal())}
       >
-        {content === MODAL_TYPE.LOGIN && <LoginForm />}
-        {content === MODAL_TYPE.REGISTER && <RegisterForm />}
+        {ModalContent}
       </ReactModal>
     </>
   );

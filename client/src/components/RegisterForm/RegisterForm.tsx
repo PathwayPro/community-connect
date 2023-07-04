@@ -178,10 +178,10 @@ const RegisterForm: FC = () => {
       <p className={styles.formBottomText}>
         <span>Already have an account? </span>
         <a
-          href="#"
+          href=""
           className={styles.formBottomLink}
           onClick={(e) => {
-            e.preventDefault;
+            e.preventDefault();
             dispatch(showModal({ content: MODAL_TYPE.LOGIN }));
           }}
         >
