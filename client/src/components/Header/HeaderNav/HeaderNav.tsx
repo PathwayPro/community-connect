@@ -2,19 +2,17 @@ import classNames from 'classnames';
 import React, { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
+import { useAppDispatch } from '../../../app/hooks';
+import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
 import Button from '../../../common/components/Button/Button';
 import Heading from '../../../common/components/Heading/Heading';
 import useWindowSize, { BREAKPOINTS } from '../../../common/utils/useWindowSize';
-import LoginForm from '../../LoginForm/LoginForm';
-import Modal from '../../Modal/Modal';
-import RegisterForm from '../../RegisterForm/RegisterForm';
 
 import styles from './HeaderNav.module.scss';
 
 const HeaderNav: FC = () => {
   const [isNavDropDownActive, setNavDropDownActive] = useState(false);
-  const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
-  const [registerModalIsOpen, setRegisterModalIsOpen] = useState(false);
+  const dispatch = useAppDispatch();
 
   // Using window width size to update nav view: desktop or mobile
   const { width } = useWindowSize();
@@ -22,13 +20,13 @@ const HeaderNav: FC = () => {
   const onLoginClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
     handleMobileDropDownClose();
-    setLoginModalIsOpen(true);
+    dispatch(showModal({ content: MODAL_TYPE.LOGIN }));
   };
 
   const onRegisterClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
     handleMobileDropDownClose();
-    setRegisterModalIsOpen(true);
+    dispatch(showModal({ content: MODAL_TYPE.REGISTER }));
   };
 
   const onMobileButtonClick = () => {
@@ -121,13 +119,6 @@ const HeaderNav: FC = () => {
           />
         </div>
       </div>
-
-      <Modal isModalOpen={loginModalIsOpen} setIsModalOpen={setLoginModalIsOpen}>
-        <LoginForm isFormOpen={setLoginModalIsOpen} />
-      </Modal>
-      <Modal isModalOpen={registerModalIsOpen} setIsModalOpen={setRegisterModalIsOpen}>
-        <RegisterForm />
-      </Modal>
     </>
   );
 };
