@@ -9,7 +9,7 @@ interface CarouselSlideProps {
 const CarouselSlide: FC<CarouselSlideProps> = ({ slidesList }) => (
   <div className={styles.container}>
     {slidesList.map((image) => (
-      <div key={Math.random()}>
+      <div key={Math.random()} className={styles.slide}>
         <img src={image} />
       </div>
     ))}

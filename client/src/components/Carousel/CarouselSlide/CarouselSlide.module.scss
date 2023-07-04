@@ -1,5 +1,26 @@
 @use '../../../common/styles/mixins';
+@use '../../../common/styles/media';
 
 .container {
+  gap: 16px;
   @extend %flex-space-between;
+}
+
+.slide {
+
+  &:last-child {
+    margin-right: -13%;
+
+    @include media.media-l {
+      margin-right: -16%;
+    }
+    @include media.media-xs {
+      margin-right: -28%;
+    }
+  }
+
+  img {
+    border-radius: 20px;
+    display: block;
+  }
 }
