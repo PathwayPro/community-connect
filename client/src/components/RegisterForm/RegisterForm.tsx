@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { Controller, useForm, SubmitHandler } from 'react-hook-form';
 
+import { useAppDispatch } from '../../app/hooks';
+import { closeModal, showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 import Input from '../../common/components/Input/Input';
 import {
@@ -26,6 +28,8 @@ interface IFormInput {
 }
 
 const RegisterForm: FC = () => {
+  const dispatch = useAppDispatch();
+
   const {
     register,
     handleSubmit,
@@ -76,6 +80,7 @@ const RegisterForm: FC = () => {
   // TODO: send data to the API
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
     console.log(JSON.stringify(values, undefined, 2));
+    dispatch(closeModal());
   };
 
   return (
@@ -172,7 +177,14 @@ const RegisterForm: FC = () => {
       </div>
       <p className={styles.formBottomText}>
         <span>Already have an account? </span>
-        <a href="#" className={styles.formBottomLink}>
+        <a
+          href="#"
+          className={styles.formBottomLink}
+          onClick={(e) => {
+            e.preventDefault;
+            dispatch(showModal({ content: MODAL_TYPE.LOGIN }));
+          }}
+        >
           Sign&nbsp;in&nbsp;now
         </a>
       </p>
