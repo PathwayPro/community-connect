@@ -49,7 +49,9 @@ const InputInner = (
         ref={ref}
       ></input>
       {errorMessage && <div className={classNames(styles.message, styles.errorMessage)}>{errorMessage}</div>}
-      {successMessage && <div className={classNames(styles.message, styles.successMessage)}>{successMessage}</div>}
+      {!errorMessage && successMessage && (
+        <div className={classNames(styles.message, styles.successMessage)}>{successMessage}</div>
+      )}
     </fieldset>
   );
 };

@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, ChangeEvent, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { useAppDispatch } from '../../app/hooks';
@@ -38,6 +38,11 @@ const ForgotPasswordForm: FC = () => {
     setEmailSent(true);
   };
 
+  const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
+    setEmailSent(false);
+    email.onChange(event);
+  };
+
   return (
     <form className={styles.form}>
       <Heading tagType="h5" className={styles.formTitle}>
@@ -49,11 +54,11 @@ const ForgotPasswordForm: FC = () => {
         type="email"
         autoComplete="on"
         className={styles.formField}
-        onChange={email.onChange}
+        onChange={onChangeEmail}
         onBlur={email.onBlur}
         ref={email.ref}
         errorMessage={errors.email?.message}
-        successMessage={isSubmitSuccessful ? 'Reset Email successfully sent' : ''}
+        successMessage={isSubmitSuccessful && isEmailSent ? 'Reset Email successfully sent' : ''}
       />
 
       <div className={styles.formButton}>
