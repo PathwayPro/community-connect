@@ -23,9 +23,29 @@ const Carousel = ({ children }: CarouselProps) => {
     }
   }, [slides, currentSlide]);
 
+  const swipeStartX = React.useRef(0);
+
+  const handleSwipeStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    swipeStartX.current = e.touches[0].clientX;
+  };
+
+  const handleSwipeEnd = (e: React.TouchEvent<HTMLDivElement>) => {
+    const swipeEndX = e.changedTouches[0].clientX;
+    const swipeLength = swipeStartX.current - swipeEndX;
+
+    if (Math.abs(swipeLength) > 100) {
+      if (swipeLength > 0) {
+        setCurrentSlide((currentSlide + 1) % activeSlide.length);
+      } else {
+        setCurrentSlide((currentSlide - 1 + activeSlide.length) % activeSlide.length);
+      }
+    }
+  };
+
   return (
     <div>
-      <div className={styles.wrapper}>
+      <div className={styles.wrapper} onTouchStart={handleSwipeStart}
+      onTouchEnd={handleSwipeEnd}>
         <div ref={slides} className={styles.slides}>
           {activeSlide}
         </div>
