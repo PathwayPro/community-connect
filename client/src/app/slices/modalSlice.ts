@@ -3,6 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 export const MODAL_TYPE = {
   LOGIN: 'login',
   REGISTER: 'register',
+  FROGOT_PASSWORD: 'forgotPassword',
+  RESET_PASSWORD: 'resetPassword',
 };
 
 type initialStateType = {
@@ -21,9 +23,7 @@ const modalSlice = createSlice({
   reducers: {
     closeModal: (state) => {
       state.isOpen = false;
-    },
-    openModal: (state) => {
-      state.isOpen = true;
+      state.content = '';
     },
     showModal: (state, action) => {
       state.content = action.payload.content;
@@ -32,6 +32,6 @@ const modalSlice = createSlice({
   },
 });
 
-export const { closeModal, openModal, showModal } = modalSlice.actions;
+export const { closeModal, showModal } = modalSlice.actions;
 
 export default modalSlice;

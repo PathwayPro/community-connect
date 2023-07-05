@@ -9,6 +9,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   type?: string;
   placeholder?: string;
   errorMessage?: string;
+  successMessage?: string;
   autoComplete?: string;
   className?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -22,6 +23,7 @@ const InputInner = (
     type = 'text',
     placeholder = '',
     errorMessage = '',
+    successMessage = '',
     autoComplete = 'off',
     className = '',
     onChange,
@@ -41,12 +43,15 @@ const InputInner = (
         type={type}
         placeholder={placeholder}
         autoComplete={autoComplete}
-        className={classNames(styles.input, errorMessage && styles.error)}
+        className={classNames(styles.input, errorMessage && styles.error, successMessage && styles.success)}
         onChange={onChange}
         onBlur={onBlur}
         ref={ref}
       ></input>
-      <div className={styles.errorMessage}>{errorMessage}</div>
+      {errorMessage && <div className={classNames(styles.message, styles.errorMessage)}>{errorMessage}</div>}
+      {!errorMessage && successMessage && (
+        <div className={classNames(styles.message, styles.successMessage)}>{successMessage}</div>
+      )}
     </fieldset>
   );
 };

@@ -1,5 +1,7 @@
 import { MouseEvent, FC } from 'react';
 
+import { useAppDispatch } from '../../../app/hooks';
+import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
 import Button from '../../../common/components/Button/Button';
 import Heading from '../../../common/components/Heading/Heading';
 import SectionMain from '../../../components/SectionMain/SectionMain';
@@ -9,8 +11,11 @@ import styles from './Hero.module.scss';
 import sectionImg from '../../../images/Main/hero.png';
 
 const Hero: FC = () => {
+  const dispatch = useAppDispatch();
+
   const onRegisterClick = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
+    dispatch(showModal({ content: MODAL_TYPE.REGISTER }));
   };
 
   return (

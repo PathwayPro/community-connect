@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
@@ -6,16 +7,16 @@ import { closeModal, showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 import Heading from '../../common/components/Heading/Heading';
 import Input from '../../common/components/Input/Input';
-import { EMAIL_REGEX, ERROR_MESSAGE_EMAIL } from '../../common/utils/formComponentsUtils';
+import { PASS_REGEX, ERROR_MESSAGE_PASSWORD, ERROR_MESSAGE_REPASSWORD } from '../../common/utils/formComponentsUtils';
 
-import styles from './LoginForm.module.scss';
+import styles from './ResetPasswordForm.module.scss';
 
 interface IFormInput {
-  email: string;
   password: string;
+  rePassword: string;
 }
 
-const LoginForm: FC = () => {
+const ResetPasswordForm: FC = () => {
   const dispatch = useAppDispatch();
 
   const {
@@ -24,16 +25,20 @@ const LoginForm: FC = () => {
     formState: { errors, isValid, isDirty },
   } = useForm<IFormInput>({ mode: 'onTouched' });
 
-  const email = register('email', {
-    required: 'Email is required',
+  const password = register('password', {
+    required: 'Password is required',
     pattern: {
-      value: EMAIL_REGEX,
-      message: ERROR_MESSAGE_EMAIL,
+      value: PASS_REGEX,
+      message: ERROR_MESSAGE_PASSWORD,
     },
   });
 
-  const password = register('password', {
-    required: 'Password is required',
+  const rePassword = register('rePassword', {
+    required: 'Re-enter password is required',
+    pattern: {
+      value: PASS_REGEX,
+      message: ERROR_MESSAGE_REPASSWORD,
+    },
   });
 
   // TODO: send data to the API
@@ -45,33 +50,32 @@ const LoginForm: FC = () => {
   return (
     <form className={styles.form}>
       <Heading tagType="h5" className={styles.formTitle}>
-        Welcome Back!
+        New password
       </Heading>
       <Input
-        name={email.name}
-        label="Email *"
-        type="email"
-        autoComplete="on"
-        className={styles.formField}
-        onChange={email.onChange}
-        onBlur={email.onBlur}
-        ref={email.ref}
-        errorMessage={errors.email?.message}
-      />
-      <Input
         name={password.name}
-        label="Password *"
+        label="New Password *"
         type="password"
-        className={styles.formField}
+        className={classNames(styles.formField, errors.password && styles.errorPassword)}
         onChange={password.onChange}
         onBlur={password.onBlur}
         ref={password.ref}
         errorMessage={errors.password?.message}
       />
+      <Input
+        name={rePassword.name}
+        label="Re-enter New Password *"
+        type="password"
+        className={styles.formField}
+        onChange={rePassword.onChange}
+        onBlur={rePassword.onBlur}
+        ref={rePassword.ref}
+        errorMessage={errors.rePassword?.message}
+      />
 
       <div className={styles.formButton}>
         <Button
-          label="Sign Up"
+          label="Reset my password"
           isSubmit
           isDisabled={!isValid || !isDirty}
           onClick={handleSubmit(onSubmit)}
@@ -80,16 +84,16 @@ const LoginForm: FC = () => {
       </div>
       <div className={styles.formBottomPart}>
         <p className={styles.formBottomText}>
-          <span>Forgot Your Password? </span>
+          <span>Already have an&nbsp;account? </span>
           <a
             href=""
             className={styles.formBottomLink}
             onClick={(e) => {
               e.preventDefault();
-              dispatch(showModal({ content: MODAL_TYPE.FROGOT_PASSWORD }));
+              dispatch(showModal({ content: MODAL_TYPE.LOGIN }));
             }}
           >
-            Click&nbsp;here.
+            Sign&nbsp;in&nbsp;now.
           </a>
         </p>
         <p className={styles.formBottomText}>
@@ -110,4 +114,4 @@ const LoginForm: FC = () => {
   );
 };
 
-export default LoginForm;
+export default ResetPasswordForm;
