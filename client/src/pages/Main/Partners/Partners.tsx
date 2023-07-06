@@ -1,40 +1,45 @@
 import { FC } from 'react';
+// import  SwiperOptions  from 'swiper';
+import 'swiper/css';
+import { Navigation, Pagination } from 'swiper/modules';
+// import 'swiper/modules/navigation/navigation.scss';
+// import 'swiper/modules/pagination/pagination.scss';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 import Heading from '../../../common/components/Heading/Heading';
-import Carousel from '../../../components/Carousel/Carousel';
-import CarouselSlide from '../../../components/Carousel/CarouselSlide/CarouselSlide';
 import SectionMain from '../../../components/SectionMain/SectionMain';
 
 import styles from './Partners.module.scss';
 
-import partner9Image from '../../../images/Partners/AppHarvest.jpg';
-import partner7Image from '../../../images/Partners/BettyLabs.jpg';
-import partner1Image from '../../../images/Partners/Blind.jpg';
-import partner10Image from '../../../images/Partners/Cohesity.jpg';
-import partner5Image from '../../../images/Partners/Coinbase.jpg';
-import partner2Image from '../../../images/Partners/Helbiz.jpg';
-import partner6Image from '../../../images/Partners/MasterClass.jpg';
-import partner8Image from '../../../images/Partners/Replica.jpg';
-import partner4Image from '../../../images/Partners/Sonos.jpg';
-import partner3Image from '../../../images/Partners/Upstart.jpg';
-
-const partnersList = {
-  slide1: [partner1Image, partner2Image, partner3Image, partner4Image],
-  slide2: [partner4Image, partner5Image, partner6Image, partner7Image],
-  slide3: [partner7Image, partner8Image, partner9Image, partner10Image],
-};
+// import partner9Image from '../../../images/Partners/AppHarvest.jpg';
+// import partner7Image from '../../../images/Partners/BettyLabs.jpg';
+// import partner1Image from '../../../images/Partners/Blind.jpg';
+// import partner10Image from '../../../images/Partners/Cohesity.jpg';
+// import partner5Image from '../../../images/Partners/Coinbase.jpg';
+// import partner2Image from '../../../images/Partners/Helbiz.jpg';
+// import partner6Image from '../../../images/Partners/MasterClass.jpg';
+// import partner8Image from '../../../images/Partners/Replica.jpg';
+// import partner4Image from '../../../images/Partners/Sonos.jpg';
+// import partner3Image from '../../../images/Partners/Upstart.jpg';
 
 const Partners: FC = () => {
+
   return (
     <SectionMain>
       <Heading tagType="h2" className={styles.heading}>
-        Our partners
+         Our partners
       </Heading>
-      <Carousel>
-        <CarouselSlide slidesList={partnersList.slide1} />
-        <CarouselSlide slidesList={partnersList.slide2} />
-        <CarouselSlide slidesList={partnersList.slide3} />
-      </Carousel>
+      <Swiper navigation={true} modules={[Navigation, Pagination]}>
+        <SwiperSlide>Slide 1</SwiperSlide>
+        <SwiperSlide>Slide 2</SwiperSlide>
+        <SwiperSlide>Slide 3</SwiperSlide>
+        <SwiperSlide>Slide 4</SwiperSlide>
+        <SwiperSlide>Slide 5</SwiperSlide>
+        <SwiperSlide>Slide 6</SwiperSlide>
+        <SwiperSlide>Slide 7</SwiperSlide>
+        <SwiperSlide>Slide 8</SwiperSlide>
+        <SwiperSlide>Slide 9</SwiperSlide>
+      </Swiper>
     </SectionMain>
   );
 };

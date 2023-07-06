@@ -7,7 +7,8 @@
     "allowedHosts": [
       "localhost",
       ".localhost"
-    ]
+    ],
+    "proxy": "http://localhost:3200/"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
@@ -28,6 +29,7 @@
     "react-router-dom": "^6.12.1",
     "react-scripts": "5.0.1",
     "sass": "^1.63.3",
+    "swiper": "^10.0.3",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
