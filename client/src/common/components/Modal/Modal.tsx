@@ -3,6 +3,7 @@ import { default as ReactModal } from 'react-modal';
 
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { closeModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
+import ConfirmEmail from '../../../components/ConfirmEmail/ConfirmEmail';
 import ForgotPasswordForm from '../../../components/ForgotPasswordForm/ForgotPasswordForm';
 import LoginForm from '../../../components/LoginForm/LoginForm';
 import RegisterForm from '../../../components/RegisterForm/RegisterForm';
@@ -22,6 +23,7 @@ const Modal: FC = () => {
       if (content === MODAL_TYPE.REGISTER) return <RegisterForm />;
       if (content === MODAL_TYPE.FROGOT_PASSWORD) return <ForgotPasswordForm />;
       if (content === MODAL_TYPE.RESET_PASSWORD) return <ResetPasswordForm />;
+      if (content === MODAL_TYPE.CONFIRM_EMAIL) return <ConfirmEmail />;
     }
     return null;
   }, [content]);

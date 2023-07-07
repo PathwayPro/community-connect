@@ -11,10 +11,13 @@ import Partners from './Partners/Partners';
 import Resources from './Resources/Resources';
 
 const Main: FC = () => {
-  // TODO: This behaviour has to be updated according to backend logic for password reset
-  // Now it works if URL from email contains resetPassword=true parameter
+  // TODO: This behaviour has to be updated according to backend logic for password reset and email conformation
+  // Now it works if URL from email contains resetPassword=true parameter => show resetPasswordForm
+  // if URL from email contains emailConfirmed=true parameter => show ConfirmEmail
   const [searchParams, setSearchParams] = useSearchParams();
   const resetPassword = searchParams.get('resetPassword');
+  const emailConfirmed = searchParams.get('emailConfirmed');
+
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (resetPassword && resetPassword === 'true') {
@@ -22,8 +25,11 @@ const Main: FC = () => {
       searchParams.delete('resetPassword');
       setSearchParams(searchParams);
     }
+    if (emailConfirmed && emailConfirmed === 'true') {
+      dispatch(showModal({ content: MODAL_TYPE.CONFIRM_EMAIL }));
+    }
     return;
-  }, [resetPassword]);
+  }, [resetPassword, emailConfirmed]);
 
   return (
     <>

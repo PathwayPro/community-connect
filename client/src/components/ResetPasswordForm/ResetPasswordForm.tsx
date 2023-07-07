@@ -21,9 +21,10 @@ const ResetPasswordForm: FC = () => {
 
   const {
     register,
+    getValues,
     handleSubmit,
     formState: { errors, isValid, isDirty },
-  } = useForm<IFormInput>({ mode: 'onTouched' });
+  } = useForm<IFormInput>({ mode: 'onChange' });
 
   const password = register('password', {
     required: 'Password is required',
@@ -35,9 +36,8 @@ const ResetPasswordForm: FC = () => {
 
   const rePassword = register('rePassword', {
     required: 'Re-enter password is required',
-    pattern: {
-      value: PASS_REGEX,
-      message: ERROR_MESSAGE_REPASSWORD,
+    validate: (value) => {
+      return value === getValues('password') || ERROR_MESSAGE_REPASSWORD;
     },
   });
 
