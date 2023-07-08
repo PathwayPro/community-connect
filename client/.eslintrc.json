@@ -78,7 +78,9 @@
       "after",
       {
         "overrides": {
-          "&&": "after"
+          "&&": "after",
+          "?": "before",
+          ":": "before"
         }
       }
     ],

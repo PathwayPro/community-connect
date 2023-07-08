@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { Controller, useForm, SubmitHandler } from 'react-hook-form';
 
 import { useAppDispatch } from '../../app/hooks';
-import { closeModal, showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
+import { showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 import Input from '../../common/components/Input/Input';
 import {
@@ -32,10 +32,11 @@ const RegisterForm: FC = () => {
 
   const {
     register,
+    getValues,
     handleSubmit,
     control,
     formState: { errors, isValid, isDirty },
-  } = useForm<IFormInput>({ mode: 'onTouched' });
+  } = useForm<IFormInput>({ mode: 'onChange' });
 
   const firstName = register('firstName', {
     required: 'First name is required',
@@ -71,16 +72,15 @@ const RegisterForm: FC = () => {
 
   const rePassword = register('rePassword', {
     required: 'Re-enter password is required',
-    pattern: {
-      value: PASS_REGEX,
-      message: ERROR_MESSAGE_REPASSWORD,
+    validate: (value) => {
+      return value === getValues('password') || ERROR_MESSAGE_REPASSWORD;
     },
   });
 
   // TODO: send data to the API
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
     console.log(JSON.stringify(values, undefined, 2));
-    dispatch(closeModal());
+    dispatch(showModal({ content: MODAL_TYPE.CONFIRM_EMAIL }));
   };
 
   return (

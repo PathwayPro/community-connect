@@ -1,0 +1,23 @@
+@use '../../common//styles/media.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 485px;
+  min-width: 260px;
+  width: 100%;
+}
+
+.text {
+  @include media.media-s {
+    text-align: center;
+  }
+}
+
+.textSuccess {
+  text-align: center;
+}
+
+.buttonConfirm {
+  margin: 0 auto;
+}
