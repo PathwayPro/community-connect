@@ -1,0 +1,34 @@
+@use '../../styles/media.scss';
+@use '../../styles/colors.scss';
+@use '../../styles/mixins.scss';
+
+.carouselDots {
+  display: flex !important;
+  justify-content: center;
+  max-width: 100px;
+  margin: 38px auto 0;
+  @extend %reset-list;
+
+  :global(li.slick-active) {
+    width: 24px;
+    border-radius: 33px;
+    background-color: colors.$orange-normal;
+  }
+
+  button {
+    padding: 0;
+    margin: 0;
+    font-size: 0;
+    border: none;
+  }
+
+  li {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: colors.$grey-light;
+    // margin-right: 8px;
+    margin: 2px 4px;
+    transition: background-color 0.3s, width 0.2s, border-radius 0.1s;
+  }
+}

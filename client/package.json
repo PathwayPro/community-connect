@@ -28,8 +28,8 @@
     "react-redux": "^8.0.7",
     "react-router-dom": "^6.12.1",
     "react-scripts": "5.0.1",
+    "react-slick": "^0.29.0",
     "sass": "^1.63.3",
-    "swiper": "^10.0.3",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@types/react-slick": "^0.23.10",
     "@typescript-eslint/eslint-plugin": "^5.59.11",
     "@typescript-eslint/parser": "^5.59.11",
     "eslint": "^8.42.0",

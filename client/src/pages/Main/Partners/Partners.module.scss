@@ -1,6 +1,42 @@
-@use '../../../common/styles/fonts';
+@use '../../../common/styles/colors';
+@use '../../../common/styles/media';
 
 .heading {
   margin-bottom: 1.6rem;
   text-align: center;
+}
+
+.slider {
+
+  :global(.slick-slide) {
+    &:global(.slick-active) {
+      margin-right: -65px;
+
+      @include media.media-xl {
+        margin-right: -40px;
+      }
+
+      @include media.media-m {
+        margin-right: -20px;
+      }
+
+      @include media.media-xs {
+        margin-right: -10px;
+      }
+    }
+  }
+}
+
+
+.slide {
+  // padding: 0 8px;
+
+  img {
+    border-radius: 20px;
+    display: block;
+
+    @include media.media-xl {
+      max-width: 80%;
+    }
+  }
 }
