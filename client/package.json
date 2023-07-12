@@ -7,8 +7,7 @@
     "allowedHosts": [
       "localhost",
       ".localhost"
-    ],
-    "proxy": "http://localhost:3200/"
+    ]
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
