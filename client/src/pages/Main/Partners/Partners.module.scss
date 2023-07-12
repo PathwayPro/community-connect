@@ -7,7 +7,6 @@
 }
 
 .slider {
-
   :global(.slick-slide) {
     &:global(.slick-active) {
       margin-right: -65px;
@@ -27,10 +26,7 @@
   }
 }
 
-
 .slide {
-  // padding: 0 8px;
-
   img {
     border-radius: 20px;
     display: block;

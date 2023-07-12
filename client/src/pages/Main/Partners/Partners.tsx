@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
 
 import CarouselArrow from '../../../common/components/CarouselArrow/CarouselArrow';
 import stylesCarouselDots from '../../../common/components/CarouselDots/CarouselDots.module.scss';
@@ -20,6 +20,19 @@ import partner8Image from '../../../images/Partners/Replica.jpg';
 import partner4Image from '../../../images/Partners/Sonos.jpg';
 import partner3Image from '../../../images/Partners/Upstart.jpg';
 
+const partnersImages = [
+  partner1Image,
+  partner2Image,
+  partner3Image,
+  partner4Image,
+  partner5Image,
+  partner6Image,
+  partner7Image,
+  partner8Image,
+  partner9Image,
+  partner10Image,
+];
+
 const Partners: FC = () => {
   const settings = {
     className: `${styles.slider}`,
@@ -34,39 +47,14 @@ const Partners: FC = () => {
   return (
     <SectionMain>
       <Heading tagType="h2" className={styles.heading}>
-         Our partners
+        Our partners
       </Heading>
       <Slider {...settings}>
-        <div className={styles.slide}>
-          <img src={partner1Image} />
-        </div>
-        <div className={styles.slide}>
-          <img src={partner2Image} />
-        </div>
-        <div className={styles.slide}>
-          <img src={partner3Image} />
-        </div>
-        <div className={styles.slide}>
-          <img src={partner4Image} />
-        </div>
-        <div className={styles.slide}>
-          <img src={partner5Image} />
-        </div>
-        <div className={styles.slide}>
-          <img src={partner6Image} />
-        </div>
-        <div className={styles.slide}>
-          <img src={partner7Image} />
-        </div>
-        <div className={styles.slide}>
-          <img src={partner8Image} />
-        </div>
-        <div className={styles.slide}>
-          <img src={partner9Image} />
-        </div>
-        <div className={styles.slide}>
-          <img src={partner10Image} />
-        </div>
+        {partnersImages.map((image, index) => (
+          <div className={styles.slide} key={Math.random()}>
+            <img src={image} alt={`partner-${index + 1}`} />
+          </div>
+        ))}
       </Slider>
     </SectionMain>
   );
