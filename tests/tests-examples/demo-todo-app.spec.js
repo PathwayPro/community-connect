@@ -104,7 +104,7 @@ test.describe('Mark all as completed', () => {
     await toggleAll.check();
     await expect(toggleAll).toBeChecked();
     await checkNumberOfCompletedTodosInLocalStorage(page, 3);
-
+//
     // Uncheck first todo.
     const firstTodo = page.getByTestId('todo-item').nth(0);
     await firstTodo.getByRole('checkbox').uncheck();
