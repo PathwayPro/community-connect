@@ -7,7 +7,7 @@ const swaggerDef = {
     title: 'Community Builders API documentation',
     version,
     license: {
-      name: 'Private'
+      name: 'Private',
     },
   },
   servers: [

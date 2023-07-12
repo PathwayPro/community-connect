@@ -17,7 +17,10 @@ module.exports = (sequelize, DataTypes) => {
       token: DataTypes.STRING,
       type: DataTypes.ENUM(tokenTypes.ACCESS, tokenTypes.REFRESH, tokenTypes.RESET_PASSWORD, tokenTypes.VERIFY_EMAIL),
       expiredAt: DataTypes.DATE,
-      blacklistedAt: DataTypes.DATE,
+      blacklisted: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     {
       sequelize,

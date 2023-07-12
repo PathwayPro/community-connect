@@ -5,18 +5,18 @@ services:
     build: .
     image: node-app
     environment:
-      - MONGODB_URL=mongodb://mongodb:27017/community-builders-database
+      - DB_URL
     ports:
       - '3000:3000'
     depends_on:
-      - mongodb
+      - postgres
     volumes:
       - .:/usr/src/node-app
     networks:
       - node-network
 
-  mongodb:
-    image: mongo:4.2.1-bionic
+  postgres:
+    image:
     ports:
       - '27017:27017'
     volumes:

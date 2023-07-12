@@ -37,8 +37,8 @@ const generateToken = (userId, expires, type, secret = config.jwt.secret) => {
 const saveToken = async (token, userId, expires, type, blacklisted = false) => {
   const tokenDoc = await Token.create({
     token,
-    user: userId,
-    expires: expires.toDate(),
+    userId,
+    expiredAt: expires.toDate(),
     type,
     blacklisted,
   });
@@ -76,11 +76,11 @@ const generateAuthTokens = async (user) => {
   return {
     access: {
       token: accessToken,
-      expires: accessTokenExpires.toDate(),
+      expiredAt: accessTokenExpires.toDate(),
     },
     refresh: {
       token: refreshToken,
-      expires: refreshTokenExpires.toDate(),
+      expiredAt: refreshTokenExpires.toDate(),
     },
   };
 };

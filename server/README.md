@@ -60,34 +60,129 @@ yarn prettier:fix
 
 # Initial Setup
 
-**Install MongoDB on your local Machine:**
+## Install PostgreSQL on your local Machine
 
 Helpful Instructions on this link:
-```
-https://tutorial.techaltum.com/mongodb-installation.html
-```
-You need to start mongo everytime (using terminal / command prompt) you restart your computer. That is it should be running before you run the app:
 
-- If you have a mongodb database path: (Replace '/mongodb-data' with whatever your path is)
+```
+https://www.postgresql.org/download/
+```
+
+Documentation:
+
+```
+https://www.postgresql.org/docs/current/
+```
+
+You need to start PostgreSQL everytime (using terminal / db management apps) you restart your computer.\
+That is it should be running before you run the app:
+
+
+
+## Setup dev env to work with PostgreSQL
+\
+**Start Postgres and login:**
+
+`psql postgres`
+
+You’ll see that you have entered into a new connection.\
+You are now inside `psql` in the `postgres` database.\
+The prompt ends with a `#` to denote that you logged in as the superuser\
+\
+**Check what database, user, and port we’ve connected**
+
+`\conninfo`
+
+**Create a role called `root` and add option to create DB**
+
+`CREATE ROLE root WITH LOGIN PASSWORD 'root';`
+`ALTER ROLE root CREATEDB;`
+
+**Connect postgres with root**
+
+From default terminal connection run:
+
+`psql -d postgres -U root`
+
+**Create development database**
+
+`CREATE DATABASE comm_dev;`
+
+
+
+## Working with Models using Sequelize
+
+For creating and migrating models we are using Sequelize ORM.
+
+API: 
+```
+https://sequelize.org/api/v6/
+```
+
+Models concepts:
+```
+https://sequelize.org/docs/v6/core-concepts/model-basics/
+```
+
+**DB connection**
+
+All connection settings are located in the `/config/database.js` config.
+
+**Create new Model by Sequelize CLI**
+
+You will need the Sequelize Command-Line Interface (CLI).\
+The CLI ships support for migrations and project bootstrapping
+
+```
+https://github.com/sequelize/cli
+```
+
+This example will create a `Role` Model inside `/src/models` folder with next attributes(columns):
+
 ```bash
-mongod --dbpath ~/mongodb-data
+cd server
+yarn run sequelize-cli model:generate --name Role --attributes name:string,status:string,deletedAt:Date
 ```
-- If you have no path and default:
+
+Columns `id`, `createdAt`, `updatedAt` will be creted by default for each model.
+
+
+
+```
+Model name: Role
+Table name: Roles
+Attributes:
+id: number, autoincremented, PK (added by default)
+name: string
+status: string
+createdAt: Date (added by default)
+updatedAt: Date (added by default)
+deletedAt: Date
+```
+
+
+Also at the same time a migration file `20230705221514-create-role` for this model will be created
+inside `/src/migrations` folder
+
+After model was created, it's possible to add Assosiations, Methods or Validations
+
+**Migrate Models and model's updates to the DB**
+
+Before start developing, use migrations to create or update DB tables
+
+***Running all migrations***
+
 ```bash
-mongod
+cd server
+yarn run sequelize-cli db:migrate
 ```
 
-**Intall MongoDB Compass for GUI Access to the Database:**
+***Running migration by name `20230705221514-create-role`***
 
+```bash
+cd server
+yarn run sequelize-cli db:migrate --name 20230705221514-create-role
 ```
-https://www.mongodb.com/docs/compass/master/install/
-```
-
-Then just use this connection string to connect:
-```
-mongodb://localhost:27017/
-```
-
 
 ## Environment Variables
 
@@ -96,9 +191,6 @@ The environment variables can be found and modified in the `.env` file. They com
 ```bash
 # Port number
 PORT=3200
-
-# URL of the Mongo DB
-MONGODB_URL=mongodb://127.0.0.1:27017/community-builders-database
 
 # JWT
 # JWT secret key
@@ -125,7 +217,7 @@ src\
  |--controllers\    # Route controllers (controller layer)
  |--docs\           # Swagger files
  |--middlewares\    # Custom express middlewares
- |--models\         # Mongoose models (data layer)
+ |--models\         # Sequelize models (data layer)
  |--routes\         # Routes
  |--services\       # Business logic (service layer)
  |--utils\          # Utility classes and functions
@@ -291,26 +383,9 @@ This app uses pm2 in production mode, which is already configured to store the l
 
 Note: API request information (request url, response code, timestamp, etc.) are also automatically logged (using [morgan](https://github.com/expressjs/morgan)).
 
-## Custom Mongoose Plugins
+## Custom models Plugins
 
-The app also contains 2 custom mongoose plugins that you can attach to any mongoose model schema. You can find the plugins in `src/models/plugins`.
-
-```javascript
-const mongoose = require('mongoose');
-const { toJSON, paginate } = require('./plugins');
-
-const userSchema = mongoose.Schema(
-  {
-    /* schema definition here */
-  },
-  { timestamps: true }
-);
-
-userSchema.plugin(toJSON);
-userSchema.plugin(paginate);
-
-const User = mongoose.model('User', userSchema);
-```
+The app also contains 2 custom plugins that you can attach to any model schema. You can find the plugins in `src/models/plugins`.
 
 ### toJSON
 
@@ -321,7 +396,7 @@ The toJSON plugin applies the following changes in the toJSON transform call:
 
 ### paginate
 
-The paginate plugin adds the `paginate` static method to the mongoose schema.
+The paginate plugin adds the `paginate` static method to the model.
 
 Adding this plugin to the `User` model schema will allow you to do the following:
 
@@ -332,7 +407,7 @@ const queryUsers = async (filter, options) => {
 };
 ```
 
-The `filter` param is a regular mongo filter.
+The `filter` param is a regular filter.
 
 The `options` param can have the following (optional) fields:
 

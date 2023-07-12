@@ -52,5 +52,13 @@ module.exports = (sequelize, DataTypes) => {
       modelName: 'User',
     }
   );
+
+  User.addHook('beforeCreate', async function (user) {
+    if (user.password) {
+      // eslint-disable-next-line no-param-reassign
+      user.password = await bcrypt.hash(user.password, 8);
+    }
+  });
+
   return User;
 };

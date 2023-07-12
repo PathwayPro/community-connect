@@ -22,26 +22,27 @@ const getUsers = {
 
 const getUser = {
   params: Joi.object().keys({
-    userId: Joi.string().custom(objectId),
+    id: Joi.string().custom(objectId),
   }),
 };
 
 const updateUser = {
   params: Joi.object().keys({
-    userId: Joi.required().custom(objectId),
+    id: Joi.required().custom(objectId),
   }),
   body: Joi.object()
     .keys({
       email: Joi.string().email(),
       password: Joi.string().custom(password),
-      name: Joi.string(),
+      firstName: Joi.string(),
+      lastName: Joi.string(),
     })
     .min(1),
 };
 
 const deleteUser = {
   params: Joi.object().keys({
-    userId: Joi.string().custom(objectId),
+    id: Joi.string().custom(objectId),
   }),
 };
 

@@ -11,12 +11,15 @@ const createUser = async (userBody) => {
   if (await User.isEmailTaken(userBody.email)) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
   }
-  return User.create(userBody);
+  const createdAt = new Date();
+  const updatedAt = new Date();
+
+  return User.create({ ...userBody, createdAt, updatedAt });
 };
 
 /**
  * Query for users
- * @param {Object} filter - Mongo filter
+ * @param {Object} filter - filter
  * @param {Object} options - Query options
  * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
  * @param {number} [options.limit] - Maximum number of results per page (default = 10)
@@ -43,7 +46,7 @@ const getUserById = async (id) => {
  * @returns {Promise<User>}
  */
 const getUserByEmail = async (email) => {
-  return User.findOne({ email });
+  return User.findOne({ where: { email } });
 };
 
 /**

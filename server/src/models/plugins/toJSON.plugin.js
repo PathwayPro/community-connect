@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 
 /**
- * A mongoose schema plugin which applies the following in the toJSON transform call:
+ * A model plugin which applies the following in the toJSON transform call:
  *  - removes __v, createdAt, updatedAt, and any path that has private: true
  *  - replaces _id with id
  */
