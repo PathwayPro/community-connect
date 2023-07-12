@@ -1,8 +1,21 @@
 const app = require('./app');
 const config = require('./config/config');
+const db = require('./models/index');
 const logger = require('./config/logger');
 
 let server;
+db.sequelize
+  .authenticate()
+  .then(() => {
+    logger.info('Connected and sync DB');
+
+    server = app.listen(config.port, () => {
+      logger.info(`Listening to port ${config.port}`);
+    });
+  })
+  .catch((err) => {
+    logger.info('Unable to connect to the database:', err);
+  });
 
 const exitHandler = () => {
   if (server) {
