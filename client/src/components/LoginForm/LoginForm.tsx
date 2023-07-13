@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { useAppDispatch } from '../../app/hooks';
+import { useLoginUserMutation } from '../../app/slices/apiSlice';
 import { closeModal, showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 import Heading from '../../common/components/Heading/Heading';
@@ -36,10 +37,18 @@ const LoginForm: FC = () => {
     required: 'Password is required',
   });
 
-  // TODO: send data to the API
+  const [loginUser] = useLoginUserMutation();
+
+  // TODO: Implement errors handler
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
-    console.log(JSON.stringify(values, undefined, 2));
-    dispatch(closeModal());
+    await loginUser(values)
+      .unwrap()
+      .then(() => {
+        dispatch(closeModal());
+      })
+      .catch(({ data }) => {
+        console.log(data?.message);
+      });
   };
 
   return (

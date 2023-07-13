@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { Controller, useForm, SubmitHandler } from 'react-hook-form';
 
 import { useAppDispatch } from '../../app/hooks';
+import { useRegisterUserMutation } from '../../app/slices/apiSlice';
 import { showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 import Input from '../../common/components/Input/Input';
@@ -77,10 +78,24 @@ const RegisterForm: FC = () => {
     },
   });
 
-  // TODO: send data to the API
+  const [registerUser] = useRegisterUserMutation();
+  // TODO: Implement errors handler
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
-    console.log(JSON.stringify(values, undefined, 2));
-    dispatch(showModal({ content: MODAL_TYPE.CONFIRM_EMAIL }));
+    const bodyObject = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      password: values.password,
+    };
+
+    await registerUser(bodyObject)
+      .unwrap()
+      .then(() => {
+        dispatch(showModal({ content: MODAL_TYPE.CONFIRM_EMAIL }));
+      })
+      .catch(({ data }) => {
+        console.log(data?.message);
+      });
   };
 
   return (
