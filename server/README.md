@@ -64,18 +64,18 @@ yarn prettier:fix
 
 Helpful Instructions on this link:
 
-```
+```bash
 https://www.postgresql.org/download/
 ```
 
 Documentation:
 
-```
+```bash
 https://www.postgresql.org/docs/current/
 ```
 
 You need to start PostgreSQL everytime (using terminal / db management apps) you restart your computer.\
-That is it should be running before you run the app:
+This should be running before you run the app:
 
 
 
@@ -83,30 +83,46 @@ That is it should be running before you run the app:
 \
 **Start Postgres and login:**
 
-`psql postgres`
+```bash
+psql postgres
+```
 
 You’ll see that you have entered into a new connection.\
 You are now inside `psql` in the `postgres` database.\
 The prompt ends with a `#` to denote that you logged in as the superuser\
 \
-**Check what database, user, and port we’ve connected**
+**Check what database, user, and port you’ve connected**
 
-`\conninfo`
+```bash
+\conninfo
+```
+\
+**End Postgres and getting out of it:**
+
+```bash
+\q
+```
 
 **Create a role called `root` and add option to create DB**
 
-`CREATE ROLE root WITH LOGIN PASSWORD 'root';`
-`ALTER ROLE root CREATEDB;`
+```bash
+CREATE ROLE root WITH LOGIN PASSWORD 'root';
+ALTER ROLE root CREATEDB;
+```
 
 **Connect postgres with root**
 
 From default terminal connection run:
 
-`psql -d postgres -U root`
+```bash
+psql -d postgres -U root
+```
 
 **Create development database**
 
-`CREATE DATABASE comm_dev;`
+```bash
+CREATE DATABASE comm_dev;
+```
 
 
 
@@ -114,26 +130,26 @@ From default terminal connection run:
 
 For creating and migrating models we are using Sequelize ORM.
 
-API: 
-```
+API:
+```bash
 https://sequelize.org/api/v6/
 ```
 
 Models concepts:
-```
+```bash
 https://sequelize.org/docs/v6/core-concepts/model-basics/
 ```
 
 **DB connection**
 
-All connection settings are located in the `/config/database.js` config.
+All connection settings are located in the `/src/config/database.js` config.
 
 **Create new Model by Sequelize CLI**
 
 You will need the Sequelize Command-Line Interface (CLI).\
 The CLI ships support for migrations and project bootstrapping
 
-```
+```bash
 https://github.com/sequelize/cli
 ```
 
@@ -148,7 +164,7 @@ Columns `id`, `createdAt`, `updatedAt` will be creted by default for each model.
 
 
 
-```
+```bash
 Model name: Role
 Table name: Roles
 Attributes:
@@ -161,10 +177,10 @@ deletedAt: Date
 ```
 
 
-Also at the same time a migration file `20230705221514-create-role` for this model will be created
+Also at the same time a migration file `XXXXXXXXXXXXXXXX-create-role` for this model will be created
 inside `/src/migrations` folder
 
-After model was created, it's possible to add Assosiations, Methods or Validations
+After model was created, it's possible to add Assosiations, Methods or Validations inside the file
 
 **Migrate Models and model's updates to the DB**
 
@@ -177,11 +193,70 @@ cd server
 yarn run sequelize-cli db:migrate
 ```
 
-***Running migration by name `20230705221514-create-role`***
+***Running Migration by Name `XXXXXXXXXXXXXX-create-role`***
 
 ```bash
 cd server
-yarn run sequelize-cli db:migrate --name 20230705221514-create-role
+yarn run sequelize-cli db:migrate --name XXXXXXXXXXXXXX-create-role
+```
+
+In case of any mistake or error, it is possible to undo migrations
+
+***Undoing all Migrations***
+
+```bash
+cd server
+yarn run sequelize-cli db:migrate:undo:all
+```
+
+***Undoing the Most Recent Migration***
+
+```bash
+cd server
+yarn run sequelize-cli db:migrate:undo
+```
+
+***Undoing Migrations to a Specific Migration with Name `XXXXXXXXXXXXXX-create-role`***
+
+```bash
+cd server
+yarn run sequelize-cli db:migrate:undo:all --to XXXXXXXXXXXXXX-create-role.js
+```
+
+**Populating the DB**
+
+***Creating the First Seed for Table `Role`***
+
+This will create the seeder file  `XXXXXXXXXXXXXX-demo-role.js` inside `/src/seeders`  folder and then you can add some dummy data in the file to be used as the data instance for the DB
+
+```bash
+yarn run sequelize-cli seed:generate --name demo-role
+```
+
+***Running Seed***
+
+Note: Seeder execution history is not stored anywhere, unlike migrations
+
+```bash
+yarn run sequelize-cli db:seed:all
+```
+
+***Undoing all Seeds***
+
+```bash
+yarn run sequelize-cli db:seed:undo:all
+```
+
+***Undoing the Most Recent Seed***
+
+```bash
+yarn run sequelize-cli db:seed:undo
+```
+
+***Undoing to a Specific Seed***
+
+```bash
+yarn run sequelize-cli db:seed:undo --seed name-of-seed-as-in-data
 ```
 
 ## Environment Variables
