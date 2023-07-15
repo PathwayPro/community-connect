@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { useAppDispatch } from '../../app/hooks';
 import { useLoginUserMutation } from '../../app/slices/apiSlice';
+import { setCredentials } from '../../app/slices/authSlice';
 import { closeModal, showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 import Heading from '../../common/components/Heading/Heading';
@@ -38,16 +39,16 @@ const LoginForm: FC = () => {
   });
 
   const [loginUser] = useLoginUserMutation();
-
   // TODO: Implement errors handler
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
     await loginUser(values)
       .unwrap()
-      .then(() => {
+      .then((data) => {
+        dispatch(setCredentials(data));
         dispatch(closeModal());
       })
-      .catch(({ data }) => {
-        console.log(data?.message);
+      .catch((error) => {
+        console.log(error.data?.message || error);
       });
   };
 
@@ -80,7 +81,7 @@ const LoginForm: FC = () => {
 
       <div className={styles.formButton}>
         <Button
-          label="Sign Up"
+          label="Sign In"
           isSubmit
           isDisabled={!isValid || !isDirty}
           onClick={handleSubmit(onSubmit)}

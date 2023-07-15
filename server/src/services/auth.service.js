@@ -6,6 +6,45 @@ const ApiError = require('../utils/ApiError');
 const { tokenTypes } = require('../config/tokens');
 
 /**
+ * Update refresh token cookie
+ * @param {HTTPRequest} req
+ * @param {HTTPResponse} res
+ * @param {object} refreshToken
+ * @returns {Promise}
+ */
+const updateRefreshTokenCookie = async (req, res, refreshToken) => {
+  const { cookies } = req;
+
+  if (cookies.jwtRefresh) {
+    // Clear out previous refresh token cookie
+    res.clearCookie('jwtRefresh', { httpOnly: true, sameSite: 'None', secure: true });
+  }
+
+  // Set new Secure Cookie with refresh token
+  res.cookie('jwtRefresh', refreshToken.token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'None',
+    expires: refreshToken.expiredAt,
+  });
+};
+
+/**
+ * Check refresh token cookie
+ * @param {HTTPRequest} req
+ * @returns {Promise<string>}
+ */
+const checkRequestHasRefreshTokenCookie = async (req) => {
+  const { cookies } = req;
+
+  if (!cookies.jwtRefresh) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Please authenticate');
+  }
+
+  return cookies.jwtRefresh;
+};
+
+/**
  * Login with username and password
  * @param {string} email
  * @param {string} password
@@ -25,11 +64,13 @@ const loginUserWithEmailAndPassword = async (email, password) => {
  * @returns {Promise}
  */
 const logout = async (refreshToken) => {
-  const refreshTokenDoc = await Token.findOne({ token: refreshToken, type: tokenTypes.REFRESH, blacklisted: false });
+  const refreshTokenDoc = await Token.findOne({
+    where: { token: refreshToken, type: tokenTypes.REFRESH, blacklisted: false },
+  });
   if (!refreshTokenDoc) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Not found');
   }
-  await refreshTokenDoc.remove();
+  await refreshTokenDoc.destroy();
 };
 
 /**
@@ -40,11 +81,11 @@ const logout = async (refreshToken) => {
 const refreshAuth = async (refreshToken) => {
   try {
     const refreshTokenDoc = await tokenService.verifyToken(refreshToken, tokenTypes.REFRESH);
-    const user = await userService.getUserById(refreshTokenDoc.user);
+    const user = await userService.getUserById(refreshTokenDoc.userId);
     if (!user) {
       throw new Error();
     }
-    await refreshTokenDoc.remove();
+    await refreshTokenDoc.destroy();
     return tokenService.generateAuthTokens(user);
   } catch (error) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'Please authenticate');
@@ -91,6 +132,8 @@ const verifyEmail = async (verifyEmailToken) => {
 };
 
 module.exports = {
+  updateRefreshTokenCookie,
+  checkRequestHasRefreshTokenCookie,
   loginUserWithEmailAndPassword,
   logout,
   refreshAuth,

@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { useAppDispatch } from '../../app/hooks';
+import { useConfirmEmailMutation } from '../../app/slices/apiSlice';
 import { closeModal, showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 
@@ -22,6 +23,20 @@ const ConfirmEmail: FC = () => {
     searchParams.delete('emailConfirmed');
     setSearchParams(searchParams);
   };
+
+  const [verify] = useConfirmEmailMutation();
+
+  const onEmailVerify = async () => {
+    await verify({})
+      .unwrap()
+      .then(() => {
+        dispatch(closeModal());
+      })
+      .catch((error) => {
+        console.log(error.data?.message || error);
+      });
+  };
+
   return (
     <div className={styles.container}>
       <div>
@@ -39,7 +54,7 @@ const ConfirmEmail: FC = () => {
       {emailConfirmed ? (
         <Button label="Login" onClick={onLoginButtonClick} size="small" className={styles.buttonConfirm} />
       ) : (
-        <Button label="Ok" onClick={() => dispatch(closeModal())} size="small" className={styles.buttonConfirm} />
+        <Button label="Ok" onClick={onEmailVerify} size="small" className={styles.buttonConfirm} />
       )}
     </div>
   );

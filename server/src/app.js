@@ -5,6 +5,8 @@ const compression = require('compression');
 const cors = require('cors');
 const passport = require('passport');
 const httpStatus = require('http-status');
+const cookieParser = require('cookie-parser');
+const { corsOptions, credentials } = require('./config/corsOptions');
 const config = require('./config/config');
 const morgan = require('./config/morgan');
 const { jwtStrategy } = require('./config/passport');
@@ -26,6 +28,9 @@ app.use(helmet());
 // parse json request body
 app.use(express.json());
 
+// middleware for cookies
+app.use(cookieParser());
+
 // parse urlencoded request body
 app.use(express.urlencoded({ extended: true }));
 
@@ -36,8 +41,8 @@ app.use(xss());
 app.use(compression());
 
 // enable cors
-app.use(cors());
-app.options('*', cors());
+app.use(credentials);
+app.use(cors(corsOptions));
 
 // jwt authentication
 app.use(passport.initialize());

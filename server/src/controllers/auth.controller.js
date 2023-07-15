@@ -5,24 +5,37 @@ const { authService, userService, tokenService, emailService } = require('../ser
 const register = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
   const tokens = await tokenService.generateAuthTokens(user);
-  res.status(httpStatus.CREATED).send({ user, tokens });
+
+  await authService.updateRefreshTokenCookie(req, res, tokens.refresh);
+
+  res.status(httpStatus.CREATED).send({ user, access: tokens.access });
 });
 
 const login = catchAsync(async (req, res) => {
   const { email, password } = req.body;
   const user = await authService.loginUserWithEmailAndPassword(email, password);
   const tokens = await tokenService.generateAuthTokens(user);
-  res.send({ user, tokens });
+
+  await authService.updateRefreshTokenCookie(req, res, tokens.refresh);
+
+  res.send({ user, access: tokens.access });
 });
 
 const logout = catchAsync(async (req, res) => {
-  await authService.logout(req.body.refreshToken);
+  const jwtRefresh = await authService.checkRequestHasRefreshTokenCookie(req);
+  res.clearCookie('jwtRefresh');
+
+  await authService.logout(jwtRefresh);
+
   res.status(httpStatus.NO_CONTENT).send();
 });
 
 const refreshTokens = catchAsync(async (req, res) => {
-  const tokens = await authService.refreshAuth(req.body.refreshToken);
-  res.send({ ...tokens });
+  const jwtRefresh = await authService.checkRequestHasRefreshTokenCookie(req);
+  const tokens = await authService.refreshAuth(jwtRefresh);
+  await authService.updateRefreshTokenCookie(req, res, tokens.refresh);
+
+  res.send({ access: tokens.access });
 });
 
 const forgotPassword = catchAsync(async (req, res) => {

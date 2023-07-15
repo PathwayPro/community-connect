@@ -4,6 +4,7 @@ import { Controller, useForm, SubmitHandler } from 'react-hook-form';
 
 import { useAppDispatch } from '../../app/hooks';
 import { useRegisterUserMutation } from '../../app/slices/apiSlice';
+import { setCredentials } from '../../app/slices/authSlice';
 import { showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 import Input from '../../common/components/Input/Input';
@@ -79,6 +80,7 @@ const RegisterForm: FC = () => {
   });
 
   const [registerUser] = useRegisterUserMutation();
+
   // TODO: Implement errors handler
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
     const bodyObject = {
@@ -90,11 +92,12 @@ const RegisterForm: FC = () => {
 
     await registerUser(bodyObject)
       .unwrap()
-      .then(() => {
+      .then((data) => {
+        dispatch(setCredentials(data));
         dispatch(showModal({ content: MODAL_TYPE.CONFIRM_EMAIL }));
       })
-      .catch(({ data }) => {
-        console.log(data?.message);
+      .catch((error) => {
+        console.log(error.data?.message || error);
       });
   };
 
