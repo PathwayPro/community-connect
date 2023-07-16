@@ -17,9 +17,14 @@ const Hero: FC = () => {
     e.preventDefault();
     dispatch(showModal({ content: MODAL_TYPE.REGISTER }));
   };
+  const onFillUserProfileClick = (e: MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    dispatch(showModal({ content: MODAL_TYPE.FILL_USER_PROFILE }));
+  };
 
   return (
     <SectionMain>
+      <Button label="open" color="orange" onClick={onFillUserProfileClick} className={styles.buttonHero} />
       <div className={styles.inner}>
         <div className={styles.part}>
           <Heading tagType="h1" className={styles.heading}>

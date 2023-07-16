@@ -4,6 +4,7 @@ import { default as ReactModal } from 'react-modal';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { closeModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
 import { SendVerificationEmail, VerifyEmail } from '../../../components/ConfirmEmail';
+import FillUserProfile from '../../../components/FillUserProfileForm/FillUserProfileForm';
 import ForgotPasswordForm from '../../../components/ForgotPasswordForm/ForgotPasswordForm';
 import LoginForm from '../../../components/LoginForm/LoginForm';
 import RegisterForm from '../../../components/RegisterForm/RegisterForm';
@@ -25,6 +26,7 @@ const Modal: FC = () => {
       if (content === MODAL_TYPE.RESET_PASSWORD) return <ResetPasswordForm />;
       if (content === MODAL_TYPE.SEND_CONFIRMATION_EMAIL) return <SendVerificationEmail />;
       if (content === MODAL_TYPE.VERIFY_EMAIL) return <VerifyEmail />;
+      if (content === MODAL_TYPE.FILL_USER_PROFILE) return <FillUserProfile />;
     }
     return null;
   }, [content]);
