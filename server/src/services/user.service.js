@@ -1,5 +1,6 @@
 const httpStatus = require('http-status');
 const { User } = require('../models');
+const { UserProfile } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**
@@ -82,11 +83,31 @@ const deleteUserById = async (userId) => {
   return user;
 };
 
+
+/**
+ * Create or update user profile
+ * @param {ObjectId} userId
+ * @param {Object} updateBody
+ * @returns {Promise<UserProfile>}
+ */
+const createOrUpdateProfile = async (userId, updateBody) => {
+  const [userProfile, created] = await UserProfile.findOrCreate({
+    where: { userId },
+    defaults: updateBody,
+  });
+  if (!created) {
+    Object.assign(userProfile, updateBody);
+    await userProfile.save();
+  }
+  return userProfile;
+};
+
 module.exports = {
   createUser,
   queryUsers,
   getUserById,
   getUserByEmail,
   updateUserById,
+  createOrUpdateProfile,
   deleteUserById,
 };
