@@ -1,0 +1,16 @@
+@use '../../common/styles/colors';
+@use '../../common/styles/mixins';
+@use '../../common/styles/fonts';
+@use '../../common/styles/media';
+
+.title {
+  margin-bottom: 40px;
+}
+
+.content {
+  margin-bottom: 16px;
+}
+
+.btnWrapper {
+  @extend %flex-space-between
+}
