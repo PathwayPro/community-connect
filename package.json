@@ -15,6 +15,7 @@
     "dev-backendonly": "yarn workspace server dev"
   },
   "devDependencies": {
+    "@playwright/test": "^1.36.0",
     "concurrently": "^8.2.0"
   }
 }
