@@ -20,6 +20,14 @@ const router = createBrowserRouter([
         Component: Main,
       },
       {
+        path: 'verify-email',
+        Component: Main,
+      },
+      {
+        path: 'reset-password',
+        Component: Main,
+      },
+      {
         path: 'events',
         Component: Events,
       },

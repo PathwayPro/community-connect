@@ -6,6 +6,7 @@ interface IUser {
   firstName: string;
   lastName: string;
   email: string;
+  isEmailVerified: boolean,
   id: number;
 }
 

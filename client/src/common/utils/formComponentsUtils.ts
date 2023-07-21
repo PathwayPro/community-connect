@@ -2,7 +2,7 @@ const NAME_REGEX = /^[a-z ,.'-]+$/i;
 
 const ERROR_MESSAGE_NAME = 'Only letters are allowed';
 
-const EMAIL_REGEX = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+const EMAIL_REGEX = /^[\w-.]+@([\w-]+\.)+[\w-]{2,5}$/;
 
 const ERROR_MESSAGE_EMAIL = 'Enter a valid email address';
 

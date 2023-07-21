@@ -2,7 +2,8 @@ import { FC, ChangeEvent, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { useAppDispatch } from '../../app/hooks';
-import { showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
+import { useForgotPasswordMutation } from '../../app/slices/apiSlice';
+import { closeModal, showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 import Heading from '../../common/components/Heading/Heading';
 import Input from '../../common/components/Input/Input';
@@ -32,10 +33,13 @@ const ForgotPasswordForm: FC = () => {
     },
   });
 
-  // TODO: send data to the API
+  // TODO: Loader and Error handler
+  const [forgotPassword] = useForgotPasswordMutation();
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
-    console.log(JSON.stringify(values, undefined, 2));
-    setEmailSent(true);
+    await forgotPassword(values)
+      .unwrap()
+      .then(() => setEmailSent(true))
+      .catch((error) => console.log(error));
   };
 
   const onChangeEmail = (event: ChangeEvent<HTMLInputElement>) => {
@@ -58,27 +62,17 @@ const ForgotPasswordForm: FC = () => {
         onBlur={email.onBlur}
         ref={email.ref}
         errorMessage={errors.email?.message}
-        successMessage={isSubmitSuccessful && isEmailSent ? 'Reset Email successfully sent' : ''}
+        successMessage={isSubmitSuccessful && isEmailSent ? 'Reset Email successfully sent to your email' : ''}
       />
 
       <div className={styles.formButton}>
-        {!isEmailSent ? (
-          <Button
-            label="Reset by email"
-            isSubmit
-            isDisabled={!isValid || !isDirty}
-            onClick={handleSubmit(onSubmit)}
-            size="small"
-          />
-        ) : (
-          <Button
-            label="Resend link"
-            isSubmit
-            isDisabled={!isValid || !isDirty}
-            onClick={handleSubmit(onSubmit)}
-            size="small"
-          />
-        )}
+        <Button
+          label={!isEmailSent ? 'Reset by email' : 'Ok'}
+          isSubmit
+          isDisabled={!isValid || !isDirty}
+          onClick={!isEmailSent ? handleSubmit(onSubmit) : () => dispatch(closeModal())}
+          size="small"
+        />
       </div>
       <div className={styles.formBottomPart}>
         <p className={styles.formBottomText}>

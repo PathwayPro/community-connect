@@ -1,9 +1,11 @@
 import classNames from 'classnames';
 import { FC } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from '../../app/hooks';
-import { closeModal, showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
+import { useResetPasswordMutation } from '../../app/slices/apiSlice';
+import { showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 import Heading from '../../common/components/Heading/Heading';
 import Input from '../../common/components/Input/Input';
@@ -17,6 +19,10 @@ interface IFormInput {
 }
 
 const ResetPasswordForm: FC = () => {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const emailConfirmationToken = searchParams.get('token');
+
   const dispatch = useAppDispatch();
 
   const {
@@ -41,10 +47,20 @@ const ResetPasswordForm: FC = () => {
     },
   });
 
-  // TODO: send data to the API
+  // TODO: add Error handler
+  const [resetPassword] = useResetPasswordMutation();
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
-    console.log(JSON.stringify(values, undefined, 2));
-    dispatch(closeModal());
+    const data = {
+      token: emailConfirmationToken,
+      password: values.password,
+    };
+    await resetPassword(data)
+      .unwrap()
+      .then(() => {
+        dispatch(showModal({ content: MODAL_TYPE.LOGIN }));
+        navigate('/');
+      })
+      .then((error) => console.log(error));
   };
 
   return (

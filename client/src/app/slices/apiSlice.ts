@@ -38,6 +38,7 @@ const baseQueryWithReauth = async (args: string | FetchArgs, api: BaseQueryApi, 
 
 export const apiSlice = createApi({
   baseQuery: baseQueryWithReauth,
+  tagTypes: ['Email'],
   endpoints: (builder) => ({
     getUrl: builder.query({ query: (url: string) => url }),
 
@@ -57,19 +58,49 @@ export const apiSlice = createApi({
         method: 'POST',
         body: data,
       }),
+      invalidatesTags: ['Email'],
     }),
 
     // Request Verification Email
-    confirmEmail: builder.mutation({
+    sendConfirmationEmail: builder.query<unknown, void>({
+      query: () => '/v1/auth/send-verification-email',
+      providesTags: ['Email'],
+    }),
+
+    // Verify Email
+    verifyEmail: builder.query({
+      query: ({ token }) => ({
+        url: `/v1/auth/verify-email?token=${token}`,
+      }),
+    }),
+
+    // Request Forgot password email
+    forgotPassword: builder.mutation({
       query: (data) => ({
-        url: '/v1/auth/send-verification-email',
+        url: `/v1/auth/forgot-password`,
         method: 'POST',
         body: data,
+      }),
+    }),
+
+    // Reset password
+    resetPassword: builder.mutation({
+      query: ({ token, password }) => ({
+        url: `/v1/auth/reset-password?token=${token}`,
+        method: 'POST',
+        body: { password },
       }),
     }),
   }),
 });
 
 // hooks are automatically generated based on endpoint names
-
-export const { useGetUrlQuery, useRegisterUserMutation, useLoginUserMutation, useConfirmEmailMutation } = apiSlice;
+export const {
+  useGetUrlQuery,
+  useRegisterUserMutation,
+  useLoginUserMutation,
+  useSendConfirmationEmailQuery,
+  useVerifyEmailQuery,
+  useForgotPasswordMutation,
+  useResetPasswordMutation,
+} = apiSlice;

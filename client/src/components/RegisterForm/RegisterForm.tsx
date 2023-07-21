@@ -94,7 +94,7 @@ const RegisterForm: FC = () => {
       .unwrap()
       .then((data) => {
         dispatch(setCredentials(data));
-        dispatch(showModal({ content: MODAL_TYPE.CONFIRM_EMAIL }));
+        dispatch(showModal({ content: MODAL_TYPE.SEND_CONFIRMATION_EMAIL }));
       })
       .catch((error) => {
         console.log(error.data?.message || error);

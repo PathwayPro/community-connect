@@ -26,6 +26,16 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     /**
+     * Encrypt password
+     * @param {string} password
+     * @returns {Promise<string>}
+     */
+    static async encryptPassword(password) {
+      const ecryptedPassword = await bcrypt.hash(password, 8);
+      return ecryptedPassword;
+    }
+
+    /**
      * Check if password matches the user's password
      * @param {string} password
      * @returns {Promise<boolean>}
