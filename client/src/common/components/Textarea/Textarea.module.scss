@@ -1,0 +1,105 @@
+@use '../../styles/colors';
+@use '../../styles/fonts';
+@use '../../styles/media';
+
+.fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: 100% !important;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.textarea {
+  width: 100%;
+  // height: 3rem;
+  line-height: 3rem;
+  background-color: colors.$white;
+  border: 1px solid colors.$grey-light;
+  border-radius: 8px;
+  padding: 0.75rem;
+  appearance: none;
+  outline: none;
+  @include fonts.mainText;
+
+  &::placeholder {
+    color: colors.$grey;
+  }
+  &:focus,
+  &:active,
+  &:focus-visible {
+    border-color: colors.$focus;
+  }
+
+  &.error {
+    border: 1px solid colors.$error;
+    margin-bottom: 1.6rem;
+    background-color: colors.$error-bg !important;
+  }
+
+  &.success {
+    border: 1px solid colors.$success;
+    margin-bottom: 1.6rem;
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      transition: background-color 5000s ease-in-out 0s;
+      box-shadow: inset 0 0 20px 20px colors.$success-bg;
+    }
+  }
+}
+
+// generate classes like .textarea-1, .textarea-2, ... , .textarea-10 with corresponding height in rem.
+@for $i from 1 through 10 {
+  .textarea-#{$i} {
+    height: #{$i * 2}rem;
+  }
+}
+
+.label {
+  @include fonts.mainText($font-size: 0.8rem, $font-weight: 700, $line-height: 1);
+  margin-bottom: 0.5rem;
+}
+
+.message {
+  position: absolute;
+  top: 80px;
+  padding-left: 1.2rem;
+
+  @include media.media-l {
+    top: 70px;
+  }
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    left: 0;
+
+    @include media.media-s {
+      width: 11px;
+      height: 11px;
+    }
+  }
+}
+
+.errorMessage {
+  @include fonts.hintText($color: colors.$error);
+
+  &::before {
+    background: url('/images/Icon/error.svg') no-repeat center center / cover;
+  }
+}
+
+.successMessage {
+  @include fonts.hintText($color: colors.$success);
+
+  &::before {
+    background: url('/images/Icon/success.svg') no-repeat center center / cover;
+  }
+}
