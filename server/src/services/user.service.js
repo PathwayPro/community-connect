@@ -83,7 +83,6 @@ const deleteUserById = async (userId) => {
   return user;
 };
 
-
 /**
  * Create or update user profile
  * @param {ObjectId} userId
