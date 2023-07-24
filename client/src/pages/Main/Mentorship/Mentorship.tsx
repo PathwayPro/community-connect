@@ -20,13 +20,20 @@ const Mentorship: FC = () => {
             Connect with experienced mentors who understand the challenges and opportunities of the immigrant
             experience. Get personalized guidance, support, and advice to help you thrive in your new environment.
           </p>
-          <ButtonLink
-            to="/mentorship"
-            label="Book a session!"
-            color="orange"
-            size="small"
-            className={styles.buttonMentorship}
-          />
+         <div className={styles.buttons}>
+            <ButtonLink
+              to="/mentorship/apply"
+              label="Apply for mentorship"
+              color="orange"
+              size="small"
+            />
+            <ButtonLink
+              to="/mentorship/become"
+              label="Become a Mentor"
+              color="orange"
+              size="small"
+            />
+         </div>
         </div>
         <div className={styles.part}>
           <img src={sectionImg} alt="man and a laptop" />

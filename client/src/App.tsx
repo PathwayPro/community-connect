@@ -3,11 +3,12 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import AboutUs from './pages/AboutUs/AboutUs';
 import Events from './pages/Events/Events';
-import Faq from './pages/FAQ/Faq';
 import Layout from './pages/Layout/Layout';
 import Main from './pages/Main/Main';
-import Mentorship from './pages/Mentorship/Mentorship';
+import ApplyForMentorship from './pages/Mentorship/ApplyForMentorship';
+import BecomeMentor from './pages/Mentorship/BecomeMentor';
 import Resources from './pages/Resources/Resources';
+import Volunteering from './pages/Volunteering/Volunteering';
 
 const router = createBrowserRouter([
   {
@@ -27,16 +28,20 @@ const router = createBrowserRouter([
         Component: Resources,
       },
       {
-        path: 'mentorship',
-        Component: Mentorship,
+        path: 'mentorship/apply',
+        Component: ApplyForMentorship,
       },
       {
-        path: 'faq',
-        Component: Faq,
+        path: 'mentorship/become',
+        Component: BecomeMentor,
       },
       {
         path: 'about',
         Component: AboutUs,
+      },
+      {
+        path: 'volunteering',
+        Component: Volunteering,
       },
     ],
   },

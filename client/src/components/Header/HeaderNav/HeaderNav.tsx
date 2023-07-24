@@ -7,6 +7,7 @@ import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
 import Button from '../../../common/components/Button/Button';
 import Heading from '../../../common/components/Heading/Heading';
 import useWindowSize, { BREAKPOINTS } from '../../../common/utils/useWindowSize';
+import HeaderDropDown from '../HeaderDropDown/HeaderDropDown';
 
 import styles from './HeaderNav.module.scss';
 
@@ -73,25 +74,7 @@ const HeaderNav: FC = () => {
             Resources
           </NavLink>
 
-          <NavLink
-            to="/mentorship"
-            className={({ isActive, isPending }) =>
-              classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
-            }
-            onClick={handleMobileDropDownClose}
-          >
-            Mentorship
-          </NavLink>
-
-          <NavLink
-            to="/faq"
-            className={({ isActive, isPending }) =>
-              classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
-            }
-            onClick={handleMobileDropDownClose}
-          >
-            FAQ
-          </NavLink>
+          <HeaderDropDown label="Mentorship" />
 
           <NavLink
             to="/about"
