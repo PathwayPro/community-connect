@@ -15,16 +15,17 @@ const footerLinks: footerLinkItem[] = [
   {
     heading: 'Work with us',
     list: [
-      { label: 'Apply for mentorship', link: '/mentorship' },
-      { label: 'Become a mentor', link: '/mentorship' },
-      { label: 'Become a partner', link: '/mentorship' },
+      { label: 'Apply for mentorship', link: '/mentorship/apply' },
+      { label: 'Become a mentor', link: '/mentorship/become' },
+      { label: 'Become a volunteer', link: '/volunteering' },
+      { label: 'Become a partner', link: '/' }, // TODO: No page, just invoke modal
     ],
   },
   {
     heading: 'Events',
     list: [
       { label: 'Upcoming Events', link: '/events' },
-      { label: 'Past Recordings', link: '/events' },
+      { label: 'Past Events', link: '/events' },
     ],
   },
   {
