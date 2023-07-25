@@ -1,12 +1,14 @@
-import { ReactComponent as blogCommentIcon } from './img/blog-comment.svg';
-import { ReactComponent as blogRepostIcon } from './img/blog-repost.svg';
-import { ReactComponent as DeleteIcon } from './img/delete-can.svg';
-import { ReactComponent as editIcon } from './img/edit-pen.svg';
-import { ReactComponent as headerNotificationIcon } from './img/header-bell.svg';
-import { ReactComponent as headerHomeIcon } from './img/header-home.svg';
-import { ReactComponent as headerMsgIcon } from './img/header-msg.svg';
-import { ReactComponent as headerSearchIcon } from './img/header-search.svg';
-import { ReactComponent as likeIcon } from './img/like.svg';
+import { ReactComponent as blogCommentIcon } from '../../../images/Icon/blog-comment.svg';
+import { ReactComponent as blogRepostIcon } from '../../../images/Icon/blog-repost.svg';
+import { ReactComponent as DeleteIcon } from '../../../images/Icon/delete-can.svg';
+import { ReactComponent as editIcon } from '../../../images/Icon/edit-pen.svg';
+import { ReactComponent as headerNotificationIcon } from '../../../images/Icon/header-bell.svg';
+import { ReactComponent as headerHomeIcon } from '../../../images/Icon/header-home.svg';
+import { ReactComponent as headerMsgIcon } from '../../../images/Icon/header-msg.svg';
+import { ReactComponent as headerSearchIcon } from '../../../images/Icon/header-search.svg';
+import { ReactComponent as likeIcon } from '../../../images/Icon/like.svg';
+import { ReactComponent as settingIcon } from '../../../images/Icon/setting.svg';
+
 
 interface IconMap {
   blogCommentIcon: React.FC<React.SVGProps<SVGSVGElement>>;
@@ -18,6 +20,7 @@ interface IconMap {
   headerMsgIcon: React.FC<React.SVGProps<SVGSVGElement>>;
   headerSearchIcon: React.FC<React.SVGProps<SVGSVGElement>>;
   likeIcon: React.FC<React.SVGProps<SVGSVGElement>>;
+  settingIcon: React.FC<React.SVGProps<SVGSVGElement>>;
 }
 
 const iconMap: IconMap = {
@@ -30,6 +33,7 @@ const iconMap: IconMap = {
   headerMsgIcon: headerMsgIcon,
   headerSearchIcon: headerSearchIcon,
   likeIcon: likeIcon,
+  settingIcon: settingIcon,
 };
 
 export default iconMap;

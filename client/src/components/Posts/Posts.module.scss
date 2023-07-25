@@ -1,0 +1,10 @@
+@use '../../common/styles/mixins';
+
+.box {
+    width: 60%;
+}
+
+.posts {
+    @extend %flex-column-left;
+    gap: 16px;
+}
