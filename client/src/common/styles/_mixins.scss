@@ -24,6 +24,13 @@
   align-items: center;
 }
 
+%flex-column-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 %flex-left-center {
   display: flex;
   justify-content: flex-start;

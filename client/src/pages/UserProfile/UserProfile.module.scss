@@ -1,0 +1,34 @@
+@use '../../common/styles/colors';
+@use '../../common/styles/mixins';
+
+.page {
+  margin: 20px 60px 80px 60px;
+  gap: 10px;
+  @extend %flex-column-center;
+}
+
+.background {
+  background-color: colors.$orange-normal;
+  width: 100%;
+  height: 250px;
+  border-radius: 15px;
+  position: relative;
+}
+
+.image {
+  width: 200px;
+  height: 200px;
+  border-radius: 200px;
+  border: 2px solid colors.$orange-light;
+  position: absolute;
+  top: 150px;
+  left: 40px;
+}
+
+.personal {
+  background: colors.$blue-light;
+  width: 100%;
+  height: 200px;
+  border-radius: 15px;
+}
+
