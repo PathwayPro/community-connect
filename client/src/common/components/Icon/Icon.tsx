@@ -9,7 +9,7 @@ export interface iconProps {
   className?: string;
 }
 const Icon: FC<iconProps> = ({ href, type, className }) => {
-  return <a href={href} className={classNames(className, styles.icon, styles[type])}></a>;
+  return <a href={href} className={classNames(className, styles.icon, styles[type])} target="_blank" rel="noreferrer"></a>;
 };
 
 export default Icon;
