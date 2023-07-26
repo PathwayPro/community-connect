@@ -1,0 +1,84 @@
+@use '../../../common/styles/colors';
+@use '../../../common/styles/fonts';
+@use '../../../common/styles/mixins';
+
+@mixin detailText {
+    @include fonts.mainText;
+    font-size: 19px;
+}
+
+.personal {
+    background: colors.$blue-light;
+    width: 100%;
+    min-height: 200px;
+    padding: 15px 26px;
+    border-radius: 15px;
+    position: relative;
+
+    @extend %flex-column;
+}
+
+.mainInfo {
+    margin-left: 260px;
+
+    @extend %flex-column;
+}
+
+.name {
+    @include fonts.headingText;
+    font-size: 33px;
+}
+
+.experience {
+    @include fonts.hintText;
+    font-size: 19px;
+}
+
+.otherInfo {
+    gap: 16px;
+
+    @extend %flex-column;
+}
+
+.infoRow {
+    @extend %flex-row-left;
+}
+
+.title {
+    margin-right: 10px;
+    padding-top: 3px;
+
+    @include fonts.headingText;
+    font-size: 19px;
+}
+
+.detail {
+    @include detailText;
+    @extend %flex-row-left;
+}
+
+.languageDetail {
+    @include detailText;
+    @extend %flex-row-center;
+}
+
+.languageItem {
+    @include fonts.mainText($line-height: 1.6);
+    font-size: 13px;
+
+    background-color: colors.$orange-normal;
+    color: colors.$white;
+    height: 20px;
+    padding: 0px 12px;
+    margin-left: 1px;
+    border-radius: 16px;
+}
+
+.socials {
+    @extend %flex-row-right;
+}
+
+.icons {
+    border-radius: 10px;
+    margin-left: 8px;
+}

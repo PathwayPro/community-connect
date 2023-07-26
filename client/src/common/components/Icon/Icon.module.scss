@@ -4,7 +4,6 @@
   display: block;
   height: 50px;
   width: 50px;
-  border-radius: 50%;
   overflow: hidden;
 
   @include media.media-s {
@@ -22,5 +21,17 @@
 
   &.inst {
     background: url('/images/Icon/inst.svg') no-repeat center center / cover;
+  }
+
+  &.tw {
+    background: url('/images/Icon/tw.svg') no-repeat center center / cover;
+  }
+
+  &.git {
+    background: url('/images/Icon/git.svg') no-repeat center center / cover;
+  }
+
+  &.be {
+    background: url('/images/Icon/be.svg') no-repeat center center / cover;
   }
 }

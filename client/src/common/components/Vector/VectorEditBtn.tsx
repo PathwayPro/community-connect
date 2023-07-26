@@ -8,7 +8,7 @@ import styles from './VectorEditBtn.module.scss';
 import vector from '../../../images/Icon/Vector.svg'
 
 interface VectorEditBtnProps {
-  position?: 'middle' | 'bottom';
+  position?: 'top' | 'middle' | 'bottom';
   onClick: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   className?: string;
 }

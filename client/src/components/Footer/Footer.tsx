@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import Container from '../../common/components/Container/Container';
+import Icon, { iconProps } from '../../common/components/Icon/Icon';
 
 import styles from './Footer.module.scss';
-import Icon, { iconProps } from './Icon/Icon';
 
 interface footerLinkItem {
   heading: string;
@@ -34,9 +34,9 @@ const footerLinks: footerLinkItem[] = [
 ];
 
 const socialsList: iconProps[] = [
-  { href: '/', type: 'in' },
-  { href: '/', type: 'fb' },
-  { href: '/', type: 'inst' },
+  { href: '/', type: 'in', className: styles.icon },
+  { href: '/', type: 'fb', className: styles.icon },
+  { href: '/', type: 'inst', className: styles.icon },
 ];
 
 const onClickUpButton = () => {
@@ -74,7 +74,7 @@ const Footer: FC = () => {
           ))}
           <div className={styles.socials}>
             {socialsList.map((item) => (
-              <Icon key={item.type} href={item.href} type={item.type} />
+              <Icon key={item.type} href={item.href} type={item.type} className={item.className}/>
             ))}
           </div>
           <button className={styles.upButton} onClick={onClickUpButton} />
