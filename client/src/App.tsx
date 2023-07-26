@@ -8,6 +8,7 @@ import Layout from './pages/Layout/Layout';
 import Main from './pages/Main/Main';
 import Mentorship from './pages/Mentorship/Mentorship';
 import Resources from './pages/Resources/Resources';
+import UserProfile from './pages/UserProfile/UserProfile';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: 'about',
         Component: AboutUs,
+      },
+      {
+        path: 'userProfile',
+        Component: UserProfile,
       },
     ],
   },
