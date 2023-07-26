@@ -58,7 +58,7 @@ const Info: FC = () => {
 
         </div>
     </div>
-    );
+  );
 };
 
 export default Info;

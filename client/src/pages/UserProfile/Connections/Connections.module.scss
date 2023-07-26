@@ -1,0 +1,16 @@
+@use '../../../common/styles/colors';
+@use '../../../common/styles/fonts';
+@use '../../../common/styles/mixins';
+
+.connections {
+    background: colors.$blue-light;
+    width: 15%;
+    min-height: 100px;
+    padding: 26px;
+    border-radius: 15px;
+
+    @include fonts.headingText;
+    font-size: 16px;
+
+    @extend %flex-column-start;
+}

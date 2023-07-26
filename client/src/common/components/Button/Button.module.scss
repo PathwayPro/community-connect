@@ -118,4 +118,10 @@
       border: 3px solid colors.$orange-normal-active;
     }
   }
+
+  &.grey {
+    background-color: colors.$white-normal-hover;
+    color: colors.$white-dark-active;
+    border-radius: 5px;
+  }
 }

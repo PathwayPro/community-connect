@@ -9,7 +9,7 @@ interface ButtonProps {
   size?: 'normal' | 'small';
   isDisabled?: boolean;
   isSubmit?: boolean;
-  color?: 'orange' | 'orangeLight' | 'hollow';
+  color?: 'orange' | 'orangeLight' | 'hollow' | 'grey';
   onClick: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   className?: string;
 }

@@ -6,3 +6,11 @@
   gap: 10px;
   @extend %flex-column-center;
 }
+
+.socials {
+  width: 100%;
+
+  @extend %flex-row;
+  gap: 26px;
+
+}
