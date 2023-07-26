@@ -1,4 +1,4 @@
-const NAME_REGEX = /^[a-z ,.'-]+$/i;
+const NAME_REGEX = /^[a-z '-]+$/i;
 
 const ERROR_MESSAGE_NAME = 'Only letters are allowed';
 
