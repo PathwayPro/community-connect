@@ -1,7 +1,8 @@
 import { FC, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 import { useAppDispatch } from '../../app/hooks';
+import { setVerifyEmailToken, setResetPasswordToken } from '../../app/slices/authSlice';
 import { showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 
 import Events from './Events/Events';
@@ -12,13 +13,20 @@ import Resources from './Resources/Resources';
 
 const Main: FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (location.pathname === '/verify-email') {
+    const token = searchParams.get('token');
+    if (location.pathname === '/verify-email' && token) {
+      dispatch(setVerifyEmailToken(token));
+      navigate('/');
       dispatch(showModal({ content: MODAL_TYPE.VERIFY_EMAIL }));
     }
-    if (location.pathname === '/reset-password') {
+    if (location.pathname === '/reset-password' && token) {
+      dispatch(setResetPasswordToken(token));
+      navigate('/');
       dispatch(showModal({ content: MODAL_TYPE.RESET_PASSWORD }));
     }
     return;

@@ -70,5 +70,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
+  User.addHook('beforeUpdate', async function (user) {
+    if (user.dataValues.password !== user._previousDataValues.password) {
+      // eslint-disable-next-line no-param-reassign
+      user.password = await bcrypt.hash(user.password, 8);
+    }
+  });
+
   return User;
 };

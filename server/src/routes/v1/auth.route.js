@@ -12,8 +12,8 @@ router.get('/logout', authController.logout);
 router.get('/refresh-tokens', authController.refreshTokens);
 router.post('/forgot-password', validate(authValidation.forgotPassword), authController.forgotPassword);
 router.post('/reset-password', validate(authValidation.resetPassword), authController.resetPassword);
-router.get('/send-verification-email', auth(), authController.sendVerificationEmail);
-router.get('/verify-email', validate(authValidation.verifyEmail), authController.verifyEmail);
+router.post('/send-verification-email', auth(), authController.sendVerificationEmail);
+router.post('/verify-email', validate(authValidation.verifyEmail), authController.verifyEmail);
 
 module.exports = router;
 

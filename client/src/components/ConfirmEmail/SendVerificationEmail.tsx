@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
 
 import { useAppDispatch } from '../../app/hooks';
-import { useSendConfirmationEmailQuery } from '../../app/slices/apiSlice';
+import { useSendConfirmationEmailMutation } from '../../app/slices/apiSlice';
 import { closeModal } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 
@@ -11,34 +11,27 @@ import image from '../../images/ConfirmEmail/confirmed.png';
 
 const SendVerificationEmail: FC = () => {
   const dispatch = useAppDispatch();
-  const { isLoading, isError, isSuccess } = useSendConfirmationEmailQuery();
+  const verifiying = useRef(false);
+  const [requestConfirmationLetter, { isUninitialized }] = useSendConfirmationEmailMutation();
 
-  let result = null;
+  useEffect(() => {
+    if (verifiying.current) return;
 
-  // TODO: Loader and Error handler
-  if (isLoading) {
-    result = <p className={styles.textCentered}>Loading...</p>;
-  }
-  if (isError) {
-    result = <p className={styles.textCentered}>Try later</p>;
-  }
-  if (isSuccess) {
-    result = (
-      <>
-        <p className={styles.text}>
-          Before creating your user account, please check your email for a&nbsp;confirmation request
-        </p>
-        <Button label="Ok" onClick={() => dispatch(closeModal())} size="small" className={styles.buttonConfirm} />
-      </>
-    );
-  }
+    if (isUninitialized) {
+      verifiying.current = true;
+      requestConfirmationLetter({}).unwrap();
+    }
+  }, [verifiying]);
 
   return (
     <div className={styles.container}>
       <div>
         <img src={image} />
       </div>
-      {result}
+      <p className={styles.text}>
+        Before creating your user account, please check your email for a&nbsp;confirmation request
+      </p>
+      <Button label="Ok" onClick={() => dispatch(closeModal())} size="small" className={styles.buttonConfirm} />
     </div>
   );
 };

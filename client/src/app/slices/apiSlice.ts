@@ -38,7 +38,6 @@ const baseQueryWithReauth = async (args: string | FetchArgs, api: BaseQueryApi, 
 
 export const apiSlice = createApi({
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['Email'],
   endpoints: (builder) => ({
     getUrl: builder.query({ query: (url: string) => url }),
 
@@ -58,19 +57,23 @@ export const apiSlice = createApi({
         method: 'POST',
         body: data,
       }),
-      invalidatesTags: ['Email'],
     }),
 
     // Request Verification Email
-    sendConfirmationEmail: builder.query<unknown, void>({
-      query: () => '/v1/auth/send-verification-email',
-      providesTags: ['Email'],
+    sendConfirmationEmail: builder.mutation({
+      query: (data) => ({
+        url: '/v1/auth/send-verification-email',
+        method: 'POST',
+        body: data,
+      }),
     }),
 
     // Verify Email
-    verifyEmail: builder.query({
-      query: ({ token }) => ({
-        url: `/v1/auth/verify-email?token=${token}`,
+    verifyEmail: builder.mutation({
+      query: (data) => ({
+        url: `/v1/auth/verify-email`,
+        method: 'POST',
+        body: data,
       }),
     }),
 
@@ -85,10 +88,10 @@ export const apiSlice = createApi({
 
     // Reset password
     resetPassword: builder.mutation({
-      query: ({ token, password }) => ({
-        url: `/v1/auth/reset-password?token=${token}`,
+      query: (data) => ({
+        url: `/v1/auth/reset-password`,
         method: 'POST',
-        body: { password },
+        body: data,
       }),
     }),
   }),
@@ -99,8 +102,8 @@ export const {
   useGetUrlQuery,
   useRegisterUserMutation,
   useLoginUserMutation,
-  useSendConfirmationEmailQuery,
-  useVerifyEmailQuery,
+  useSendConfirmationEmailMutation,
+  useVerifyEmailMutation,
   useForgotPasswordMutation,
   useResetPasswordMutation,
 } = apiSlice;
