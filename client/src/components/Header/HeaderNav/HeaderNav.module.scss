@@ -29,6 +29,11 @@
     border-top: 2px solid colors.$orange-normal;
     z-index: 10;
     padding: 30px;
+    text-align: center;
+  }
+
+  &.wide {
+    width: 100%;
   }
 }
 

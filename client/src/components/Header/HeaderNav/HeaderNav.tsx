@@ -52,7 +52,13 @@ const HeaderNav: FC = () => {
         )}
         onClick={onMobileButtonClick}
       />
-      <div className={classNames(styles.wrapper, width <= BREAKPOINTS.small && !isNavDropDownActive && styles.hidden)}>
+      <div
+        className={classNames(
+          styles.wrapper,
+          width <= BREAKPOINTS.small && !isNavDropDownActive && styles.hidden,
+          width <= BREAKPOINTS.xsmall && styles.wide
+        )}
+      >
         <nav className={styles.nav}>
           <NavLink
             to="/events"
@@ -74,8 +80,30 @@ const HeaderNav: FC = () => {
             Resources
           </NavLink>
 
-          <HeaderDropDown label="Mentorship" />
-
+          {width > BREAKPOINTS.small ? (
+            <HeaderDropDown label="Mentorship" />
+          ) : (
+            <>
+              <NavLink
+                to="/mentorship/apply"
+                className={({ isActive, isPending }) =>
+                  classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
+                }
+                onClick={handleMobileDropDownClose}
+              >
+                Apply for mentorship
+              </NavLink>
+              <NavLink
+                to="/mentorship/become"
+                className={({ isActive, isPending }) =>
+                  classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
+                }
+                onClick={handleMobileDropDownClose}
+              >
+                Become a mentor
+              </NavLink>
+            </>
+          )}
           <NavLink
             to="/about"
             className={({ isActive, isPending }) =>

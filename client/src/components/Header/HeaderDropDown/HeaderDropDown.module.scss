@@ -35,6 +35,8 @@
 .options {
   position: absolute;
   top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
   background: colors.$blue-normal;
   box-shadow: 0 2px 2px colors.$white-darker;
   border-radius: 0px 2px 2px 0px;
@@ -59,10 +61,12 @@
 
 .option {
   display: block;
-  padding: 8px 16px;
+  padding: 0.5rem 1rem;
   cursor: pointer;
   text-align: left;
   color: colors.$white;
+  white-space: nowrap;
+  text-align: center;
 
   &:hover {
     background: colors.$orange-normal-hover;
