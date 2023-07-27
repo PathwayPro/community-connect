@@ -2,8 +2,10 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-import { useAppDispatch } from '../../app/hooks';
-import { closeModal, showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useResetPasswordMutation } from '../../app/slices/apiSlice';
+import { setResetPasswordToken } from '../../app/slices/authSlice';
+import { showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 import Heading from '../../common/components/Heading/Heading';
 import Input from '../../common/components/Input/Input';
@@ -17,6 +19,7 @@ interface IFormInput {
 }
 
 const ResetPasswordForm: FC = () => {
+  const resetPasswordToken = useAppSelector((state) => state.auth.resetPasswordToken);
   const dispatch = useAppDispatch();
 
   const {
@@ -41,10 +44,20 @@ const ResetPasswordForm: FC = () => {
     },
   });
 
-  // TODO: send data to the API
+  // TODO: add Error handler
+  const [resetPassword] = useResetPasswordMutation();
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
-    console.log(JSON.stringify(values, undefined, 2));
-    dispatch(closeModal());
+    const data = {
+      token: resetPasswordToken,
+      password: values.password,
+    };
+    await resetPassword(data)
+      .unwrap()
+      .then(() => {
+        dispatch(setResetPasswordToken(null));
+        dispatch(showModal({ content: MODAL_TYPE.LOGIN }));
+      })
+      .then((error) => console.log(error));
   };
 
   return (

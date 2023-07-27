@@ -60,9 +60,36 @@ export const apiSlice = createApi({
     }),
 
     // Request Verification Email
-    confirmEmail: builder.mutation({
+    sendConfirmationEmail: builder.mutation({
       query: (data) => ({
         url: '/v1/auth/send-verification-email',
+        method: 'POST',
+        body: data,
+      }),
+    }),
+
+    // Verify Email
+    verifyEmail: builder.mutation({
+      query: (data) => ({
+        url: `/v1/auth/verify-email`,
+        method: 'POST',
+        body: data,
+      }),
+    }),
+
+    // Request Forgot password email
+    forgotPassword: builder.mutation({
+      query: (data) => ({
+        url: `/v1/auth/forgot-password`,
+        method: 'POST',
+        body: data,
+      }),
+    }),
+
+    // Reset password
+    resetPassword: builder.mutation({
+      query: (data) => ({
+        url: `/v1/auth/reset-password`,
         method: 'POST',
         body: data,
       }),
@@ -71,5 +98,12 @@ export const apiSlice = createApi({
 });
 
 // hooks are automatically generated based on endpoint names
-
-export const { useGetUrlQuery, useRegisterUserMutation, useLoginUserMutation, useConfirmEmailMutation } = apiSlice;
+export const {
+  useGetUrlQuery,
+  useRegisterUserMutation,
+  useLoginUserMutation,
+  useSendConfirmationEmailMutation,
+  useVerifyEmailMutation,
+  useForgotPasswordMutation,
+  useResetPasswordMutation,
+} = apiSlice;

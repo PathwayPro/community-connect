@@ -48,7 +48,11 @@ const LoginForm: FC = () => {
         dispatch(closeModal());
       })
       .catch((error) => {
-        console.log(error.data?.message || error);
+        if (error.data?.message === 'Please verify email') {
+          dispatch(showModal({ content: MODAL_TYPE.SEND_CONFIRMATION_EMAIL }));
+        } else {
+          console.log(error.data?.message || error);
+        }
       });
   };
 

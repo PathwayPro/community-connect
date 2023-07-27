@@ -5,12 +5,22 @@ export const MODAL_TYPE = {
   REGISTER: 'register',
   FROGOT_PASSWORD: 'forgotPassword',
   RESET_PASSWORD: 'resetPassword',
-  CONFIRM_EMAIL: 'confirmEmail',
+  SEND_CONFIRMATION_EMAIL: 'sendConfirmationEmail',
+  VERIFY_EMAIL: 'verifyEmail',
 };
 
 type initialStateType = {
   content: string;
   isOpen: boolean;
+};
+
+type payloadType = {
+  content: string;
+};
+
+type actionType = {
+  payload: payloadType;
+  type: string;
 };
 
 const initialState: initialStateType = {
@@ -26,7 +36,7 @@ const modalSlice = createSlice({
       state.isOpen = false;
       state.content = '';
     },
-    showModal: (state, action) => {
+    showModal: (state, action: actionType) => {
       state.content = action.payload.content;
       state.isOpen = true;
     },

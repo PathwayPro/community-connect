@@ -1,7 +1,8 @@
 import { FC, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 import { useAppDispatch } from '../../app/hooks';
+import { setVerifyEmailToken, setResetPasswordToken } from '../../app/slices/authSlice';
 import { showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 
 import Events from './Events/Events';
@@ -11,25 +12,25 @@ import Partners from './Partners/Partners';
 import Resources from './Resources/Resources';
 
 const Main: FC = () => {
-  // TODO: This behaviour has to be updated according to backend logic for password reset and email conformation
-  // Now it works if URL from email contains resetPassword=true parameter => show resetPasswordForm
-  // if URL from email contains emailConfirmed=true parameter => show ConfirmEmail
-  const [searchParams, setSearchParams] = useSearchParams();
-  const resetPassword = searchParams.get('resetPassword');
-  const emailConfirmed = searchParams.get('emailConfirmed');
-
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const dispatch = useAppDispatch();
+
   useEffect(() => {
-    if (resetPassword && resetPassword === 'true') {
-      dispatch(showModal({ content: MODAL_TYPE.RESET_PASSWORD }));
-      searchParams.delete('resetPassword');
-      setSearchParams(searchParams);
+    const token = searchParams.get('token');
+    if (location.pathname === '/verify-email' && token) {
+      dispatch(setVerifyEmailToken(token));
+      navigate('/');
+      dispatch(showModal({ content: MODAL_TYPE.VERIFY_EMAIL }));
     }
-    if (emailConfirmed && emailConfirmed === 'true') {
-      dispatch(showModal({ content: MODAL_TYPE.CONFIRM_EMAIL }));
+    if (location.pathname === '/reset-password' && token) {
+      dispatch(setResetPasswordToken(token));
+      navigate('/');
+      dispatch(showModal({ content: MODAL_TYPE.RESET_PASSWORD }));
     }
     return;
-  }, [resetPassword, emailConfirmed]);
+  }, [location.pathname]);
 
   return (
     <>
