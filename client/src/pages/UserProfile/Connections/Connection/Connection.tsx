@@ -16,7 +16,7 @@ const Connection: FC<connectionProps> = ({
   position,
 }) => {
 
-  const disconnect = () => console.log('click');
+  const viewProfile = () => console.log('click');
 
   return (
     <div className={styles.box}>
@@ -28,7 +28,7 @@ const Connection: FC<connectionProps> = ({
         </div>
       </div>
       <div  className={styles.btn}>
-        <Button label={'Disconnect'} size={'small'} color={'grey'} onClick={disconnect}></Button>
+        <Button label={'View Profile'} size={'medium'} color={'orange'} onClick={viewProfile}></Button>
       </div>
     </div>
 

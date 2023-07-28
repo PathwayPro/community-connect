@@ -52,6 +52,21 @@
     }
   }
 
+  &.medium {
+    height: 48px;
+    min-width: 156px;
+    @include fonts.buttonText($font-size: 1rem);
+
+    @include media.media-l {
+      height: 46px;
+      min-width: 120px;
+    }
+
+    @include media.media-s {
+      height: 42px;
+    }
+  }
+
   &.small {
     height: 48px;
     min-width: 120px;

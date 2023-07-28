@@ -4,9 +4,9 @@
 
 .connections {
     background: colors.$blue-light;
-    width: 15%;
+    width: 23%;
     min-height: 100px;
-    padding: 26px;
+    padding: 26px 16px;
     border-radius: 15px;
 
     @include fonts.headingText;

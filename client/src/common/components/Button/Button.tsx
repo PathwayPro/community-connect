@@ -6,7 +6,7 @@ import styles from './Button.module.scss';
 interface ButtonProps {
   label?: string;
   imgPath?: string;
-  size?: 'normal' | 'small';
+  size?: 'normal' | 'medium' | 'small';
   isDisabled?: boolean;
   isSubmit?: boolean;
   color?: 'orange' | 'orangeLight' | 'hollow' | 'grey';
