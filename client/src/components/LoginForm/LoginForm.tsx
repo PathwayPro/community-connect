@@ -114,7 +114,7 @@ const LoginForm: FC = () => {
             className={styles.formBottomLink}
             onClick={(e) => {
               e.preventDefault();
-              dispatch(showModal({ content: MODAL_TYPE.FROGOT_PASSWORD }));
+              dispatch(showModal({ content: MODAL_TYPE.FROGOT_PASSWORD, closeOnOverlayClick: true }));
             }}
           >
             Click&nbsp;here.
@@ -127,7 +127,7 @@ const LoginForm: FC = () => {
             className={styles.formBottomLink}
             onClick={(e) => {
               e.preventDefault();
-              dispatch(showModal({ content: MODAL_TYPE.REGISTER }));
+              dispatch(showModal({ content: MODAL_TYPE.REGISTER, closeOnOverlayClick: true }));
             }}
           >
             Sign&nbsp;up&nbsp;now.

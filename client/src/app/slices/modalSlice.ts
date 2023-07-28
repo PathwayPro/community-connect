@@ -13,6 +13,7 @@ export const MODAL_TYPE = {
 type initialStateType = {
   content: string;
   isOpen: boolean;
+  closeOnOverlayClick: boolean;
 };
 
 type payloadType = {
@@ -27,6 +28,7 @@ type actionType = {
 const initialState: initialStateType = {
   content: '',
   isOpen: false,
+  closeOnOverlayClick: true,
 };
 
 const modalSlice = createSlice({
@@ -36,10 +38,12 @@ const modalSlice = createSlice({
     closeModal: (state) => {
       state.isOpen = false;
       state.content = '';
+      state.closeOnOverlayClick = initialState.closeOnOverlayClick;
     },
     showModal: (state, action: actionType) => {
       state.content = action.payload.content;
       state.isOpen = true;
+      state.closeOnOverlayClick = action.payload.closeOnOverlayClick
     },
   },
 });

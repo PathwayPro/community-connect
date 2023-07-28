@@ -1,8 +1,9 @@
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useRef, useState, useEffect } from 'react';
 import { default as ReactModal } from 'react-modal';
 
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { closeModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
+import useWindowSize from '../../../common/utils/useWindowSize';
 import { SendVerificationEmail, VerifyEmail } from '../../../components/ConfirmEmail';
 import FillUserProfile from '../../../components/FillUserProfileForm/FillUserProfileForm';
 import ForgotPasswordForm from '../../../components/ForgotPasswordForm/ForgotPasswordForm';
@@ -16,7 +17,27 @@ ReactModal.setAppElement('#root');
 
 const Modal: FC = () => {
   const dispatch = useAppDispatch();
-  const { content, isOpen } = useAppSelector((state) => state.modal);
+  const { content, isOpen, closeOnOverlayClick } = useAppSelector((state) => state.modal);
+  const { height: windowHeight } = useWindowSize();
+
+  const [isTall, setIsTall] = useState(false);
+  const modalRef = useRef<any>(null);
+
+  // add class ".tall" when modal is highter that clientHeight
+  useEffect(() => {
+    if (isOpen) {
+      const timer = setTimeout(() => {
+        if (modalRef.current) {
+          const modalHeight = modalRef.current.clientHeight;
+          setIsTall(modalHeight > windowHeight);
+        }
+      }, 0);
+      return () => clearTimeout(timer);
+    } else {
+      setIsTall(false);
+      return undefined;
+    }
+  }, [isOpen, windowHeight]);
 
   const ModalContent = useMemo(() => {
     if (content) {
@@ -35,11 +56,14 @@ const Modal: FC = () => {
     <>
       <ReactModal
         isOpen={isOpen}
-        className={styles.modal}
+        className={`${styles.modal} ${isTall ? styles.tall : ''}`}
         overlayClassName={styles.overlay}
         onRequestClose={() => dispatch(closeModal())}
+        shouldCloseOnOverlayClick={closeOnOverlayClick}
       >
-        {ModalContent}
+        <div ref={modalRef}>
+          {ModalContent}
+        </div>
       </ReactModal>
     </>
   );

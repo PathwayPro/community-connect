@@ -110,7 +110,7 @@ const ForgotPasswordForm: FC = () => {
             className={styles.formBottomLink}
             onClick={(e) => {
               e.preventDefault();
-              dispatch(showModal({ content: MODAL_TYPE.LOGIN }));
+              dispatch(showModal({ content: MODAL_TYPE.LOGIN, closeOnOverlayClick: true }));
             }}
           >
             Sign&nbsp;in&nbsp;now.
@@ -123,7 +123,7 @@ const ForgotPasswordForm: FC = () => {
             className={styles.formBottomLink}
             onClick={(e) => {
               e.preventDefault();
-              dispatch(showModal({ content: MODAL_TYPE.REGISTER }));
+              dispatch(showModal({ content: MODAL_TYPE.REGISTER, closeOnOverlayClick: true }));
             }}
           >
             Sign&nbsp;up&nbsp;now.

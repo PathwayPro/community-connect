@@ -21,13 +21,13 @@ const HeaderNav: FC = () => {
   const onLoginClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
     handleMobileDropDownClose();
-    dispatch(showModal({ content: MODAL_TYPE.LOGIN }));
+    dispatch(showModal({ content: MODAL_TYPE.LOGIN, closeOnOverlayClick: true }));
   };
 
   const onRegisterClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
     handleMobileDropDownClose();
-    dispatch(showModal({ content: MODAL_TYPE.REGISTER }));
+    dispatch(showModal({ content: MODAL_TYPE.REGISTER, closeOnOverlayClick: true }));
   };
 
   const onMobileButtonClick = () => {

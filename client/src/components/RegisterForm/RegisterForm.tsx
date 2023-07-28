@@ -220,7 +220,7 @@ const RegisterForm: FC = () => {
           className={styles.formBottomLink}
           onClick={(e) => {
             e.preventDefault();
-            dispatch(showModal({ content: MODAL_TYPE.LOGIN }));
+            dispatch(showModal({ content: MODAL_TYPE.LOGIN, closeOnOverlayClick: true }));
           }}
         >
           Sign&nbsp;in&nbsp;now

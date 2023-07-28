@@ -15,11 +15,11 @@ const Hero: FC = () => {
 
   const onRegisterClick = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    dispatch(showModal({ content: MODAL_TYPE.REGISTER }));
+    dispatch(showModal({ content: MODAL_TYPE.REGISTER, closeOnOverlayClick: true }));
   };
   const onFillUserProfileClick = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    dispatch(showModal({ content: MODAL_TYPE.FILL_USER_PROFILE }));
+    dispatch(showModal({ content: MODAL_TYPE.FILL_USER_PROFILE, closeOnOverlayClick: false }));
   };
 
   return (
