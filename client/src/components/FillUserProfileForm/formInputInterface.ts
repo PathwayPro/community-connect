@@ -1,6 +1,20 @@
 export interface IFormInput {
   avatar?: FileList;
-  text?: string;
-  moreFields?: string;
+  bio?: string;
+  behanceURL?: string;
+  birthDate?: string;
+  isBirthdayVisible?: boolean;
+  githubURL?: string;
   goal?: string;
+  fieldOfExpertise?: string;
+  firstName: string;
+  instagramURL?: string;
+  lastName: string;
+  linkedInURL?: string;
+  province?: string;
+  originCountry?: string;
+  spokenLanguage?: string;
+  twitterURL?: string;
+  yearsInCanada?: number;
+  yearsOfExperience?: number;
 }
