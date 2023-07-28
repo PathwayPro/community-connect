@@ -4,13 +4,122 @@
 @use '../../common/styles/media';
 
 .title {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .content {
-  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.2rem;
+  margin-bottom: 26px;
 }
 
 .btnWrapper {
-  @extend %flex-space-between
+  @extend %flex-space-between;
+}
+
+.formRow {
+  display: flex;
+  column-gap: 1rem;
+  // margin-bottom: 1.2rem;
+
+  @include media.media-s {
+    flex-direction: column;
+    row-gap: 1rem;
+    align-items: center;
+    margin-bottom: 0;
+  }
+
+  &.column {
+    flex-direction: column;
+    @extend %flex-center;
+  }
+
+  &.error {
+    padding-bottom: 1rem;
+
+    @include media.media-s {
+      padding-bottom: 0;
+    }
+  }
+}
+
+.formField {
+  width: 300px;
+
+  @include media.media-s {
+    // width: 350px;
+    margin-bottom: 1rem;
+  }
+}
+
+.formFieldWide {
+  @include media.media-s {
+    // width: 350px;
+  }
+}
+
+// checkbox
+
+.checkboxField {
+  display: flex;
+  align-items: flex-end;
+  margin: 8px 0 0;
+  padding: 0;
+  @include fonts.hintText($font-size: 0.8rem, $font-weight: 700);
+  border: none;
+}
+
+.checkbox {
+  position: relative;
+  @extend %flex-center;
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  margin-right: 6px;
+  background: transparent;
+  border: 2px solid colors.$grey-dark;
+  border-radius: 3px;
+  appearance: none;
+  z-index: 1;
+
+  &:checked {
+    background: colors.$focus;
+    border: colors.$focus;
+
+    &::before {
+      position: absolute;
+      content: url('/images/Icon/check.svg');
+      width: 12px;
+      height: 12px;
+      z-index: 10;
+      top: 2px;
+    }
+  }
+}
+
+// avatar
+
+.avatarTitle {
+  font-size: 1.18rem;
+  margin-bottom: 8px;
+}
+.avatarLabel {
+  --size: 194px;
+
+  width: var(--size);
+  height: var(--size);
+  padding: 26px;
+  background: colors.$orange-light url('/images/FillUserProfileForm/avatar.svg') no-repeat center;
+  border-radius: 15px;
+}
+
+.avatar {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
 }
