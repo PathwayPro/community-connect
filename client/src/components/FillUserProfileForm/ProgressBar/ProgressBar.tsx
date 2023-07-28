@@ -6,7 +6,7 @@ type ProgressBarProps = {
   step: number;
 };
 
-const stepsLabels = ["Basic Information", "Social Media", "Resume/CV", "Your Goal"];
+const stepsLabels = ["Basic Information", "Social Media", "Resume / CV", "Your Goal"];
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ step }) => {
   return (
