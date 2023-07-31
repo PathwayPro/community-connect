@@ -15,6 +15,6 @@ export interface IFormInput {
   originCountry?: string;
   spokenLanguage?: string;
   twitterURL?: string;
-  yearsInCanada?: number;
+  timeInCanada?: number;
   yearsOfExperience?: number;
 }
