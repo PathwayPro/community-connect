@@ -50,7 +50,6 @@
     @include mixins.common-transition;
   }
 
-  // FIX width
   &::before {
     content: "";
     position: absolute;

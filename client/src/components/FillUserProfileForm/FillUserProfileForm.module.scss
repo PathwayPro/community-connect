@@ -47,16 +47,12 @@
 
 .formField {
   width: 300px;
-
-  @include media.media-s {
-    // width: 350px;
-    margin-bottom: 1rem;
-  }
 }
 
 .formFieldWide {
+  width: 616px;
   @include media.media-s {
-    // width: 350px;
+    width: 300px;
   }
 }
 

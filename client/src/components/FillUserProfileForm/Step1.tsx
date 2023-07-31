@@ -202,7 +202,7 @@ const Step1: FC<StepProps> = () => {
           label="Bio *"
           rows={3}
           placeholder="Please provide a brief description about yourself."
-          className={styles.formFieldWide}
+          className={styles.formField}
           onChange={bio.onChange}
           onBlur={bio.onBlur}
           ref={bio.ref}

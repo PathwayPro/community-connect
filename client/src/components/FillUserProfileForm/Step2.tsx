@@ -1,18 +1,82 @@
 import { FC } from 'react';
+import { useForm } from 'react-hook-form';
 
-import Heading from '../../common/components/Heading/Heading';
 import Input from '../../common/components/Input/Input';
 
 import { StepProps } from './FillUserProfileForm';
+import { IFormInput } from './formInputInterface';
 
-const Step2: FC<StepProps> = ({ register, data }) => {
+import styles from './FillUserProfileForm.module.scss';
+
+const Step2: FC<StepProps> = () => {
+  const {
+    register, formState: { errors },
+  } = useForm<IFormInput>({ mode: 'onChange' });
+
+  const linkedInURL = register('linkedInURL');
+  const instagramURL = register('instagramURL');
+  const twitterURL = register('twitterURL');
+  const githubURL = register('githubURL');
+  const behanceURL = register('behanceURL');
+
   return (
     <>
-      <Heading tagType="h4">
-        Basic Information
-      </Heading>
-      <Input {...register("text")} defaultValue={data.text} />
-      <Input {...register("moreFields")} defaultValue={data.moreFields} />
+      <div className={styles.formRow}>
+        <Input
+          name={linkedInURL.name}
+          label="LinkedIn"
+          className={styles.formFieldWide}
+          onChange={linkedInURL.onChange}
+          onBlur={linkedInURL.onBlur}
+          ref={linkedInURL.ref}
+          errorMessage={errors.linkedInURL?.message}
+        />
+      </div>
+      <div className={styles.formRow}>
+        <Input
+          name={instagramURL.name}
+          label="Instagram"
+          className={styles.formFieldWide}
+          onChange={instagramURL.onChange}
+          onBlur={instagramURL.onBlur}
+          ref={instagramURL.ref}
+          errorMessage={errors.instagramURL?.message}
+        />
+      </div>
+      <div className={styles.formRow}>
+        <Input
+          name={twitterURL.name}
+          label="Twitter"
+          className={styles.formFieldWide}
+          onChange={twitterURL.onChange}
+          onBlur={twitterURL.onBlur}
+          ref={twitterURL.ref}
+          errorMessage={errors.twitterURL?.message}
+        />
+      </div>
+      <div className={styles.formRow}>
+        <Input
+          name={githubURL.name}
+          label="Github"
+          className={styles.formFieldWide}
+          onChange={githubURL.onChange}
+          onBlur={githubURL.onBlur}
+          ref={githubURL.ref}
+          errorMessage={errors.githubURL?.message}
+        />
+      </div>
+      <div className={styles.formRow}>
+        <Input
+          name={behanceURL.name}
+          label="Behance"
+          autoComplete="on"
+          className={styles.formFieldWide}
+          onChange={behanceURL.onChange}
+          onBlur={behanceURL.onBlur}
+          ref={behanceURL.ref}
+          errorMessage={errors.behanceURL?.message}
+        />
+      </div>
     </>
   );
 };
