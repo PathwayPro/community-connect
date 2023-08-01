@@ -1,11 +1,17 @@
 @use '../../../common/styles/colors';
 
-.background {
+.container {
   background-color: colors.$orange-normal;
   width: 100%;
   height: 250px;
   border-radius: 15px;
   position: relative;
+}
+
+.backgroundImage {
+  border-radius: 15px;
+  width: 100%;
+  height: 100%;
 }
 
 .image {
