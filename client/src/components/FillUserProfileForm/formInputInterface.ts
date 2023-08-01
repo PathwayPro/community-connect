@@ -13,6 +13,7 @@ export interface IFormInput {
   linkedInURL?: string;
   province?: string;
   originCountry?: string;
+  resume?: FileList;
   spokenLanguage?: string;
   twitterURL?: string;
   timeInCanada?: number;

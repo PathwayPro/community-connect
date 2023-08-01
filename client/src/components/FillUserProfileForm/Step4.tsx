@@ -26,7 +26,8 @@ const goals = [
 
 const Step4: FC<StepProps> = () => {
   const {
-    register, formState: { errors },
+    register,
+    formState: { errors },
   } = useForm<IFormInput>({ mode: 'onChange' });
 
   const timeInCanada = register('timeInCanada');

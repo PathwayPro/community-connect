@@ -5,7 +5,12 @@ import { Controller, useForm } from 'react-hook-form';
 import Dropdown from '../../common/components/Dropdown/Dropdown';
 import Input from '../../common/components/Input/Input';
 import Textarea from '../../common/components/Textarea/Textarea';
-import { NAME_REGEX, ERROR_MESSAGE_NAME } from '../../common/utils/formComponentsUtils';
+import {
+  NAME_REGEX,
+  ERROR_MESSAGE_NAME,
+  BIRTHDATE_REGEX,
+  ERROR_MESSAGE_BIRTHDATE,
+} from '../../common/utils/formComponentsUtils';
 
 import { StepProps } from './FillUserProfileForm';
 import { IFormInput } from './formInputInterface';
@@ -34,7 +39,10 @@ const years = [
 
 const Step1: FC<StepProps> = () => {
   const {
-    register, control, setValue, formState: { errors },
+    register,
+    control,
+    setValue,
+    formState: { errors },
   } = useForm<IFormInput>({ mode: 'onChange' });
 
   const avatar = register('avatar', {
@@ -58,8 +66,8 @@ const Step1: FC<StepProps> = () => {
   const province = register('province');
   const birthDate = register('birthDate', {
     pattern: {
-      value: /^[0-9]{4}\/(0[1-9]|1[0-2])$/,
-      message: 'Birth date should be in format "yyyy/mm"',
+      value: BIRTHDATE_REGEX,
+      message: ERROR_MESSAGE_BIRTHDATE,
     },
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
       let { value } = e.target;
@@ -67,7 +75,7 @@ const Step1: FC<StepProps> = () => {
       if (value.length > 4) {
         value = value.slice(0, 4) + '/' + value.slice(4);
       }
-      setValue('birthDate', value); // set the value manually
+      setValue('birthDate', value);
     },
   });
   const spokenLanguage = register('spokenLanguage');

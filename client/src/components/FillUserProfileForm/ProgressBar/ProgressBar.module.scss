@@ -43,7 +43,7 @@
   &::after {
     --size: 8px;
 
-    content: "";
+    content: '';
     width: var(--size);
     height: var(--size);
     border-radius: 50%;
@@ -51,7 +51,7 @@
   }
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     left: calc(0px + var(--dot-size));
     width: 140px;
@@ -72,7 +72,6 @@
 }
 
 .inactive {
-
   .dot {
     background-color: colors.$white;
 
@@ -88,7 +87,6 @@
 }
 
 .active {
-
   .dot {
     background-color: colors.$orange-normal-hover;
 
@@ -107,7 +105,6 @@
 }
 
 .finished {
-
   .dot {
     background-color: colors.$orange-normal-hover;
 

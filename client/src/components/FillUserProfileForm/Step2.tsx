@@ -10,7 +10,8 @@ import styles from './FillUserProfileForm.module.scss';
 
 const Step2: FC<StepProps> = () => {
   const {
-    register, formState: { errors },
+    register,
+    formState: { errors },
   } = useForm<IFormInput>({ mode: 'onChange' });
 
   const linkedInURL = register('linkedInURL');
