@@ -5,7 +5,7 @@ import Button from '../Button/Button';
 
 import styles from './VectorEditBtn.module.scss';
 
-import vector from '../../../images/Icon/Vector.svg'
+import vector from '../../../images/Icon/vector.svg'
 
 interface VectorEditBtnProps {
   position?: 'top' | 'middle' | 'bottom';
