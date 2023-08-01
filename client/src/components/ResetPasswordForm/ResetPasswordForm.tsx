@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
@@ -9,6 +9,7 @@ import { showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 import Heading from '../../common/components/Heading/Heading';
 import Input from '../../common/components/Input/Input';
+import { ERROR_MESSAGES } from '../../common/utils/errors';
 import { PASS_REGEX, ERROR_MESSAGE_PASSWORD, ERROR_MESSAGE_REPASSWORD } from '../../common/utils/formComponentsUtils';
 
 import styles from './ResetPasswordForm.module.scss';
@@ -21,6 +22,7 @@ interface IFormInput {
 const ResetPasswordForm: FC = () => {
   const resetPasswordToken = useAppSelector((state) => state.auth.resetPasswordToken);
   const dispatch = useAppDispatch();
+  const [errorMessage, setErrorMessage] = useState('');
 
   const {
     register,
@@ -44,7 +46,6 @@ const ResetPasswordForm: FC = () => {
     },
   });
 
-  // TODO: add Error handler
   const [resetPassword] = useResetPasswordMutation();
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
     const data = {
@@ -57,7 +58,19 @@ const ResetPasswordForm: FC = () => {
         dispatch(setResetPasswordToken(null));
         dispatch(showModal({ content: MODAL_TYPE.LOGIN }));
       })
-      .then((error) => console.log(error));
+      .catch((error) => {
+        if (error?.data?.message === ERROR_MESSAGES.PASSWORD_RESET_FAILED) {
+          setErrorMessage(ERROR_MESSAGES.PASSWORD_RESET_FAILED);
+        } else {
+          // Unhandled errors
+          setErrorMessage(ERROR_MESSAGES.SERVER_ERROR);
+        }
+      });
+  };
+
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>, onChangeHandler: React.ChangeEventHandler) => {
+    setErrorMessage('');
+    onChangeHandler(event);
   };
 
   return (
@@ -65,12 +78,13 @@ const ResetPasswordForm: FC = () => {
       <Heading tagType="h5" className={styles.formTitle}>
         New password
       </Heading>
+      {errorMessage && <p className={styles.error}>{errorMessage}</p>}
       <Input
         name={password.name}
         label="New Password *"
         type="password"
         className={classNames(styles.formField, errors.password && styles.errorPassword)}
-        onChange={password.onChange}
+        onChange={(event) => onChange(event, password.onChange)}
         onBlur={password.onBlur}
         ref={password.ref}
         errorMessage={errors.password?.message}
@@ -80,7 +94,7 @@ const ResetPasswordForm: FC = () => {
         label="Re-enter New Password *"
         type="password"
         className={styles.formField}
-        onChange={rePassword.onChange}
+        onChange={(event) => onChange(event, rePassword.onChange)}
         onBlur={rePassword.onBlur}
         ref={rePassword.ref}
         errorMessage={errors.rePassword?.message}
@@ -90,7 +104,7 @@ const ResetPasswordForm: FC = () => {
         <Button
           label="Reset my password"
           isSubmit
-          isDisabled={!isValid || !isDirty}
+          isDisabled={!isValid || !isDirty || errorMessage.length > 0}
           onClick={handleSubmit(onSubmit)}
           size="small"
         />

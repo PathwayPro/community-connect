@@ -55,9 +55,6 @@ const loginUserWithEmailAndPassword = async (email, password) => {
   if (!user || !(await user.isPasswordMatch(password))) {
     throw new ApiError(httpStatus.FORBIDDEN, 'Incorrect email or password');
   }
-  if (!user.isEmailVerified) {
-    throw new ApiError(httpStatus.FORBIDDEN, 'Please verify email');
-  }
   return user;
 };
 
@@ -91,7 +88,7 @@ const refreshAuth = async (refreshToken) => {
     await refreshTokenDoc.destroy();
     return tokenService.generateAuthTokens(user);
   } catch (error) {
-    throw new ApiError(httpStatus.UNAUTHORIZED, 'Please authenticate');
+    throw new ApiError(httpStatus.NOT_FOUND, 'Refresh auth failed');
   }
 };
 

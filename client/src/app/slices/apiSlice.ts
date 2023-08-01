@@ -1,10 +1,16 @@
 import { createApi, fetchBaseQuery, FetchArgs, BaseQueryApi } from '@reduxjs/toolkit/query/react';
+import { Mutex } from 'async-mutex';
 
 import { RootState } from '../store';
 
-import { setCredentials, logout } from './authSlice';
+import { IUser, setCredentials, logout } from './authSlice';
+import { closeModal } from './modalSlice';
 
-// All endpoints are defined in the api slice
+/*
+  Using async-mutex to prevent multiple calls to '/refresh-tokens' when multiple calls fail with 401 Unauthorized errors.
+  https://redux-toolkit.js.org/rtk-query/usage/customizing-queries#preventing-multiple-unauthorized-errors
+ */
+const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({
   baseUrl:
@@ -18,24 +24,42 @@ const baseQuery = fetchBaseQuery({
 });
 
 const baseQueryWithReauth = async (args: string | FetchArgs, api: BaseQueryApi, extraOptions: Record<never, never>) => {
+  await mutex.waitForUnlock();
   let result = await baseQuery(args, api, extraOptions);
 
-  if (result?.error?.status === 401) {
-    // request new access token
-    const refreshResult = await baseQuery('/v1/auth/refresh-tokens', api, extraOptions);
-    if (refreshResult?.data) {
-      const user = (api.getState() as RootState).auth.user;
-      // store new access token
-      api.dispatch(setCredentials({ ...refreshResult.data, user }));
-      // retry the original query with new access token
-      result = await baseQuery(args, api, extraOptions);
+  if (result?.error) {
+    if (result?.error?.status === 401) {
+      if (!mutex.isLocked()) {
+        const release = await mutex.acquire();
+        try {
+          // request new access token
+          const refreshResult = await baseQuery('/v1/auth/refresh-tokens', api, extraOptions);
+          if (refreshResult?.data && (refreshResult.data as Record<'token', string>)) {
+            const user = (api.getState() as RootState).auth.user;
+            // store new access token
+            api.dispatch(setCredentials({ ...refreshResult.data, user }));
+            // retry the original query with new access token
+            result = await baseQuery(args, api, extraOptions);
+          } else {
+            // TODO: Finish logout process after UserProfile page will be added
+            api.dispatch(logout());
+          }
+        } finally {
+          release();
+        }
+      } else {
+        await mutex.waitForUnlock();
+        // retry the original query with new access token
+        result = await baseQuery(args, api, extraOptions);
+      }
     } else {
-      api.dispatch(logout());
+      return { error: result?.error };
     }
   }
   return result;
 };
 
+// All endpoints are defined in the api slice
 export const apiSlice = createApi({
   baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
@@ -48,6 +72,9 @@ export const apiSlice = createApi({
         method: 'POST',
         body: data,
       }),
+      transformResponse: (response: { user: IUser; token: string }) => {
+        return { user: null, token: response.token };
+      },
     }),
 
     // Login
@@ -94,6 +121,23 @@ export const apiSlice = createApi({
         body: data,
       }),
     }),
+
+    // Logout
+    logout: builder.query({
+      query: () => '/v1/auth/logout',
+      async onQueryStarted(_, { dispatch, getState, queryFulfilled }) {
+        const modal = (getState() as RootState).modal;
+        if (modal.isOpen) dispatch(closeModal());
+        try {
+          await queryFulfilled;
+          // `onSuccess` side-effect
+          dispatch(logout());
+        } catch (err) {
+          // `onError` side-effect
+          dispatch(logout());
+        }
+      },
+    }),
   }),
 });
 
@@ -106,4 +150,5 @@ export const {
   useVerifyEmailMutation,
   useForgotPasswordMutation,
   useResetPasswordMutation,
+  useLogoutQuery,
 } = apiSlice;

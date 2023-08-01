@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { useAppDispatch } from '../../app/hooks';
@@ -8,6 +8,7 @@ import { closeModal, showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 import Heading from '../../common/components/Heading/Heading';
 import Input from '../../common/components/Input/Input';
+import { ERROR_MESSAGES } from '../../common/utils/errors';
 import { EMAIL_REGEX, ERROR_MESSAGE_EMAIL } from '../../common/utils/formComponentsUtils';
 
 import styles from './LoginForm.module.scss';
@@ -19,6 +20,7 @@ interface IFormInput {
 
 const LoginForm: FC = () => {
   const dispatch = useAppDispatch();
+  const [errorMessage, setErrorMessage] = useState('');
 
   const {
     register,
@@ -39,21 +41,32 @@ const LoginForm: FC = () => {
   });
 
   const [loginUser] = useLoginUserMutation();
-  // TODO: Implement errors handler
+
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
     await loginUser(values)
       .unwrap()
       .then((data) => {
-        dispatch(setCredentials(data));
-        dispatch(closeModal());
+        if (data.user && !data.user.isEmailVerified) {
+          dispatch(showModal({ content: MODAL_TYPE.SEND_CONFIRMATION_EMAIL }));
+          dispatch(setCredentials({ user: null, token: null }));
+        } else {
+          dispatch(setCredentials(data));
+          dispatch(closeModal());
+        }
       })
       .catch((error) => {
-        if (error.data?.message === 'Please verify email') {
-          dispatch(showModal({ content: MODAL_TYPE.SEND_CONFIRMATION_EMAIL }));
+        if (error?.data?.message === ERROR_MESSAGES.INCORRECT_LOGIN_PAIR) {
+          setErrorMessage(ERROR_MESSAGES.INCORRECT_LOGIN_PAIR);
         } else {
-          console.log(error.data?.message || error);
+          // Unhandled errors
+          setErrorMessage(ERROR_MESSAGES.SERVER_ERROR);
         }
       });
+  };
+
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>, onChangeHandler: React.ChangeEventHandler) => {
+    setErrorMessage('');
+    onChangeHandler(event);
   };
 
   return (
@@ -61,13 +74,14 @@ const LoginForm: FC = () => {
       <Heading tagType="h5" className={styles.formTitle}>
         Welcome Back!
       </Heading>
+      {errorMessage && <p className={styles.error}>{errorMessage}</p>}
       <Input
         name={email.name}
         label="Email *"
         type="email"
         autoComplete="on"
         className={styles.formField}
-        onChange={email.onChange}
+        onChange={(event) => onChange(event, email.onChange)}
         onBlur={email.onBlur}
         ref={email.ref}
         errorMessage={errors.email?.message}
@@ -77,7 +91,7 @@ const LoginForm: FC = () => {
         label="Password *"
         type="password"
         className={styles.formField}
-        onChange={password.onChange}
+        onChange={(event) => onChange(event, password.onChange)}
         onBlur={password.onBlur}
         ref={password.ref}
         errorMessage={errors.password?.message}
