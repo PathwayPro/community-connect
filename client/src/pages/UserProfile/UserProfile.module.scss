@@ -9,6 +9,7 @@
 
 .socials {
   width: 100%;
+  max-height: 1000px;
 
   @extend %flex-row;
   gap: 26px;
