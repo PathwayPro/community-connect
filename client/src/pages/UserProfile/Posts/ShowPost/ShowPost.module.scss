@@ -1,0 +1,63 @@
+@use '../../../../common/styles/fonts';
+@use '../../../../common/styles/mixins';
+@use '../../../../common/styles/colors';
+
+.box {
+    background: colors.$blue-light;
+    border-radius: 15px;
+    width: 100%;
+    min-height: 216px;
+    padding: 26px;
+
+    @extend %flex-column-left;
+    gap: 16px;
+}
+
+.userInfo {
+    @extend %flex-row-left;
+}
+
+.image {
+    border: 2px solid colors.$orange-normal;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.info {
+    @extend %flex-column-left;
+}
+
+.name {
+    @include fonts.headingText;
+    font-size: 16px;
+}
+
+.position {
+    @include fonts.hintText;
+    font-size: 16px;
+}
+
+.date {
+    @include fonts.hintText;
+    font-size: 16px;
+}
+
+.content {
+    border-bottom: 1px solid colors.$blue-dark;
+    padding-bottom: 16px;
+
+    @include fonts.mainText;
+    font-size: 16px;
+}
+
+.reactions {
+    @extend %flex-row-left;
+    justify-content: space-between;
+}
+
+.repostComment {
+    @extend %flex-row-left;
+    gap: 16px;
+}

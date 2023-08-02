@@ -12,5 +12,5 @@
     @include fonts.headingText;
     font-size: 16px;
 
-    @extend %flex-column-start;
+    @extend %flex-column-left-center;
 }

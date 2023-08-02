@@ -36,7 +36,13 @@
   align-items: center;
 }
 
-%flex-column-start {
+%flex-column-left {
+  @extend %flex-column;
+
+  justify-content: flex-start;
+}
+
+%flex-column-left-center {
   @extend %flex-column;
 
   justify-content: flex-start;
