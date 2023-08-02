@@ -8,7 +8,7 @@ const AddPost: FC = () => {
 
   return (
     <div className={styles.newPost}>
-      <img src={defaultProfileImage} alt="profile" />
+      <img src={defaultProfileImage} alt="profile" className={styles.image} />
       <input type="text" placeholder="What is in your mind ?" />
     </div>
   );
