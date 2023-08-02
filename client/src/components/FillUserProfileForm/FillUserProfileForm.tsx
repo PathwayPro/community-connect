@@ -26,27 +26,15 @@ const FillUserProfileForm: FC = () => {
   const { register, handleSubmit, watch } = useForm<IFormInput>();
   const watchedFields = watch();
 
-  const onSubmit: SubmitHandler<IFormInput> = async (values) => {
-    const bodyObject = {
-      firstName: values.firstName,
-      lastName: values.lastName,
-      originCountry: values.originCountry,
-      province: values.province,
-      birthDate: values.birthDate,
-      spokenLanguage: values.spokenLanguage,
-      fieldOfExpertise: values.fieldOfExpertise,
-      yearsOfExperience: values.yearsOfExperience,
-      bio: values.bio,
-    };
-
+  // TODO: send data to backend
+  const onSubmit: SubmitHandler<IFormInput> = async () => {
     dispatch(closeModal());
   };
-
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Heading tagType="h4" className={styles.title}>
-        {step === 1 && 'Welcome back Niloofar!'}
+        {step === 1 && 'Welcome!'}
         {step === 2 && 'Social Media'}
         {step === 3 && 'Resume / CV'}
         {step === 4 && 'Your Goal'}

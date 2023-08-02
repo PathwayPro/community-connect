@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { FC, useState, MouseEvent, KeyboardEvent } from 'react';
 import { useForm } from 'react-hook-form';
 
-import IconSVG from '../../common/components/IconSVG/IconSVG';
+import ResumeInput from '../../common/components/ResumeInput/ResumeInput';
 
 import { StepProps } from './FillUserProfileForm';
 import { IFormInput } from './formInputInterface';
@@ -10,50 +10,59 @@ import { IFormInput } from './formInputInterface';
 import styles from './FillUserProfileForm.module.scss';
 
 const Step3: FC<StepProps> = () => {
-  const { register } = useForm<IFormInput>({ mode: 'onChange' });
+  const {
+    register,
+    formState: { errors },
+  } = useForm<IFormInput>({ mode: 'onChange' });
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  const resume = register('resume');
+  const resume = register('resume', {
+    // validate: {
+    //   fileFormat: (value: FileList | undefined) => {
+    //     const file = value ? value[0] : undefined;
+    //     if (
+    //       file &&
+    //       ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'].includes(
+    //         file.type
+    //       )
+    //     ) {
+    //       return true;
+    //     }
+    //     return 'File must be a .docx or .pdf';
+    //   },
+    //   fileSize: (value: FileList | undefined) => {
+    //     const file = value ? value[0] : undefined;
+    //     if (file && file.size <= 5 * 1024 * 1024) {
+    //       // 5MB
+    //       return true;
+    //     }
+    //     return 'File must be less than 5MB';
+    //   },
+    // },
+  });
 
   const handleDeleteClick = (e: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setSelectedFile(null);
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files) {
-      setSelectedFile(files[0]);
-      resume.onChange(e);
-    }
+  const handleFileChange = (file: File | null) => {
+    setSelectedFile(file);
   };
 
   return (
     <>
       <div className={classNames(styles.formRow, styles.column)}>
-        <p className={styles.resumeTitle}>Upload your CV or Resume</p>
-        <label htmlFor={resume.name} className={classNames(styles.resumeLabel, styles.formFieldWide)}></label>
-        <div className={styles.inputWrap}>
-          <input
-            type="file"
-            id={resume.name}
-            name={resume.name}
-            className={styles.input}
-            onChange={handleFileChange}
-            onBlur={resume.onBlur}
-            ref={resume.ref}
-          />
-          <span className={styles.fileName}>{selectedFile ? selectedFile.name : 'No selected File -'}</span>
-          <IconSVG
-            name="deleteIcon"
-            label="Delete file"
-            color="black"
-            size="medium"
-            onClick={handleDeleteClick}
-            className={styles.deleteIcon}
-          />
-        </div>
+        <ResumeInput
+          title="Upload your CV or Resume"
+          name={resume.name}
+          onFileChange={handleFileChange}
+          onDeleteClick={handleDeleteClick}
+          selectedFile={selectedFile}
+          errorMessage={errors.resume?.message}
+          className={styles.formFieldWide}
+        />
       </div>
     </>
   );

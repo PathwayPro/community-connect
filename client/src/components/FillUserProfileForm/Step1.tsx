@@ -47,6 +47,23 @@ const Step1: FC<StepProps> = () => {
 
   const avatar = register('avatar', {
     required: 'User photo is required',
+    validate: {
+      fileFormat: (value: FileList | undefined) => {
+        const file = value ? value[0] : undefined;
+        if (file && ['image/jpg', 'image/jpeg', 'image/png'].includes(file.type)) {
+          return true;
+        }
+        return 'Image must be a .jpg, .jpeg or .png format';
+      },
+      fileSize: (value: FileList | undefined) => {
+        const file = value ? value[0] : undefined;
+        if (file && file.size <= 8 * 1024 * 1024) {
+          // 8MB
+          return true;
+        }
+        return 'Image must be less than 8MB';
+      },
+    },
   });
   const firstName = register('firstName', {
     required: 'First name is required',
@@ -91,18 +108,22 @@ const Step1: FC<StepProps> = () => {
 
   return (
     <>
-      <div className={classNames(styles.formRow, styles.column)}>
+      <div className={classNames(styles.formRow, styles.column, styles.avatarWrap)}>
         <p className={styles.avatarTitle}>Add Photo *</p>
         <label htmlFor={avatar.name} className={styles.avatarLabel}></label>
         <input
           type="file"
           id={avatar.name}
           name={avatar.name}
+          accept="image/jpg, image/jpeg, image/png"
           className={styles.avatar}
           onChange={avatar.onChange}
           onBlur={avatar.onBlur}
           ref={avatar.ref}
         />
+        {errors.avatar && (
+          <div className={classNames(styles.avatarMessage, styles.errorMessage)}>{errors.avatar.message}</div>
+        )}
       </div>
       <div className={styles.formRow}>
         <Input
