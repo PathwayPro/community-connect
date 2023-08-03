@@ -28,6 +28,8 @@ const ForgotPasswordForm: FC = () => {
     formState: { errors, isValid, isDirty },
   } = useForm<IFormInput>({ mode: 'onTouched' });
 
+  const formId = 'ForgotPassword';
+
   const email = register('email', {
     required: 'Email is required',
     pattern: {
@@ -82,6 +84,7 @@ const ForgotPasswordForm: FC = () => {
       </Heading>
       <Input
         name={email.name}
+        id={`${formId}_${email.name}`}
         label="Email *"
         type="email"
         autoComplete="on"

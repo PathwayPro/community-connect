@@ -9,7 +9,7 @@ import { IFormInput } from './formInputInterface';
 
 import styles from './FillUserProfileForm.module.scss';
 
-const Step3: FC<StepProps> = () => {
+const Step3: FC<StepProps> = ({ formId }) => {
   const {
     register,
     formState: { errors },
@@ -57,6 +57,7 @@ const Step3: FC<StepProps> = () => {
         <ResumeInput
           title="Upload your CV or Resume"
           name={resume.name}
+          id={`${formId}_${resume.name}`}
           onFileChange={handleFileChange}
           onDeleteClick={handleDeleteClick}
           selectedFile={selectedFile}

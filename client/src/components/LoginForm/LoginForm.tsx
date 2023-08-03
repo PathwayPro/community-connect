@@ -28,6 +28,8 @@ const LoginForm: FC = () => {
     formState: { errors, isValid, isDirty },
   } = useForm<IFormInput>({ mode: 'onTouched' });
 
+  const formId = 'Login';
+
   const email = register('email', {
     required: 'Email is required',
     pattern: {
@@ -77,6 +79,7 @@ const LoginForm: FC = () => {
       {errorMessage && <p className={styles.error}>{errorMessage}</p>}
       <Input
         name={email.name}
+        id={`${formId}_${email.name}`}
         label="Email *"
         type="email"
         autoComplete="on"
@@ -88,6 +91,7 @@ const LoginForm: FC = () => {
       />
       <Input
         name={password.name}
+        id={`${formId}_${password.name}`}
         label="Password *"
         type="password"
         className={styles.formField}

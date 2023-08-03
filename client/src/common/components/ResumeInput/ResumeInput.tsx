@@ -8,6 +8,7 @@ import styles from './ResumeInput.module.scss';
 interface FileInputProps {
   title?: string;
   name: string;
+  id?: string;
   className?: string;
   errorMessage?: string;
   onFileChange: (file: File | null) => void;
@@ -19,6 +20,7 @@ interface FileInputProps {
 const ResumeInput: FC<FileInputProps> = ({
   title,
   name,
+  id,
   className = '',
   errorMessage,
   onFileChange,
@@ -35,11 +37,11 @@ const ResumeInput: FC<FileInputProps> = ({
   return (
     <>
       {title && <p className={styles.title}>{title}</p>}
-      <label htmlFor={name} className={classNames(styles.label, className)} />
+      <label htmlFor={id} className={classNames(styles.label, className)} />
       <div className={styles.inputWrap}>
         <input
           type="file"
-          id={name}
+          id={id}
           name={name}
           accept=".docx,application/pdf"
           className={styles.input}

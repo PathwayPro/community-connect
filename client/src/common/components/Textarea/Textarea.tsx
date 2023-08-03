@@ -6,6 +6,7 @@ import styles from './Textarea.module.scss';
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   name: string;
+  id?: string;
   rows?: number;
   placeholder?: string;
   errorMessage?: string;
@@ -19,6 +20,7 @@ const TextareaInner = (
   {
     label,
     name,
+    id,
     rows = 1,
     placeholder = '',
     errorMessage = '',
@@ -32,12 +34,13 @@ const TextareaInner = (
   return (
     <fieldset className={classNames(styles.fieldset, className)}>
       {label && (
-        <label htmlFor={name} className={styles.label}>
+        <label htmlFor={id} className={styles.label}>
           {label}
         </label>
       )}
       <textarea
         name={name}
+        id={id}
         rows={rows}
         placeholder={placeholder}
         className={classNames(

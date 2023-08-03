@@ -24,7 +24,7 @@ const goals = [
   { value: 'networking', label: 'Networking' },
 ];
 
-const Step4: FC<StepProps> = () => {
+const Step4: FC<StepProps> = ({ formId }) => {
   const {
     register,
     formState: { errors },
@@ -38,6 +38,7 @@ const Step4: FC<StepProps> = () => {
       <div className={styles.formRow}>
         <Dropdown
           name={timeInCanada.name}
+          id={`${formId}_${timeInCanada.name}`}
           label="How long have you been in Canada?"
           options={years}
           className={styles.formFieldWide}
@@ -50,6 +51,7 @@ const Step4: FC<StepProps> = () => {
       <div className={styles.formRow}>
         <Dropdown
           name={goal.name}
+          id={`${formId}_${goal.name}`}
           label="What is your goal to join the Community Connect?"
           options={goals}
           className={styles.formFieldWide}

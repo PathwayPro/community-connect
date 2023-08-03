@@ -11,6 +11,7 @@ interface Option {
 interface DropdownProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
   name: string;
+  id?: string;
   placeholder?: string;
   options: Option[];
   errorMessage?: string;
@@ -24,6 +25,7 @@ const DropdownInner = (
   {
     label,
     name,
+    id,
     placeholder = 'Choose from the list',
     options,
     errorMessage = '',
@@ -46,12 +48,13 @@ const DropdownInner = (
   return (
     <fieldset className={classNames(styles.fieldset, className)}>
       {label && (
-        <label htmlFor={name} className={styles.label}>
+        <label htmlFor={id} className={styles.label}>
           {label}
         </label>
       )}
       <select
         name={name}
+        id={id}
         defaultValue=""
         className={classNames(
           styles.select,

@@ -18,6 +18,7 @@ import styles from './FillUserProfileForm.module.scss';
 export interface StepProps {
   register: UseFormRegister<IFormInput>;
   data: Partial<IFormInput>;
+  formId: string;
 }
 
 const FillUserProfileForm: FC = () => {
@@ -25,6 +26,7 @@ const FillUserProfileForm: FC = () => {
   const [step, setStep] = useState(1);
   const { register, handleSubmit, watch } = useForm<IFormInput>();
   const watchedFields = watch();
+  const formId = 'FillUserProfile';
 
   // TODO: send data to backend
   const onSubmit: SubmitHandler<IFormInput> = async () => {
@@ -41,10 +43,10 @@ const FillUserProfileForm: FC = () => {
       </Heading>
       <ProgressBar step={step} />
       <div className={styles.content}>
-        {step === 1 && <Step1 register={register} data={watchedFields} />}
-        {step === 2 && <Step2 register={register} data={watchedFields} />}
-        {step === 3 && <Step3 register={register} data={watchedFields} />}
-        {step === 4 && <Step4 register={register} data={watchedFields} />}
+        {step === 1 && <Step1 register={register} data={watchedFields} formId={formId} />}
+        {step === 2 && <Step2 register={register} data={watchedFields} formId={formId} />}
+        {step === 3 && <Step3 register={register} data={watchedFields} formId={formId} />}
+        {step === 4 && <Step4 register={register} data={watchedFields} formId={formId} />}
       </div>
       <div className={styles.btnWrapper}>
         <Button
