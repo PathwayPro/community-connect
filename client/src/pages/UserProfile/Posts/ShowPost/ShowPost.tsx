@@ -19,6 +19,7 @@ const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content })
   const leaveComment = () => console.log('comment');
   const repostPost = () => console.log('repost');
   const likePost = () => console.log('like');
+  const openModal = () => console.log('copy post link');
 
   function formatDate(date: Date): string {
     const currentDate = new Date();
@@ -46,7 +47,7 @@ const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content })
         </div>
       </div>
       <div className={styles.setting}>
-        <SettingBtn onClick={likePost} />
+        <SettingBtn onClick={openModal} />
       </div>
       <div className={styles.content}>{content}</div>
       <div className={styles.reactions}>
