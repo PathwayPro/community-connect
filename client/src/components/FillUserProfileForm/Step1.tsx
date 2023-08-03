@@ -43,7 +43,12 @@ const Step1: FC<StepProps> = ({ formId }) => {
     control,
     setValue,
     formState: { errors },
-  } = useForm<IFormInput>({ mode: 'onChange' });
+  } = useForm<IFormInput>({
+    mode: 'onChange',
+    defaultValues: {
+      isBirthdayVisible: false,
+    },
+  });
 
   const avatar = register('avatar', {
     required: 'User photo is required',
@@ -96,7 +101,6 @@ const Step1: FC<StepProps> = ({ formId }) => {
     },
   });
   const spokenLanguage = register('spokenLanguage');
-  const isBirthdayVisible = register('isBirthdayVisible');
   const fieldOfExpertise = register('fieldOfExpertise', {
     required: 'Field of expertise is required',
   });
@@ -189,19 +193,19 @@ const Step1: FC<StepProps> = ({ formId }) => {
           />
           <fieldset className={styles.checkboxField}>
             <Controller
-              name={isBirthdayVisible.name}
+              name="isBirthdayVisible"
               control={control}
               render={({ field: { value, ...field } }) => (
                 <input
                   type="checkbox"
-                  id={`${formId}_${isBirthdayVisible.name}`}
+                  id={`${formId}_isBirthdayVisible`}
                   {...field}
                   className={styles.checkbox}
                   checked={value}
                 />
               )}
             />
-            <label htmlFor={`${formId}_${isBirthdayVisible.name}`}>Show my birthday date on my profile.</label>
+            <label htmlFor={`${formId}_isBirthdayVisible`}>Show my birthday date on my profile.</label>
           </fieldset>
         </div>
 
