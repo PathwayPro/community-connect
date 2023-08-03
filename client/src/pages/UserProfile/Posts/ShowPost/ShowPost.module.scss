@@ -8,6 +8,7 @@
     width: 100%;
     min-height: 216px;
     padding: 26px;
+    position: relative;
 
     @extend %flex-column-left;
     gap: 16px;
@@ -60,4 +61,10 @@
 .repostComment {
     @extend %flex-row-left;
     gap: 16px;
+}
+
+.setting {
+    position: absolute;
+    top: 26px;
+    right: 26px;
 }

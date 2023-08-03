@@ -3,6 +3,7 @@ import { FC } from 'react';
 import CommentBtn from '../../../../common/components/Comment/CommentBtn';
 import LikeBtn from '../../../../common/components/Like/LikeBtn';
 import RepostBtn from '../../../../common/components/Repost/RepostBtn';
+import SettingBtn from '../../../../common/components/Setting/SettingBtn';
 
 import styles from './ShowPost.module.scss';
 
@@ -43,6 +44,9 @@ const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content })
           <div className={styles.position}>{position}</div>
           <div className={styles.date}>{formatDate(date)}</div>
         </div>
+      </div>
+      <div className={styles.setting}>
+        <SettingBtn onClick={likePost} />
       </div>
       <div className={styles.content}>{content}</div>
       <div className={styles.reactions}>
