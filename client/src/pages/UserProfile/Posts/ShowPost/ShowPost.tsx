@@ -4,6 +4,7 @@ import CommentBtn from '../../../../common/components/Comment/CommentBtn';
 import LikeBtn from '../../../../common/components/Like/LikeBtn';
 import RepostBtn from '../../../../common/components/Repost/RepostBtn';
 import SettingBtn from '../../../../common/components/Setting/SettingBtn';
+import formatDate from '../../../../common/utils/formatDateUtils';
 
 import styles from './ShowPost.module.scss';
 
@@ -20,21 +21,6 @@ const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content })
   const repostPost = () => console.log('repost');
   const likePost = () => console.log('like');
   const openModal = () => console.log('copy post link');
-
-  function formatDate(date: Date): string {
-    const currentDate = new Date();
-    const diffInMilliseconds = currentDate.getTime() - date.getTime() + 100000;
-
-    const millisecondsIn24Hours = 24 * 60 * 60 * 1000;
-
-    if (diffInMilliseconds < millisecondsIn24Hours) {
-      const options: Intl.DateTimeFormatOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
-      return date.toLocaleTimeString(undefined, options);
-    } else {
-      const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
-      return date.toLocaleDateString(undefined, options);
-    }
-  }
 
   return (
     <div className={styles.box}>
