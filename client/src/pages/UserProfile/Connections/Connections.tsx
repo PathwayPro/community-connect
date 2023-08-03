@@ -13,11 +13,16 @@ const connectionList: connectionProps[] = [
 const Connections: FC = () => {
 
   return (
-    <div className={styles.connections}>
+    <div className={styles.box}>
       Connections
-      {connectionList.map((connection, index) => (
-        <Connection key={index} imgPath={connection.imgPath} name={connection.name} position={connection.position} />
+      <div className={styles.connections}>
+        {connectionList.map((connection, index) => (
+          <Connection key={index} imgPath={connection.imgPath} name={connection.name} position={connection.position} />
       ))}
+      </div>
+      <div className={styles.seeMore}>
+        <a href="/">View all</a>
+      </div>
     </div>
   );
 };

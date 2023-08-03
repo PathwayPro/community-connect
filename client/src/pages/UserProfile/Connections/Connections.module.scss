@@ -2,15 +2,41 @@
 @use '../../../common/styles/fonts';
 @use '../../../common/styles/mixins';
 
-.connections {
+.box {
     background: colors.$blue-light;
     width: 23%;
     min-height: 100px;
     padding: 26px 16px;
     border-radius: 15px;
+    position: relative;
 
     @include fonts.headingText;
     font-size: 16px;
 
     @extend %flex-column-left-center;
 }
+
+.connections {
+    width: 100%;
+    margin-bottom: 16px;
+
+    @extend %flex-column-center;
+}
+
+.seeMore {
+    position: absolute;
+    bottom: 26px;
+    right: 16px;
+    color: colors.$black;
+
+
+    @include fonts.mainText;
+    font-size: 13px;
+}
+
+a {
+    text-decoration: none;
+    color: colors.$black;
+    cursor: pointer;
+}
+
