@@ -32,9 +32,16 @@ const Modal: FC = () => {
           setIsTall(modalHeight > windowHeight);
         }
       }, 0);
-      return () => clearTimeout(timer);
+
+      document.documentElement.classList.add('lock');
+
+      return () => {
+        clearTimeout(timer);
+        document.documentElement.classList.remove('lock');
+      };
     } else {
       setIsTall(false);
+      document.documentElement.classList.remove('lock');
       return undefined;
     }
   }, [isOpen, windowHeight]);
