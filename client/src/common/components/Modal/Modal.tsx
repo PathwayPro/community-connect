@@ -21,7 +21,7 @@ const Modal: FC = () => {
   const { height: windowHeight } = useWindowSize();
 
   const [isTall, setIsTall] = useState(false);
-  const modalRef = useRef<any>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   // add class ".tall" when modal is highter that clientHeight
   useEffect(() => {

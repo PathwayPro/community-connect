@@ -18,6 +18,7 @@ type initialStateType = {
 
 type payloadType = {
   content: string;
+  closeOnOverlayClick?: boolean;
 };
 
 type actionType = {
@@ -43,7 +44,7 @@ const modalSlice = createSlice({
     showModal: (state, action: actionType) => {
       state.content = action.payload.content;
       state.isOpen = true;
-      state.closeOnOverlayClick = action.payload.closeOnOverlayClick
+      state.closeOnOverlayClick = action.payload.closeOnOverlayClick ?? initialState.closeOnOverlayClick;
     },
   },
 });

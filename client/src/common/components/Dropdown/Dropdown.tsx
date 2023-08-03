@@ -52,33 +52,32 @@ const DropdownInner = (
           {label}
         </label>
       )}
-      <select
-        name={name}
-        id={id}
-        defaultValue=""
-        className={classNames(
-          styles.select,
-          errorMessage && styles.error,
-          successMessage && styles.success,
-          !hasSelected && styles._notSelected
-        )}
-        onChange={handleChange}
-        onBlur={onBlur}
-        ref={ref}
-      >
-        <option value="" disabled>
-          {placeholder}
-        </option>
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
+      <div className={styles.selectWrap}>
+        <select
+          name={name}
+          id={id}
+          defaultValue=""
+          className={classNames(
+            styles.select,
+            errorMessage && styles.error,
+            successMessage && styles.success,
+            !hasSelected && styles._notSelected
+          )}
+          onChange={handleChange}
+          onBlur={onBlur}
+          ref={ref}
+        >
+          <option value="" disabled>
+            {placeholder}
           </option>
-        ))}
-      </select>
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </div>
       {errorMessage && <div className={classNames(styles.message, styles.errorMessage)}>{errorMessage}</div>}
-      {!errorMessage && successMessage && (
-        <div className={classNames(styles.message, styles.successMessage)}>{successMessage}</div>
-      )}
     </fieldset>
   );
 };
