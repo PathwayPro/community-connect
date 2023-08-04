@@ -3,7 +3,7 @@ import { FC } from 'react';
 import CommentBtn from '../../../../common/components/Comment/CommentBtn';
 import LikeBtn from '../../../../common/components/Like/LikeBtn';
 import RepostBtn from '../../../../common/components/Repost/RepostBtn';
-import SettingBtn from '../../../../common/components/Setting/SettingBtn';
+import ToastSetting from '../../../../common/components/Toast/Toast';
 import formatDate from '../../../../common/utils/formatDateUtils';
 
 import styles from './ShowPost.module.scss';
@@ -20,7 +20,7 @@ const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content })
   const leaveComment = () => console.log('comment');
   const repostPost = () => console.log('repost');
   const likePost = () => console.log('like');
-  const openModal = () => console.log('copy post link');
+  const copyPost = () => console.log('copy post link');
 
   return (
     <div className={styles.box}>
@@ -33,7 +33,7 @@ const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content })
         </div>
       </div>
       <div className={styles.setting}>
-        <SettingBtn onClick={openModal} />
+        <ToastSetting onClick={copyPost} content={`Copy post link`}/>
       </div>
       <div className={styles.content}>{content}</div>
       <div className={styles.reactions}>
