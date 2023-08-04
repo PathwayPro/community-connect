@@ -10,8 +10,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsToMany(models.Role, { through: models.UserRole });
-      this.hasMany(models.Token, { onDelete: 'CASCADE' });
-      this.hasMany(models.MentorshipRequests, { onDelete: 'CASCADE' });
+      this.hasMany(models.Token, { foreignKey: 'userId', onDelete: 'CASCADE' });
+      this.hasMany(models.MentorshipRequest, { foreignKey: 'userId', onDelete: 'CASCADE' });
+      this.hasMany(models.MentorRequest, { foreignKey: 'userId', onDelete: 'CASCADE' });
       this.hasOne(models.UserProfile, { onDelete: 'CASCADE' });
     }
 

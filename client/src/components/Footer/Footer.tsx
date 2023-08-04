@@ -16,7 +16,7 @@ const footerLinks: footerLinkItem[] = [
     heading: 'Work with us',
     list: [
       { label: 'Apply for mentorship', link: '/mentorship/apply' },
-      { label: 'Become a mentor', link: '/mentorship/become' },
+      { label: 'Become a mentor', link: '/mentorship/become-mentor' },
       { label: 'Become a volunteer', link: '/volunteering' },
       { label: 'Become a partner', link: '/' }, // TODO: No page, just invoke modal
     ],

@@ -2,7 +2,7 @@ const { Model } = require('sequelize');
 const { mentorshipRequestStatuses } = require('../config/mentorship');
 
 module.exports = (sequelize, DataTypes) => {
-  class mentorshipRequests extends Model {
+  class MentorshipRequest extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.User, { foreignKey: 'userId' });
     }
   }
-  mentorshipRequests.init(
+  MentorshipRequest.init(
     {
       message: DataTypes.TEXT,
       resume: DataTypes.BLOB,
@@ -23,8 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'MentorshipRequests',
+      modelName: 'MentorshipRequest',
     }
   );
-  return mentorshipRequests;
+  return MentorshipRequest;
 };

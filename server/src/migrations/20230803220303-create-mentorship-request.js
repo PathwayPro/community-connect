@@ -1,10 +1,9 @@
 const { mentorshipRequestStatuses } = require('../config/mentorship');
 
 /** @type {import('sequelize-cli').Migration} */
-
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('mentorshipRequests', {
+    await queryInterface.createTable('MentorshipRequests', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -16,12 +15,12 @@ module.exports = {
         allowNull: false,
       },
       resume: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.BLOB,
         allowNull: false,
       },
       status: {
         type: Sequelize.ENUM,
-        values: mentorshipRequestStatuses,
+        values: [mentorshipRequestStatuses.PENDING, mentorshipRequestStatuses.RESOLVED],
         allowNull: false,
       },
       createdAt: {
@@ -32,9 +31,19 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        unique: true,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+      },
     });
   },
   async down(queryInterface) {
-    await queryInterface.dropTable('mentorshipRequests');
+    await queryInterface.dropTable('MentorshipRequests');
   },
 };

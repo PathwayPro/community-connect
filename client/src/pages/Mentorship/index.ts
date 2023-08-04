@@ -1,4 +1,4 @@
-import ApplyForMentorship from './ApplyForMentorship/ApplyForMentorship';
-import BecomeMentor from './BecomeMentor/BecomeMentor';
+import ApplyForMentorship from './ApplyForMentorship';
+import BecomeMentor from './BecomeMentor';
 
 export { ApplyForMentorship, BecomeMentor };

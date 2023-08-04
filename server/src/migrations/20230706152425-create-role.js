@@ -1,6 +1,6 @@
-/** @type {import('sequelize-cli').Migration} */
 const { roles } = require('../config/roles');
 
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Roles', {

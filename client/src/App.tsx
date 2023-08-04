@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         Component: ApplyForMentorship,
       },
       {
-        path: 'mentorship/become',
+        path: 'mentorship/become-mentor',
         Component: BecomeMentor,
       },
       {
