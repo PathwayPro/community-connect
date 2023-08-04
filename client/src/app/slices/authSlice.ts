@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import type { RootState } from '../store';
 
-interface IUser {
+export interface IUser {
   firstName: string;
   lastName: string;
   email: string;
@@ -23,7 +23,7 @@ const authSlice = createSlice({
   reducers: {
     setCredentials: (state, action) => {
       const { user } = action.payload;
-      const accessToken = action.payload.access?.token;
+      const accessToken = action.payload?.token;
       state.user = user;
       state.token = accessToken;
     },

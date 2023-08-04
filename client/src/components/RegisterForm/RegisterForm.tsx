@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Controller, useForm, SubmitHandler } from 'react-hook-form';
 
 import { useAppDispatch } from '../../app/hooks';
@@ -8,6 +8,7 @@ import { setCredentials } from '../../app/slices/authSlice';
 import { showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 import Input from '../../common/components/Input/Input';
+import { ERROR_MESSAGES } from '../../common/utils/errors';
 import {
   NAME_REGEX,
   ERROR_MESSAGE_NAME,
@@ -31,6 +32,8 @@ interface IFormInput {
 
 const RegisterForm: FC = () => {
   const dispatch = useAppDispatch();
+  const [emailError, setEmailError] = useState('');
+  const [commonError, setCommonError] = useState('');
 
   const {
     register,
@@ -81,7 +84,6 @@ const RegisterForm: FC = () => {
 
   const [registerUser] = useRegisterUserMutation();
 
-  // TODO: Implement errors handler
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
     const bodyObject = {
       firstName: values.firstName,
@@ -93,16 +95,30 @@ const RegisterForm: FC = () => {
     await registerUser(bodyObject)
       .unwrap()
       .then((data) => {
+        setCommonError('');
         dispatch(setCredentials(data));
         dispatch(showModal({ content: MODAL_TYPE.SEND_CONFIRMATION_EMAIL }));
       })
       .catch((error) => {
-        console.log(error.data?.message || error);
+        if (error?.data?.message === ERROR_MESSAGES.EMAIL_TAKEN) {
+          setCommonError('');
+          setEmailError(ERROR_MESSAGES.EMAIL_TAKEN);
+        } else {
+          // Unhandled errors
+          setCommonError(ERROR_MESSAGES.SERVER_ERROR);
+          setEmailError('');
+        }
       });
+  };
+
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>, onChangeHandler: React.ChangeEventHandler) => {
+    setEmailError('');
+    onChangeHandler(event);
   };
 
   return (
     <form className={styles.form}>
+      {commonError && <p className={styles.error}>{ERROR_MESSAGES.SERVER_ERROR}</p>}
       <div className={styles.formRow}>
         <Input
           name={firstName.name}
@@ -132,10 +148,10 @@ const RegisterForm: FC = () => {
           type="email"
           autoComplete="on"
           className={styles.formField}
-          onChange={email.onChange}
+          onChange={(event) => onChange(event, email.onChange)}
           onBlur={email.onBlur}
           ref={email.ref}
-          errorMessage={errors.email?.message}
+          errorMessage={errors.email?.message || emailError}
         />
       </div>
       <div className={classNames(styles.formRow, (errors.password || errors.rePassword) && styles.error)}>

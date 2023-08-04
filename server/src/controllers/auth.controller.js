@@ -8,7 +8,7 @@ const register = catchAsync(async (req, res) => {
 
   await authService.updateRefreshTokenCookie(req, res, tokens.refresh);
 
-  res.status(httpStatus.CREATED).send({ user, access: tokens.access });
+  res.status(httpStatus.CREATED).send({ user, token: tokens.access.token });
 });
 
 const login = catchAsync(async (req, res) => {
@@ -18,7 +18,7 @@ const login = catchAsync(async (req, res) => {
 
   await authService.updateRefreshTokenCookie(req, res, tokens.refresh);
 
-  res.send({ user, access: tokens.access });
+  res.send({ user, token: tokens.access.token });
 });
 
 const logout = catchAsync(async (req, res) => {
@@ -35,7 +35,7 @@ const refreshTokens = catchAsync(async (req, res) => {
   const tokens = await authService.refreshAuth(jwtRefresh);
   await authService.updateRefreshTokenCookie(req, res, tokens.refresh);
 
-  res.send({ access: tokens.access });
+  res.send({ token: tokens.access.token });
 });
 
 const forgotPassword = catchAsync(async (req, res) => {

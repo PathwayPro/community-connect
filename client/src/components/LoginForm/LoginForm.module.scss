@@ -1,3 +1,4 @@
+@use '../../common/styles/colors';
 @use '../../common/styles/fonts';
 @use '../../common/styles/mixins';
 @use '../../common/styles/media';
@@ -41,4 +42,8 @@
 .formBottomLink {
   text-decoration: underline;
   @include fonts.mainText($font-weight: 400);
+}
+
+.error {
+  color: colors.$error;
 }
