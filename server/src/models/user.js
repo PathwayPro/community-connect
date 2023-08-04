@@ -9,10 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsToMany(models.Role, {
-        as: 'roles',
-        through: 'UserRole',
-      });
+      this.belongsToMany(models.Role, { through: models.UserRole });
+      this.hasMany(models.Token, { onDelete: 'CASCADE' });
+      this.hasMany(models.MentorshipRequests, { onDelete: 'CASCADE' });
+      this.hasOne(models.UserProfile, { onDelete: 'CASCADE' });
     }
 
     /**
@@ -60,6 +60,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'User',
+      paranoid: true,
     }
   );
 

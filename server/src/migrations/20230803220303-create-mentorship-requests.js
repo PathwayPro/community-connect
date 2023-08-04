@@ -1,22 +1,27 @@
+const { mentorshipRequestStatuses } = require('../config/mentorship');
+
 /** @type {import('sequelize-cli').Migration} */
-const { roles } = require('../config/roles');
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Roles', {
+    await queryInterface.createTable('mentorshipRequests', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
-        type: Sequelize.ENUM,
-        values: roles,
+      message: {
+        type: Sequelize.TEXT,
         allowNull: false,
       },
-      rights: {
-        type: Sequelize.ARRAY(Sequelize.STRING),
+      resume: {
+        type: Sequelize.NUMBER,
+        allowNull: false,
+      },
+      status: {
+        type: Sequelize.ENUM,
+        values: mentorshipRequestStatuses,
         allowNull: false,
       },
       createdAt: {
@@ -30,6 +35,6 @@ module.exports = {
     });
   },
   async down(queryInterface) {
-    await queryInterface.dropTable('Roles');
+    await queryInterface.dropTable('mentorshipRequests');
   },
 };

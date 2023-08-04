@@ -1,0 +1,123 @@
+@use '../../../common/styles/colors';
+@use '../../../common/styles/media';
+@use '../../../common/styles/mixins';
+
+.block {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+
+  @include media.media-s {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &.blockForm {
+    justify-content: center;
+    background-color: colors.$blue-light;
+    border-radius: 15px;
+    padding: 60px 0;
+  }
+}
+
+.titleBlock {
+  position: relative;
+}
+
+.title {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  z-index: 1;
+  display: inline-block;
+  border-radius: 15px;
+  padding: 0 1rem;
+  background-color: rgba($color: colors.$white, $alpha: 0.25);
+
+  @include media.media-xl {
+    top: 10px;
+  }
+
+  @include media.media-l {
+    top: 10px;
+  }
+
+  @include media.media-m {
+    position: relative;
+    top: 0;
+    padding-left: 0;
+    background-color: transparent;
+  }
+
+  @include media.media-s {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.left {
+  position: relative;
+  z-index: 0;
+  max-width: 48%;
+  width: 100%;
+  align-self: flex-end;
+
+  @include media.media-xl {
+    max-width: 55%;
+  }
+
+  @include media.media-m {
+    align-self: center;
+  }
+
+  @include media.media-s {
+    max-width: none;
+    margin-bottom: 1rem;
+  }
+}
+
+.text {
+  @extend %reset-p;
+  padding-bottom: 2.5rem;
+
+  @include media.media-xl {
+    padding-bottom: 1rem;
+  }
+  @include media.media-m {
+    padding-bottom: 0;
+  }
+}
+
+.right {
+  max-width: 50%;
+  width: 100%;
+  position: relative;
+  z-index: 0;
+  display: flex;
+
+  @include media.media-xl {
+    max-width: 43%;
+  }
+
+  @include media.media-s {
+    max-width: 80%;
+    align-items: center;
+  }
+  @include media.media-xs {
+    max-width: none;
+  }
+}
+
+.form {
+  max-width: 600px;
+  width: 100%;
+  @extend %flex-center;
+  flex-direction: column;
+}
+
+.textarea {
+  width: 100%;
+}
+
+.mentorshipButton {
+  margin-top: 1.6rem;
+}

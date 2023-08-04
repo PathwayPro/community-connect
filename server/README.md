@@ -77,9 +77,8 @@ https://www.postgresql.org/docs/current/
 You need to start PostgreSQL everytime (using terminal / db management apps) you restart your computer.\
 This should be running before you run the app:
 
-
-
 ## Setup dev env to work with PostgreSQL
+
 \
 **Start Postgres and login:**
 
@@ -96,18 +95,19 @@ The prompt ends with a `#` to denote that you logged in as the superuser\
 ```bash
 \conninfo
 ```
-\
-**End Postgres and getting out of it:**
-
-```bash
-\q
-```
 
 **Create a role called `root` and add option to create DB**
 
 ```bash
 CREATE ROLE root WITH LOGIN PASSWORD 'root';
 ALTER ROLE root CREATEDB;
+```
+
+
+**End Postgres and getting out of it:**
+
+```bash
+\q
 ```
 
 **Connect postgres with root**
@@ -124,18 +124,18 @@ psql -d postgres -U root
 CREATE DATABASE comm_dev;
 ```
 
-
-
 ## Working with Models using Sequelize
 
 For creating and migrating models we are using Sequelize ORM.
 
 API:
+
 ```bash
 https://sequelize.org/api/v6/
 ```
 
 Models concepts:
+
 ```bash
 https://sequelize.org/docs/v6/core-concepts/model-basics/
 ```
@@ -162,8 +162,6 @@ yarn run sequelize-cli model:generate --name Role --attributes name:string,statu
 
 Columns `id`, `createdAt`, `updatedAt` will be creted by default for each model.
 
-
-
 ```bash
 Model name: Role
 Table name: Roles
@@ -176,7 +174,6 @@ updatedAt: Date (added by default)
 deletedAt: Date
 ```
 
-
 Also at the same time a migration file `XXXXXXXXXXXXXXXX-create-role` for this model will be created
 inside `/src/migrations` folder
 
@@ -186,14 +183,14 @@ After model was created, it's possible to add Assosiations, Methods or Validatio
 
 Before start developing, use migrations to create or update DB tables
 
-***Running all migrations***
+**_Running all migrations_**
 
 ```bash
 cd server
 yarn run sequelize-cli db:migrate
 ```
 
-***Running Migration by Name `XXXXXXXXXXXXXX-create-role`***
+**_Running Migration by Name `XXXXXXXXXXXXXX-create-role`_**
 
 ```bash
 cd server
@@ -202,21 +199,21 @@ yarn run sequelize-cli db:migrate --name XXXXXXXXXXXXXX-create-role
 
 In case of any mistake or error, it is possible to undo migrations
 
-***Undoing all Migrations***
+**_Undoing all Migrations_**
 
 ```bash
 cd server
 yarn run sequelize-cli db:migrate:undo:all
 ```
 
-***Undoing the Most Recent Migration***
+**_Undoing the Most Recent Migration_**
 
 ```bash
 cd server
 yarn run sequelize-cli db:migrate:undo
 ```
 
-***Undoing Migrations to a Specific Migration with Name `XXXXXXXXXXXXXX-create-role`***
+**_Undoing Migrations to a Specific Migration with Name `XXXXXXXXXXXXXX-create-role`_**
 
 ```bash
 cd server
@@ -225,15 +222,15 @@ yarn run sequelize-cli db:migrate:undo:all --to XXXXXXXXXXXXXX-create-role.js
 
 **Populating the DB**
 
-***Creating the First Seed for Table `Role`***
+**_Creating the First Seed for Table `Role`_**
 
-This will create the seeder file  `XXXXXXXXXXXXXX-demo-role.js` inside `/src/seeders`  folder and then you can add some dummy data in the file to be used as the data instance for the DB
+This will create the seeder file `XXXXXXXXXXXXXX-demo-role.js` inside `/src/seeders` folder and then you can add some dummy data in the file to be used as the data instance for the DB
 
 ```bash
 yarn run sequelize-cli seed:generate --name demo-role
 ```
 
-***Running Seed***
+**_Running Seed_**
 
 Note: Seeder execution history is not stored anywhere, unlike migrations
 
@@ -241,19 +238,19 @@ Note: Seeder execution history is not stored anywhere, unlike migrations
 yarn run sequelize-cli db:seed:all
 ```
 
-***Undoing all Seeds***
+**_Undoing all Seeds_**
 
 ```bash
 yarn run sequelize-cli db:seed:undo:all
 ```
 
-***Undoing the Most Recent Seed***
+**_Undoing the Most Recent Seed_**
 
 ```bash
 yarn run sequelize-cli db:seed:undo
 ```
 
-***Undoing to a Specific Seed***
+**_Undoing to a Specific Seed_**
 
 ```bash
 yarn run sequelize-cli db:seed:undo --seed name-of-seed-as-in-data
