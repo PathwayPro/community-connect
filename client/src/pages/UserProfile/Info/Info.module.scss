@@ -78,7 +78,11 @@
     @extend %flex-row-right;
 }
 
-.icons {
+.squareIcons {
+    margin-left: 8px;
+}
+
+.roundIcons {
     border-radius: 10px;
     margin-left: 8px;
 }

@@ -7,11 +7,11 @@ import VectorEditBtn from '../../../common/components/Vector/VectorEditBtn';
 import styles from './Info.module.scss';
 
 const socialsList: iconProps[] = [
-    { href: '/', type: 'be', className: styles.icons },
-    { href: 'https://github.com/Hoorasadat', type: 'git', className: styles.icons },
-    { href: '/', type: 'tw', className: styles.icons },
-    { href: '/', type: 'in', className: styles.icons },
-    { href: '/', type: 'inst', className: styles.icons },
+    { href: '/', type: 'be', className: styles.roundIcons },
+    { href: 'https://github.com/Hoorasadat', type: 'git', className: styles.squareIcons },
+    { href: '/', type: 'tw', className: styles.roundIcons },
+    { href: '/', type: 'in', className: styles.roundIcons },
+    { href: '/', type: 'inst', className: styles.roundIcons },
 ];
 
 const Info: FC = () => {
