@@ -1,0 +1,14 @@
+@use '../../styles/colors';
+@use '../../styles/fonts';
+
+.container {
+	position: absolute;
+	width: 200px;
+}
+
+.toast {
+	background-color: colors.$orange-light-hover;
+	text-align: center;
+
+	@include fonts.mainText;
+}

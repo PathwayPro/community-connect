@@ -33,7 +33,7 @@ const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content })
         </div>
       </div>
       <div className={styles.setting}>
-        <ToastSetting onClick={copyPost} content={`Copy post link`}/>
+        <ToastSetting onToastClick={copyPost} toastContent={`Copy link to post`}/>
       </div>
       <div className={styles.content}>{content}</div>
       <div className={styles.reactions}>
