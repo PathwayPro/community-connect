@@ -5,10 +5,10 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Tokens', {
       id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
       },
       token: {
         type: Sequelize.STRING,
@@ -26,6 +26,15 @@ module.exports = {
       blacklisted: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+        allowNull: false,
+        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,

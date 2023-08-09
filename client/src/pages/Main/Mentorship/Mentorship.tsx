@@ -28,7 +28,7 @@ const Mentorship: FC = () => {
               size="small"
             />
             <ButtonLink
-              to="/mentorship/become"
+              to="/mentorship/become-mentor"
               label="Become a Mentor"
               color="orange"
               size="small"

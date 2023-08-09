@@ -1,0 +1,56 @@
+@use '../../../common/styles/colors';
+@use '../../../common/styles/mixins';
+@use '../../../common/styles/media';
+
+.block {
+  display: flex;
+  justify-content: center;
+  background-color: colors.$blue-light;
+  border-radius: 15px;
+  padding: 60px 16px;
+  margin-bottom: 2rem;
+}
+
+.form {
+  max-width: 620px;
+  width: 100%;
+  @extend %flex-center;
+  flex-direction: column;
+}
+
+.formRow {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+
+  @include media.media-s {
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 0;
+  }
+}
+
+.formField {
+  width: 100%;
+  @include media.media-s {
+    margin-bottom: 1rem;
+  }
+}
+
+.formFieldLabel {
+  width: 100%;
+
+  @include media.media-s {
+    margin-bottom: 1rem;
+  }
+  @include media.media-xs {
+    & div {
+      margin-top: 8px;
+    }
+  }
+}
+
+.mentorshipButton {
+  margin-top: 1.6rem;
+}

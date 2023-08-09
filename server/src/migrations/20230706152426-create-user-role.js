@@ -1,22 +1,16 @@
-const { roles } = require('../config/roles');
-
 /** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Roles', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
+    await queryInterface.createTable('UserRoles', {
+      userId: {
         type: Sequelize.INTEGER,
-      },
-      name: {
-        type: Sequelize.ENUM,
-        values: roles,
+        primaryKey: true,
         allowNull: false,
       },
-      rights: {
-        type: Sequelize.ARRAY(Sequelize.STRING),
+      roleId: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
         allowNull: false,
       },
       createdAt: {
@@ -30,6 +24,6 @@ module.exports = {
     });
   },
   async down(queryInterface) {
-    await queryInterface.dropTable('Roles');
+    await queryInterface.dropTable('UserRoles');
   },
 };

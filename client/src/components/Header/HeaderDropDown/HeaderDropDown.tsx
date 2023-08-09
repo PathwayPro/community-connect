@@ -12,7 +12,7 @@ interface DropDownOption {
 
 const dropDownOptions: DropDownOption[] = [
   { label: 'Apply for Mentorship', link: '/mentorship/apply' },
-  { label: 'Become a Mentor', link: '/mentorship/become' },
+  { label: 'Become a Mentor', link: '/mentorship/become-mentor' },
 ];
 
 interface HeaderDropDownProps {

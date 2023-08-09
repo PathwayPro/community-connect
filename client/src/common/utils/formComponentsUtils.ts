@@ -15,6 +15,10 @@ const ERROR_MESSAGE_REPASSWORD = 'The password you entered do not match';
 
 const ERROR_MESSAGE_EMAILPASSMATCH = 'The email and password combination is incorrect';
 
+const NUMBER_REGEX = /(\d)+/;
+
+const ERROR_MESSAGE_NUMBER = 'Only digits are allowed';
+
 export {
   NAME_REGEX,
   ERROR_MESSAGE_NAME,
@@ -24,4 +28,6 @@ export {
   ERROR_MESSAGE_PASSWORD,
   ERROR_MESSAGE_REPASSWORD,
   ERROR_MESSAGE_EMAILPASSMATCH,
+  NUMBER_REGEX,
+  ERROR_MESSAGE_NUMBER,
 };
