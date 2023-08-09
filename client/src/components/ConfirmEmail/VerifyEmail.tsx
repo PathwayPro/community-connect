@@ -9,7 +9,8 @@ import { ERROR_MESSAGES } from '../../common/utils/errors';
 
 import styles from './ConfirmEmail.module.scss';
 
-import image from '../../images/ConfirmEmail/confirmed.png';
+import confirmedImage from '../../images/ConfirmEmail/confirmed.png';
+import failedImage from '../../images/ConfirmEmail/failed.png';
 
 const VerifyEmail: FC = () => {
   const verifyEmailToken = useAppSelector((state) => state.auth.verifyEmailToken);
@@ -53,12 +54,12 @@ const VerifyEmail: FC = () => {
 
   return (
     <div className={styles.container}>
-      <div>
-        <img src={image} />
-      </div>
       {isLoading && <p className={styles.textCentered}>Loading...</p>}
       {isError && errorMessage && (
         <>
+          <div>
+            <img src={failedImage} />
+          </div>
           <p className={styles.textCentered}>{errorMessage}</p>
           <Button
             label="Request confirmation letter"
@@ -70,6 +71,9 @@ const VerifyEmail: FC = () => {
       )}
       {isSuccess && (
         <>
+          <div>
+            <img src={confirmedImage} />
+          </div>
           <p className={styles.textCentered}>Email successfully confirmed</p>
           <Button label="Login" onClick={onLoginButtonClick} size="small" className={styles.buttonConfirm} />
         </>
