@@ -7,6 +7,7 @@ import { useRegisterUserMutation } from '../../app/slices/apiSlice';
 import { setCredentials } from '../../app/slices/authSlice';
 import { showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
+import Heading from '../../common/components/Heading/Heading';
 import Input from '../../common/components/Input/Input';
 import { ERROR_MESSAGES } from '../../common/utils/errors';
 import {
@@ -118,7 +119,10 @@ const RegisterForm: FC = () => {
 
   return (
     <form className={styles.form}>
-      {commonError && <p className={styles.error}>{ERROR_MESSAGES.SERVER_ERROR}</p>}
+      <Heading tagType="h5" className={styles.formTitle}>
+        Create a new account
+      </Heading>
+      {commonError && <p className={styles.errorMessage}>{ERROR_MESSAGES.SERVER_ERROR}</p>}
       <div className={styles.formRow}>
         <Input
           name={firstName.name}

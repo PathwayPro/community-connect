@@ -1,4 +1,5 @@
 const { Model } = require('sequelize');
+const { roles } = require('../config/roles');
 
 module.exports = (sequelize, DataTypes) => {
   class Role extends Model {
@@ -8,15 +9,15 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsToMany(models.User, {
-        as: 'users',
-        through: 'UserRole',
-      });
+      this.belongsToMany(models.User, { through: models.UserRole });
     }
   }
   Role.init(
     {
-      name: DataTypes.STRING,
+      name: {
+        type: DataTypes.ENUM,
+        values: roles,
+      },
       rights: DataTypes.ARRAY(DataTypes.STRING),
     },
     {

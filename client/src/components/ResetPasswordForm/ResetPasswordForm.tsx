@@ -78,7 +78,7 @@ const ResetPasswordForm: FC = () => {
       <Heading tagType="h5" className={styles.formTitle}>
         New password
       </Heading>
-      {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+      {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
       <Input
         name={password.name}
         label="New Password *"

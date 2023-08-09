@@ -5,8 +5,7 @@ import AboutUs from './pages/AboutUs/AboutUs';
 import Events from './pages/Events/Events';
 import Layout from './pages/Layout/Layout';
 import Main from './pages/Main/Main';
-import ApplyForMentorship from './pages/Mentorship/ApplyForMentorship';
-import BecomeMentor from './pages/Mentorship/BecomeMentor';
+import { ApplyForMentorship, BecomeMentor } from './pages/Mentorship';
 import Resources from './pages/Resources/Resources';
 import Volunteering from './pages/Volunteering/Volunteering';
 
@@ -40,7 +39,7 @@ const router = createBrowserRouter([
         Component: ApplyForMentorship,
       },
       {
-        path: 'mentorship/become',
+        path: 'mentorship/become-mentor',
         Component: BecomeMentor,
       },
       {

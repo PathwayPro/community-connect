@@ -94,7 +94,7 @@ const HeaderNav: FC = () => {
                 Apply for mentorship
               </NavLink>
               <NavLink
-                to="/mentorship/become"
+                to="/mentorship/become-mentor"
                 className={({ isActive, isPending }) =>
                   classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
                 }
