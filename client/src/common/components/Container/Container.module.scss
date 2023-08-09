@@ -1,0 +1,17 @@
+@use '../../styles/media.scss';
+
+.container {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 60px;
+
+  @include media.media-l {
+    padding: 0 30px;
+  }
+
+  @include media.media-s {
+    max-width: none;
+    padding: 0 20px;
+  }
+}

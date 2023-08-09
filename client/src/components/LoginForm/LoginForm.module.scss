@@ -1,0 +1,49 @@
+@use '../../common/styles/colors';
+@use '../../common/styles/fonts';
+@use '../../common/styles/mixins';
+@use '../../common/styles/media';
+
+.form {
+  @extend %flex-center;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+.formTitle {
+  margin-bottom: 10px;
+}
+
+.formField {
+  width: 280px;
+
+  @include media.media-s {
+    width: 250px;
+  }
+}
+
+.formButton {
+  margin: 10px 0;
+}
+
+.formBottomPart {
+  display: flex;
+  flex-direction: column;
+}
+
+.formBottomText {
+  @extend %reset-p;
+  margin-bottom: 4px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.formBottomLink {
+  text-decoration: underline;
+  @include fonts.mainText($font-weight: 400);
+}
+
+.error {
+  color: colors.$error;
+}

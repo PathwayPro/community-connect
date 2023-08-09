@@ -1,0 +1,29 @@
+@use './common/styles/fonts';
+@import '~@csstools/normalize.css/normalize';
+
+body,
+html {
+  margin: 0;
+  @include fonts.mainText;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+code {
+  @extend %font-family;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  font-family: inherit;
+}

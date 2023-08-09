@@ -1,0 +1,82 @@
+@use '../../styles/mixins';
+@use '../../styles/fonts';
+@use '../../styles/media';
+
+.heading {
+  @extend %reset-h;
+  @include fonts.headingText;
+
+  &.h1 {
+    font-size: 57px;
+    line-height: 1;
+
+    @include media.media-l {
+      font-size: 49px;
+    }
+
+    @include media.media-s {
+      font-size: 24px;
+    }
+  }
+
+  &.h2 {
+    font-size: 48px;
+
+    @include media.media-l {
+      font-size: 40px;
+    }
+
+    @include media.media-s {
+      font-size: 19px;
+      line-height: 1.26;
+    }
+  }
+
+  &.h3 {
+    font-size: 40px;
+
+    @include media.media-l {
+      font-size: 33px;
+    }
+
+    @include media.media-s {
+      font-size: 18px;
+    }
+  }
+
+  &.h4 {
+    font-size: 33px;
+
+    @include media.media-l {
+      font-size: 28px;
+    }
+
+    @include media.media-s {
+      font-size: 18px;
+    }
+  }
+
+  &.h5 {
+    font-size: 28px;
+
+    @include media.media-l {
+      font-size: 23px;
+    }
+
+    @include media.media-s {
+      font-size: 16px;
+    }
+  }
+
+  &.h6 {
+    font-size: 23px;
+
+    @include media.media-l {
+      font-size: 18px;
+    }
+
+    @include media.media-s {
+      font-size: 14px;
+    }
+  }
+}

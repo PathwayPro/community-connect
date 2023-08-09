@@ -1,7 +1,18 @@
-# community-builders
+# Community Builders Project
 
-### `yarn start`
-
-Runs the app (client and server) in the development mode.\
+Running both server and client locally in development mode:\
+\
 Runs client on [http://localhost:3000](http://localhost:3000)\
-Runs server on [http://localhost:3200](http://localhost:3200)\
+Runs server on [http://localhost:3200](http://localhost:3200)
+
+```bash
+yarn dev
+```
+
+
+\
+\
+Let's handle production later - so use the above for now
+```bash
+yarn start
+```

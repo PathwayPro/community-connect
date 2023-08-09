@@ -1,0 +1,86 @@
+@use '../../styles/colors';
+@use '../../styles/fonts';
+@use '../../styles/mixins';
+@use '../../styles/media';
+
+.link {
+  padding: 0 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  width: fit-content;
+  white-space: nowrap;
+  @extend %flex-center;
+
+  &.normal {
+    height: 64px;
+    min-width: 150px;
+    @include fonts.buttonText;
+
+    @include media.media-l {
+      height: 60px;
+      min-width: 120px;
+    }
+
+    @include media.media-s {
+      height: 58px;
+      min-width: 100px;
+    }
+  }
+
+  &.small {
+    height: 48px;
+    min-width: 120px;
+    @include fonts.buttonText($font-size: 1rem);
+
+    @include media.media-l {
+      height: 46px;
+      min-width: 100px;
+    }
+
+    @include media.media-s {
+      height: 42px;
+    }
+  }
+
+  &.orange {
+    background-color: colors.$orange-normal;
+
+    &:hover {
+      background-color: colors.$orange-normal-hover;
+    }
+
+    &:active {
+      background-color: colors.$orange-normal-active;
+    }
+  }
+
+  &.orangeLight {
+    background-color: colors.$orange-light;
+
+    &:hover {
+      background-color: colors.$orange-light-hover;
+    }
+
+    &:active {
+      background-color: colors.$orange-light-active;
+    }
+  }
+
+  &.hollow {
+    color: colors.$orange-normal;
+    border: 3px solid colors.$orange-normal;
+    background-color: transparent;
+
+    &:hover {
+      color: colors.$orange-normal-hover;
+      border: 3px solid colors.$orange-normal-hover;
+    }
+
+    &:active {
+      color: colors.$orange-normal-active;
+      border: 3px solid colors.$orange-normal-active;
+    }
+  }
+}

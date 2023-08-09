@@ -19,7 +19,8 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -29,7 +30,8 @@
     "@typescript-eslint",
     "react",
     "import",
-    "eslint-plugin-no-inline-styles"
+    "eslint-plugin-no-inline-styles",
+    "prettier"
   ],
   "rules": {
     // common eslint rules https://eslint.org/docs/latest/rules/
@@ -39,8 +41,18 @@
       {
         "arrays": "always-multiline",
         "objects": "always-multiline",
-        "imports": "never",
-        "exports": "never",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "never"
+      }
+    ],
+    "@typescript-eslint/comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
         "functions": "never"
       }
     ],
@@ -66,7 +78,9 @@
       "after",
       {
         "overrides": {
-          "&&": "after"
+          "&&": "after",
+          "?": "before",
+          ":": "before"
         }
       }
     ],
@@ -107,7 +121,14 @@
         "allow": "single-child"
       }
     ],
-    "react/forbid-component-props": "error",
+    "react/forbid-component-props": [
+      "error",
+      {
+        "forbid": [
+          "style"
+        ]
+      }
+    ],
     "react/function-component-definition": [
       "error",
       {
@@ -124,6 +145,7 @@
     "react/no-unstable-nested-components": "error",
     "react/jsx-child-element-spacing": "error",
     "react/require-default-props": "off",
+    "react/react-in-jsx-scope": "off",
     // eslint-plugin-import https://github.com/import-js/eslint-plugin-import
     "import/no-cycle": "off",
     "import/order": [

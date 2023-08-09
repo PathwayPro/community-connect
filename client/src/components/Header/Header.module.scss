@@ -1,28 +1,52 @@
 @use '../../common/styles/colors';
-@use '../../common/styles/fonts';
+@use '../../common/styles/media';
+
+@mixin margin-right {
+  margin-right: 3.5rem;
+
+  @include media.media-xl {
+    margin-right: 2rem;
+  }
+  @include media.media-l {
+    margin-right: 1.6rem;
+  }
+  @include media.media-s {
+    margin-right: 0;
+  }
+}
 
 .header {
   background-color: colors.$blue-normal;
-  padding: 14px 60px;
+  padding: 14px 0;
+  position: relative;
+}
+
+.wrapper {
   display: flex;
   align-items: center;
+
+  @include media.media-s {
+    justify-content: space-between;
+  }
 }
 
 .logo {
   display: block;
   background: url('../../images/Header/logo.svg') no-repeat 0 0 / contain;
   text-decoration: none;
-  margin-right: 60px;
   width: 70px;
   height: 70px;
-}
+  flex: 0 0 auto;
 
-.nav {
-  display: flex;
-}
+  @include margin-right;
 
-.navLink {
-  @include fonts.navText;
-  margin-right: 60px;
-  text-decoration: none;
+  @include media.media-l {
+    width: 60px;
+    height: 60px;
+  }
+
+  @include media.media-s {
+    width: 24px;
+    height: 24px;
+  }
 }

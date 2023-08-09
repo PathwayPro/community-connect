@@ -1,28 +1,60 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import Header from './components/Header/Header';
+import AboutUs from './pages/AboutUs/AboutUs';
 import Events from './pages/Events/Events';
+import Layout from './pages/Layout/Layout';
 import Main from './pages/Main/Main';
+import ApplyForMentorship from './pages/Mentorship/ApplyForMentorship';
+import BecomeMentor from './pages/Mentorship/BecomeMentor';
+import Resources from './pages/Resources/Resources';
+import Volunteering from './pages/Volunteering/Volunteering';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Main />,
-  },
-  {
-    path: 'events',
-    element: <Events />,
+    Component: Layout,
+    children: [
+      {
+        index: true,
+        Component: Main,
+      },
+      {
+        path: 'verify-email',
+        Component: Main,
+      },
+      {
+        path: 'reset-password',
+        Component: Main,
+      },
+      {
+        path: 'events',
+        Component: Events,
+      },
+      {
+        path: 'resources',
+        Component: Resources,
+      },
+      {
+        path: 'mentorship/apply',
+        Component: ApplyForMentorship,
+      },
+      {
+        path: 'mentorship/become',
+        Component: BecomeMentor,
+      },
+      {
+        path: 'about',
+        Component: AboutUs,
+      },
+      {
+        path: 'volunteering',
+        Component: Volunteering,
+      },
+    ],
   },
 ]);
 
-const App: FC = () => {
-  return (
-    <div className="App">
-      <Header />
-      <RouterProvider router={router} />
-    </div>
-  );
-};
+const App: FC = () => <RouterProvider router={router} />;
 
 export default App;

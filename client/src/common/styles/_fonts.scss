@@ -1,13 +1,102 @@
 @use './colors';
+@use './media';
 
-%font-family {
-  font-family: 'Open Sans', sans-serif;
+/* light */
+@font-face {
+  font-family: 'poppins';
+  src: url('/common/styles/fonts/poppins-light-webfont.woff') format('woff');
+  src: url('/common/styles/fonts/poppins-light-webfont.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
 
-@mixin navText($font-weight: 700, $color: colors.$white-light, $font-size: 23px) {
+/* regular */
+@font-face {
+  font-family: 'poppins';
+  src: url('/common/styles/fonts/poppins-regular-webfont.woff') format('woff');
+  src: url('/common/styles/fonts/poppins-regular-webfont.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+/* medium */
+@font-face {
+  font-family: 'poppins';
+  src: url('/common/styles/fonts/Poppins-Medium.woff') format('woff');
+  src: url('/common/styles/fonts/Poppins-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+/* bold */
+@font-face {
+  font-family: 'poppins';
+  src: url('/common/styles/fonts/poppins-bold-webfont.woff') format('woff');
+  src: url('/common/styles/fonts/poppins-bold-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+// STYLES
+%font-family {
+  font-family: 'poppins', sans-serif;
+}
+
+@mixin mainText($font-size: 16px, $font-weight: 500, $line-height: 1.5, $color: colors.$black) {
   @extend %font-family;
   font-size: $font-size;
   font-weight: $font-weight;
-  line-height: 1.5;
+  line-height: $line-height;
   color: $color;
+
+  @include media.media-l {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  @include media.media-s {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.25;
+  }
+}
+
+@mixin hintText($font-size: 0.85rem, $font-weight: 300, $color: colors.$black) {
+  @extend %font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: 1.25;
+  color: $color;
+}
+
+@mixin headingText($font-weight: 700, $line-height: 1.5) {
+  @extend %font-family;
+  font-weight: $font-weight;
+  line-height: $line-height;
+}
+
+@mixin navText($font-size: 1.45rem, $font-weight: 700, $color: colors.$white-light) {
+  @extend %font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: 1.25;
+  color: $color;
+
+  @include media.media-m {
+    font-weight: 500;
+  }
+}
+
+@mixin buttonText($font-size: 1.18rem, $font-weight: 700, $color: colors.$black) {
+  @extend %font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: 1;
+  color: $color;
+
+  @include media.media-l {
+    font-weight: 500;
+  }
 }

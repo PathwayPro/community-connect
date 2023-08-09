@@ -1,0 +1,103 @@
+@use '../../common/styles/colors';
+@use '../../common/styles/mixins';
+@use '../../common/styles/fonts';
+@use '../../common/styles/media';
+
+.footer {
+  background: url('/images/Footer/footer-bg.png') no-repeat 0 0 / cover;
+  margin-top: auto;
+  padding: 50px 0 25px;
+
+  @include media.media-l {
+    padding: 30px 0 20px;
+  }
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 7.5%;
+  position: relative;
+
+  @include media.media-s {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.container {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  @include fonts.mainText($font-size: 1.2rem, $color: colors.$white);
+  line-height: 1.25;
+}
+
+.heading {
+  @extend %reset-h;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.list {
+  @extend %reset-list;
+}
+
+.listColumn {
+  margin-bottom: 0.5rem;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.link {
+  color: colors.$white;
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.socials {
+  display: flex;
+  gap: 16px;
+  margin-top: auto;
+  position: absolute;
+  top: -75px;
+  left: 0;
+  z-index: 10;
+
+  @include media.media-l {
+    top: -55px;
+  }
+
+  @include media.media-s {
+    top: -50px;
+  }
+}
+
+.upButton {
+  position: absolute;
+  top: -75px;
+  right: 0;
+  height: 50px;
+  width: 50px;
+  border: none;
+  cursor: pointer;
+  background: url('/images/Icon/button-up.svg') no-repeat center center / cover;
+  z-index: 10;
+
+  @include media.media-l {
+    top: -55px;
+  }
+
+  @include media.media-s {
+    top: -50px;
+    width: 40px;
+    height: 40px;
+  }
+}

@@ -1,0 +1,65 @@
+@use '../../common/styles/fonts';
+@use '../../common/styles/media';
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+
+  @include media.media-s {
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 1rem;
+  }
+}
+
+.textBlock {
+  width: 100%;
+
+  &.reorder {
+    @include media.media-s {
+      order: 2;
+    }
+  }
+}
+
+.imageBlock {
+  max-width: 500px;
+  width: 100%;
+
+  &.reorder {
+    @include media.media-s {
+      order: 1;
+    }
+  }
+}
+
+.heading {
+  margin-bottom: 30px;
+
+  @include media.media-s {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}
+
+.subheading {
+  margin-bottom: 1rem;
+
+  &.centered {
+    text-align: center;
+
+    @include media.media-s {
+      text-align: left;
+    }
+  }
+}
+
+.text {
+  margin: 0 auto 1rem;
+  @include fonts.mainText($color: inherit);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

@@ -1,22 +1,20 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
+import { Link } from 'react-router-dom';
+
+import Container from '../../common/components/Container/Container';
 
 import styles from './Header.module.scss';
+import HeaderNav from './HeaderNav/HeaderNav';
 
 const Header: FC = () => {
   return (
     <header className={styles.header}>
-      <a href="/" className={styles.logo}></a>
-      <nav className={styles.nav}>
-        <a href="/events" className={styles.navLink}>
-          Events
-        </a>
-        <a href="/mentorship" className={styles.navLink}>
-          Mentorship
-        </a>
-        <a href="/faq" className={styles.navLink}>
-          FAQ
-        </a>
-      </nav>
+      <Container>
+        <div className={styles.wrapper}>
+          <Link to="/" className={styles.logo}></Link>
+          <HeaderNav />
+        </div>
+      </Container>
     </header>
   );
 };

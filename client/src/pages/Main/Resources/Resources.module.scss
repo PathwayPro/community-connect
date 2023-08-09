@@ -1,0 +1,55 @@
+@use '../../../common/styles/fonts';
+@use '../../../common/styles/mixins';
+@use '../../../common/styles/media';
+
+.inner {
+  gap: 30px;
+  @extend %flex-space-between;
+
+  @include media.media-s {
+    flex-direction: column;
+  }
+}
+
+.part {
+  max-width: 56%;
+  width: 100%;
+
+  @include media.media-s {
+    max-width: 100%;
+  }
+
+  &:nth-child(2) {
+    max-width: 44%;
+
+    @include media.media-s {
+      max-width: 100%;
+    }
+  }
+}
+
+.heading {
+  margin-bottom: 1.6rem;
+  text-align: center;
+}
+
+.text {
+  max-width: 500px;
+  margin: 0 auto 1.6rem;
+  text-align: center;
+  @include fonts.mainText($color: inherit);
+
+  @include media.media-s {
+    max-width: 100%;
+    text-align: left;
+    margin-bottom: 16px;
+  }
+}
+
+.linkResources {
+  margin: 0 auto;
+
+  @include media.media-s {
+    margin-bottom: 16px;
+  }
+}
