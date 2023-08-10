@@ -183,7 +183,7 @@ const Step1: FC<StepProps> = ({ formId, errors }) => {
             name={birthDate.name}
             id={`${formId}-${birthDate.name}`}
             label="Date of Birth"
-            placeholder="Year / Month"
+            placeholder="yyyy/mm"
             className={styles.formField}
             onChange={birthDate.onChange}
             onBlur={birthDate.onBlur}
