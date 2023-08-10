@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { FC } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
 import Dropdown from '../../common/components/Dropdown/Dropdown';
 import Input from '../../common/components/Input/Input';
@@ -12,8 +12,7 @@ import {
   ERROR_MESSAGE_BIRTHDATE,
 } from '../../common/utils/formComponentsUtils';
 
-import { StepProps } from './FillUserProfileForm';
-import { IFormInput } from './formInputInterface';
+import { StepAllProps } from './FillUserProfileForm';
 
 import styles from './FillUserProfileForm.module.scss';
 
@@ -37,38 +36,29 @@ const years = [
   { value: 'more than 8', label: 'more than 8' },
 ];
 
-const Step1: FC<StepProps> = ({ formId, errors }) => {
-  const {
-    register,
-    control,
-    setValue,
-  } = useForm<IFormInput>({
-    mode: 'onChange',
-    defaultValues: {
-      isBirthdayVisible: false,
-    },
+const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }) => {
+  // TODO: add file upload
+  const avatar = register('avatar', {
+    // required: 'User photo is required',
+    // validate: {
+    //   fileFormat: (value: FileList | undefined) => {
+    //     const file = value ? value[0] : undefined;
+    //     if (file && ['image/jpg', 'image/jpeg', 'image/png'].includes(file.type)) {
+    //       return true;
+    //     }
+    //     return 'Image must be a .jpg, .jpeg or .png format';
+    //   },
+    //   fileSize: (value: FileList | undefined) => {
+    //     const file = value ? value[0] : undefined;
+    //     if (file && file.size <= 8 * 1024 * 1024) {
+    //       // 8MB
+    //       return true;
+    //     }
+    //     return 'Image must be less than 8MB';
+    //   },
+    // },
   });
 
-  const avatar = register('avatar', {
-    required: 'User photo is required',
-    validate: {
-      fileFormat: (value: FileList | undefined) => {
-        const file = value ? value[0] : undefined;
-        if (file && ['image/jpg', 'image/jpeg', 'image/png'].includes(file.type)) {
-          return true;
-        }
-        return 'Image must be a .jpg, .jpeg or .png format';
-      },
-      fileSize: (value: FileList | undefined) => {
-        const file = value ? value[0] : undefined;
-        if (file && file.size <= 8 * 1024 * 1024) {
-          // 8MB
-          return true;
-        }
-        return 'Image must be less than 8MB';
-      },
-    },
-  });
   const firstName = register('firstName', {
     required: 'First name is required',
     pattern: {
@@ -76,6 +66,7 @@ const Step1: FC<StepProps> = ({ formId, errors }) => {
       message: ERROR_MESSAGE_NAME,
     },
   });
+
   const lastName = register('lastName', {
     required: 'Last name is required',
     pattern: {
@@ -83,8 +74,7 @@ const Step1: FC<StepProps> = ({ formId, errors }) => {
       message: ERROR_MESSAGE_NAME,
     },
   });
-  const originCountry = register('originCountry');
-  const province = register('province');
+
   const birthDate = register('birthDate', {
     pattern: {
       value: BIRTHDATE_REGEX,
@@ -99,13 +89,13 @@ const Step1: FC<StepProps> = ({ formId, errors }) => {
       setValue('birthDate', value);
     },
   });
+
   const spokenLanguage = register('spokenLanguage');
+
   const fieldOfExpertise = register('fieldOfExpertise', {
     required: 'Field of expertise is required',
   });
-  const yearsOfExperience = register('yearsOfExperience', {
-    required: 'Years of experience are required',
-  });
+
   const bio = register('bio', {
     required: 'Bio is required',
   });
@@ -154,27 +144,37 @@ const Step1: FC<StepProps> = ({ formId, errors }) => {
         />
       </div>
       <div className={styles.formRow}>
-        <Dropdown
-          name={originCountry.name}
-          id={`${formId}-${originCountry.name}`}
-          label="Country of origin"
-          options={countries}
-          className={styles.formField}
-          // onChange={originCountry.onChange}
-          // onBlur={originCountry.onBlur}
-          // ref={originCountry.ref}
-          // errorMessage={errors.originCountry?.message}
+        <Controller
+          name="originCountry"
+          control={control}
+          render={({ field }) => (
+            <Dropdown
+              name={field.name}
+              id={`${formId}-${field.name}`}
+              label="Country of origin"
+              options={countries}
+              className={styles.formField}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+              errorMessage={errors.originCountry?.message}
+            />
+          )}
         />
-        <Dropdown
-          name={province.name}
-          id={`${formId}-${province.name}`}
-          label="Province"
-          options={provinces}
-          className={styles.formField}
-          // onChange={province.onChange}
-          // onBlur={province.onBlur}
-          // ref={province.ref}
-          // errorMessage={errors.province?.message}
+        <Controller
+          name="province"
+          control={control}
+          render={({ field }) => (
+            <Dropdown
+              name={field.name}
+              id={`${formId}-${field.name}`}
+              label="Province"
+              options={provinces}
+              className={styles.formField}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+              errorMessage={errors.province?.message}
+            />
+          )}
         />
       </div>
       <div className={styles.formRow}>
@@ -185,7 +185,7 @@ const Step1: FC<StepProps> = ({ formId, errors }) => {
             label="Date of Birth"
             placeholder="yyyy/mm"
             className={styles.formField}
-            onChange={birthDate.onChange}
+            onChange={(e) => birthDate.onChange(e)}
             onBlur={birthDate.onBlur}
             ref={birthDate.ref}
             errorMessage={errors.birthDate?.message}
@@ -194,13 +194,13 @@ const Step1: FC<StepProps> = ({ formId, errors }) => {
             <Controller
               name="isBirthdayVisible"
               control={control}
-              render={({ field: { value, ...field } }) => (
+              render={({ field: { value, name, ...field } }) => (
                 <input
                   type="checkbox"
-                  id={`${formId}-isBirthdayVisible`}
-                  {...field}
+                  id={`${formId}-${name}`}
                   className={styles.checkbox}
                   checked={value}
+                  {...field}
                 />
               )}
             />
@@ -231,16 +231,24 @@ const Step1: FC<StepProps> = ({ formId, errors }) => {
           ref={fieldOfExpertise.ref}
           errorMessage={errors.fieldOfExpertise?.message}
         />
-        <Dropdown
-          name={yearsOfExperience.name}
-          id={`${formId}-${yearsOfExperience.name}`}
-          label="Years of experience *"
-          options={years}
-          className={styles.formField}
-          // onChange={yearsOfExperience.onChange}
-          // onBlur={yearsOfExperience.onBlur}
-          // ref={yearsOfExperience.ref}
-          // errorMessage={errors.yearsOfExperience?.message}
+        <Controller
+          name="yearsOfExperience"
+          control={control}
+          rules={{
+            required: 'Years of experience are required',
+          }}
+          render={({ field }) => (
+            <Dropdown
+              name={field.name}
+              id={`${formId}-${field.name}`}
+              label="Years of experience *"
+              options={years}
+              className={styles.formField}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+              errorMessage={errors.yearsOfExperience?.message}
+            />
+          )}
         />
       </div>
       <div className={styles.formRow}>

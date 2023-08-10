@@ -1,19 +1,12 @@
 import { FC } from 'react';
-import { useForm } from 'react-hook-form';
 
 import Input from '../../common/components/Input/Input';
 
-import { StepProps } from './FillUserProfileForm';
-import { IFormInput } from './formInputInterface';
+import { StepRegisterProps } from './FillUserProfileForm';
 
 import styles from './FillUserProfileForm.module.scss';
 
-const Step2: FC<StepProps> = ({ formId }) => {
-  const {
-    register,
-    formState: { errors },
-  } = useForm<IFormInput>({ mode: 'onChange' });
-
+const Step2: FC<StepRegisterProps> = ({ formId, errors, register }) => {
   const linkedInURL = register('linkedInURL');
   const instagramURL = register('instagramURL');
   const twitterURL = register('twitterURL');

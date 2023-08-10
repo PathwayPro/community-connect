@@ -4,14 +4,16 @@ import Select, { components, DropdownIndicatorProps } from 'react-select';
 
 import styles from './Dropdown.module.scss';
 
-interface ColourOption {
-  readonly value: string;
-  readonly label: string;
+import { ReactComponent as DDIcon } from '../../../images/Icon/dropdown-arrow.svg';
+
+interface OptionType {
+  value: string;
+  label: string;
 }
 
 interface DropdownProps {
-  options: readonly ColourOption[];
-  defaultValue?: ColourOption;
+  options: OptionType[];
+  defaultValue?: OptionType;
   name: string;
   id: string;
   label?: string;
@@ -19,14 +21,15 @@ interface DropdownProps {
   classNamePrefix?: string;
   placeholder?: string;
   isSearchable?: boolean;
+  onChange: (value: string | null | undefined) => void;
+  onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+  errorMessage?: string;
 }
 
-const DropdownIndicator = (props: DropdownIndicatorProps<ColourOption, true>) => {
+const DropdownIndicator = (props: DropdownIndicatorProps<OptionType, false>) => {
   return (
     <components.DropdownIndicator {...props}>
-      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="6"  viewBox="0 0 10 6">
-        <path d="M0.6,1.1l4.2,4.2c0.1,0.1,0.3,0.1,0.5,0l4.2-4.2c0.2-0.2,0.1-0.6-0.2-0.6H0.8C0.5,0.5,0.4,0.9,0.6,1.1z" fill="black" />
-      </svg>
+      <DDIcon />
     </components.DropdownIndicator>
   );
 };
@@ -41,6 +44,9 @@ const Dropdown: FC<DropdownProps> = ({
   classNamePrefix = 'select',
   placeholder = 'Choose from the list',
   isSearchable = false,
+  onChange,
+  onBlur,
+  errorMessage,
 }) => {
   return (
     <fieldset className={classNames(styles.fieldset, className)}>
@@ -58,8 +64,10 @@ const Dropdown: FC<DropdownProps> = ({
         placeholder={placeholder}
         isSearchable={isSearchable}
         components={{ DropdownIndicator }}
+        onChange={(newValue) => onChange(newValue?.value)}
+        onBlur={onBlur}
       />
-      {/* {errorMessage && <div className={classNames(styles.message, styles.errorMessage)}>{errorMessage}</div>} */}
+      {errorMessage && <div className={classNames(styles.message, styles.errorMessage)}>{errorMessage}</div>}
     </fieldset>
   );
 };

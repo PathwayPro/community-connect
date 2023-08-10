@@ -1,25 +1,17 @@
 import classNames from 'classnames';
 import { FC, useState, MouseEvent, KeyboardEvent } from 'react';
-import { useForm } from 'react-hook-form';
 
 import ResumeInput from '../../common/components/ResumeDownloadInput/ResumeDownloadInput';
 
-import { StepProps } from './FillUserProfileForm';
-import { IFormInput } from './formInputInterface';
+import { StepRegisterProps } from './FillUserProfileForm';
 
 import styles from './FillUserProfileForm.module.scss';
 
-const Step3: FC<StepProps> = ({ formId }) => {
-  const {
-    register,
-    formState: { errors },
-  } = useForm<IFormInput>({ mode: 'onChange' });
-
+const Step3: FC<StepRegisterProps> = ({ formId, errors, register }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const resume = register('resume', {
     // TODO: validation
-
     // validate: {
     //   fileFormat: (value: FileList | undefined) => {
     //     const file = value ? value[0] : undefined;

@@ -1,10 +1,9 @@
 import { FC } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
 import Dropdown from '../../common/components/Dropdown/Dropdown';
 
-import { StepProps } from './FillUserProfileForm';
-import { IFormInput } from './formInputInterface';
+import { StepControlProps } from './FillUserProfileForm';
 
 import styles from './FillUserProfileForm.module.scss';
 
@@ -24,41 +23,43 @@ const goals = [
   { value: 'networking', label: 'Networking' },
 ];
 
-const Step4: FC<StepProps> = ({ formId }) => {
-  const {
-    register,
-    // formState: { errors },
-  } = useForm<IFormInput>({ mode: 'onChange' });
-
-  const timeInCanada = register('timeInCanada');
-  const goal = register('goal');
-
+const Step4: FC<StepControlProps> = ({ formId, errors, control }) => {
   return (
     <>
       <div className={styles.formRow}>
-        <Dropdown
-          name={timeInCanada.name}
-          id={`${formId}-${timeInCanada.name}`}
-          label="How long have you been in Canada?"
-          options={years}
-          className={styles.formFieldWide}
-          // onChange={timeInCanada.onChange}
-          // onBlur={timeInCanada.onBlur}
-          // ref={timeInCanada.ref}
-          // errorMessage={errors.timeInCanada?.message}
+        <Controller
+          name="timeInCanada"
+          control={control}
+          render={({ field }) => (
+            <Dropdown
+              name={field.name}
+              id={`${formId}-${field.name}`}
+              label="How long have you been in Canada?"
+              options={years}
+              className={styles.formFieldWide}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+              errorMessage={errors.timeInCanada?.message}
+            />
+          )}
         />
       </div>
       <div className={styles.formRow}>
-        <Dropdown
-          name={goal.name}
-          id={`${formId}-${goal.name}`}
-          label="What is your goal to join the Community Connect?"
-          options={goals}
-          className={styles.formFieldWide}
-          // onChange={goal.onChange}
-          // onBlur={goal.onBlur}
-          // ref={goal.ref}
-          // errorMessage={errors.goal?.message}
+        <Controller
+          name="goal"
+          control={control}
+          render={({ field }) => (
+            <Dropdown
+              name={field.name}
+              id={`${formId}-${field.name}`}
+              label="What is your goal to join the Community Connect?"
+              options={goals}
+              className={styles.formFieldWide}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+              errorMessage={errors.goal?.message}
+            />
+          )}
         />
       </div>
     </>

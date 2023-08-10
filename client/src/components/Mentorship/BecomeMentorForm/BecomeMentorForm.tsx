@@ -23,6 +23,8 @@ interface IFormInput {
   otherMentorships: string;
 }
 
+const FORM_ID = 'becomeMentorForm';
+
 const BecomeMentorForm: FC = () => {
   const {
     register,
@@ -90,6 +92,7 @@ const BecomeMentorForm: FC = () => {
       <form className={styles.form}>
         <div className={styles.formRow}>
           <Input
+            id={`${FORM_ID}-${firstName.name}`}
             name={firstName.name}
             label="First name *"
             autoComplete="on"
@@ -100,6 +103,7 @@ const BecomeMentorForm: FC = () => {
             errorMessage={errors.firstName?.message}
           />
           <Input
+            id={`${FORM_ID}-${lastName.name}`}
             name={lastName.name}
             label="Last name *"
             autoComplete="on"
@@ -112,6 +116,7 @@ const BecomeMentorForm: FC = () => {
         </div>
         <div className={styles.formRow}>
           <Input
+            id={`${FORM_ID}-${fieldOfExpertise.name}`}
             name={fieldOfExpertise.name}
             label="Field of expertise *"
             className={styles.formField}
@@ -121,6 +126,7 @@ const BecomeMentorForm: FC = () => {
             errorMessage={errors.fieldOfExpertise?.message}
           />
           <Input
+            id={`${FORM_ID}-${yearsOfExperience.name}`}
             name={yearsOfExperience.name}
             label="Years of experience *"
             className={styles.formField}
@@ -132,6 +138,7 @@ const BecomeMentorForm: FC = () => {
         </div>
         <div className={styles.formRow}>
           <Input
+            id={`${FORM_ID}-${numberOfMentees.name}`}
             name={numberOfMentees.name}
             label="Number of mentees you can accommodate *"
             className={styles.formField}
@@ -141,6 +148,7 @@ const BecomeMentorForm: FC = () => {
             errorMessage={errors.numberOfMentees?.message}
           />
           <Input
+            id={`${FORM_ID}-${availability.name}`}
             name={availability.name}
             label="Availability (hours a week) *"
             className={styles.formField}
@@ -152,6 +160,7 @@ const BecomeMentorForm: FC = () => {
         </div>
         <div className={styles.formRow}>
           <Input
+            id={`${FORM_ID}-${otherMentorships.name}`}
             name={otherMentorships.name}
             label="Have you provided mentorship in other organizations (yes or no). If yes, provide details"
             className={classNames(styles.formFieldLabel)}
