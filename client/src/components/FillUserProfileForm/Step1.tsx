@@ -37,12 +37,11 @@ const years = [
   { value: 'more than 8', label: 'more than 8' },
 ];
 
-const Step1: FC<StepProps> = ({ formId }) => {
+const Step1: FC<StepProps> = ({ formId, errors }) => {
   const {
     register,
     control,
     setValue,
-    formState: { errors },
   } = useForm<IFormInput>({
     mode: 'onChange',
     defaultValues: {
@@ -118,7 +117,7 @@ const Step1: FC<StepProps> = ({ formId }) => {
         <label htmlFor={`${formId}_${avatar.name}`} className={styles.avatarLabel}></label>
         <input
           type="file"
-          id={`${formId}_${avatar.name}`}
+          id={`${formId}-${avatar.name}`}
           name={avatar.name}
           accept="image/jpg, image/jpeg, image/png"
           className={styles.avatar}
@@ -133,7 +132,7 @@ const Step1: FC<StepProps> = ({ formId }) => {
       <div className={styles.formRow}>
         <Input
           name={firstName.name}
-          id={`${formId}_${firstName.name}`}
+          id={`${formId}-${firstName.name}`}
           label="First name *"
           autoComplete="on"
           className={styles.formField}
@@ -144,7 +143,7 @@ const Step1: FC<StepProps> = ({ formId }) => {
         />
         <Input
           name={lastName.name}
-          id={`${formId}_${lastName.name}`}
+          id={`${formId}-${lastName.name}`}
           label="Last name *"
           autoComplete="on"
           className={styles.formField}
@@ -157,32 +156,32 @@ const Step1: FC<StepProps> = ({ formId }) => {
       <div className={styles.formRow}>
         <Dropdown
           name={originCountry.name}
-          id={`${formId}_${originCountry.name}`}
+          id={`${formId}-${originCountry.name}`}
           label="Country of origin"
           options={countries}
           className={styles.formField}
-          onChange={originCountry.onChange}
-          onBlur={originCountry.onBlur}
-          ref={originCountry.ref}
-          errorMessage={errors.originCountry?.message}
+          // onChange={originCountry.onChange}
+          // onBlur={originCountry.onBlur}
+          // ref={originCountry.ref}
+          // errorMessage={errors.originCountry?.message}
         />
         <Dropdown
           name={province.name}
-          id={`${formId}_${province.name}`}
+          id={`${formId}-${province.name}`}
           label="Province"
           options={provinces}
           className={styles.formField}
-          onChange={province.onChange}
-          onBlur={province.onBlur}
-          ref={province.ref}
-          errorMessage={errors.province?.message}
+          // onChange={province.onChange}
+          // onBlur={province.onBlur}
+          // ref={province.ref}
+          // errorMessage={errors.province?.message}
         />
       </div>
       <div className={styles.formRow}>
         <div className={styles.fieldWithCheckbox}>
           <Input
             name={birthDate.name}
-            id={`${formId}_${birthDate.name}`}
+            id={`${formId}-${birthDate.name}`}
             label="Date of Birth"
             placeholder="Year / Month"
             className={styles.formField}
@@ -198,20 +197,20 @@ const Step1: FC<StepProps> = ({ formId }) => {
               render={({ field: { value, ...field } }) => (
                 <input
                   type="checkbox"
-                  id={`${formId}_isBirthdayVisible`}
+                  id={`${formId}-isBirthdayVisible`}
                   {...field}
                   className={styles.checkbox}
                   checked={value}
                 />
               )}
             />
-            <label htmlFor={`${formId}_isBirthdayVisible`}>Show my birthday date on my profile.</label>
+            <label htmlFor={`${formId}-isBirthdayVisible`}>Show my birthday date on my profile.</label>
           </fieldset>
         </div>
 
         <Input
           name={spokenLanguage.name}
-          id={`${formId}_${spokenLanguage.name}`}
+          id={`${formId}-${spokenLanguage.name}`}
           label="Spoken languages"
           placeholder="List separated by commas"
           className={styles.formField}
@@ -224,7 +223,7 @@ const Step1: FC<StepProps> = ({ formId }) => {
       <div className={styles.formRow}>
         <Input
           name={fieldOfExpertise.name}
-          id={`${formId}_${fieldOfExpertise.name}`}
+          id={`${formId}-${fieldOfExpertise.name}`}
           label="Field of expertise *"
           className={styles.formField}
           onChange={fieldOfExpertise.onChange}
@@ -234,20 +233,20 @@ const Step1: FC<StepProps> = ({ formId }) => {
         />
         <Dropdown
           name={yearsOfExperience.name}
-          id={`${formId}_${yearsOfExperience.name}`}
+          id={`${formId}-${yearsOfExperience.name}`}
           label="Years of experience *"
           options={years}
           className={styles.formField}
-          onChange={yearsOfExperience.onChange}
-          onBlur={yearsOfExperience.onBlur}
-          ref={yearsOfExperience.ref}
-          errorMessage={errors.yearsOfExperience?.message}
+          // onChange={yearsOfExperience.onChange}
+          // onBlur={yearsOfExperience.onBlur}
+          // ref={yearsOfExperience.ref}
+          // errorMessage={errors.yearsOfExperience?.message}
         />
       </div>
       <div className={styles.formRow}>
         <Textarea
           name={bio.name}
-          id={`${formId}_${bio.name}`}
+          id={`${formId}-${bio.name}`}
           label="Bio *"
           rows={3}
           placeholder="Please provide a brief description about yourself."

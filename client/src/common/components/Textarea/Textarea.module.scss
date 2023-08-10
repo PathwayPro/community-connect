@@ -14,7 +14,6 @@
 
 .textarea {
   width: 100%;
-  // height: 3rem;
   line-height: 3rem;
   background-color: colors.$white;
   border: 1px solid colors.$grey-light;
@@ -27,6 +26,7 @@
   &::placeholder {
     color: colors.$grey;
   }
+
   &:focus,
   &:active,
   &:focus-visible {
@@ -53,7 +53,7 @@
 }
 
 // generate classes like .textarea-1, .textarea-2, ... , .textarea-10 with corresponding height in rem.
-@for $i from 1 through 10 {
+@for $i from 2 through 10 {
   .textarea-#{$i} {
     height: #{$i * 2}rem;
   }

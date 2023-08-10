@@ -12,56 +12,72 @@
   position: relative;
 }
 
-.selectWrap {
-  position: relative;
+:global {
+  div.select {
 
-  &::after {
-    content: url('/images/Icon/dropdown-arrow.svg');
-    position: absolute;
-    top: 50%;
-    left: 89%;
-    width: 11px;
-    height: 22px;
-    transform: translateY(-50%);
-  }
-}
+    &__control {
+      width: 100%;
+      height: 3rem;
+      padding-right: 4px;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.5;
+      background-color: colors.$white;
+      border: 1px solid colors.$grey-light;
+      border-radius: 8px;
+      box-shadow: none;
 
-.select {
-  width: 100%;
-  height: 3rem;
-  background-color: colors.$white;
-  border: 1px solid colors.$grey-light;
-  border-radius: 8px;
-  padding: 0 0.75rem;
-  appearance: none;
-  outline: none;
-  @include fonts.mainText;
+      &:hover {
+        border-color: colors.$grey-light;
+      }
 
-  &:focus,
-  &:active,
-  &:focus-visible {
-    border-color: colors.$focus;
-  }
+      &:focus,
+      &:active,
+      &:focus-visible {
+        border-color: colors.$focus;
+      }
 
-  option {
-    color: colors.$black;
+      &--menu-is-open {
+        border-radius: 0px;
+      }
+    }
 
-    &[disabled] {
-      color: colors.$grey;
+    &__indicators {
+
+      .select__indicator-separator {
+        display: none !important;
+      }
+    }
+
+    &__menu {
+      margin: 0 ;
+      border-radius: 0 0 8px 8px;
+      z-index: 2;
+      overflow: hidden;
+    }
+
+    &__menu-list {
+      padding: 0;
+    }
+
+    &__option {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      border: 1px solid colors.$grey-light;
+
+      &--is-selected {
+        color: colors.$black;
+        background-color: colors.$orange-light-active;
+      }
+    }
+
+    &.error {
+      border: 1px solid colors.$error;
+      margin-bottom: 1.6rem;
+      background-color: colors.$error-bg;
     }
   }
-
-  &.error {
-    border: 1px solid colors.$error;
-    margin-bottom: 1.6rem;
-    background-color: colors.$error-bg !important;
-  }
-
-  &._notSelected {
-    color: colors.$grey;
-  }
 }
-
 
 .label {
   @include fonts.mainText($font-size: 0.8rem, $font-weight: 700, $line-height: 1);

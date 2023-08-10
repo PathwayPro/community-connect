@@ -7,7 +7,7 @@ export const MODAL_TYPE = {
   RESET_PASSWORD: 'resetPassword',
   SEND_CONFIRMATION_EMAIL: 'sendConfirmationEmail',
   VERIFY_EMAIL: 'verifyEmail',
-  FILL_USER_PROFILE: 'FillUserProfile',
+  FILL_USER_PROFILE: 'fillUserProfile',
 };
 
 type initialStateType = {

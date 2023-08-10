@@ -1,50 +1,47 @@
 import classNames from 'classnames';
-import React, { SelectHTMLAttributes, useState } from 'react';
+import { FC } from 'react';
+import Select, { components, DropdownIndicatorProps } from 'react-select';
 
 import styles from './Dropdown.module.scss';
 
-interface Option {
-  value: string;
-  label: string;
+interface ColourOption {
+  readonly value: string;
+  readonly label: string;
 }
 
-interface DropdownProps extends SelectHTMLAttributes<HTMLSelectElement> {
-  label?: string;
+interface DropdownProps {
+  options: readonly ColourOption[];
+  defaultValue?: ColourOption;
   name: string;
-  id?: string;
-  placeholder?: string;
-  options: Option[];
-  errorMessage?: string;
-  successMessage?: string;
+  id: string;
+  label?: string;
   className?: string;
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  onBlur: (event: React.FocusEvent<HTMLSelectElement>) => void;
+  classNamePrefix?: string;
+  placeholder?: string;
+  isSearchable?: boolean;
 }
 
-const DropdownInner = (
-  {
-    label,
-    name,
-    id,
-    placeholder = 'Choose from the list',
-    options,
-    errorMessage = '',
-    successMessage = '',
-    className = '',
-    onChange: onChangeProp,
-    onBlur,
-  }: DropdownProps,
-  ref: React.ForwardedRef<HTMLSelectElement>
-) => {
-  const [hasSelected, setHasSelected] = useState(false);
+const DropdownIndicator = (props: DropdownIndicatorProps<ColourOption, true>) => {
+  return (
+    <components.DropdownIndicator {...props}>
+      <svg xmlns="http://www.w3.org/2000/svg" width="10" height="6"  viewBox="0 0 10 6">
+        <path d="M0.6,1.1l4.2,4.2c0.1,0.1,0.3,0.1,0.5,0l4.2-4.2c0.2-0.2,0.1-0.6-0.2-0.6H0.8C0.5,0.5,0.4,0.9,0.6,1.1z" fill="black" />
+      </svg>
+    </components.DropdownIndicator>
+  );
+};
 
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setHasSelected(true);
-    if (onChangeProp) {
-      onChangeProp(event);
-    }
-  };
-
+const Dropdown: FC<DropdownProps> = ({
+  options,
+  defaultValue,
+  name,
+  id,
+  label,
+  className = '',
+  classNamePrefix = 'select',
+  placeholder = 'Choose from the list',
+  isSearchable = false,
+}) => {
   return (
     <fieldset className={classNames(styles.fieldset, className)}>
       {label && (
@@ -52,36 +49,19 @@ const DropdownInner = (
           {label}
         </label>
       )}
-      <div className={styles.selectWrap}>
-        <select
-          name={name}
-          id={id}
-          defaultValue=""
-          className={classNames(
-            styles.select,
-            errorMessage && styles.error,
-            successMessage && styles.success,
-            !hasSelected && styles._notSelected
-          )}
-          onChange={handleChange}
-          onBlur={onBlur}
-          ref={ref}
-        >
-          <option value="" disabled>
-            {placeholder}
-          </option>
-          {options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </div>
-      {errorMessage && <div className={classNames(styles.message, styles.errorMessage)}>{errorMessage}</div>}
+      <Select
+        classNamePrefix={classNamePrefix}
+        defaultValue={defaultValue}
+        name={name}
+        id={id}
+        options={options}
+        placeholder={placeholder}
+        isSearchable={isSearchable}
+        components={{ DropdownIndicator }}
+      />
+      {/* {errorMessage && <div className={classNames(styles.message, styles.errorMessage)}>{errorMessage}</div>} */}
     </fieldset>
   );
 };
-
-const Dropdown = React.forwardRef<HTMLSelectElement, DropdownProps>(DropdownInner);
 
 export default Dropdown;

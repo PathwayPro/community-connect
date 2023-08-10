@@ -15,7 +15,7 @@ const Hero: FC = () => {
 
   const onRegisterClick = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    dispatch(showModal({ content: MODAL_TYPE.REGISTER, closeOnOverlayClick: true }));
+    dispatch(showModal({ content: MODAL_TYPE.REGISTER }));
   };
   const onFillUserProfileClick = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();

@@ -35,8 +35,7 @@
     bottom: 78px;
     right: 50%;
     transform: translateX(50%);
-    font-size: 23px;
-    font-weight: 700;
+    @include fonts.navText($color: colors.$black);
 
     @include media.media-s {
       bottom: 40px;
@@ -126,5 +125,9 @@
 
 .deleteIcon {
   position: relative;
-  bottom: 1px;
+  bottom: -1px;
+
+  svg {
+    height: 80%;
+  }
 }

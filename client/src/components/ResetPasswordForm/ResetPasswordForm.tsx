@@ -31,7 +31,7 @@ const ResetPasswordForm: FC = () => {
     formState: { errors, isValid, isDirty },
   } = useForm<IFormInput>({ mode: 'onChange' });
 
-  const formId = 'ResetPassword';
+  const formId = 'resetPassword';
 
   const password = register('password', {
     required: 'Password is required',
@@ -83,7 +83,7 @@ const ResetPasswordForm: FC = () => {
       {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
       <Input
         name={password.name}
-        id={`${formId}_${password.name}`}
+        id={`${formId}-${password.name}`}
         label="New Password *"
         type="password"
         className={classNames(styles.formField, errors.password && styles.errorPassword)}
@@ -94,7 +94,7 @@ const ResetPasswordForm: FC = () => {
       />
       <Input
         name={rePassword.name}
-        id={`${formId}_${rePassword.name}`}
+        id={`${formId}-${rePassword.name}`}
         label="Re-enter New Password *"
         type="password"
         className={styles.formField}
@@ -121,7 +121,7 @@ const ResetPasswordForm: FC = () => {
             className={styles.formBottomLink}
             onClick={(e) => {
               e.preventDefault();
-              dispatch(showModal({ content: MODAL_TYPE.LOGIN, closeOnOverlayClick: true }));
+              dispatch(showModal({ content: MODAL_TYPE.LOGIN }));
             }}
           >
             Sign&nbsp;in&nbsp;now.
@@ -134,7 +134,7 @@ const ResetPasswordForm: FC = () => {
             className={styles.formBottomLink}
             onClick={(e) => {
               e.preventDefault();
-              dispatch(showModal({ content: MODAL_TYPE.REGISTER, closeOnOverlayClick: true }));
+              dispatch(showModal({ content: MODAL_TYPE.REGISTER}));
             }}
           >
             Sign&nbsp;up&nbsp;now.

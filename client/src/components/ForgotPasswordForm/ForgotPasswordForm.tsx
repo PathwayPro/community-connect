@@ -28,7 +28,7 @@ const ForgotPasswordForm: FC = () => {
     formState: { errors, isValid, isDirty },
   } = useForm<IFormInput>({ mode: 'onTouched' });
 
-  const formId = 'ForgotPassword';
+  const formId = 'forgotPassword';
 
   const email = register('email', {
     required: 'Email is required',
@@ -84,7 +84,7 @@ const ForgotPasswordForm: FC = () => {
       </Heading>
       <Input
         name={email.name}
-        id={`${formId}_${email.name}`}
+        id={`${formId}-${email.name}`}
         label="Email *"
         type="email"
         autoComplete="on"
@@ -113,7 +113,7 @@ const ForgotPasswordForm: FC = () => {
             className={styles.formBottomLink}
             onClick={(e) => {
               e.preventDefault();
-              dispatch(showModal({ content: MODAL_TYPE.LOGIN, closeOnOverlayClick: true }));
+              dispatch(showModal({ content: MODAL_TYPE.LOGIN }));
             }}
           >
             Sign&nbsp;in&nbsp;now.
@@ -126,7 +126,7 @@ const ForgotPasswordForm: FC = () => {
             className={styles.formBottomLink}
             onClick={(e) => {
               e.preventDefault();
-              dispatch(showModal({ content: MODAL_TYPE.REGISTER, closeOnOverlayClick: true }));
+              dispatch(showModal({ content: MODAL_TYPE.REGISTER }));
             }}
           >
             Sign&nbsp;up&nbsp;now.

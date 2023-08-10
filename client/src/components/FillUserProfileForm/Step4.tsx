@@ -27,7 +27,7 @@ const goals = [
 const Step4: FC<StepProps> = ({ formId }) => {
   const {
     register,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<IFormInput>({ mode: 'onChange' });
 
   const timeInCanada = register('timeInCanada');
@@ -38,27 +38,27 @@ const Step4: FC<StepProps> = ({ formId }) => {
       <div className={styles.formRow}>
         <Dropdown
           name={timeInCanada.name}
-          id={`${formId}_${timeInCanada.name}`}
+          id={`${formId}-${timeInCanada.name}`}
           label="How long have you been in Canada?"
           options={years}
           className={styles.formFieldWide}
-          onChange={timeInCanada.onChange}
-          onBlur={timeInCanada.onBlur}
-          ref={timeInCanada.ref}
-          errorMessage={errors.timeInCanada?.message}
+          // onChange={timeInCanada.onChange}
+          // onBlur={timeInCanada.onBlur}
+          // ref={timeInCanada.ref}
+          // errorMessage={errors.timeInCanada?.message}
         />
       </div>
       <div className={styles.formRow}>
         <Dropdown
           name={goal.name}
-          id={`${formId}_${goal.name}`}
+          id={`${formId}-${goal.name}`}
           label="What is your goal to join the Community Connect?"
           options={goals}
           className={styles.formFieldWide}
-          onChange={goal.onChange}
-          onBlur={goal.onBlur}
-          ref={goal.ref}
-          errorMessage={errors.goal?.message}
+          // onChange={goal.onChange}
+          // onBlur={goal.onBlur}
+          // ref={goal.ref}
+          // errorMessage={errors.goal?.message}
         />
       </div>
     </>

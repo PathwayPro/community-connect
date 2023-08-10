@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { useForm, UseFormRegister, SubmitHandler } from 'react-hook-form';
+import { useForm, UseFormRegister, SubmitHandler, FieldErrors } from 'react-hook-form';
 
 import { useAppDispatch } from '../../app/hooks';
 import { closeModal } from '../../app/slices/modalSlice';
@@ -17,16 +17,15 @@ import styles from './FillUserProfileForm.module.scss';
 
 export interface StepProps {
   register: UseFormRegister<IFormInput>;
-  data: Partial<IFormInput>;
   formId: string;
+  errors: FieldErrors<IFormInput>;
 }
 
 const FillUserProfileForm: FC = () => {
   const dispatch = useAppDispatch();
   const [step, setStep] = useState(1);
-  const { register, handleSubmit, watch } = useForm<IFormInput>();
-  const watchedFields = watch();
-  const formId = 'FillUserProfile';
+  const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
+  const formId = 'fillUserProfile';
 
   // TODO: send data to backend
   const onSubmit: SubmitHandler<IFormInput> = async () => {
@@ -34,7 +33,7 @@ const FillUserProfileForm: FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form>
       <Heading tagType="h4" className={styles.title}>
         {step === 1 && 'Welcome!'}
         {step === 2 && 'Social Media'}
@@ -43,10 +42,10 @@ const FillUserProfileForm: FC = () => {
       </Heading>
       <ProgressBar step={step} />
       <div className={styles.content}>
-        {step === 1 && <Step1 register={register} data={watchedFields} formId={formId} />}
-        {step === 2 && <Step2 register={register} data={watchedFields} formId={formId} />}
-        {step === 3 && <Step3 register={register} data={watchedFields} formId={formId} />}
-        {step === 4 && <Step4 register={register} data={watchedFields} formId={formId} />}
+        {step === 1 && <Step1 register={register} formId={formId} errors={errors} />}
+        {step === 2 && <Step2 register={register} formId={formId} errors={errors} />}
+        {step === 3 && <Step3 register={register} formId={formId} errors={errors} />}
+        {step === 4 && <Step4 register={register} formId={formId} errors={errors} />}
       </div>
       <div className={styles.btnWrapper}>
         <Button

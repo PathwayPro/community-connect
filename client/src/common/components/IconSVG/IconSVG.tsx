@@ -8,9 +8,8 @@ import styles from './IconSVG.module.scss';
 interface IconSVGProps {
   name: keyof typeof iconMap;
   label: string;
-  color?: 'black' | 'orange' |'orangeLight' | 'grey';
+  color?: 'black' | 'orange' | 'orangeLight' | 'grey';
   size: 'small' | 'medium' | 'big' | 'wide';
-  isStatic?: boolean;
   isSubmit?: boolean;
   className?: string;
   onClick?: (e: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>) => void;
@@ -26,7 +25,6 @@ const IconSVG: FC<IconSVGProps> = ({
   label = 'icon',
   color = 'black',
   size = 'medium',
-  isStatic = false,
   isSubmit = false,
   className,
   onClick,
@@ -40,7 +38,7 @@ const IconSVG: FC<IconSVGProps> = ({
   };
   return (
     <button
-      className={classNames(className, styles.button, color && styles[color], styles[size], !isStatic && styles.stated)}
+      className={classNames(className, styles.button, color && styles[color], styles[size])}
       onClick={onClick}
       onKeyDown={handleKeyDown}
       type={isSubmit ? 'submit' : 'button'}

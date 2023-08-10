@@ -44,7 +44,7 @@ const RegisterForm: FC = () => {
     formState: { errors, isValid, isDirty },
   } = useForm<IFormInput>({ mode: 'onChange' });
 
-  const formId = 'Register';
+  const formId = 'register';
 
   const firstName = register('firstName', {
     required: 'First name is required',
@@ -128,7 +128,7 @@ const RegisterForm: FC = () => {
       <div className={styles.formRow}>
         <Input
           name={firstName.name}
-          id={`${formId}_${firstName.name}`}
+          id={`${formId}-${firstName.name}`}
           label="First name *"
           autoComplete="on"
           className={styles.formField}
@@ -139,7 +139,7 @@ const RegisterForm: FC = () => {
         />
         <Input
           name={lastName.name}
-          id={`${formId}_${lastName.name}`}
+          id={`${formId}-${lastName.name}`}
           label="Last name *"
           autoComplete="on"
           className={styles.formField}
@@ -152,7 +152,7 @@ const RegisterForm: FC = () => {
       <div className={styles.formRow}>
         <Input
           name={email.name}
-          id={`${formId}_${email.name}`}
+          id={`${formId}-${email.name}`}
           label="Email *"
           type="email"
           autoComplete="on"
@@ -166,7 +166,7 @@ const RegisterForm: FC = () => {
       <div className={classNames(styles.formRow, (errors.password || errors.rePassword) && styles.error)}>
         <Input
           name={password.name}
-          id={`${formId}_${password.name}`}
+          id={`${formId}-${password.name}`}
           label="Password *"
           type="password"
           className={classNames(styles.formField, errors.password && styles.formFieldPassword)}
@@ -177,7 +177,7 @@ const RegisterForm: FC = () => {
         />
         <Input
           name={rePassword.name}
-          id={`${formId}_${rePassword.name}`}
+          id={`${formId}-${rePassword.name}`}
           label="Re-enter Password *"
           type="password"
           className={styles.formField}
@@ -199,7 +199,7 @@ const RegisterForm: FC = () => {
             render={({ field, fieldState }) => (
               <input
                 type="checkbox"
-                id={`${formId}_agreement}`}
+                id={`${formId}-agreement}`}
                 {...field}
                 className={classNames(styles.checkbox, fieldState.error && styles.error)}
               />

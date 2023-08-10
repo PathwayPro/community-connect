@@ -6,8 +6,8 @@ import styles from './Textarea.module.scss';
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   name: string;
-  id?: string;
-  rows?: number;
+  id: string;
+  rows?: 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
   placeholder?: string;
   errorMessage?: string;
   successMessage?: string;
@@ -21,7 +21,7 @@ const TextareaInner = (
     label,
     name,
     id,
-    rows = 1,
+    rows = 3,
     placeholder = '',
     errorMessage = '',
     successMessage = '',

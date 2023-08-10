@@ -6,7 +6,7 @@ import styles from './Input.module.scss';
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   name: string;
-  id?: string;
+  id: string;
   type?: string;
   placeholder?: string;
   errorMessage?: string;

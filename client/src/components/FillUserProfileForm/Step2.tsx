@@ -25,7 +25,7 @@ const Step2: FC<StepProps> = ({ formId }) => {
       <div className={styles.formRow}>
         <Input
           name={linkedInURL.name}
-          id={`${formId}_${linkedInURL.name}`}
+          id={`${formId}-${linkedInURL.name}`}
           label="LinkedIn"
           className={styles.formFieldWide}
           onChange={linkedInURL.onChange}
@@ -37,7 +37,7 @@ const Step2: FC<StepProps> = ({ formId }) => {
       <div className={styles.formRow}>
         <Input
           name={instagramURL.name}
-          id={`${formId}_${instagramURL.name}`}
+          id={`${formId}-${instagramURL.name}`}
           label="Instagram"
           className={styles.formFieldWide}
           onChange={instagramURL.onChange}
@@ -49,7 +49,7 @@ const Step2: FC<StepProps> = ({ formId }) => {
       <div className={styles.formRow}>
         <Input
           name={twitterURL.name}
-          id={`${formId}_${twitterURL.name}`}
+          id={`${formId}-${twitterURL.name}`}
           label="Twitter"
           className={styles.formFieldWide}
           onChange={twitterURL.onChange}
@@ -61,7 +61,7 @@ const Step2: FC<StepProps> = ({ formId }) => {
       <div className={styles.formRow}>
         <Input
           name={githubURL.name}
-          id={`${formId}_${githubURL.name}`}
+          id={`${formId}-${githubURL.name}`}
           label="Github"
           className={styles.formFieldWide}
           onChange={githubURL.onChange}
@@ -73,7 +73,7 @@ const Step2: FC<StepProps> = ({ formId }) => {
       <div className={styles.formRow}>
         <Input
           name={behanceURL.name}
-          id={`${formId}_${behanceURL.name}`}
+          id={`${formId}-${behanceURL.name}`}
           label="Behance"
           autoComplete="on"
           className={styles.formFieldWide}

@@ -3,12 +3,12 @@ import React, { FC, MouseEvent, KeyboardEvent } from 'react';
 
 import IconSVG from '../IconSVG/IconSVG';
 
-import styles from './ResumeInput.module.scss';
+import styles from './ResumeDownloadInput.module.scss';
 
 interface FileInputProps {
   title?: string;
   name: string;
-  id?: string;
+  id: string;
   className?: string;
   errorMessage?: string;
   onFileChange: (file: File | null) => void;
@@ -17,7 +17,7 @@ interface FileInputProps {
 }
 
 // TODO validation
-const ResumeInput: FC<FileInputProps> = ({
+const ResumeDownloadInput: FC<FileInputProps> = ({
   title,
   name,
   id,
@@ -62,4 +62,4 @@ const ResumeInput: FC<FileInputProps> = ({
   );
 };
 
-export default ResumeInput;
+export default ResumeDownloadInput;

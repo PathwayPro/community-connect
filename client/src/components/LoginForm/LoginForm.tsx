@@ -28,7 +28,7 @@ const LoginForm: FC = () => {
     formState: { errors, isValid, isDirty },
   } = useForm<IFormInput>({ mode: 'onTouched' });
 
-  const formId = 'Login';
+  const formId = 'login';
 
   const email = register('email', {
     required: 'Email is required',
@@ -79,7 +79,7 @@ const LoginForm: FC = () => {
       {errorMessage && <p className={styles.error}>{errorMessage}</p>}
       <Input
         name={email.name}
-        id={`${formId}_${email.name}`}
+        id={`${formId}-${email.name}`}
         label="Email *"
         type="email"
         autoComplete="on"
@@ -91,7 +91,7 @@ const LoginForm: FC = () => {
       />
       <Input
         name={password.name}
-        id={`${formId}_${password.name}`}
+        id={`${formId}-${password.name}`}
         label="Password *"
         type="password"
         className={styles.formField}
@@ -118,7 +118,7 @@ const LoginForm: FC = () => {
             className={styles.formBottomLink}
             onClick={(e) => {
               e.preventDefault();
-              dispatch(showModal({ content: MODAL_TYPE.FROGOT_PASSWORD, closeOnOverlayClick: true }));
+              dispatch(showModal({ content: MODAL_TYPE.FROGOT_PASSWORD }));
             }}
           >
             Click&nbsp;here.
@@ -131,7 +131,7 @@ const LoginForm: FC = () => {
             className={styles.formBottomLink}
             onClick={(e) => {
               e.preventDefault();
-              dispatch(showModal({ content: MODAL_TYPE.REGISTER, closeOnOverlayClick: true }));
+              dispatch(showModal({ content: MODAL_TYPE.REGISTER}));
             }}
           >
             Sign&nbsp;up&nbsp;now.

@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC, useMemo, useRef, useState, useEffect } from 'react';
 import { default as ReactModal } from 'react-modal';
 
@@ -63,7 +64,7 @@ const Modal: FC = () => {
     <>
       <ReactModal
         isOpen={isOpen}
-        className={`${styles.modal} ${isTall ? styles.tall : ''}`}
+        className={classNames(styles.modal, { [styles.tall]: isTall })}
         overlayClassName={styles.overlay}
         onRequestClose={() => dispatch(closeModal())}
         shouldCloseOnOverlayClick={closeOnOverlayClick}
