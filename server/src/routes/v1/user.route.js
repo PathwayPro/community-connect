@@ -17,7 +17,10 @@ router
   .patch(auth('manageUsers'), validate(userValidation.updateUser), userController.updateUser)
   .delete(auth('manageUsers'), validate(userValidation.deleteUser), userController.deleteUser);
 
-router.route('/profile').post(auth(), validate(userValidation.createProfile), userController.createOrUpdateProfile);
+router
+  .route('/profile')
+  .get(auth(), userController.getProfile)
+  .post(auth(), validate(userValidation.createProfile), userController.createOrUpdateProfile);
 
 module.exports = router;
 
