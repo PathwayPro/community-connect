@@ -16,6 +16,8 @@ interface IFormInput {
   email: string;
 }
 
+const formId = 'forgotPassword';
+
 const ForgotPasswordForm: FC = () => {
   const dispatch = useAppDispatch();
   const [errorMessage, setErrorMessage] = useState('');
@@ -27,8 +29,6 @@ const ForgotPasswordForm: FC = () => {
     handleSubmit,
     formState: { errors, isValid, isDirty },
   } = useForm<IFormInput>({ mode: 'onTouched' });
-
-  const formId = 'forgotPassword';
 
   const email = register('email', {
     required: 'Email is required',

@@ -31,6 +31,8 @@ export interface StepAllProps extends StepControlProps, StepRegisterProps {
   setValue: UseFormSetValue<IFormInput>;
 }
 
+const formId = 'fillUserProfile';
+
 const FillUserProfileForm: FC = () => {
   const dispatch = useAppDispatch();
   const [step, setStep] = useState(1);
@@ -46,7 +48,6 @@ const FillUserProfileForm: FC = () => {
       isBirthdayVisible: false,
     },
   });
-  const formId = 'fillUserProfile';
 
   // TODO: send data to backend
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {

@@ -17,6 +17,7 @@ interface IFormInput {
   email: string;
   password: string;
 }
+const formId = 'login';
 
 const LoginForm: FC = () => {
   const dispatch = useAppDispatch();
@@ -27,8 +28,6 @@ const LoginForm: FC = () => {
     handleSubmit,
     formState: { errors, isValid, isDirty },
   } = useForm<IFormInput>({ mode: 'onTouched' });
-
-  const formId = 'login';
 
   const email = register('email', {
     required: 'Email is required',
@@ -53,7 +52,8 @@ const LoginForm: FC = () => {
           dispatch(setCredentials({ user: null, token: null }));
         } else {
           dispatch(setCredentials(data));
-          dispatch(showModal({ content: MODAL_TYPE.FILL_USER_PROFILE }));
+          // TODO: Add check if user doesn't have profile
+          dispatch(showModal({ content: MODAL_TYPE.FILL_USER_PROFILE, closeOnOverlayClick: false }));
         }
       })
       .catch((error) => {

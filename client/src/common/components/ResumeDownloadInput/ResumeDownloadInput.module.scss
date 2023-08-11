@@ -69,16 +69,12 @@
 }
 
 .input {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
+  width: 0;
+  height: 0;
 }
 
 .message {
-  padding-left: 1.2rem;
+  padding-top: 0.5rem;
 
   &::before {
     content: '';
@@ -108,9 +104,4 @@
   margin-right: 10px;
   font-size: 13px;
   white-space: nowrap;
-}
-
-.deleteIcon {
-  position: relative;
-  bottom: 1px;
 }

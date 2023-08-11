@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { FC, MouseEvent, KeyboardEvent } from 'react';
+import React, { MouseEvent, KeyboardEvent } from 'react';
 
 import useWindowSize, { BREAKPOINTS } from '../../../common/utils/useWindowSize';
 import IconSVG from '../IconSVG/IconSVG';
@@ -12,7 +12,7 @@ interface FileInputProps {
   id: string;
   className?: string;
   errorMessage?: string;
-  onFileChange: (file: File | null) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onDeleteClick: (e: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>) => void;
   selectedFile: File | null;
 }
@@ -27,24 +27,10 @@ const truncateFileName = (fileName: string, maxLength: number): string => {
   return `${truncatedName}[...].${fileFormat}`;
 };
 
-// TODO validation
-const ResumeDownloadInput: FC<FileInputProps> = ({
-  title,
-  name,
-  id,
-  className = '',
-  errorMessage,
-  onFileChange,
-  onDeleteClick,
-  selectedFile,
-}) => {
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files) {
-      onFileChange(files[0]);
-    }
-  };
-
+const ResumeDownloadInputInner = (
+  { title, name, id, className = '', errorMessage, onChange, onDeleteClick, selectedFile }: FileInputProps,
+  ref: React.ForwardedRef<HTMLInputElement>
+) => {
   const windowSize = useWindowSize();
   const maxFileNameLength = windowSize.width > BREAKPOINTS.small ? 60 : 20;
 
@@ -59,23 +45,19 @@ const ResumeDownloadInput: FC<FileInputProps> = ({
           name={name}
           accept=".docx,application/pdf"
           className={styles.input}
-          onChange={handleFileChange}
+          onChange={onChange}
+          ref={ref}
         />
         <span className={styles.fileName}>
           {selectedFile ? truncateFileName(selectedFile.name, maxFileNameLength) : 'No selected File'}
         </span>
-        <IconSVG
-          name="deleteIcon"
-          label="Delete file"
-          color="black"
-          size="medium"
-          onClick={onDeleteClick}
-          className={styles.deleteIcon}
-        />
+        <IconSVG name="deleteIcon" label="Delete file" color="black" size="medium" onClick={onDeleteClick} />
       </div>
-      {errorMessage && <div className={classNames(styles.resumeMessage, styles.errorMessage)}>{errorMessage}</div>}
+      {errorMessage && <div className={classNames(styles.message, styles.errorMessage)}>{errorMessage}</div>}
     </>
   );
 };
+
+const ResumeDownloadInput = React.forwardRef<HTMLInputElement, FileInputProps>(ResumeDownloadInputInner);
 
 export default ResumeDownloadInput;

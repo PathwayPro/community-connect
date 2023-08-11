@@ -12,13 +12,11 @@
   position: relative;
 }
 
-.select {
-  &.error {
-    :global(.select__control) {
-      border: 1px solid colors.$error;
-      margin-bottom: 1.6rem;
-      background-color: colors.$error-bg;
-    }
+.error {
+  :global(.select__control) {
+    border: 1px solid colors.$error;
+    margin-bottom: 1.6rem;
+    background-color: colors.$error-bg;
   }
 }
 

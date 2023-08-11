@@ -10,6 +10,8 @@ import {
   ERROR_MESSAGE_NAME,
   BIRTHDATE_REGEX,
   ERROR_MESSAGE_BIRTHDATE,
+  LANGUAGES_REGEX,
+  LANGUAGES_MESSAGE_NAME,
 } from '../../common/utils/formComponentsUtils';
 
 import { StepAllProps } from './FillUserProfileForm';
@@ -38,6 +40,7 @@ const years = [
 
 const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }) => {
   // TODO: add file preview
+  // TODO: save file to the redux store because when you back / forward files are not saving and you need to upload files again
   const avatar = register('avatar', {
     required: 'User photo is required',
     validate: {
@@ -82,6 +85,13 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
     },
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
       let { value } = e.target;
+      if (
+        (e.nativeEvent instanceof InputEvent && e.nativeEvent.inputType === 'deleteContentBackward') ||
+        (e.nativeEvent instanceof KeyboardEvent && e.nativeEvent.key === 'Backspace')
+      ) {
+        return;
+      }
+      // TODO: fix unexpected behaviour: if delete some numbers from from year and month string will be updated incorrectly
       value = value.replace(/[^0-9]/g, ''); // allow only numbers
       if (value.length >= 4) {
         value = value.slice(0, 4) + '/' + value.slice(4);
@@ -91,21 +101,16 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
         }
       }
 
-      if (e.nativeEvent instanceof InputEvent && e.nativeEvent.inputType === 'deleteContentBackward') {
-        if (value.endsWith('/')) {
-          value = value.slice(0, -2);
-        }
-      } else if (e.nativeEvent instanceof KeyboardEvent && e.nativeEvent.key === 'Backspace') {
-        if (value.endsWith('/')) {
-          value = value.slice(0, -2);
-        }
-      }
-
       setValue('birthDate', value);
     },
   });
 
-  const spokenLanguage = register('spokenLanguage');
+  const spokenLanguage = register('spokenLanguage', {
+    pattern: {
+      value: LANGUAGES_REGEX,
+      message: LANGUAGES_MESSAGE_NAME,
+    },
+  });
 
   const fieldOfExpertise = register('fieldOfExpertise', {
     required: 'Field of expertise is required',

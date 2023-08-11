@@ -19,6 +19,8 @@ interface IFormInput {
   rePassword: string;
 }
 
+const formId = 'resetPassword';
+
 const ResetPasswordForm: FC = () => {
   const resetPasswordToken = useAppSelector((state) => state.auth.resetPasswordToken);
   const dispatch = useAppDispatch();
@@ -30,8 +32,6 @@ const ResetPasswordForm: FC = () => {
     handleSubmit,
     formState: { errors, isValid, isDirty },
   } = useForm<IFormInput>({ mode: 'onChange' });
-
-  const formId = 'resetPassword';
 
   const password = register('password', {
     required: 'Password is required',
@@ -134,7 +134,7 @@ const ResetPasswordForm: FC = () => {
             className={styles.formBottomLink}
             onClick={(e) => {
               e.preventDefault();
-              dispatch(showModal({ content: MODAL_TYPE.REGISTER}));
+              dispatch(showModal({ content: MODAL_TYPE.REGISTER }));
             }}
           >
             Sign&nbsp;up&nbsp;now.
