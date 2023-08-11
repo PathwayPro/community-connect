@@ -34,10 +34,16 @@ const deleteUser = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const getProfile = catchAsync(async (req, res) => {
+  const userProfile = await userService.getUserProfileByUserId(req.user.id);
+  if (!userProfile) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User Profile not found');
+  }
+  res.send(userProfile);
+});
+
 const createOrUpdateProfile = catchAsync(async (req, res) => {
-  const userProfile = await userService.createOrUpdateProfile(req.user.id, req.body);
-  // Use this if you want to return userProfile Object
-  // res.status(httpStatus.CREATED).send(userProfile);
+  await userService.createOrUpdateProfile(req.user.id, req.body);
   res.status(httpStatus.CREATED).send();
 });
 
@@ -48,4 +54,5 @@ module.exports = {
   updateUser,
   deleteUser,
   createOrUpdateProfile,
+  getProfile,
 };
