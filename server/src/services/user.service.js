@@ -101,6 +101,12 @@ const createOrUpdateProfile = async (userId, updateBody) => {
   return userProfile;
 };
 
+const getUserProfileByUserId = async (userId) => {
+  return UserProfile.findOne({
+    where: { userId },
+  });
+};
+
 module.exports = {
   createUser,
   queryUsers,
@@ -109,4 +115,5 @@ module.exports = {
   updateUserById,
   createOrUpdateProfile,
   deleteUserById,
+  getUserProfileByUserId,
 };

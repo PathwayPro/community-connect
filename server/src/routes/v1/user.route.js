@@ -12,14 +12,15 @@ router
   .get(auth('getUsers'), validate(userValidation.getUsers), userController.getUsers);
 
 router
+  .route('/profile')
+  .get(auth(), userController.getProfile)
+  .post(auth(), validate(userValidation.createProfile), userController.createOrUpdateProfile);
+
+router
   .route('/:userId')
   .get(auth('getUsers'), validate(userValidation.getUser), userController.getUser)
   .patch(auth('manageUsers'), validate(userValidation.updateUser), userController.updateUser)
   .delete(auth('manageUsers'), validate(userValidation.deleteUser), userController.deleteUser);
-
-router
-  .route('/profile')
-  .post(auth(), validate(userValidation.createProfile), userController.createOrUpdateProfile);
 
 module.exports = router;
 
@@ -292,7 +293,7 @@ module.exports = router;
  *               linkedInURL:
  *                 type: string
  *                 format: uri
- *               InstaURL:
+ *               instaURL:
  *                 type: string
  *                 format: uri
  *               twitterURL:
@@ -321,16 +322,51 @@ module.exports = router;
  *               spokenLanguage: ["English", "Spanish"]
  *               fieldOfExpertise: "Web Development"
  *               yearsOfExperience: "10"
+ *               bio: "I am a web developer"
  *               linkedInURL: "https://linkedin.com/in/my-profile"
- *               InstaURL: "https://instagram.com/my-profile"
+ *               instaURL: "https://instagram.com/my-profile"
  *               twitterURL: "https://twitter.com/my-profile"
  *               githubURL: "https://github.com/my-profile"
  *               behanceURL: "https://behance.net/my-profile"
  *     responses:
  *       "201":
  *         description: Profile Created or Updated
- *       "400":
- *         $ref: '#/components/responses/BadRequest'
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
+ */
+
+/**
+ * @swagger
+ * /users/profile:
+ *   get:
+ *     summary: Retrieve User Profile
+ *     description: Get the profile of the currently authenticated user.
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       "200":
+ *         description: Successful retrieval of user profile
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 bio:
+ *                   type: string
+ *                 birthDate:
+ *                   type: string
+ *                   format: date
+ *                 # ... (add all other profile properties here)
+ *             example:
+ *               id: 1
+ *               bio: Software Developer
+ *               birthDate: 1990-12-31
+ *               # ... (add example values for other properties)
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
  */
