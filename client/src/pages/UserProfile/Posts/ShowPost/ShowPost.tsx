@@ -1,9 +1,10 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 
 import CommentBtn from '../../../../common/components/Comment/CommentBtn';
 import LikeBtn from '../../../../common/components/Like/LikeBtn';
 import RepostBtn from '../../../../common/components/Repost/RepostBtn';
-import ToastSetting from '../../../../common/components/Toast/Toast';
+import SettingBtn from '../../../../common/components/SettingBtn/SettingBtn';
+import Toast from '../../../../common/components/Toast/Toast';
 import formatDate from '../../../../common/utils/formatDateUtils';
 
 import styles from './ShowPost.module.scss';
@@ -17,10 +18,16 @@ export interface ShowPostProps {
 }
 
 const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content }) => {
+  const [showToast, setShowToast] = useState(false);
+
   const leaveComment = () => console.log('comment');
   const repostPost = () => console.log('repost');
   const likePost = () => console.log('like');
-  const copyPost = () => console.log('copy post link');
+  const copyPost = () => {
+    console.log('copy post link');
+    setShowToast(false);
+  };
+  const handleClick = () => setShowToast(!showToast);
 
   return (
     <div className={styles.box}>
@@ -33,7 +40,8 @@ const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content })
         </div>
       </div>
       <div className={styles.setting}>
-        <ToastSetting onToastClick={copyPost} toastContent={`Copy link to post`}/>
+        <SettingBtn onClick={handleClick} />
+        {showToast && <Toast onToastClick={copyPost} toastContent={`Copy link to post`}/> }
       </div>
       <div className={styles.content}>{content}</div>
       <div className={styles.reactions}>
