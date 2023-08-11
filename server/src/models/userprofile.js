@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
 
   UserProfile.init(
     {
+      backgroundImage: DataTypes.BLOB,
       image: DataTypes.BLOB,
       birthDate: DataTypes.DATE,
       isBirthDateVisible: DataTypes.BOOLEAN,
