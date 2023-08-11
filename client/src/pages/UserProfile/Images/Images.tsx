@@ -72,7 +72,7 @@ const Images: FC = () => {
         isOpen={alertOpen}
         onClose={closeAlert}
         title="Image Aspect Ratio Error!"
-        content="Please upload an image with a 28:9 aspect ratio."
+        content="Please choose an image that is 1320 x 250  pixels."
       />
     </div>
   );
