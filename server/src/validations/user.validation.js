@@ -48,7 +48,7 @@ const createProfile = {
     spokenLanguage: Joi.array().items(Joi.string()).optional(),
     fieldOfExpertise: Joi.string().required(),
     yearsOfExperience: Joi.string().required(),
-    bio: Joi.string().optional(),
+    bio: Joi.string().required(),
     linkedInURL: Joi.string().uri().optional(),
     InstaURL: Joi.string().uri().optional(),
     twitterURL: Joi.string().uri().optional(),
