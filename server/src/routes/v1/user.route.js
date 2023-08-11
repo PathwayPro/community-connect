@@ -19,7 +19,6 @@ router
 
 router
   .route('/profile')
-  .get(auth(), userController.getProfile)
   .post(auth(), validate(userValidation.createProfile), userController.createOrUpdateProfile);
 
 module.exports = router;
@@ -272,39 +271,64 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               bio:
+ *               image:
  *                 type: string
+ *                 format: binary
  *               birthDate:
  *                 type: string
  *                 format: date
+ *               isBirthDateVisible:
+ *                 type: boolean
+ *               spokenLanguage:
+ *                 type: array
+ *                 items:
+ *                   type: string
  *               fieldOfExpertise:
  *                 type: string
  *               yearsOfExperience:
- *                 type: integer
- *               countryId:
- *                 type: integer
- *               provinceId:
- *                 type: integer
- *               spokenLanguage:
  *                 type: string
- *               interestAndHobby:
+ *               bio:
  *                 type: string
  *               linkedInURL:
  *                 type: string
  *                 format: uri
+ *               InstaURL:
+ *                 type: string
+ *                 format: uri
+ *               twitterURL:
+ *                 type: string
+ *                 format: uri
+ *               githubURL:
+ *                 type: string
+ *                 format: uri
+ *               behanceURL:
+ *                 type: string
+ *                 format: uri
+ *               resume:
+ *                 type: string
+ *                 format: binary
+ *               timeInCanada:
+ *                 type: string
+ *               goal:
+ *                 type: string
+ *               countryId:
+ *                 type: integer
+ *               provinceId:
+ *                 type: integer
  *             example:
- *               bio: Software Developer
- *               birthDate: 1990-12-31
- *               fieldOfExpertise: Web Development
- *               yearsOfExperience: 10
- *               countryId: 1
- *               provinceId: 2
- *               spokenLanguage: English
- *               interestAndHobby: Reading
- *               linkedInURL: https://linkedin.com/in/my-profile
+ *               birthDate: "1990-12-31"
+ *               isBirthDateVisible: true
+ *               spokenLanguage: ["English", "Spanish"]
+ *               fieldOfExpertise: "Web Development"
+ *               yearsOfExperience: "10"
+ *               linkedInURL: "https://linkedin.com/in/my-profile"
+ *               InstaURL: "https://instagram.com/my-profile"
+ *               twitterURL: "https://twitter.com/my-profile"
+ *               githubURL: "https://github.com/my-profile"
+ *               behanceURL: "https://behance.net/my-profile"
  *     responses:
  *       "201":
- *         description: Profile Created
+ *         description: Profile Created or Updated
  *       "400":
  *         $ref: '#/components/responses/BadRequest'
  *       "401":
