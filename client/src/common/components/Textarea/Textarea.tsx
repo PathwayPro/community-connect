@@ -1,37 +1,35 @@
 import classNames from 'classnames';
-import React, { InputHTMLAttributes } from 'react';
+import React, { TextareaHTMLAttributes } from 'react';
 
-import styles from './Input.module.scss';
+import styles from './Textarea.module.scss';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   name: string;
   id: string;
-  type?: string;
+  rows?: 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
   placeholder?: string;
   errorMessage?: string;
   successMessage?: string;
-  autoComplete?: string;
   className?: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onBlur: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
 }
 
-const InputInner = (
+const TextareaInner = (
   {
     label,
     name,
     id,
-    type = 'text',
+    rows = 3,
     placeholder = '',
     errorMessage = '',
     successMessage = '',
-    autoComplete = 'off',
     className = '',
     onChange,
     onBlur,
-  }: InputProps,
-  ref: React.ForwardedRef<HTMLInputElement>
+  }: TextareaProps,
+  ref: React.ForwardedRef<HTMLTextAreaElement>
 ) => {
   return (
     <fieldset className={classNames(styles.fieldset, className)}>
@@ -40,17 +38,21 @@ const InputInner = (
           {label}
         </label>
       )}
-      <input
+      <textarea
         name={name}
         id={id}
-        type={type}
+        rows={rows}
         placeholder={placeholder}
-        autoComplete={autoComplete}
-        className={classNames(styles.input, errorMessage && styles.error, successMessage && styles.success)}
+        className={classNames(
+          styles.textarea,
+          styles[`textarea-${rows}`],
+          errorMessage && styles.error,
+          successMessage && styles.success
+        )}
         onChange={onChange}
         onBlur={onBlur}
         ref={ref}
-      ></input>
+      ></textarea>
       {errorMessage && <div className={classNames(styles.message, styles.errorMessage)}>{errorMessage}</div>}
       {!errorMessage && successMessage && (
         <div className={classNames(styles.message, styles.successMessage)}>{successMessage}</div>
@@ -59,6 +61,6 @@ const InputInner = (
   );
 };
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(InputInner);
+const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(TextareaInner);
 
-export default Input;
+export default Textarea;

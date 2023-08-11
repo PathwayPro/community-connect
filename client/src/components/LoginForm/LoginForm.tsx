@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useAppDispatch } from '../../app/hooks';
 import { useLoginUserMutation } from '../../app/slices/apiSlice';
 import { setCredentials } from '../../app/slices/authSlice';
-import { closeModal, showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
+import { showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 import Heading from '../../common/components/Heading/Heading';
 import Input from '../../common/components/Input/Input';
@@ -17,6 +17,7 @@ interface IFormInput {
   email: string;
   password: string;
 }
+const formId = 'login';
 
 const LoginForm: FC = () => {
   const dispatch = useAppDispatch();
@@ -51,7 +52,8 @@ const LoginForm: FC = () => {
           dispatch(setCredentials({ user: null, token: null }));
         } else {
           dispatch(setCredentials(data));
-          dispatch(closeModal());
+          // TODO: Add check if user doesn't have profile
+          dispatch(showModal({ content: MODAL_TYPE.FILL_USER_PROFILE, closeOnOverlayClick: false }));
         }
       })
       .catch((error) => {
@@ -77,6 +79,7 @@ const LoginForm: FC = () => {
       {errorMessage && <p className={styles.error}>{errorMessage}</p>}
       <Input
         name={email.name}
+        id={`${formId}-${email.name}`}
         label="Email *"
         type="email"
         autoComplete="on"
@@ -88,6 +91,7 @@ const LoginForm: FC = () => {
       />
       <Input
         name={password.name}
+        id={`${formId}-${password.name}`}
         label="Password *"
         type="password"
         className={styles.formField}

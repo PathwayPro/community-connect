@@ -6,19 +6,19 @@
   border: none;
   margin: 0;
   padding: 0;
-  width: 100%;
+  width: 100% !important;
   display: flex;
   flex-direction: column;
   position: relative;
 }
 
-.input {
+.textarea {
   width: 100%;
-  height: 3rem;
+  line-height: 3rem;
   background-color: colors.$white;
   border: 1px solid colors.$grey-light;
   border-radius: 8px;
-  padding: 0 0.75rem;
+  padding: 0.75rem;
   appearance: none;
   outline: none;
   @include fonts.mainText;
@@ -26,6 +26,7 @@
   &::placeholder {
     color: colors.$grey;
   }
+
   &:focus,
   &:active,
   &:focus-visible {
@@ -51,6 +52,13 @@
   }
 }
 
+// generate classes like .textarea-1, .textarea-2, ... , .textarea-10 with corresponding height in rem.
+@for $i from 2 through 10 {
+  .textarea-#{$i} {
+    height: #{$i * 2}rem;
+  }
+}
+
 .label {
   @include fonts.hintText($font-weight: 700, $line-height: 1);
   margin-bottom: 0.5rem;
@@ -69,13 +77,9 @@
     position: absolute;
     left: 0;
 
-    @include media.media-l {
-      top: -2px;
-    }
-    @include media.media-m {
-      width: 13px;
-      height: 13px;
-      top: -1px;
+    @include media.media-s {
+      width: 11px;
+      height: 11px;
     }
   }
 }

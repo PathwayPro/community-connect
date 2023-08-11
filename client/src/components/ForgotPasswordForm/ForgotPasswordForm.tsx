@@ -16,6 +16,8 @@ interface IFormInput {
   email: string;
 }
 
+const formId = 'forgotPassword';
+
 const ForgotPasswordForm: FC = () => {
   const dispatch = useAppDispatch();
   const [errorMessage, setErrorMessage] = useState('');
@@ -82,6 +84,7 @@ const ForgotPasswordForm: FC = () => {
       </Heading>
       <Input
         name={email.name}
+        id={`${formId}-${email.name}`}
         label="Email *"
         type="email"
         autoComplete="on"
