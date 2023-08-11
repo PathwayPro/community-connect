@@ -19,9 +19,9 @@ const NUMBER_REGEX = /(\d)+/;
 
 const ERROR_MESSAGE_NUMBER = 'Only digits are allowed';
 
-const BIRTHDATE_REGEX = /^[0-9]{4}\/(0[1-9]|1[0-2])$/;
+const BIRTHDATE_REGEX = /^[0-9]{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[01])$/;
 
-const ERROR_MESSAGE_BIRTHDATE = 'Birth date should be in format "yyyy/mm"';
+const ERROR_MESSAGE_BIRTHDATE = 'Birth date should be in format yyyy/mm/dd';
 
 export {
   NAME_REGEX,

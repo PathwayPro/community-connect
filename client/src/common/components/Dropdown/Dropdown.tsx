@@ -56,6 +56,7 @@ const Dropdown: FC<DropdownProps> = ({
         </label>
       )}
       <Select
+        className={classNames(styles.select, errorMessage && styles.error)}
         classNamePrefix={classNamePrefix}
         defaultValue={defaultValue}
         name={name}

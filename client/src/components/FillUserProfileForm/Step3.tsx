@@ -10,8 +10,8 @@ import styles from './FillUserProfileForm.module.scss';
 const Step3: FC<StepRegisterProps> = ({ formId, errors, register }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
+  // TODO: validation
   const resume = register('resume', {
-    // TODO: validation
     // validate: {
     //   fileFormat: (value: FileList | undefined) => {
     //     const file = value ? value[0] : undefined;

@@ -37,26 +37,26 @@ const years = [
 ];
 
 const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }) => {
-  // TODO: add file upload
+  // TODO: add file preview
   const avatar = register('avatar', {
-    // required: 'User photo is required',
-    // validate: {
-    //   fileFormat: (value: FileList | undefined) => {
-    //     const file = value ? value[0] : undefined;
-    //     if (file && ['image/jpg', 'image/jpeg', 'image/png'].includes(file.type)) {
-    //       return true;
-    //     }
-    //     return 'Image must be a .jpg, .jpeg or .png format';
-    //   },
-    //   fileSize: (value: FileList | undefined) => {
-    //     const file = value ? value[0] : undefined;
-    //     if (file && file.size <= 8 * 1024 * 1024) {
-    //       // 8MB
-    //       return true;
-    //     }
-    //     return 'Image must be less than 8MB';
-    //   },
-    // },
+    required: 'User photo is required',
+    validate: {
+      fileFormat: (value: FileList | undefined) => {
+        const file = value ? value[0] : undefined;
+        if (file && ['image/jpg', 'image/jpeg', 'image/png'].includes(file.type)) {
+          return true;
+        }
+        return 'Image must be a .jpg, .jpeg or .png format';
+      },
+      fileSize: (value: FileList | undefined) => {
+        const file = value ? value[0] : undefined;
+        if (file && file.size <= 8 * 1024 * 1024) {
+          // 8MB
+          return true;
+        }
+        return 'Image must be less than 8MB';
+      },
+    },
   });
 
   const firstName = register('firstName', {
@@ -83,9 +83,24 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
       let { value } = e.target;
       value = value.replace(/[^0-9]/g, ''); // allow only numbers
-      if (value.length > 4) {
+      if (value.length >= 4) {
         value = value.slice(0, 4) + '/' + value.slice(4);
+
+        if (value.length >= 7) {
+          value = value.slice(0, 7) + '/' + value.slice(7);
+        }
       }
+
+      if (e.nativeEvent instanceof InputEvent && e.nativeEvent.inputType === 'deleteContentBackward') {
+        if (value.endsWith('/')) {
+          value = value.slice(0, -2);
+        }
+      } else if (e.nativeEvent instanceof KeyboardEvent && e.nativeEvent.key === 'Backspace') {
+        if (value.endsWith('/')) {
+          value = value.slice(0, -2);
+        }
+      }
+
       setValue('birthDate', value);
     },
   });
@@ -104,7 +119,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
     <>
       <div className={classNames(styles.formRow, styles.column, styles.avatarWrap)}>
         <p className={styles.avatarTitle}>Add Photo *</p>
-        <label htmlFor={`${formId}_${avatar.name}`} className={styles.avatarLabel}></label>
+        <label htmlFor={`${formId}-${avatar.name}`} className={styles.avatarLabel}></label>
         <input
           type="file"
           id={`${formId}-${avatar.name}`}
@@ -183,7 +198,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
             name={birthDate.name}
             id={`${formId}-${birthDate.name}`}
             label="Date of Birth"
-            placeholder="yyyy/mm"
+            placeholder="yyyy/mm/dd"
             className={styles.formField}
             onChange={(e) => birthDate.onChange(e)}
             onBlur={birthDate.onBlur}

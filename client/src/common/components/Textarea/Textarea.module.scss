@@ -60,18 +60,14 @@
 }
 
 .label {
-  @include fonts.mainText($font-size: 0.8rem, $font-weight: 700, $line-height: 1);
+  @include fonts.hintText($font-weight: 700, $line-height: 1);
   margin-bottom: 0.5rem;
 }
 
 .message {
   position: absolute;
-  top: 80px;
+  bottom: 0;
   padding-left: 1.2rem;
-
-  @include media.media-l {
-    top: 70px;
-  }
 
   &::before {
     content: '';

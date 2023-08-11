@@ -205,7 +205,7 @@ const RegisterForm: FC = () => {
               />
             )}
           />
-          <label htmlFor={`${formId}_agreement}`}>
+          <label htmlFor={`${formId}-agreement}`}>
             <span>Do&nbsp;you agree to&nbsp;our </span>
             <a href="#">Terms and Conditions, Privacy Statement, and Security Policy</a>
           </label>

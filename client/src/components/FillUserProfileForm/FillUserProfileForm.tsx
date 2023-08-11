@@ -41,6 +41,7 @@ const FillUserProfileForm: FC = () => {
     setValue,
     formState: { errors },
   } = useForm<IFormInput>({
+    mode: 'onChange',
     defaultValues: {
       isBirthdayVisible: false,
     },
