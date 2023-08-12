@@ -47,7 +47,7 @@ const Posts: FC = () => {
       <Scroll>
         <div className={styles.posts}>
           <AddPost />
-          {posts.map((post, index) => (
+          {posts.length > 0 && posts.map((post, index) => (
             <ShowPost
               key={index}
               imgPath={post.imgPath}
