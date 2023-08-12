@@ -10,8 +10,7 @@
     border-radius: 15px;
     position: relative;
 
-    @include fonts.headingText;
-    font-size: 16px;
+    @include fonts.bigText;
 
     @extend %flex-column-left-center;
 }
@@ -30,8 +29,7 @@
     color: colors.$black;
 
 
-    @include fonts.mainText;
-    font-size: 13px;
+    @include fonts.mainText($font-size: 13px);
 }
 
 a {

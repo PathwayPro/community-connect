@@ -9,8 +9,7 @@
     padding: 26px;
     border-radius: 15px;
 
-    @include fonts.headingText;
-    font-size: 16px;
+    @include fonts.bigText;
 
     @extend %flex-column-left-center;
 }

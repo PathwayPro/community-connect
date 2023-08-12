@@ -31,18 +31,15 @@
 }
 
 .name {
-    @include fonts.headingText;
-    font-size: 16px;
+    @include fonts.bigText;
 }
 
 .position {
-    @include fonts.hintText;
-    font-size: 16px;
+    @include fonts.hintText($font-size: 16px);
 }
 
 .date {
-    @include fonts.hintText;
-    font-size: 16px;
+    @include fonts.hintText($font-size: 16px);
 }
 
 .content {
@@ -50,7 +47,6 @@
     padding-bottom: 16px;
 
     @include fonts.mainText;
-    font-size: 16px;
 }
 
 .reactions {

@@ -6,8 +6,7 @@
     margin: 16px;
     width: 100%;
 
-    @include fonts.headingText;
-    font-size: 16px;
+    @include fonts.bigText;
 
     @extend %flex-column;
     gap: 15px;
@@ -34,8 +33,7 @@
 }
 
 .position {
-    @include fonts.hintText;
-    font-size: 16px;
+    @include fonts.hintText($font-size: 16px);
 }
 
 .btn {
