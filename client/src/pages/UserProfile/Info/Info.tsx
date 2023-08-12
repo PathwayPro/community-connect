@@ -31,7 +31,7 @@ const userData: userDataProps = {
     { href: '/', type: 'git', className: styles.squareIcons },
     { href: '/', type: 'tw', className: styles.roundIcons },
     { href: '/', type: 'in', className: styles.roundIcons },
-    { href: '/', type: 'inst', className: styles.roundIcons },
+    // { href: '/', type: 'inst', className: styles.roundIcons },
   ],
 };
 
