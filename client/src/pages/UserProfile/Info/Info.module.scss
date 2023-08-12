@@ -2,11 +2,6 @@
 @use '../../../common/styles/fonts';
 @use '../../../common/styles/mixins';
 
-@mixin detailText {
-    @include fonts.mainText;
-    font-size: 19px;
-}
-
 .personal {
     background: colors.$blue-light;
     width: 100%;
@@ -53,12 +48,12 @@
 }
 
 .detail {
-    @include detailText;
+    @include fonts.detailText;
     @extend %flex-row-left;
 }
 
 .languageDetail {
-    @include detailText;
+    @include fonts.detailText;
     @extend %flex-row-center;
 }
 

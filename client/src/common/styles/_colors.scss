@@ -1,6 +1,6 @@
 // General
 $black: #000000;
-$black-light: rgba(0, 0, 0, 0.5);
+$black-light: rgba($color: $black, $alpha: 0.5);
 $white: #ffffff;
 $grey-light: #d5d4dc;
 $grey-dark: #636366;

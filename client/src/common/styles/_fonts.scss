@@ -100,3 +100,10 @@
     font-weight: 500;
   }
 }
+
+@mixin detailText($font-size: 19px, $font-weight: 500, $line-height: 1.5) {
+  @extend %font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+}
