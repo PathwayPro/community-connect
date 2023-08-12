@@ -1,10 +1,10 @@
 import classNames from 'classnames';
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
 import styles from './Toast.module.scss';
 interface ToastProps {
   onToastClick: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-  toastContent: string;
+  toastContent: ReactNode;
   toastClassName?: string;
   containerClassName?: string;
 }
