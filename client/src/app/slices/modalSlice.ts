@@ -8,6 +8,7 @@ export const MODAL_TYPE = {
   SEND_CONFIRMATION_EMAIL: 'sendConfirmationEmail',
   VERIFY_EMAIL: 'verifyEmail',
   FILL_USER_PROFILE: 'fillUserProfile',
+  WRITE_POST: 'writePost',
 };
 
 type initialStateType = {

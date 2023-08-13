@@ -9,6 +9,7 @@ import { SendVerificationEmail, VerifyEmail } from '../../../components/ConfirmE
 import FillUserProfile from '../../../components/FillUserProfileForm/FillUserProfileForm';
 import ForgotPasswordForm from '../../../components/ForgotPasswordForm/ForgotPasswordForm';
 import LoginForm from '../../../components/LoginForm/LoginForm';
+import PostModal from '../../../components/Posts/AddPost/PostModal';
 import RegisterForm from '../../../components/RegisterForm/RegisterForm';
 import ResetPasswordForm from '../../../components/ResetPasswordForm/ResetPasswordForm';
 
@@ -56,6 +57,7 @@ const Modal: FC = () => {
       if (content === MODAL_TYPE.SEND_CONFIRMATION_EMAIL) return <SendVerificationEmail />;
       if (content === MODAL_TYPE.VERIFY_EMAIL) return <VerifyEmail />;
       if (content === MODAL_TYPE.FILL_USER_PROFILE) return <FillUserProfile />;
+      if (content === MODAL_TYPE.WRITE_POST) return <PostModal />;
     }
     return null;
   }, [content]);
