@@ -2,6 +2,7 @@
 import { format } from 'date-fns';
 import { FC } from 'react';
 
+import Button from '../../../common/components/Button/Button';
 import Icon, { iconProps } from '../../../common/components/Icon/Icon';
 import VectorEditBtn from '../../../common/components/Vector/VectorEditBtn';
 
@@ -35,16 +36,36 @@ const userData: userDataProps = {
   ],
 };
 
-const Info: FC = () => {
+interface InfoProps {
+  myProfile: boolean;
+  userProfile: boolean;
+}
+
+const Info: FC<InfoProps> = ({
+  myProfile,
+  userProfile,
+}) => {
   const openModal = () => console.log('click');
+  const messageUser = () => console.log('message');
+  const connectUser = () => console.log('connect');
 
   return (
     <div className={styles.personal}>
-      <VectorEditBtn position={'top'} onClick={openModal} />
-      <div className={styles.mainInfo}>
-        <div className={styles.name}>{userData.name}</div>
-        <div className={styles.experience}>{userData.background}</div>
-        <div className={styles.experience}>{userData.experience}</div>
+      {myProfile &&
+        <VectorEditBtn position={'top'} onClick={openModal} />
+      }
+      <div className={styles.infoButtons}>
+        <div className={styles.mainInfo}>
+          <div className={styles.name}>{userData.name}</div>
+          <div className={styles.experience}>{userData.background}</div>
+          <div className={styles.experience}>{userData.experience}</div>
+        </div>
+        {userProfile &&
+          <div className={styles.connectionBtns}>
+            <Button label={'Message'} size={'small'} color={'orangeLight'} onClick={messageUser}></Button>
+            <Button label={'Connect'} size={'small'} color={'orange'} onClick={connectUser}></Button>
+          </div>
+        }
       </div>
       <div className={styles.otherInfo}>
         <div className={styles.infoRow}>

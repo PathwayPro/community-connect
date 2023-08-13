@@ -7,7 +7,13 @@ import styles from './Images.module.scss';
 
 import defaultProfileImage from '../../../images/Main/defaultProfileImg.png';
 
-const Images: FC = () => {
+interface ImagesProps {
+  myProfile: boolean;
+}
+
+const Images: FC<ImagesProps> = ({
+  myProfile,
+}) => {
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -57,10 +63,12 @@ const Images: FC = () => {
 
       <img className={styles.profileImage} src={source} alt="Your Image" />
 
-      <VectorEditBtn
-        position={'bottom'}
-        onClick={handleButtonClick}
-      />
+      {myProfile &&
+        <VectorEditBtn
+          position={'bottom'}
+          onClick={handleButtonClick}
+        />
+      }
       <input
         className={styles.imageInput}
         type="file"

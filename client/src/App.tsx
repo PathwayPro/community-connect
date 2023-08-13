@@ -7,8 +7,9 @@ import Faq from './pages/FAQ/Faq';
 import Layout from './pages/Layout/Layout';
 import Main from './pages/Main/Main';
 import Mentorship from './pages/Mentorship/Mentorship';
+import MyProfile from './pages/Profile/MyProfile';
+import UserProfile from './pages/Profile/UserProfile';
 import Resources from './pages/Resources/Resources';
-import UserProfile from './pages/UserProfile/UserProfile';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       },
       {
         path: 'profile/my',
+        Component: MyProfile,
+      },
+      {
+        path: 'profile/user/:Id',
         Component: UserProfile,
       },
     ],
