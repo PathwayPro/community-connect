@@ -13,6 +13,16 @@
   @extend %flex-column;
 }
 
+.infoButtons {
+  @extend %flex-space-between;
+}
+
+.connectionBtns {
+  gap: 12px;
+  margin-right: 6px;
+  @extend %flex-row-right;
+}
+
 .mainInfo {
   margin-left: 260px;
   margin-bottom: 1.625rem;

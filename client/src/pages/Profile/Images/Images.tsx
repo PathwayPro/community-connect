@@ -7,7 +7,11 @@ import IconSVG from '../../../common/components/IconSVG/Button/IconSVG';
 
 import styles from './Images.module.scss';
 
-const Images: FC = () => {
+interface ImagesProps {
+  myProfile: boolean;
+}
+
+const Images: FC<ImagesProps> = ({ myProfile }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [alertOpen, setAlertOpen] = useState(false);
   const [imageClassName, setImageClassName] = useState('');
@@ -55,7 +59,7 @@ const Images: FC = () => {
 
       <Avatar size="big" borderColor="white" className={styles.profileImage} />
 
-      <IconSVG name={'editIcon'} className={styles.editIcon} onClick={handleButtonClick} />
+      {myProfile && <IconSVG name={'editIcon'} className={styles.editIcon} onClick={handleButtonClick} />}
 
       <input
         className={styles.imageInput}

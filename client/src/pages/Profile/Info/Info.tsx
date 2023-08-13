@@ -3,6 +3,7 @@ import { FC } from 'react';
 
 import { useAppDispatch } from '../../../app/hooks';
 import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
+import Button from '../../../common/components/Button/Button';
 import Heading from '../../../common/components/Heading/Heading';
 import Icon, { iconProps } from '../../../common/components/Icon/Icon';
 import IconSVG from '../../../common/components/IconSVG/Button/IconSVG';
@@ -40,21 +41,34 @@ const userData: userDataProps = {
   ],
 };
 
-const Info: FC = () => {
+interface InfoProps {
+  myProfile: boolean;
+  userProfile: boolean;
+}
+
+const Info: FC<InfoProps> = ({ myProfile, userProfile }) => {
   const dispatch = useAppDispatch();
 
   const openModal = (e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.KeyboardEvent<HTMLButtonElement>) => {
     e.preventDefault();
     dispatch(showModal({ content: MODAL_TYPE.FILL_USER_PROFILE, closeOnOverlayClick: false }));
   };
+  const messageUser = () => console.log('message');
+  const connectUser = () => console.log('connect');
 
   return (
     <div className={styles.personal}>
-      <IconSVG name={'editIcon'} className={styles.editIcon} onClick={openModal} />
+      {myProfile && <IconSVG name={'editIcon'} className={styles.editIcon} onClick={openModal} />}
       <div className={styles.mainInfo}>
         <Heading tagType="h4">{userData.name}</Heading>
         <span className={styles.experience}>{userData.background}</span>
         <span className={styles.experience}>{userData.experience}</span>
+        {userProfile && (
+          <div className={styles.connectionBtns}>
+            <Button label={'Message'} size={'small'} color={'orangeLight'} onClick={messageUser}></Button>
+            <Button label={'Connect'} size={'small'} color={'orange'} onClick={connectUser}></Button>
+          </div>
+        )}
       </div>
       <div className={styles.otherInfo}>
         <div className={styles.infoRow}>
