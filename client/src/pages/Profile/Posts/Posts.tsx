@@ -6,6 +6,8 @@ import AddPost from './AddPost/AddPost';
 import styles from './Posts.module.scss';
 import ShowPost, { ShowPostProps } from './ShowPost/ShowPost';
 
+import defaultProfileImage from '../../../images/Main/defaultProfileImg.png';
+
 const posts: ShowPostProps[] = [
   {
     imgPath: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
@@ -41,12 +43,16 @@ const posts: ShowPostProps[] = [
   },
 ];
 
+const image = posts[0].imgPath ? posts[0].imgPath : defaultProfileImage;
+
 const Posts: FC = () => {
   return (
     <div className={styles.box}>
       <Scroll>
         <div className={styles.posts}>
-          <AddPost />
+          <AddPost
+            imgPath={image}
+          />
           {posts.length > 0 && posts.map((post, index) => (
             <ShowPost
               key={index}

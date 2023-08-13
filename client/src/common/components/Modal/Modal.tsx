@@ -8,6 +8,7 @@ import ForgotPasswordForm from '../../../components/ForgotPasswordForm/ForgotPas
 import LoginForm from '../../../components/LoginForm/LoginForm';
 import RegisterForm from '../../../components/RegisterForm/RegisterForm';
 import ResetPasswordForm from '../../../components/ResetPasswordForm/ResetPasswordForm';
+import PostModal from '../../../pages/Profile/Posts/AddPost/PostModal';
 
 import styles from './Modal.module.scss';
 
@@ -24,6 +25,7 @@ const Modal: FC = () => {
       if (content === MODAL_TYPE.FROGOT_PASSWORD) return <ForgotPasswordForm />;
       if (content === MODAL_TYPE.RESET_PASSWORD) return <ResetPasswordForm />;
       if (content === MODAL_TYPE.CONFIRM_EMAIL) return <ConfirmEmail />;
+      if (content === MODAL_TYPE.WRITE_POST) return <PostModal />;
     }
     return null;
   }, [content]);

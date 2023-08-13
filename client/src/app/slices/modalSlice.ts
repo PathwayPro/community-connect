@@ -6,6 +6,7 @@ export const MODAL_TYPE = {
   FROGOT_PASSWORD: 'forgotPassword',
   RESET_PASSWORD: 'resetPassword',
   CONFIRM_EMAIL: 'confirmEmail',
+  WRITE_POST: 'writePost',
 };
 
 type initialStateType = {
