@@ -28,10 +28,9 @@ const Connection: FC<connectionProps> = ({
         </div>
       </div>
       <div  className={styles.btn}>
-        <Button label={'View Profile'} size={'medium'} color={'orange'} onClick={viewProfile}></Button>
+        <Button label={'View Profile'} size={'small'} color={'orange'} onClick={viewProfile}></Button>
       </div>
     </div>
-
   );
 };
 
