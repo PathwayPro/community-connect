@@ -41,12 +41,17 @@ const posts: ShowPostProps[] = [
   },
 ];
 
-const Posts: FC = () => {
+interface PostsProps {
+  myProfile: boolean;
+}
+const Posts: FC<PostsProps> = ({
+  myProfile,
+}) => {
   return (
     <div className={styles.box}>
       <Scroll>
         <div className={styles.posts}>
-          <AddPost />
+          {myProfile && <AddPost />}
           {posts.length > 0 && posts.map((post, index) => (
             <ShowPost
               key={index}

@@ -17,7 +17,7 @@ const MyProfile: FC = () => {
         <Info  myProfile={false} userProfile={true}/>
         <div className={styles.socials}>
           <Events />
-          <Posts />
+          <Posts myProfile={false}/>
           <Connections />
         </div>
       </div>
