@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import AddPost from './AddPost/AddPost';
 import ShowPost from './ShowPost/ShowPost';
@@ -18,9 +19,10 @@ interface PostsProps {
 }
 
 const Posts: FC<PostsProps> = ({ posts }) => {
+  const location = useLocation();
   return (
     <div className={styles.posts}>
-      <AddPost />
+      {location.pathname.includes('/my') && <AddPost />}
       {posts.length &&
         posts.map((post) => (
           <ShowPost
