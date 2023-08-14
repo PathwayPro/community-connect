@@ -4,15 +4,15 @@
 
 .modalWindow {
 	position: relative;
-  padding: 1.5rem;
+  padding: 1.6rem;
 
   @extend %flex-column;
-  gap: 16px;
+  gap: 26px;
 }
 
 .title {
 	@extend %flex-column-center;
-	@include fonts.bigText($font-size: 30px, $font-weight: 700);
+	@include fonts.bigText($font-size: 28px, $font-weight: 700);
 }
 
 .closeBtn {
@@ -23,19 +23,15 @@
 }
 
 .userInfo{
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: center;
-	// @extend %flex-left-center;
-	gap: 16px;
+	@extend %flex-left-center;
+	gap: 17px;
 }
 
 .image {
   border: 2px solid colors.$orange-normal;
   border-radius: 50%;
-  width: 70px;
-  height: 70px;
+  width: 77px;
+  height: 77px;
 }
 
 .name {
@@ -45,18 +41,26 @@
 .input {
 	position: relative;
   background: colors.$white;
-  width: 650px;
-  height: 150px;
+  width: 633px;
+  min-height: 148px;
   padding: 12px;
   border: 1px solid #d5d4dc;
   border-radius: 5px;
-  cursor: pointer;
+  resize: vertical;
 
   @include fonts.mainText;
 }
 
 .input::placeholder {
 	position: absolute;
-  top: 12px;
-  left: 12px;
+  top: 16px;
+  left: 16px;
+}
+
+.btnDiv {
+  @extend %flex-row-right;
+}
+
+.postBnt {
+  @include fonts.bigText;
 }
