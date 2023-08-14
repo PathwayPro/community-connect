@@ -1,5 +1,6 @@
 import { ReactComponent as blogCommentIcon } from './img/blog-comment.svg';
 import { ReactComponent as blogRepostIcon } from './img/blog-repost.svg';
+import { ReactComponent as closeIcon } from './img/close.svg';
 import { ReactComponent as deleteIcon } from './img/delete-can.svg';
 import { ReactComponent as editIcon } from './img/edit-pen.svg';
 import { ReactComponent as headerNotificationIcon } from './img/header-bell.svg';
@@ -12,6 +13,7 @@ import { ReactComponent as settingIcon } from './img/setting.svg';
 interface IconMap {
   blogCommentIcon: React.FC<React.SVGProps<SVGSVGElement>>;
   blogRepostIcon: React.FC<React.SVGProps<SVGSVGElement>>;
+  closeIcon: React.FC<React.SVGProps<SVGSVGElement>>;
   deleteIcon: React.FC<React.SVGProps<SVGSVGElement>>;
   editIcon: React.FC<React.SVGProps<SVGSVGElement>>;
   headerNotificationIcon: React.FC<React.SVGProps<SVGSVGElement>>;
@@ -25,6 +27,7 @@ interface IconMap {
 const iconMap: IconMap = {
   blogCommentIcon: blogCommentIcon,
   blogRepostIcon: blogRepostIcon,
+  closeIcon: closeIcon,
   deleteIcon: deleteIcon,
   editIcon: editIcon,
   headerNotificationIcon: headerNotificationIcon,
