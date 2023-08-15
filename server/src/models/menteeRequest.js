@@ -1,8 +1,8 @@
 const { Model } = require('sequelize');
-const { mentorshipRequestStatuses } = require('../config/mentorship');
+const { menteeStatuses } = require('../config/mentorship');
 
 module.exports = (sequelize, DataTypes) => {
-  class MentorshipRequest extends Model {
+  class MenteeRequest extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,19 +12,19 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.User, { foreignKey: 'userId' });
     }
   }
-  MentorshipRequest.init(
+  MenteeRequest.init(
     {
       message: DataTypes.TEXT,
       resume: DataTypes.BLOB,
       status: {
         type: DataTypes.ENUM,
-        values: [mentorshipRequestStatuses.PENDING, mentorshipRequestStatuses.RESOLVED],
+        values: [menteeStatuses.PENDING, menteeStatuses.IN_PROGRESS, menteeStatuses.MATCHED],
       },
     },
     {
       sequelize,
-      modelName: 'MentorshipRequest',
+      modelName: 'MenteeRequest',
     }
   );
-  return MentorshipRequest;
+  return MenteeRequest;
 };

@@ -1,5 +1,5 @@
 const { Model } = require('sequelize');
-const { mentorshipRequestStatuses } = require('../config/mentorship');
+const { mentorStatuses } = require('../config/mentorship');
 
 module.exports = (sequelize, DataTypes) => {
   class MentorRequest extends Model {
@@ -14,16 +14,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   MentorRequest.init(
     {
-      firstName: DataTypes.STRING,
-      lastName: DataTypes.STRING,
       fieldOfExpertise: DataTypes.STRING,
-      yearsOfExperiences: DataTypes.NUMBER,
+      yearsOfExperience: DataTypes.STRING,
       numberOfMentees: DataTypes.NUMBER,
-      availability: DataTypes.NUMBER,
+      availability: DataTypes.STRING,
       otherMentorships: DataTypes.TEXT,
       status: {
         type: DataTypes.ENUM,
-        values: [mentorshipRequestStatuses.PENDING, mentorshipRequestStatuses.RESOLVED],
+        values: [mentorStatuses.PENDING, mentorStatuses.APPROVED, mentorStatuses.REJECTED],
       },
     },
     {
