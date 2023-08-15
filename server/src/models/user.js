@@ -13,7 +13,21 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.Token, { foreignKey: 'userId', onDelete: 'CASCADE' });
       this.hasMany(models.MentorshipRequest, { foreignKey: 'userId', onDelete: 'CASCADE' });
       this.hasMany(models.MentorRequest, { foreignKey: 'userId', onDelete: 'CASCADE' });
-      this.hasOne(models.UserProfile, { onDelete: 'CASCADE' });
+      this.hasOne(models.UserProfile, { foreignKey: 'userId', onDelete: 'CASCADE' });
+      this.hasMany(models.UserConnection, { foreignKey: 'senderId', as: 'asSender' });
+      this.hasMany(models.UserConnection, { foreignKey: 'receiverId', as: 'asReceiver' });
+
+      this.belongsToMany(models.User, {
+        as: 'sender',
+        through: models.UserConnection,
+        foreignKey: 'senderId',
+      });
+
+      this.belongsToMany(models.User, {
+        as: 'receiver',
+        through: models.UserConnection,
+        foreignKey: 'receiverId',
+      });
     }
 
     /**

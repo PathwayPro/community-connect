@@ -234,11 +234,19 @@ yarn run sequelize-cli seed:generate --name demo-role
 
 Note: Seeder execution history is not stored anywhere, unlike migrations
 
+***Running all Seeds***
+
 ```bash
 yarn run sequelize-cli db:seed:all
 ```
 
-**_Undoing all Seeds_**
+***Running a Specific Seed***
+
+```bash
+yarn run sequelize-cli db:seed --seed name-of-seed-as-in-data
+```
+
+***Undoing all Seeds***
 
 ```bash
 yarn run sequelize-cli db:seed:undo:all
