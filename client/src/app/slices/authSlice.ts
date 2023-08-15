@@ -3,11 +3,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
 export interface IUser {
-  firstName: string;
-  lastName: string;
-  email: string;
-  isEmailVerified: boolean;
-  id: number;
+  firstName: string | null;
+  lastName: string | null;
+  email: string | null;
+  isEmailVerified: boolean | null;
+  id: number | null;
+  roles: string[] | null;
 }
 
 interface IInitialState {
@@ -15,11 +16,12 @@ interface IInitialState {
   token: string | null;
   verifyEmailToken: string | null;
   resetPasswordToken: string | null;
+  login: boolean;
 }
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState: { user: null, token: null } as IInitialState,
+  initialState: { user: null, token: null, login: false } as IInitialState,
   reducers: {
     setCredentials: (state, action) => {
       const { user } = action.payload;
@@ -33,14 +35,18 @@ const authSlice = createSlice({
     setResetPasswordToken: (state, action) => {
       state.resetPasswordToken = action.payload;
     },
+    login: (state) => {
+      state.login = true;
+    },
     logout: (state) => {
       state.user = null;
       state.token = null;
+      state.login = false;
     },
   },
 });
 
-export const { setCredentials, setVerifyEmailToken, setResetPasswordToken, logout } = authSlice.actions;
+export const { setCredentials, setVerifyEmailToken, setResetPasswordToken, login, logout } = authSlice.actions;
 
 export default authSlice.reducer;
 

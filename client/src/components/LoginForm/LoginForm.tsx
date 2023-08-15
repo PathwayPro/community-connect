@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { useAppDispatch } from '../../app/hooks';
 import { useLoginUserMutation } from '../../app/slices/apiSlice';
-import { setCredentials } from '../../app/slices/authSlice';
+import { setCredentials, login } from '../../app/slices/authSlice';
 import { showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 import Heading from '../../common/components/Heading/Heading';
@@ -54,6 +54,7 @@ const LoginForm: FC = () => {
           dispatch(setCredentials(data));
           // TODO: Add check if user doesn't have profile
           dispatch(showModal({ content: MODAL_TYPE.FILL_USER_PROFILE, closeOnOverlayClick: false }));
+          dispatch(login());
         }
       })
       .catch((error) => {
