@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.User, { foreignKey: 'senderId' });
-      this.belongsTo(models.User, { foreignKey: 'receiverId' });
+      this.belongsTo(models.User, { as: 'asSender', foreignKey: 'senderId' });
+      this.belongsTo(models.User, { as: 'asReceiver', foreignKey: 'receiverId' });
     }
   }
 
@@ -28,12 +28,6 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       paranoid: true,
       modelName: 'UserConnection',
-      indexes: [
-        {
-          unique: true,
-          fields: ['senderId', 'receiverId'],
-        },
-      ],
     }
   );
 
