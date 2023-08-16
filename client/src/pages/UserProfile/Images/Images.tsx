@@ -1,7 +1,7 @@
 import { useState, useRef, FC } from 'react';
 
 import Alert from '../../../common/components/Alert/Alert';
-import VectorEditBtn from '../../../common/components/Vector/VectorEditBtn';
+import IconSVG from '../../../common/components/IconSVG/IconSVG';
 
 import styles from './Images.module.scss';
 
@@ -57,10 +57,12 @@ const Images: FC = () => {
 
       <img className={styles.profileImage} src={source} alt="Your Image" />
 
-      <VectorEditBtn
-        position={'bottom'}
+      <IconSVG
+        name={'editIcon'}
+        className={styles.editIcon}
         onClick={handleButtonClick}
       />
+
       <input
         className={styles.imageInput}
         type="file"

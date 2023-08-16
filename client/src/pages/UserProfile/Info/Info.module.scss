@@ -28,6 +28,14 @@
     @include fonts.hintText($font-size: 19px);
 }
 
+.editIcon {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 26px;
+    right: 26px;
+}
+
 .otherInfo {
     gap: 16px;
 

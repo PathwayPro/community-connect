@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import { FC } from 'react';
 
 import Icon, { iconProps } from '../../../common/components/Icon/Icon';
-import VectorEditBtn from '../../../common/components/Vector/VectorEditBtn';
+import IconSVG from '../../../common/components/IconSVG/IconSVG';
 
 import styles from './Info.module.scss';
 
@@ -40,7 +40,11 @@ const Info: FC = () => {
 
   return (
     <div className={styles.personal}>
-      <VectorEditBtn position={'top'} onClick={openModal} />
+      <IconSVG
+        name={'editIcon'}
+        className={styles.editIcon}
+        onClick={openModal}
+      />
       <div className={styles.mainInfo}>
         <div className={styles.name}>{userData.name}</div>
         <div className={styles.experience}>{userData.background}</div>
