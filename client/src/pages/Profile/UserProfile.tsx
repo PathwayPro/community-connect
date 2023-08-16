@@ -7,6 +7,7 @@ import Events from './Events/Events';
 import Images from './Images/Images';
 import Info from './Info/Info';
 import Posts from './Posts/Posts';
+
 import styles from './Profile.module.scss';
 
 const MyProfile: FC = () => {

@@ -3,8 +3,9 @@ import { FC } from 'react';
 import Scroll from '../../../common/components/Scroll/Scroll';
 
 import AddPost from './AddPost/AddPost';
-import styles from './Posts.module.scss';
 import ShowPost, { ShowPostProps } from './ShowPost/ShowPost';
+
+import styles from './Posts.module.scss';
 
 const posts: ShowPostProps[] = [
   {

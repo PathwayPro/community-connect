@@ -1,9 +1,6 @@
 import { FC, useState } from 'react';
 
-import CommentBtn from '../../../../common/components/Comment/CommentBtn';
-import LikeBtn from '../../../../common/components/Like/LikeBtn';
-import RepostBtn from '../../../../common/components/Repost/RepostBtn';
-import SettingBtn from '../../../../common/components/SettingBtn/SettingBtn';
+import IconSVG from '../../../../common/components/IconSVG/IconSVG';
 import Toast from '../../../../common/components/Toast/Toast';
 import formatDate from '../../../../common/utils/formatDateUtils';
 
@@ -40,16 +37,31 @@ const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content })
         </div>
       </div>
       <div className={styles.setting}>
-        <SettingBtn onClick={handleClick} />
+        <IconSVG
+          name={'settingIcon'}
+          onClick={handleClick}
+        />
         {showToast && <Toast onToastClick={copyPost} toastContent={`Copy link to post`}/> }
       </div>
       <div className={styles.content}>{content}</div>
       <div className={styles.reactions}>
         <div className={styles.repostComment}>
-          <CommentBtn onClick={leaveComment} />
-          <RepostBtn onClick={repostPost} />
+          <IconSVG
+            name={'blogCommentIcon'}
+            color={'orangeLight'}
+            onClick={leaveComment}
+          />
+          <IconSVG
+            name={'blogRepostIcon'}
+            color={'orangeLight'}
+            onClick={repostPost}
+          />
         </div>
-        <LikeBtn onClick={likePost} />
+        <IconSVG
+          name={'likeIcon'}
+          color={'grey'}
+          onClick={likePost}
+        />
       </div>
     </div>
   );

@@ -1,4 +1,3 @@
-@use '../../../common/styles/colors';
 @use '../../../common/styles/fonts';
 @use '../../../common/styles/mixins';
 @use '../../../common/styles/media';
@@ -50,8 +49,12 @@
   }
 }
 
-.buttonMentorship {
+.buttons {
+  display: flex;
+  gap: 16px;
+
   @include media.media-s {
-    margin: 0 auto;
+    flex-direction: column;
+    align-items: center;
   }
 }

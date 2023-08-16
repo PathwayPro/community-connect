@@ -3,13 +3,13 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import AboutUs from './pages/AboutUs/AboutUs';
 import Events from './pages/Events/Events';
-import Faq from './pages/FAQ/Faq';
 import Layout from './pages/Layout/Layout';
 import Main from './pages/Main/Main';
-import Mentorship from './pages/Mentorship/Mentorship';
+import { ApplyForMentorship, BecomeMentor } from './pages/Mentorship';
 import MyProfile from './pages/Profile/MyProfile';
 import UserProfile from './pages/Profile/UserProfile';
 import Resources from './pages/Resources/Resources';
+import Volunteering from './pages/Volunteering/Volunteering';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +21,14 @@ const router = createBrowserRouter([
         Component: Main,
       },
       {
+        path: 'verify-email',
+        Component: Main,
+      },
+      {
+        path: 'reset-password',
+        Component: Main,
+      },
+      {
         path: 'events',
         Component: Events,
       },
@@ -29,12 +37,12 @@ const router = createBrowserRouter([
         Component: Resources,
       },
       {
-        path: 'mentorship',
-        Component: Mentorship,
+        path: 'mentorship/apply',
+        Component: ApplyForMentorship,
       },
       {
-        path: 'faq',
-        Component: Faq,
+        path: 'mentorship/become-mentor',
+        Component: BecomeMentor,
       },
       {
         path: 'about',
@@ -47,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: 'profile/user/:Id',
         Component: UserProfile,
+      },
+      {
+        path: 'volunteering',
+        Component: Volunteering,
       },
     ],
   },

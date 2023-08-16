@@ -40,6 +40,20 @@ const updateUser = {
     .min(1),
 };
 
+const createProfile = {
+  body: Joi.object().keys({
+    bio: Joi.string().required(),
+    birthDate: Joi.date().required(),
+    fieldOfExpertise: Joi.string().required(),
+    yearsOfExperience: Joi.number().integer().min(0).required(),
+    countryId: Joi.number().integer().required(),
+    provinceId: Joi.number().integer().required(),
+    spokenLanguage: Joi.string().required(),
+    interestAndHobby: Joi.string().required(),
+    linkedInURL: Joi.string().uri().required(),
+  }),
+};
+
 const deleteUser = {
   params: Joi.object().keys({
     id: Joi.string().custom(objectId),
@@ -52,4 +66,5 @@ module.exports = {
   getUser,
   updateUser,
   deleteUser,
+  createProfile,
 };

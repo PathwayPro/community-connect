@@ -1,0 +1,124 @@
+@use '../../../common/styles/colors';
+@use '../../../common/styles/mixins';
+@use '../../../common/styles/fonts';
+@use '../../../common/styles/media';
+
+.progressBar {
+  width: 100%;
+  margin-bottom: 26px;
+
+  @extend %flex-space-between;
+
+  @include media.media-s {
+    align-items: flex-start;
+  }
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% / 4);
+
+  &:last-child {
+    .dot {
+      &::before {
+        display: none;
+      }
+    }
+  }
+}
+
+.dot {
+  --dot-size: 16px;
+
+  position: relative;
+  width: var(--dot-size);
+  height: var(--dot-size);
+  border-radius: 50%;
+  margin: 0 auto;
+
+  @include mixins.common-transition;
+  @extend %flex-center;
+
+  &::after {
+    --size: 8px;
+
+    content: '';
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    @include mixins.common-transition;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: calc(0px + var(--dot-size));
+    width: 140px;
+    height: 2px;
+    @include mixins.common-transition;
+
+    @include media.media-s {
+      width: 60px;
+    }
+  }
+}
+
+.label {
+  text-align: center;
+
+  @include fonts.hintText($color: colors.$content-secondary);
+  @include mixins.common-transition;
+}
+
+.inactive {
+  .dot {
+    background-color: colors.$white;
+
+    &::before,
+    &::after {
+      background-color: colors.$content-disabled;
+    }
+  }
+
+  .label {
+    color: colors.$content-secondary;
+  }
+}
+
+.active {
+  .dot {
+    background-color: colors.$orange-normal-hover;
+
+    &::before {
+      background-color: colors.$content-disabled;
+    }
+
+    &::after {
+      background-color: colors.$white;
+    }
+  }
+
+  .label {
+    color: colors.$orange-dark-hover;
+  }
+}
+
+.finished {
+  .dot {
+    background-color: colors.$orange-normal-hover;
+
+    &::before {
+      background-color: colors.$orange-normal-hover;
+    }
+
+    &::after {
+      --size: 13px;
+      background-image: url('/images/Icon/check.svg');
+    }
+  }
+
+  .label {
+    color: colors.$content-secondary;
+  }
+}

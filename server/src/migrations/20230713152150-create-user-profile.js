@@ -16,7 +16,6 @@ module.exports = {
           key: 'id',
         },
         onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
       },
       image: {
         type: Sequelize.BLOB,
@@ -28,7 +27,6 @@ module.exports = {
           key: 'id',
         },
         onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
       },
       provinceId: {
         type: Sequelize.INTEGER,
@@ -37,7 +35,6 @@ module.exports = {
           key: 'id',
         },
         onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
       },
       birthDate: {
         type: Sequelize.DATE,

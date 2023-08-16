@@ -63,11 +63,11 @@
   }
 }
 
-@mixin hintText($font-size: 0.85rem, $font-weight: 300, $color: colors.$black) {
+@mixin hintText($font-size: 0.8rem, $font-weight: 300, $color: colors.$black, $line-height: 1.25) {
   @extend %font-family;
   font-size: $font-size;
   font-weight: $font-weight;
-  line-height: 1.25;
+  line-height: $line-height;
   color: $color;
 }
 

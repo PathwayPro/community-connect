@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import Container from '../../common/components/Container/Container';
 import Icon, { iconProps } from '../../common/components/Icon/Icon';
 
+// import Icon, { iconProps } from './Icon/Icon';
+
 import styles from './Footer.module.scss';
 
 interface footerLinkItem {
@@ -15,16 +17,17 @@ const footerLinks: footerLinkItem[] = [
   {
     heading: 'Work with us',
     list: [
-      { label: 'Apply for mentorship', link: '/mentorship' },
-      { label: 'Become a mentor', link: '/mentorship' },
-      { label: 'Become a partner', link: '/mentorship' },
+      { label: 'Apply for mentorship', link: '/mentorship/apply' },
+      { label: 'Become a mentor', link: '/mentorship/become-mentor' },
+      { label: 'Become a volunteer', link: '/volunteering' },
+      { label: 'Become a partner', link: '/' }, // TODO: No page, just invoke modal
     ],
   },
   {
     heading: 'Events',
     list: [
       { label: 'Upcoming Events', link: '/events' },
-      { label: 'Past Recordings', link: '/events' },
+      { label: 'Past Events', link: '/events' },
     ],
   },
   {

@@ -8,6 +8,11 @@
   flex-direction: column;
 }
 
+.formTitle {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
 .formRow {
   display: flex;
   column-gap: 1rem;
@@ -19,14 +24,6 @@
     margin-bottom: 0;
   }
 
-  &.error {
-    padding-bottom: 1rem;
-
-    @include media.media-s {
-      padding-bottom: 0;
-    }
-  }
-
   &.errorCheckbox {
     padding-top: 1rem;
   }
@@ -34,6 +31,7 @@
 
 .formField {
   width: 280px;
+  height: fit-content;
 
   @include media.media-s {
     width: 250px;
@@ -42,9 +40,7 @@
 }
 
 .formFieldPassword {
-  @include media.media-s {
-    margin-bottom: 2rem;
-  }
+  padding-bottom: 1rem;
 }
 
 .formButton {
@@ -116,4 +112,9 @@
 .formBottomLink {
   text-decoration: underline;
   @include fonts.mainText($font-weight: 400);
+}
+
+.errorMessage {
+  color: colors.$error;
+  text-align: center;
 }

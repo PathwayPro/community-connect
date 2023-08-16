@@ -1,7 +1,7 @@
 import { useState, useRef, FC } from 'react';
 
 import Alert from '../../../common/components/Alert/Alert';
-import VectorEditBtn from '../../../common/components/Vector/VectorEditBtn';
+import IconSVG from '../../../common/components/IconSVG/IconSVG';
 
 import styles from './Images.module.scss';
 
@@ -11,10 +11,7 @@ interface ImagesProps {
   myProfile: boolean;
 }
 
-const Images: FC<ImagesProps> = ({
-  myProfile,
-}) => {
-
+const Images: FC<ImagesProps> = ({ myProfile }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [alertOpen, setAlertOpen] = useState(false);
 
@@ -48,27 +45,16 @@ const Images: FC<ImagesProps> = ({
   };
 
   const isProfileImageAvailable = false;
-  const source = !isProfileImageAvailable
-    ? defaultProfileImage
-    : '';
+  const source = !isProfileImageAvailable ? defaultProfileImage : '';
 
   return (
     <div className={styles.container}>
-      {selectedFile && (
-        <img
-          className={styles.backgroundImage}
-          src={URL.createObjectURL(selectedFile)}
-        />
-      )}
+      {selectedFile && <img className={styles.backgroundImage} src={URL.createObjectURL(selectedFile)} />}
 
       <img className={styles.profileImage} src={source} alt="Your Image" />
 
-      {myProfile &&
-        <VectorEditBtn
-          position={'bottom'}
-          onClick={handleButtonClick}
-        />
-      }
+      {myProfile && <IconSVG name={'editIcon'} className={styles.editIcon} onClick={handleButtonClick} />}
+
       <input
         className={styles.imageInput}
         type="file"

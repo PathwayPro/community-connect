@@ -7,6 +7,7 @@ import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
 import Button from '../../../common/components/Button/Button';
 import Heading from '../../../common/components/Heading/Heading';
 import useWindowSize, { BREAKPOINTS } from '../../../common/utils/useWindowSize';
+import HeaderDropDown from '../HeaderDropDown/HeaderDropDown';
 
 import styles from './HeaderNav.module.scss';
 
@@ -51,7 +52,13 @@ const HeaderNav: FC = () => {
         )}
         onClick={onMobileButtonClick}
       />
-      <div className={classNames(styles.wrapper, width <= BREAKPOINTS.small && !isNavDropDownActive && styles.hidden)}>
+      <div
+        className={classNames(
+          styles.wrapper,
+          width <= BREAKPOINTS.small && !isNavDropDownActive && styles.hidden,
+          width <= BREAKPOINTS.xsmall && styles.wide
+        )}
+      >
         <nav className={styles.nav}>
           <NavLink
             to="/events"
@@ -73,26 +80,30 @@ const HeaderNav: FC = () => {
             Resources
           </NavLink>
 
-          <NavLink
-            to="/mentorship"
-            className={({ isActive, isPending }) =>
-              classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
-            }
-            onClick={handleMobileDropDownClose}
-          >
-            Mentorship
-          </NavLink>
-
-          <NavLink
-            to="/faq"
-            className={({ isActive, isPending }) =>
-              classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
-            }
-            onClick={handleMobileDropDownClose}
-          >
-            FAQ
-          </NavLink>
-
+          {width > BREAKPOINTS.small ? (
+            <HeaderDropDown label="Mentorship" />
+          ) : (
+            <>
+              <NavLink
+                to="/mentorship/apply"
+                className={({ isActive, isPending }) =>
+                  classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
+                }
+                onClick={handleMobileDropDownClose}
+              >
+                Apply for mentorship
+              </NavLink>
+              <NavLink
+                to="/mentorship/become-mentor"
+                className={({ isActive, isPending }) =>
+                  classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
+                }
+                onClick={handleMobileDropDownClose}
+              >
+                Become a mentor
+              </NavLink>
+            </>
+          )}
           <NavLink
             to="/about"
             className={({ isActive, isPending }) =>
