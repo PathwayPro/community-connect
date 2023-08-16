@@ -2,6 +2,7 @@
 import { FC } from 'react';
 
 import Connection, { connectionProps } from './Connection/Connection';
+
 import styles from './Connections.module.scss';
 
 const connectionList: connectionProps[] = [

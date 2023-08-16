@@ -1,3 +1,5 @@
+const { roles } = require('../config/roles');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -9,11 +11,13 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       name: {
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM,
+        values: roles,
         allowNull: false,
       },
       rights: {
         type: Sequelize.ARRAY(Sequelize.STRING),
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

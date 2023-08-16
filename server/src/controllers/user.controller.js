@@ -34,10 +34,18 @@ const deleteUser = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const createOrUpdateProfile = catchAsync(async (req, res) => {
+  const userProfile = await userService.createOrUpdateProfile(req.user.id, req.body);
+  // Use this if you want to return userProfile Object
+  // res.status(httpStatus.CREATED).send(userProfile);
+  res.status(httpStatus.CREATED).send();
+});
+
 module.exports = {
   createUser,
   getUsers,
   getUser,
   updateUser,
   deleteUser,
+  createOrUpdateProfile,
 };

@@ -43,3 +43,7 @@
   text-decoration: underline;
   @include fonts.mainText($font-weight: 400);
 }
+
+.error {
+  color: colors.$error;
+}

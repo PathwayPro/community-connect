@@ -1,0 +1,26 @@
+@use '../../../common/styles/colors';
+@use '../../../common/styles/mixins';
+
+.block {
+  display: flex;
+  justify-content: center;
+  background-color: colors.$blue-light;
+  border-radius: 15px;
+  padding: 60px 0;
+  margin-bottom: 2rem;
+}
+
+.form {
+  max-width: 600px;
+  width: 100%;
+  @extend %flex-center;
+  flex-direction: column;
+}
+
+.textarea {
+  width: 100%;
+}
+
+.mentorshipButton {
+  margin-top: 1.6rem;
+}

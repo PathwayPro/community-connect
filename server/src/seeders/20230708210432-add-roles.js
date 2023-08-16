@@ -14,8 +14,20 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
+          name: 'mentor',
+          rights: roleRights.get('mentor'),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
           name: 'admin',
           rights: roleRights.get('admin'),
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: 'superAdmin',
+          rights: roleRights.get('superAdmin'),
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -25,6 +37,8 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    await queryInterface.bulkDelete('Roles', { [Op.or]: [{ name: 'user' }, { name: 'admin' }] });
+    await queryInterface.bulkDelete('Roles', {
+      [Op.and]: [{ name: 'user' }, { name: 'mentor' }, { name: 'admin' }, { name: 'superAdmin' }],
+    });
   },
 };

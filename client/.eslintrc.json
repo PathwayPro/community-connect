@@ -155,7 +155,7 @@
         "newlines-between": "always",
         "pathGroups": [
           {
-            "pattern": "./**/*.@(css)",
+            "pattern": "./**/*.@(scss)",
             "group": "unknown",
             "position": "before"
           },

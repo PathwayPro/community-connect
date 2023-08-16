@@ -17,6 +17,8 @@ router
   .patch(auth('manageUsers'), validate(userValidation.updateUser), userController.updateUser)
   .delete(auth('manageUsers'), validate(userValidation.deleteUser), userController.deleteUser);
 
+router.route('/profile').post(auth(), validate(userValidation.createProfile), userController.createOrUpdateProfile);
+
 module.exports = router;
 
 /**
@@ -249,4 +251,59 @@ module.exports = router;
  *         $ref: '#/components/responses/Forbidden'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /users/profile:
+ *   post:
+ *     summary: Create or Update a User Profile
+ *     description: Create or Update the profile of the currently authenticated user.
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               bio:
+ *                 type: string
+ *               birthDate:
+ *                 type: string
+ *                 format: date
+ *               fieldOfExpertise:
+ *                 type: string
+ *               yearsOfExperience:
+ *                 type: integer
+ *               countryId:
+ *                 type: integer
+ *               provinceId:
+ *                 type: integer
+ *               spokenLanguage:
+ *                 type: string
+ *               interestAndHobby:
+ *                 type: string
+ *               linkedInURL:
+ *                 type: string
+ *                 format: uri
+ *             example:
+ *               bio: Software Developer
+ *               birthDate: 1990-12-31
+ *               fieldOfExpertise: Web Development
+ *               yearsOfExperience: 10
+ *               countryId: 1
+ *               provinceId: 2
+ *               spokenLanguage: English
+ *               interestAndHobby: Reading
+ *               linkedInURL: https://linkedin.com/in/my-profile
+ *     responses:
+ *       "201":
+ *         description: Profile Created
+ *       "400":
+ *         $ref: '#/components/responses/BadRequest'
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
  */
