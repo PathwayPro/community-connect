@@ -2,6 +2,8 @@
 import { format } from 'date-fns';
 import { FC } from 'react';
 
+import { useAppDispatch } from '../../../app/hooks';
+import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
 import Button from '../../../common/components/Button/Button';
 import Icon, { iconProps } from '../../../common/components/Icon/Icon';
 import IconSVG from '../../../common/components/IconSVG/IconSVG';
@@ -42,8 +44,14 @@ interface InfoProps {
 }
 
 const Info: FC<InfoProps> = ({ myProfile, userProfile }) => {
+
+  const dispatch = useAppDispatch();
+
   const openModal = () => console.log('click');
-  const messageUser = () => console.log('message');
+  const messageUser = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    e.preventDefault();
+    dispatch(showModal({ content: MODAL_TYPE.WRITE_MESSAGE }));
+  };
   const connectUser = () => console.log('connect');
 
   return (
