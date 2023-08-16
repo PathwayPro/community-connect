@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { useAppDispatch } from '../../../../app/hooks';
 import { closeModal } from '../../../../app/slices/modalSlice';
 import Button from '../../../../common/components/Button/Button';
-import CloseBtn from '../../../../common/components/CloseBtn/CloseBtn';
+import IconSVG from '../../../../common/components/IconSVG/IconSVG';
 import defaultProfileImage from '../../../../images/Main/defaultProfileImg.png';
 
 import styles from './PostModal.module.scss';
@@ -37,7 +37,10 @@ const PostModal: FC = () => {
   return (
     <div className={styles.modalWindow}>
       <div className={styles.closeBtn}>
-        <CloseBtn onClick={closePostModal} />
+        <IconSVG
+          name={'closeIcon'}
+          onClick={closePostModal}
+        />
       </div>
       <div className={styles.title}>Create a post</div>
       <div className={styles.userInfo}>

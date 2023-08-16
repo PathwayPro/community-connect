@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { useAppDispatch } from '../../../app/hooks';
 import { closeModal } from '../../../app/slices/modalSlice';
 import Button from '../../../common/components/Button/Button';
-import CloseBtn from '../../../common/components/CloseBtn/CloseBtn';
+import IconSVG from '../../../common/components/IconSVG/IconSVG';
 
 import styles from './MessageModal.module.scss';
 
@@ -39,7 +39,10 @@ const MessageModal: FC = () => {
   return (
     <div className={styles.modalWindow}>
       <div className={styles.closeBtn}>
-        <CloseBtn onClick={closeMessageModal} />
+        <IconSVG
+          name={'closeIcon'}
+          onClick={closeMessageModal}
+        />
       </div>
       <div className={styles.title}>Send a message</div>
       <div className={styles.userInfo}>
