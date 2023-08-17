@@ -8,10 +8,7 @@ import styles from './AddPost.module.scss';
 interface AddPostProps {
   imgPath: string;
 }
-const AddPost: FC<AddPostProps> = ({
-  imgPath,
-}) => {
-
+const AddPost: FC<AddPostProps> = ({ imgPath }) => {
   const dispatch = useAppDispatch();
 
   const openPostModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {

@@ -2,9 +2,9 @@ import { FC } from 'react';
 
 import { useAppDispatch } from '../../../../app/hooks';
 import { closeModal } from '../../../../app/slices/modalSlice';
-import Button from '../../../../common/components/Button/Button';
-import IconSVG from '../../../../common/components/IconSVG/IconSVG';
 import defaultProfileImage from '../../../../images/Main/defaultProfileImg.png';
+import Button from '../../Button/Button';
+import IconSVG from '../../IconSVG/IconSVG';
 
 import styles from './PostModal.module.scss';
 

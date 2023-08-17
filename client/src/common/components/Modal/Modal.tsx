@@ -12,7 +12,7 @@ import LoginForm from '../../../components/LoginForm/LoginForm';
 import RegisterForm from '../../../components/RegisterForm/RegisterForm';
 import ResetPasswordForm from '../../../components/ResetPasswordForm/ResetPasswordForm';
 import MessageModal from '../../../pages/Profile/MessageModal/MessageModal';
-import PostModal from '../../../pages/Profile/Posts/AddPost/PostModal';
+import PostModal from '../Posts/AddPost/PostModal';
 
 import styles from './Modal.module.scss';
 

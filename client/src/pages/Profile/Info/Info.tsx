@@ -47,11 +47,16 @@ const Info: FC<InfoProps> = ({ myProfile, userProfile }) => {
 
   const dispatch = useAppDispatch();
 
-  const openModal = () => console.log('click');
+  const openModal = (e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.KeyboardEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    dispatch(showModal({ content: MODAL_TYPE.FILL_USER_PROFILE }));
+  };
+
   const messageUser = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
     dispatch(showModal({ content: MODAL_TYPE.WRITE_MESSAGE }));
   };
+
   const connectUser = () => console.log('connect');
 
   return (

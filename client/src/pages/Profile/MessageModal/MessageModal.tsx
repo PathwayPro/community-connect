@@ -9,20 +9,18 @@ import styles from './MessageModal.module.scss';
 
 import defaultProfileImage from '../../../images/Main/defaultProfileImg.png';
 
-
 export interface MessageModal {
   imgPath?: string;
   name: string;
 }
 
-const user: MessageModal[] = [
-  {
-    imgPath: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
-    name: 'Clark Mante',
-  },
-];
+const user: MessageModal =
+{
+  imgPath: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
+  name: 'Clark Mante',
+};
 
-const image = user[0].imgPath ? user[0].imgPath : defaultProfileImage;
+const image = user.imgPath ? user.imgPath : defaultProfileImage;
 
 const MessageModal: FC = () => {
   const dispatch = useAppDispatch();
@@ -47,7 +45,7 @@ const MessageModal: FC = () => {
       <div className={styles.title}>Send a message</div>
       <div className={styles.userInfo}>
         <img src={image} alt="profile" className={styles.image} />
-        <div className={styles.info}>{user[0].name}</div>
+        <div className={styles.info}>{user.name}</div>
       </div>
       <textarea
         placeholder="Write something here..."
