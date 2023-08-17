@@ -60,7 +60,7 @@ module.exports = {
       linkedInURL: {
         type: Sequelize.STRING,
       },
-      InstaURL: {
+      instaURL: {
         type: Sequelize.STRING,
       },
       twitterURL: {

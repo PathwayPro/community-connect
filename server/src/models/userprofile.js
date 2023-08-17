@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
 
   UserProfile.init(
     {
+      backgroundImage: DataTypes.BLOB,
       image: DataTypes.BLOB,
       birthDate: DataTypes.DATE,
       isBirthDateVisible: DataTypes.BOOLEAN,
@@ -24,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       yearsOfExperience: DataTypes.STRING,
       bio: DataTypes.TEXT,
       linkedInURL: DataTypes.STRING,
-      InstaURL: DataTypes.STRING,
+      instaURL: DataTypes.STRING,
       twitterURL: DataTypes.STRING,
       githubURL: DataTypes.STRING,
       behanceURL: DataTypes.STRING,
