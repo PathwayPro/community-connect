@@ -16,7 +16,6 @@ interface ButtonProps {
 
 const Button: FC<ButtonProps> = ({
   label,
-  imgPath,
   size = 'normal',
   isDisabled = false,
   isSubmit = false,
@@ -29,25 +28,14 @@ const Button: FC<ButtonProps> = ({
     onClick(e);
   };
   return (
-    imgPath ? (
-      <button
-        className={classNames(className, styles.imgButton)}
-        onClick={handleClick}
-        disabled={isDisabled}
-        type='button'
-      >
-        <img src={imgPath} alt="Button Image" />
-      </button>
-    ) : (
-      <button
-        className={classNames(className, styles.button, size && styles[size], color && styles[color])}
-        onClick={handleClick}
-        disabled={isDisabled}
-        type={isSubmit ? 'submit' : 'button'}
-      >
-        {label}
-      </button>
-    )
+    <button
+      className={classNames(className, styles.button, size && styles[size], color && styles[color])}
+      onClick={handleClick}
+      disabled={isDisabled}
+      type={isSubmit ? 'submit' : 'button'}
+    >
+      {label}
+    </button>
   );
 };
 
