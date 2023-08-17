@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import Scroll from '../../../common/components/Scroll/Scroll';
+import Scroll from '../Scroll/Scroll';
 
 import AddPost from './AddPost/AddPost';
 import ShowPost from './ShowPost/ShowPost';
@@ -59,16 +59,17 @@ const Posts: FC = () => {
       <Scroll>
         <div className={styles.posts}>
           <AddPost imgPath={userInfo.imgPath ? userInfo.imgPath : defaultProfileImage} />
-          {posts.length > 0 && posts.map((post) => (
-            <ShowPost
-              key={post.id}
-              imgPath={userInfo.imgPath ? userInfo.imgPath : defaultProfileImage}
-              name={userInfo.name}
-              position={userInfo.position}
-              date={post.date}
-              content={post.content}
-            />
-          ))}
+          {posts.length > 0 &&
+            posts.map((post) => (
+              <ShowPost
+                key={post.id}
+                imgPath={userInfo.imgPath ? userInfo.imgPath : defaultProfileImage}
+                name={userInfo.name}
+                position={userInfo.position}
+                date={post.date}
+                content={post.content}
+              />
+            ))}
         </div>
       </Scroll>
     </div>

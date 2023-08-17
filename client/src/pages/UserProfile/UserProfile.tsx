@@ -1,17 +1,16 @@
 import { FC } from 'react';
 
+import Connections from '../../common/components/Connections/Connections';
 import Container from '../../common/components/Container/Container';
+import Events from '../../common/components/Events/Events';
+import Posts from '../../common/components/Posts/Posts';
 
-import Connections from './Connections/Connections';
-import Events from './Events/Events';
 import Images from './Images/Images';
 import Info from './Info/Info';
-import Posts from './Posts/Posts';
 
 import styles from './UserProfile.module.scss';
 
 const UserProfile: FC = () => {
-
   return (
     <Container>
       <div className={styles.page}>

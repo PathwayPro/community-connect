@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import Button from '../../../../common/components/Button/Button';
+import Button from '../../Button/Button';
 
 import styles from './Connection.module.scss';
 
@@ -10,12 +10,7 @@ export interface connectionProps {
   position: string;
 }
 
-const Connection: FC<connectionProps> = ({
-  imgPath,
-  name,
-  position,
-}) => {
-
+const Connection: FC<connectionProps> = ({ imgPath, name, position }) => {
   const viewProfile = () => console.log('click');
 
   return (
@@ -27,7 +22,7 @@ const Connection: FC<connectionProps> = ({
           <div className={styles.position}>{position}</div>
         </div>
       </div>
-      <div  className={styles.btn}>
+      <div className={styles.btn}>
         <Button label={'View Profile'} size={'small'} color={'orange'} onClick={viewProfile}></Button>
       </div>
     </div>
