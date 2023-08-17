@@ -7,15 +7,18 @@ export const MODAL_TYPE = {
   RESET_PASSWORD: 'resetPassword',
   SEND_CONFIRMATION_EMAIL: 'sendConfirmationEmail',
   VERIFY_EMAIL: 'verifyEmail',
+  FILL_USER_PROFILE: 'fillUserProfile',
 };
 
 type initialStateType = {
   content: string;
   isOpen: boolean;
+  closeOnOverlayClick: boolean;
 };
 
 type payloadType = {
   content: string;
+  closeOnOverlayClick?: boolean;
 };
 
 type actionType = {
@@ -26,6 +29,7 @@ type actionType = {
 const initialState: initialStateType = {
   content: '',
   isOpen: false,
+  closeOnOverlayClick: true,
 };
 
 const modalSlice = createSlice({
@@ -35,10 +39,12 @@ const modalSlice = createSlice({
     closeModal: (state) => {
       state.isOpen = false;
       state.content = '';
+      state.closeOnOverlayClick = initialState.closeOnOverlayClick;
     },
     showModal: (state, action: actionType) => {
       state.content = action.payload.content;
       state.isOpen = true;
+      state.closeOnOverlayClick = action.payload.closeOnOverlayClick ?? initialState.closeOnOverlayClick;
     },
   },
 });

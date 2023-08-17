@@ -31,6 +31,8 @@ interface IFormInput {
   agreement: string;
 }
 
+const formId = 'register';
+
 const RegisterForm: FC = () => {
   const dispatch = useAppDispatch();
   const [emailError, setEmailError] = useState('');
@@ -126,6 +128,7 @@ const RegisterForm: FC = () => {
       <div className={styles.formRow}>
         <Input
           name={firstName.name}
+          id={`${formId}-${firstName.name}`}
           label="First name *"
           autoComplete="on"
           className={styles.formField}
@@ -136,6 +139,7 @@ const RegisterForm: FC = () => {
         />
         <Input
           name={lastName.name}
+          id={`${formId}-${lastName.name}`}
           label="Last name *"
           autoComplete="on"
           className={styles.formField}
@@ -148,6 +152,7 @@ const RegisterForm: FC = () => {
       <div className={styles.formRow}>
         <Input
           name={email.name}
+          id={`${formId}-${email.name}`}
           label="Email *"
           type="email"
           autoComplete="on"
@@ -158,12 +163,19 @@ const RegisterForm: FC = () => {
           errorMessage={errors.email?.message || emailError}
         />
       </div>
-      <div className={classNames(styles.formRow, (errors.password || errors.rePassword) && styles.error)}>
+      <div className={classNames(styles.formRow)}>
         <Input
           name={password.name}
+          id={`${formId}-${password.name}`}
           label="Password *"
           type="password"
-          className={classNames(styles.formField, errors.password && styles.formFieldPassword)}
+          className={classNames(
+            styles.formField,
+            errors.password &&
+              errors.password?.message &&
+              errors.password?.message?.length > 20 &&
+              styles.formFieldPassword
+          )}
           onChange={password.onChange}
           onBlur={password.onBlur}
           ref={password.ref}
@@ -171,6 +183,7 @@ const RegisterForm: FC = () => {
         />
         <Input
           name={rePassword.name}
+          id={`${formId}-${rePassword.name}`}
           label="Re-enter Password *"
           type="password"
           className={styles.formField}
@@ -181,7 +194,7 @@ const RegisterForm: FC = () => {
         />
       </div>
 
-      <div className={classNames(styles.formRow, (errors.password || errors.rePassword) && styles.errorCheckbox)}>
+      <div className={classNames(styles.formRow)}>
         <fieldset className={styles.checkboxField}>
           <Controller
             name="agreement"
@@ -192,12 +205,13 @@ const RegisterForm: FC = () => {
             render={({ field, fieldState }) => (
               <input
                 type="checkbox"
+                id={`${formId}-agreement}`}
                 {...field}
                 className={classNames(styles.checkbox, fieldState.error && styles.error)}
               />
             )}
           />
-          <label htmlFor="agreement">
+          <label htmlFor={`${formId}-agreement}`}>
             <span>Do&nbsp;you agree to&nbsp;our </span>
             <a href="#">Terms and Conditions, Privacy Statement, and Security Policy</a>
           </label>

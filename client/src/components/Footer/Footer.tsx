@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 
 import Container from '../../common/components/Container/Container';
 
-import styles from './Footer.module.scss';
 import Icon, { iconProps } from './Icon/Icon';
+
+import styles from './Footer.module.scss';
 
 interface footerLinkItem {
   heading: string;
