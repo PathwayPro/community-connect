@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import { FC, KeyboardEventHandler, MouseEvent, KeyboardEvent } from 'react';
+import { FC, MouseEvent } from 'react';
+// import { FC, KeyboardEventHandler, MouseEvent, KeyboardEvent } from 'react';
 
 import iconMap from './IconMap';
 
@@ -12,7 +13,8 @@ interface IconSVGProps {
   size?: 'small' | 'medium' | 'big' | 'wide';
   isSubmit?: boolean;
   className?: string;
-  onClick: (e: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>) => void;
+  onClick: (e: MouseEvent<HTMLButtonElement>) => void;
+  // onClick: (e: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>) => void;
 }
 /*
   'small'  15 x 15 – for edit pencil
@@ -30,17 +32,17 @@ const IconSVG: FC<IconSVGProps> = ({
   onClick,
 }) => {
   const Icon = iconMap[name];
-  const handleKeyDown: KeyboardEventHandler<HTMLButtonElement> = (e) => {
-    if (e.key === 'Enter' && onClick) {
-      e.preventDefault();
-      onClick(e);
-    }
-  };
+  // const handleKeyDown: KeyboardEventHandler<HTMLButtonElement> = (e) => {
+  //   if (e.key === 'Enter' && onClick) {
+  //     e.preventDefault();
+  //     onClick(e);
+  //   }
+  // };
   return (
     <button
       className={classNames(className, styles.button, color && styles[color], size && styles[size])}
       onClick={onClick}
-      onKeyDown={handleKeyDown}
+      // onKeyDown={handleKeyDown}
       type={isSubmit ? 'submit' : 'button'}
     >
       <Icon />

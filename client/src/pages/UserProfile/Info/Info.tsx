@@ -2,6 +2,8 @@
 import { format } from 'date-fns';
 import { FC } from 'react';
 
+import { useAppDispatch } from '../../../app/hooks';
+import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
 import Icon, { iconProps } from '../../../common/components/Icon/Icon';
 import IconSVG from '../../../common/components/IconSVG/IconSVG';
 
@@ -36,7 +38,13 @@ const userData: userDataProps = {
 };
 
 const Info: FC = () => {
-  const openModal = () => console.log('click');
+
+  const dispatch = useAppDispatch();
+
+  const openModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    e.preventDefault();
+    dispatch(showModal({ content: MODAL_TYPE.FILL_USER_PROFILE }));
+  };
 
   return (
     <div className={styles.personal}>
