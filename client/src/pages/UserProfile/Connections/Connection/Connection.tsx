@@ -5,7 +5,7 @@ import Button from '../../../../common/components/Button/Button';
 import styles from './Connection.module.scss';
 
 export interface connectionProps {
-  imgPath?: string;
+  imgPath: string;
   name: string;
   position: string;
 }

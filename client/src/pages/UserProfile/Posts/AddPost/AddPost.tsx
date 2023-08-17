@@ -1,14 +1,17 @@
 import { FC } from 'react';
 
-import defaultProfileImage from '../../../../images/Main/defaultProfileImg.png';
-
 import styles from './AddPost.module.scss';
 
-const AddPost: FC = () => {
+interface addPostProps {
+  imgPath: string;
+}
+const AddPost: FC<addPostProps> = ({
+  imgPath,
+}) => {
 
   return (
     <div className={styles.newPost}>
-      <img src={defaultProfileImage} alt="profile" className={styles.image} />
+      <img src={imgPath} alt="profile" className={styles.image} />
       <input type="text" placeholder="What is in your mind ?" className={styles.input}/>
     </div>
   );

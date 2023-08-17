@@ -7,14 +7,21 @@ import formatDate from '../../../../common/utils/formatDateUtils';
 import styles from './ShowPost.module.scss';
 
 export interface ShowPostProps {
-  imgPath?: string;
+  imgPath: string;
   name: string;
   position: string;
   date: Date;
   content: string;
 }
 
-const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content }) => {
+const ShowPost: FC<ShowPostProps> = ({
+  imgPath,
+  name,
+  position,
+  date,
+  content,
+}) => {
+
   const [showToast, setShowToast] = useState(false);
 
   const leaveComment = () => console.log('comment');
@@ -29,7 +36,11 @@ const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content })
   return (
     <div className={styles.box}>
       <div className={styles.userInfo}>
-        <img src={imgPath} alt="connection img" className={styles.image} />
+        <img
+          src={imgPath}
+          alt="connection img"
+          className={styles.image}
+        />
         <div className={styles.info}>
           <div className={styles.name}>{name}</div>
           <div className={styles.position}>{position}</div>
