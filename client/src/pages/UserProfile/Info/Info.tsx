@@ -41,7 +41,7 @@ const Info: FC = () => {
 
   const dispatch = useAppDispatch();
 
-  const openModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  const openModal = (e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.KeyboardEvent<HTMLButtonElement>) => {
     e.preventDefault();
     dispatch(showModal({ content: MODAL_TYPE.FILL_USER_PROFILE }));
   };
