@@ -4,7 +4,7 @@ import React, { FC } from 'react';
 import styles from './Button.module.scss';
 
 interface ButtonProps {
-  label?: string;
+  label: string;
   size?: 'normal' | 'small';
   isDisabled?: boolean;
   isSubmit?: boolean;
