@@ -10,26 +10,31 @@ import styles from './Posts.module.scss';
 import defaultProfileImage from '../../../images/Main/defaultProfileImg.png';
 
 interface PostProps {
+  id: number;
   date: Date;
   content: string;
 }
 const posts: PostProps[] = [
   {
+    id: 1,
     date: new Date('2023-01-01'),
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl.',
   },
   {
+    id: 2,
     date: new Date(),
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl.',
   },
   {
+    id: 3,
     date: new Date('2022-10-21'),
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl.',
   },
   {
+    id: 4,
     date: new Date('2023-2-28'),
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl.',
@@ -54,9 +59,9 @@ const Posts: FC = () => {
       <Scroll>
         <div className={styles.posts}>
           <AddPost imgPath={userInfo.imgPath ? userInfo.imgPath : defaultProfileImage} />
-          {posts.length > 0 && posts.map((post, index) => (
+          {posts.length > 0 && posts.map((post) => (
             <ShowPost
-              key={index}
+              key={post.id}
               imgPath={userInfo.imgPath ? userInfo.imgPath : defaultProfileImage}
               name={userInfo.name}
               position={userInfo.position}
