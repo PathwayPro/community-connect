@@ -4,6 +4,7 @@ import { FC } from 'react';
 
 import { useAppDispatch } from '../../../app/hooks';
 import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
+import Button from '../../../common/components/Button/Button';
 import Icon, { iconProps } from '../../../common/components/Icon/Icon';
 import IconSVG from '../../../common/components/IconSVG/IconSVG';
 
@@ -37,7 +38,12 @@ const userData: userDataProps = {
   ],
 };
 
-const Info: FC = () => {
+interface InfoProps {
+  myProfile: boolean;
+  userProfile: boolean;
+}
+
+const Info: FC<InfoProps> = ({ myProfile, userProfile }) => {
 
   const dispatch = useAppDispatch();
 
@@ -46,17 +52,28 @@ const Info: FC = () => {
     dispatch(showModal({ content: MODAL_TYPE.FILL_USER_PROFILE }));
   };
 
+  const messageUser = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    e.preventDefault();
+    dispatch(showModal({ content: MODAL_TYPE.WRITE_MESSAGE }));
+  };
+
+  const connectUser = () => console.log('connect');
+
   return (
     <div className={styles.personal}>
-      <IconSVG
-        name={'editIcon'}
-        className={styles.editIcon}
-        onClick={openModal}
-      />
-      <div className={styles.mainInfo}>
-        <div className={styles.name}>{userData.name}</div>
-        <div className={styles.experience}>{userData.background}</div>
-        <div className={styles.experience}>{userData.experience}</div>
+      {myProfile && <IconSVG name={'editIcon'} className={styles.editIcon} onClick={openModal} />}
+      <div className={styles.infoButtons}>
+        <div className={styles.mainInfo}>
+          <div className={styles.name}>{userData.name}</div>
+          <div className={styles.experience}>{userData.background}</div>
+          <div className={styles.experience}>{userData.experience}</div>
+        </div>
+        {userProfile && (
+          <div className={styles.connectionBtns}>
+            <Button label={'Message'} size={'small'} color={'orangeLight'} onClick={messageUser}></Button>
+            <Button label={'Connect'} size={'small'} color={'orange'} onClick={connectUser}></Button>
+          </div>
+        )}
       </div>
       <div className={styles.otherInfo}>
         <div className={styles.infoRow}>
@@ -66,8 +83,11 @@ const Info: FC = () => {
         <div className={styles.infoRow}>
           <div className={styles.title}>Birthday :</div>
           <div className={styles.detail}>
-            {format(new Date(userData.birthday.getTime() + userData.birthday.getTimezoneOffset() * 60000), 'MMMM d, yyyy')}
-        	</div>
+            {format(
+              new Date(userData.birthday.getTime() + userData.birthday.getTimezoneOffset() * 60000),
+              'MMMM d, yyyy'
+            )}
+          </div>
         </div>
         <div className={styles.infoRow}>
           <div className={styles.title}>Bio&nbsp;:</div>

@@ -3,6 +3,10 @@
 @use '../../common/styles/fonts';
 @use '../../common/styles/media';
 
+.form {
+  padding: 5rem;
+}
+
 .title {
   margin-bottom: 20px;
   text-align: center;

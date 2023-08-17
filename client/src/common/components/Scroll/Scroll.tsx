@@ -13,8 +13,7 @@ const Scroll: FC<ScrollProps> = ({
   className,
 }) => {
   return (
-    <div className={classNames(styles.scroll, className)}
-    >
+    <div className={classNames(styles.scroll, className)}>
       {children}
     </div>
   );

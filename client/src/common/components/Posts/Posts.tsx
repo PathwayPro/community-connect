@@ -53,27 +53,32 @@ const userInfo: userInfoProps = {
   position: 'Technician',
 };
 
-const Posts: FC = () => {
-  return (
-    <div className={styles.box}>
-      <Scroll>
-        <div className={styles.posts}>
-          <AddPost imgPath={userInfo.imgPath ? userInfo.imgPath : defaultProfileImage} />
-          {posts.length > 0 &&
-            posts.map((post) => (
-              <ShowPost
-                key={post.id}
-                imgPath={userInfo.imgPath ? userInfo.imgPath : defaultProfileImage}
-                name={userInfo.name}
-                position={userInfo.position}
-                date={post.date}
-                content={post.content}
-              />
-            ))}
-        </div>
-      </Scroll>
-    </div>
-  );
+interface PostsProps {
+  myProfile: boolean;
+}
+
+const Posts: FC<PostsProps> = ({
+  myProfile,
+}) => {
+return (
+  <div className={styles.box}>
+    <Scroll>
+      <div className={styles.posts}>
+        {myProfile && <AddPost imgPath={userInfo.imgPath ? userInfo.imgPath : defaultProfileImage} />}
+        {posts.length > 0 && posts.map((post) => (
+          <ShowPost
+            key={post.id}
+            imgPath={userInfo.imgPath ? userInfo.imgPath : defaultProfileImage}
+            name={userInfo.name}
+            position={userInfo.position}
+            date={post.date}
+            content={post.content}
+          />
+        ))}
+      </div>
+    </Scroll>
+  </div>
+);
 };
 
 export default Posts;

@@ -11,6 +11,8 @@ import ForgotPasswordForm from '../../../components/ForgotPasswordForm/ForgotPas
 import LoginForm from '../../../components/LoginForm/LoginForm';
 import RegisterForm from '../../../components/RegisterForm/RegisterForm';
 import ResetPasswordForm from '../../../components/ResetPasswordForm/ResetPasswordForm';
+import MessageModal from '../../../pages/Profile/MessageModal/MessageModal';
+import PostModal from '../Posts/AddPost/PostModal';
 
 import styles from './Modal.module.scss';
 
@@ -56,6 +58,8 @@ const Modal: FC = () => {
       if (content === MODAL_TYPE.SEND_CONFIRMATION_EMAIL) return <SendVerificationEmail />;
       if (content === MODAL_TYPE.VERIFY_EMAIL) return <VerifyEmail />;
       if (content === MODAL_TYPE.FILL_USER_PROFILE) return <FillUserProfile />;
+      if (content === MODAL_TYPE.WRITE_POST) return <PostModal />;
+      if (content === MODAL_TYPE.WRITE_MESSAGE) return <MessageModal />;
     }
     return null;
   }, [content]);

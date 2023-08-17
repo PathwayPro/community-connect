@@ -1,0 +1,66 @@
+@use '../../../../common/styles/fonts';
+@use '../../../../common/styles/mixins';
+@use '../../../../common/styles/colors';
+
+.modalWindow {
+	position: relative;
+  padding: 1.6rem;
+
+  @extend %flex-column;
+  gap: 26px;
+}
+
+.title {
+	@extend %flex-column-center;
+	@include fonts.bigText($font-size: 28px, $font-weight: 700);
+}
+
+.closeBtn {
+	position: absolute;
+	top: 26px;
+	right: 26px;
+	cursor: pointer;
+}
+
+.userInfo{
+	@extend %flex-left-center;
+	gap: 17px;
+}
+
+.image {
+  border: 2px solid colors.$orange-normal;
+  border-radius: 50%;
+  width: 77px;
+  height: 77px;
+}
+
+.name {
+	@include fonts.mainText;
+}
+
+.input {
+	position: relative;
+  background: colors.$white;
+  width: 633px;
+  min-height: 148px;
+  padding: 12px;
+  border: 1px solid #d5d4dc;
+  border-radius: 5px;
+  resize: vertical;
+
+  @include fonts.mainText;
+}
+
+.input::placeholder {
+	position: absolute;
+  top: 16px;
+  left: 16px;
+}
+
+.btnDiv {
+  @extend %flex-row-right;
+}
+
+.postBnt {
+  @include fonts.bigText;
+}

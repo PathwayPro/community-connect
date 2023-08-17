@@ -8,17 +8,17 @@ import Posts from '../../common/components/Posts/Posts';
 import Images from './Images/Images';
 import Info from './Info/Info';
 
-import styles from './UserProfile.module.scss';
+import styles from './Profile.module.scss';
 
-const UserProfile: FC = () => {
+const MyProfile: FC = () => {
   return (
     <Container>
       <div className={styles.page}>
-        <Images />
-        <Info />
+        <Images myProfile={false} />
+        <Info myProfile={false} userProfile={true} />
         <div className={styles.socials}>
           <Events />
-          <Posts />
+          <Posts myProfile={false} />
           <Connections />
         </div>
       </div>
@@ -26,4 +26,4 @@ const UserProfile: FC = () => {
   );
 };
 
-export default UserProfile;
+export default MyProfile;
