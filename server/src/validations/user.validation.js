@@ -50,7 +50,7 @@ const createProfile = {
     yearsOfExperience: Joi.string().required(),
     bio: Joi.string().required(),
     linkedInURL: Joi.string().uri().optional(),
-    InstaURL: Joi.string().uri().optional(),
+    instaURL: Joi.string().uri().optional(),
     twitterURL: Joi.string().uri().optional(),
     githubURL: Joi.string().uri().optional(),
     behanceURL: Joi.string().uri().optional(),
