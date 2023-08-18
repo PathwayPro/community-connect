@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import Container from '../../common/components/Container/Container';
 import Icon, { iconProps } from '../../common/components/Icon/Icon';
 
-// import Icon, { iconProps } from './Icon/Icon';
-
 import styles from './Footer.module.scss';
 
 interface footerLinkItem {
@@ -77,7 +75,7 @@ const Footer: FC = () => {
           ))}
           <div className={styles.socials}>
             {socialsList.map((item) => (
-              <Icon key={item.type} href={item.href} type={item.type} className={item.className}/>
+              <Icon key={item.type} href={item.href} type={item.type} shape="rnd" />
             ))}
           </div>
           <button className={styles.upButton} onClick={onClickUpButton} />

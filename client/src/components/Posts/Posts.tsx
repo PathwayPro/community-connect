@@ -48,7 +48,7 @@ interface userInfoProps {
 }
 
 const userInfo: userInfoProps = {
-  imgPath: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
+  imgPath: defaultProfileImage,
   name: 'Clark Mante',
   position: 'Technician',
 };

@@ -60,6 +60,10 @@ const router = createBrowserRouter([
         path: 'volunteering',
         Component: Volunteering,
       },
+      {
+        path: 'profile/my',
+        Component: UserProfile,
+      },
     ],
   },
 ]);
