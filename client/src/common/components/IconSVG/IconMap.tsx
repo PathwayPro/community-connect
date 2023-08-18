@@ -8,6 +8,7 @@ import { ReactComponent as headerHomeIcon } from './img/header-home.svg';
 import { ReactComponent as headerMsgIcon } from './img/header-msg.svg';
 import { ReactComponent as headerSearchIcon } from './img/header-search.svg';
 import { ReactComponent as likeIcon } from './img/like.svg';
+import { ReactComponent as sendMessageIcon } from './img/send-msg.svg';
 import { ReactComponent as settingIcon } from './img/setting.svg';
 
 interface IconMap {
@@ -21,6 +22,7 @@ interface IconMap {
   headerMsgIcon: React.FC<React.SVGProps<SVGSVGElement>>;
   headerSearchIcon: React.FC<React.SVGProps<SVGSVGElement>>;
   likeIcon: React.FC<React.SVGProps<SVGSVGElement>>;
+  sendMessageIcon: React.FC<React.SVGProps<SVGSVGElement>>;
   settingIcon: React.FC<React.SVGProps<SVGSVGElement>>;
 }
 
@@ -35,6 +37,7 @@ const iconMap: IconMap = {
   headerMsgIcon: headerMsgIcon,
   headerSearchIcon: headerSearchIcon,
   likeIcon: likeIcon,
+  sendMessageIcon: sendMessageIcon,
   settingIcon: settingIcon,
 };
 

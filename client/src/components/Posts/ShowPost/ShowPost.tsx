@@ -19,12 +19,19 @@ export interface ShowPostProps {
 const ShowPost: FC<ShowPostProps> = ({ id, name, position, date, content }) => {
   const [showToast, setShowToast] = useState(false);
 
-  // TODO: Add POst actions
-  const leaveComment = () => console.log('comment');
+  // TODO: Add Post actions
+  const [showCommentBox, setshowCommentBox] = useState(false);
+  const [likeBtnGrey, setlikeBtnGrey] = useState(true);
+
+  const leaveComment = () => {
+    setshowCommentBox(!showCommentBox);
+  };
   const repostPost = () => console.log('repost');
-  const likePost = () => console.log('like');
+  const likePost = () => {
+    setlikeBtnGrey(!likeBtnGrey);
+  };
+  const sendMessage = () => console.log('send message');
   const copyPost = () => {
-    console.log('copy post link');
     setShowToast(false);
   };
   const handleClick = () => setShowToast(!showToast);
@@ -51,8 +58,15 @@ const ShowPost: FC<ShowPostProps> = ({ id, name, position, date, content }) => {
           <IconSVG name={'blogCommentIcon'} color="orangeLight" onClick={leaveComment} />
           <IconSVG name={'blogRepostIcon'} color="orangeLight" size="wide" onClick={repostPost} />
         </div>
-        <IconSVG name={'likeIcon'} color="grey" onClick={likePost} />
+        <IconSVG name={'likeIcon'} color={likeBtnGrey ? 'grey' : 'green'} onClick={likePost} />
       </div>
+      {showCommentBox && (
+        <div className={styles.commentBox}>
+          <Avatar size="small" className={styles.image} />
+          <textarea className={styles.comment} placeholder="Comment" />
+          <IconSVG name={'sendMessageIcon'} color={'grey'} size="wide" onClick={sendMessage} />
+        </div>
+      )}
     </div>
   );
 };
