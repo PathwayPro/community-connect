@@ -6,8 +6,6 @@
   margin: 16px;
   width: 100%;
 
-  @include fonts.bigText;
-
   @extend %flex-column;
   gap: 15px;
 }
@@ -26,10 +24,6 @@
 
 .info {
   @extend %flex-column-left;
-}
-
-.name {
-  @include fonts.mainText;
 }
 
 .position {

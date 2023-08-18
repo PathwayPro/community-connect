@@ -8,8 +8,8 @@ interface ScrollProps {
   className?: string;
 }
 
-const Scroll: FC<ScrollProps> = ({ children, className }) => {
-  return <div className={classNames(styles.scroll, className)}>{children}</div>;
-};
+const Scroll: FC<ScrollProps> = ({ children, className }) => (
+  <div className={classNames(styles.scroll, className)}>{children}</div>
+);
 
 export default Scroll;

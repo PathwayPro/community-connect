@@ -16,13 +16,13 @@ interface connectionProps {
 const connectionList: connectionProps[] = [
   { id: 1, imgPath: defaultProfileImage, name: 'Clark Mante', position: 'Technician' },
   { id: 2, imgPath: defaultProfileImage, name: 'Adam Kenedi', position: 'Developer' },
-  { id: 2, imgPath: '', name: 'Hana Allen', position: 'Designer' },
+  { id: 3, imgPath: '', name: 'Hana Allen', position: 'Designer' },
 ];
 
 const Connections: FC = () => {
   return (
     <div className={styles.box}>
-      Connections
+      <div className={styles.title}>Connections</div>
       <div className={styles.connections}>
         {connectionList &&
           connectionList.map((connection) => (
@@ -35,6 +35,7 @@ const Connections: FC = () => {
           ))}
       </div>
       <div className={styles.seeMore}>
+        {/* Replace with NavLink */}
         <a href="/">View all</a>
       </div>
     </div>

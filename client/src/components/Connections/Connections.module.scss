@@ -10,9 +10,11 @@
   border-radius: 15px;
   position: relative;
 
-  @include fonts.bigText;
-
   @extend %flex-column-left-center;
+}
+
+.title {
+  @include fonts.bigText;
 }
 
 .connections {

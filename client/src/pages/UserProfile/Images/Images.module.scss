@@ -10,10 +10,26 @@
 
 .backgroundImage {
   border: 2px solid colors.$white;
-  background-size: contain;
+  background: none no-repeat;
   border-radius: 15px;
   width: 100%;
   height: 100%;
+  overflow: hidden;
+
+  &.cover {
+    background-size: cover;
+    background-position: center center;
+  }
+
+  &.contain {
+    background-size: contain;
+    background-position: center top;
+  }
+}
+
+.hidden {
+  display: none;
+  opacity: 0;
 }
 
 .profileImage {

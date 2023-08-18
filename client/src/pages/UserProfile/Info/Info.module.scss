@@ -19,10 +19,6 @@
   @extend %flex-column;
 }
 
-.name {
-  @include fonts.bigText($font-size: 33px);
-}
-
 .experience {
   @include fonts.hintText($font-size: 19px);
 }

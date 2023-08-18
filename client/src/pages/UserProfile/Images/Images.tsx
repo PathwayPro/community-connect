@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useState, useRef, FC } from 'react';
 
 import Alert from '../../../common/components/Alert/Alert';
@@ -10,6 +11,7 @@ import defaultProfileImage from '../../../images/Main/defaultProfileImg.png';
 const Images: FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [alertOpen, setAlertOpen] = useState(false);
+  const [imageClassName, setImageClassName] = useState('');
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -22,15 +24,14 @@ const Images: FC = () => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      setSelectedFile(file);
       const img = new Image();
       img.src = URL.createObjectURL(file);
-
       img.onload = () => {
-        const aspectRatio = img.width / img.height;
-        if (Math.abs(aspectRatio - 28 / 9) <= 0.1) {
-          setSelectedFile(file);
+        if (img.width / img.height < 1) {
+          setImageClassName('contain');
         } else {
-          setAlertOpen(true);
+          setImageClassName('cover');
         }
       };
     }
@@ -45,7 +46,14 @@ const Images: FC = () => {
 
   return (
     <div className={styles.container}>
-      {selectedFile && <img className={styles.backgroundImage} src={URL.createObjectURL(selectedFile)} />}
+      {selectedFile && (
+        <div
+          className={classNames(styles.backgroundImage, styles[imageClassName])}
+          style={{ backgroundImage: `url(${URL.createObjectURL(selectedFile)})` }}
+        >
+          <img className={styles.hidden} src={URL.createObjectURL(selectedFile)} />
+        </div>
+      )}
 
       <img className={styles.profileImage} src={source} alt="Your Image" />
 

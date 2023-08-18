@@ -1,5 +1,4 @@
 @use '../../styles/colors';
-@use '../../styles/fonts';
 @use '../../styles/mixins';
 
 .container {
@@ -16,6 +15,5 @@
   height: 65px;
   cursor: pointer;
 
-  @include fonts.mainText;
   @extend %flex-center;
 }

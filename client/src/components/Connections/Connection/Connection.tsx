@@ -18,7 +18,7 @@ const Connection: FC<connectionProps> = ({ imgPath, name, position }) => {
       <div className={styles.connection}>
         <img src={imgPath} alt="connection img" className={styles.image} />
         <div className={styles.info}>
-          <div className={styles.name}>{name}</div>
+          <div>{name}</div>
           <div className={styles.position}>{position}</div>
         </div>
       </div>

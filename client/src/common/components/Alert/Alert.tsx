@@ -1,5 +1,8 @@
 import { FC } from 'react';
 
+import Button from '../Button/Button';
+import Heading from '../Heading/Heading';
+
 import styles from './Alert.module.scss';
 
 interface alertInterface {
@@ -9,7 +12,7 @@ interface alertInterface {
   content?: string;
 }
 
-const CustomAlert: FC<alertInterface> = ({ isOpen, onClose, title, content }) => {
+const Alert: FC<alertInterface> = ({ isOpen, onClose, title, content }) => {
   if (!isOpen) {
     return null;
   }
@@ -17,12 +20,16 @@ const CustomAlert: FC<alertInterface> = ({ isOpen, onClose, title, content }) =>
   return (
     <div className={styles.customAlertOverlay}>
       <div className={styles.customAlert}>
-        <h2>{title}</h2>
-        <p>{content}</p>
-        <button onClick={onClose}>Close</button>
+        {title && (
+          <Heading tagType="h5" className={styles.title}>
+            {title}
+          </Heading>
+        )}
+        {content && <p className={styles.content}>{content}</p>}
+        <Button label="Close" size="small" onClick={onClose} />
       </div>
     </div>
   );
 };
 
-export default CustomAlert;
+export default Alert;

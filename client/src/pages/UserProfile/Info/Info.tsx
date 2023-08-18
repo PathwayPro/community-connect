@@ -3,6 +3,7 @@ import { FC } from 'react';
 
 import { useAppDispatch } from '../../../app/hooks';
 import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
+import Heading from '../../../common/components/Heading/Heading';
 import Icon, { iconProps } from '../../../common/components/Icon/Icon';
 import IconSVG from '../../../common/components/IconSVG/IconSVG';
 
@@ -51,7 +52,7 @@ const Info: FC = () => {
     <div className={styles.personal}>
       <IconSVG name={'editIcon'} className={styles.editIcon} onClick={openModal} />
       <div className={styles.mainInfo}>
-        <div className={styles.name}>{userData.name}</div>
+        <Heading tagType="h4">{userData.name}</Heading>
         <div className={styles.experience}>{userData.background}</div>
         <div className={styles.experience}>{userData.experience}</div>
       </div>
