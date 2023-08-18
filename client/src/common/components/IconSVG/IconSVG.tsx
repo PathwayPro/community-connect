@@ -8,7 +8,7 @@ import styles from './IconSVG.module.scss';
 interface IconSVGProps {
   name: keyof typeof iconMap;
   label?: string;
-  color?: 'black' | 'orange' | 'orangeLight' | 'grey';
+  color?: 'black' | 'orange' | 'orangeLight' | 'grey' | 'green';
   size?: 'small' | 'medium' | 'big' | 'wide';
   isSubmit?: boolean;
   className?: string;

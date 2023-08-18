@@ -54,13 +54,37 @@
   justify-content: space-between;
 }
 
-.repostComment {
+.repostCommentBtn {
   @extend %flex-row-left;
   gap: 16px;
+  margin-bottom: 0px;;
 }
 
 .setting {
   position: absolute;
   top: 10px;
   right: 25px;
+}
+
+.commentBox {
+  @extend %flex-row-left;
+}
+
+.commentImage {
+  border: 2px solid colors.$orange-normal;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 13px;
+}
+
+.comment {
+  width: 510px;
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid colors.$grey-light;
+  padding: 12px;
+  background-color: colors.$white;
+  resize: none;
+  margin-right: 40px;
 }

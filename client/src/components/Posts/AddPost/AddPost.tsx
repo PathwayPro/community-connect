@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-import { useAppDispatch } from '../../../../app/hooks';
-import { showModal, MODAL_TYPE } from '../../../../app/slices/modalSlice';
+import { useAppDispatch } from '../../../app/hooks';
+import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
 
 import styles from './AddPost.module.scss';
 

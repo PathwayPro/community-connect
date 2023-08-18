@@ -15,11 +15,18 @@ export interface ShowPostProps {
 }
 
 const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content }) => {
-  const [showToast, setShowToast] = useState(false);
 
-  const leaveComment = () => console.log('comment');
+  const [showToast, setShowToast] = useState(false);
+  const [showCommentBox, setshowCommentBox] = useState(false);
+  const [likeBtnGrey, setlikeBtnGrey] = useState(true);
+
+  const leaveComment = () => { setshowCommentBox(!showCommentBox) };
   const repostPost = () => console.log('repost');
-  const likePost = () => console.log('like');
+  const likePost = () => {
+    setlikeBtnGrey(!likeBtnGrey);
+    console.log(likeBtnGrey)
+  };
+  const sendMessage = () => console.log('send message');
   const copyPost = () => {
     console.log('copy post link');
     setShowToast(false);
@@ -42,12 +49,19 @@ const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content })
       </div>
       <div className={styles.content}>{content}</div>
       <div className={styles.reactions}>
-        <div className={styles.repostComment}>
+        <div className={styles.repostCommentBtn}>
           <IconSVG name={'blogCommentIcon'} color={'orangeLight'} onClick={leaveComment} />
           <IconSVG name={'blogRepostIcon'} color={'orangeLight'} onClick={repostPost} />
         </div>
-        <IconSVG name={'likeIcon'} color={'grey'} onClick={likePost} />
+        <IconSVG name={'likeIcon'} color={likeBtnGrey ? 'grey' : 'green'} onClick={likePost} />
       </div>
+      {showCommentBox &&
+        <div className={styles.commentBox}>
+          <img src={imgPath} alt="connection img" className={styles.commentImage} />
+          <textarea className={styles.comment} placeholder="Comment" />
+          <IconSVG name={'sendMessageIcon'} color={'grey'} onClick={sendMessage} />
+        </div>
+      }
     </div>
   );
 };
