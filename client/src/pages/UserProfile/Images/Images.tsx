@@ -8,7 +8,6 @@ import styles from './Images.module.scss';
 import defaultProfileImage from '../../../images/Main/defaultProfileImg.png';
 
 const Images: FC = () => {
-
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [alertOpen, setAlertOpen] = useState(false);
 
@@ -42,26 +41,15 @@ const Images: FC = () => {
   };
 
   const isProfileImageAvailable = false;
-  const source = !isProfileImageAvailable
-    ? defaultProfileImage
-    : '';
+  const source = !isProfileImageAvailable ? defaultProfileImage : '';
 
   return (
     <div className={styles.container}>
-      {selectedFile && (
-        <img
-          className={styles.backgroundImage}
-          src={URL.createObjectURL(selectedFile)}
-        />
-      )}
+      {selectedFile && <img className={styles.backgroundImage} src={URL.createObjectURL(selectedFile)} />}
 
       <img className={styles.profileImage} src={source} alt="Your Image" />
 
-      <IconSVG
-        name={'editIcon'}
-        className={styles.editIcon}
-        onClick={handleButtonClick}
-      />
+      <IconSVG name={'editIcon'} className={styles.editIcon} onClick={handleButtonClick} />
 
       <input
         className={styles.imageInput}

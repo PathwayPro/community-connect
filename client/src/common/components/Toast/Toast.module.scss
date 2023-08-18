@@ -3,19 +3,19 @@
 @use '../../styles/mixins';
 
 .container {
-	position: relative;
+  position: relative;
 }
 
 .toast {
-	background-color: colors.$orange-light-hover;
-	border-radius: 5px;
-	position: absolute;
-	top: 15px;
-	right: 0px;
-	width: 200px;
-	height: 65px;
-	cursor: pointer;
+  background-color: colors.$orange-light-hover;
+  border-radius: 5px;
+  position: absolute;
+  top: 15px;
+  right: 0px;
+  width: 200px;
+  height: 65px;
+  cursor: pointer;
 
-	@include fonts.mainText;
-	@extend %flex-center;
+  @include fonts.mainText;
+  @extend %flex-center;
 }

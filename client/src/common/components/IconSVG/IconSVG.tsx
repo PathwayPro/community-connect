@@ -20,15 +20,7 @@ interface IconSVGProps {
   'big'    38 x 32 – for header icons
   'wide'   33 x 20 – for repost icon
 */
-const IconSVG: FC<IconSVGProps> = ({
-  name,
-  label = 'icon',
-  color,
-  size,
-  isSubmit = false,
-  className,
-  onClick,
-}) => {
+const IconSVG: FC<IconSVGProps> = ({ name, label = 'icon', color, size, isSubmit = false, className, onClick }) => {
   const Icon = iconMap[name];
   const handleKeyDown: KeyboardEventHandler<HTMLButtonElement> = (e) => {
     if (e.key === 'Enter' && onClick) {

@@ -9,7 +9,6 @@ import { ReactComponent as headerSearchIcon } from '../../../images/Icon/header-
 import { ReactComponent as likeIcon } from '../../../images/Icon/like.svg';
 import { ReactComponent as settingIcon } from '../../../images/Icon/setting.svg';
 
-
 interface IconMap {
   blogCommentIcon: React.FC<React.SVGProps<SVGSVGElement>>;
   blogRepostIcon: React.FC<React.SVGProps<SVGSVGElement>>;

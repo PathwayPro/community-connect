@@ -40,21 +40,16 @@ const userData: userDataProps = {
 };
 
 const Info: FC = () => {
-
   const dispatch = useAppDispatch();
 
   const openModal = (e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.KeyboardEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    dispatch(showModal({ content: MODAL_TYPE.FILL_USER_PROFILE }));
+    dispatch(showModal({ content: MODAL_TYPE.FILL_USER_PROFILE, closeOnOverlayClick: false }));
   };
 
   return (
     <div className={styles.personal}>
-      <IconSVG
-        name={'editIcon'}
-        className={styles.editIcon}
-        onClick={openModal}
-      />
+      <IconSVG name={'editIcon'} className={styles.editIcon} onClick={openModal} />
       <div className={styles.mainInfo}>
         <div className={styles.name}>{userData.name}</div>
         <div className={styles.experience}>{userData.background}</div>
@@ -81,9 +76,9 @@ const Info: FC = () => {
         <div className={styles.infoRow}>
           <div className={styles.title}>Spoken language :</div>
           <div className={styles.languageDetail}>
-            {userData.language.map((item, index) => {
+            {userData.language.map((item) => {
               return (
-                <div key={index} className={styles.languageItem}>
+                <div key={item} className={styles.languageItem}>
                   {item}
                 </div>
               );
@@ -91,9 +86,10 @@ const Info: FC = () => {
           </div>
         </div>
         <div className={styles.socials}>
-          {userData.socialsList.map((item) => (
-            <Icon key={item.type} href={item.href} type={item.type} className={styles.icons} />
-          ))}
+          {userData.socialsList &&
+            userData.socialsList.map((item) => (
+              <Icon key={item.type} href={item.href} type={item.type} className={styles.icons} />
+            ))}
         </div>
       </div>
     </div>

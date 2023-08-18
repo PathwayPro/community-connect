@@ -9,21 +9,10 @@ interface ToastProps {
   containerClassName?: string;
 }
 
-const Toast: FC<ToastProps> = ({
-  onToastClick,
-  toastContent,
-  toastClassName,
-  containerClassName,
-}) => {
+const Toast: FC<ToastProps> = ({ onToastClick, toastContent, toastClassName, containerClassName }) => {
   return (
-    <div
-      onClick={onToastClick}
-      className={classNames(containerClassName, styles.container)}>
-      <div
-        className={classNames(toastClassName, styles.toast)}
-      >
-        {toastContent}
-      </div>
+    <div onClick={onToastClick} className={classNames(containerClassName, styles.container)}>
+      <div className={classNames(toastClassName, styles.toast)}>{toastContent}</div>
     </div>
   );
 };
