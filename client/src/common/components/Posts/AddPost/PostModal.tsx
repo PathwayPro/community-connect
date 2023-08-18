@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { useAppDispatch } from '../../../../app/hooks';
 import { closeModal } from '../../../../app/slices/modalSlice';
-import defaultProfileImage from '../../../../images/Main/defaultProfileImg.png';
+import defaultProfileImage from '../../../../images/Main/defaultProfileImg.svg';
 import Button from '../../Button/Button';
 import IconSVG from '../../IconSVG/IconSVG';
 

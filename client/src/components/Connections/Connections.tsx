@@ -5,7 +5,7 @@ import Connection from './Connection/Connection';
 
 import styles from './Connections.module.scss';
 
-import defaultProfileImage from '../../images/Main/defaultProfileImg.png';
+import defaultProfileImage from '../../images/Main/defaultProfileImg.svg';
 
 interface connectionProps {
   id: number;

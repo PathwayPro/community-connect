@@ -5,7 +5,7 @@ import IconSVG from '../../../common/components/IconSVG/IconSVG';
 
 import styles from './Images.module.scss';
 
-import defaultProfileImage from '../../../images/Main/defaultProfileImg.png';
+import defaultProfileImage from '../../../images/Main/defaultProfileImg.svg';
 
 interface ImagesProps {
   myProfile: boolean;

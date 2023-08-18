@@ -7,7 +7,7 @@ import IconSVG from '../../../common/components/IconSVG/IconSVG';
 
 import styles from './MessageModal.module.scss';
 
-import defaultProfileImage from '../../../images/Main/defaultProfileImg.png';
+import defaultProfileImage from '../../../images/Main/defaultProfileImg.svg';
 
 export interface MessageModal {
   imgPath?: string;
