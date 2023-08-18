@@ -15,7 +15,7 @@ export interface PostModal {
 
 const user: PostModal[] = [
   {
-    imgPath: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
+    imgPath: 'https://media.istockphoto.com/id/1415929535/photo/creative-entrepreneur-talking-on-business-phone-call-writing-in-notebook-and-planning-a.jpg?s=2048x2048&w=is&k=20&c=MDp4A4Km15g2u8DAZIH1w-DFquZH6CsEQ_eZUH_ohEg=',
     name: 'Clark Mante',
   },
 ];
