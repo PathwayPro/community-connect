@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import Button from '../../Button/Button';
+import Button from '../../../common/components/Button/Button';
 
 import styles from './Connection.module.scss';
 
