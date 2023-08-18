@@ -1,8 +1,8 @@
 import { FC, useState } from 'react';
 
-import formatDate from '../../../utils/formatDateUtils';
-import IconSVG from '../../IconSVG/IconSVG';
-import Toast from '../../Toast/Toast';
+import IconSVG from '../../../common/components/IconSVG/IconSVG';
+import Toast from '../../../common/components/Toast/Toast';
+import formatDate from '../../../common/utils/formatDateUtils';
 
 import styles from './ShowPost.module.scss';
 

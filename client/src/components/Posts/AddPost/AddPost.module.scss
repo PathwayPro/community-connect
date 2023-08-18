@@ -1,6 +1,6 @@
-@use '../../../../common/styles/fonts';
-@use '../../../../common/styles/mixins';
-@use '../../../../common/styles/colors';
+@use '../../../common/styles/fonts';
+@use '../../../common/styles/mixins';
+@use '../../../common/styles/colors';
 
 .newPost {
     background: colors.$blue-light;

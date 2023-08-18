@@ -1,13 +1,13 @@
 import { FC } from 'react';
 
-import Scroll from '../Scroll/Scroll';
+import Scroll from '../../common/components/Scroll/Scroll';
 
 import AddPost from './AddPost/AddPost';
 import ShowPost from './ShowPost/ShowPost';
 
 import styles from './Posts.module.scss';
 
-import defaultProfileImage from '../../../images/Main/defaultProfileImg.png';
+import defaultProfileImage from '../../images/Main/defaultProfileImg.png';
 
 interface PostProps {
   id: number;

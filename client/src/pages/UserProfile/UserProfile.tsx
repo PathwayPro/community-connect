@@ -1,9 +1,9 @@
 import { FC } from 'react';
 
-import Connections from '../../common/components/Connections/Connections';
 import Container from '../../common/components/Container/Container';
-import Events from '../../common/components/Events/Events';
-import Posts from '../../common/components/Posts/Posts';
+import Connections from '../../components/Connections/Connections';
+import Events from '../../components/Events/Events';
+import Posts from '../../components/Posts/Posts';
 
 import Images from './Images/Images';
 import Info from './Info/Info';
