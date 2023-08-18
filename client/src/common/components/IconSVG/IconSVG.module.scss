@@ -1,15 +1,15 @@
 @use '../../styles/colors';
 
 .button {
-  width: fit-content;
-  padding: 0 2px;
+  width: 100%;
+  padding: 0;
   background-color: transparent;
   border: none;
   cursor: pointer;
 
   svg {
     height: inherit;
-    width: inherit;
+    width: 100%;
     fill: inherit;
 
     path {
@@ -18,22 +18,22 @@
   }
 
   &.small {
-    min-width: 15px;
+    max-width: 15px;
     height: 15px;
   }
 
   &.medium {
-    min-width: 20px;
+    max-width: 20px;
     height: 20px;
   }
 
   &.big {
-    min-width: 38px;
+    max-width: 38px;
     height: 32px;
   }
 
   &.wide {
-    min-width: 33px;
+    max-width: 33px;
     height: 20px;
   }
 

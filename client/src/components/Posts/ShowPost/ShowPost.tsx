@@ -17,6 +17,7 @@ export interface ShowPostProps {
 const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content }) => {
   const [showToast, setShowToast] = useState(false);
 
+  // TODO: Add POst actions
   const leaveComment = () => console.log('comment');
   const repostPost = () => console.log('repost');
   const likePost = () => console.log('like');
@@ -43,10 +44,10 @@ const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content })
       <div className={styles.content}>{content}</div>
       <div className={styles.reactions}>
         <div className={styles.repostComment}>
-          <IconSVG name={'blogCommentIcon'} color={'orangeLight'} onClick={leaveComment} />
-          <IconSVG name={'blogRepostIcon'} color={'orangeLight'} onClick={repostPost} />
+          <IconSVG name={'blogCommentIcon'} color="orangeLight" onClick={leaveComment} />
+          <IconSVG name={'blogRepostIcon'} color="orangeLight" size="wide" onClick={repostPost} />
         </div>
-        <IconSVG name={'likeIcon'} color={'grey'} onClick={likePost} />
+        <IconSVG name={'likeIcon'} color="grey" onClick={likePost} />
       </div>
     </div>
   );
