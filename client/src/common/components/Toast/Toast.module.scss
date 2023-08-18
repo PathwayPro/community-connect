@@ -1,0 +1,19 @@
+@use '../../styles/colors';
+@use '../../styles/mixins';
+
+.container {
+  position: relative;
+}
+
+.toast {
+  background-color: colors.$orange-light-hover;
+  border-radius: 5px;
+  position: absolute;
+  top: 15px;
+  right: 0px;
+  width: 200px;
+  height: 65px;
+  cursor: pointer;
+
+  @extend %flex-center;
+}

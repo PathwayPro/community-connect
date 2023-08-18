@@ -77,6 +77,13 @@
   line-height: $line-height;
 }
 
+@mixin bigText($font-size: 16px, $font-weight: 700, $line-height: 1.5) {
+  @extend %font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+}
+
 @mixin navText($font-size: 1.45rem, $font-weight: 700, $color: colors.$white-light) {
   @extend %font-family;
   font-size: $font-size;

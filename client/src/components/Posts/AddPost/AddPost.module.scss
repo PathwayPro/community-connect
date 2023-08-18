@@ -1,0 +1,32 @@
+@use '../../../common/styles/fonts';
+@use '../../../common/styles/mixins';
+@use '../../../common/styles/colors';
+
+.newPost {
+  background: colors.$blue-light;
+  border-radius: 15px;
+  width: 100%;
+  min-height: 122px;
+  padding: 26px;
+
+  @extend %flex-center;
+  gap: 16px;
+}
+
+.image {
+  border: 2px solid colors.$orange-normal;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+}
+
+.input {
+  background: colors.$white;
+  width: 100%;
+  height: 48px;
+  padding: 12px;
+  border: 1px solid #d5d4dc;
+  border-radius: 8px;
+
+  @include fonts.mainText;
+}

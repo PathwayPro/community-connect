@@ -69,9 +69,7 @@ const Modal: FC = () => {
         onRequestClose={() => dispatch(closeModal())}
         shouldCloseOnOverlayClick={closeOnOverlayClick}
       >
-        <div ref={modalRef}>
-          {ModalContent}
-        </div>
+        <div ref={modalRef}>{ModalContent}</div>
       </ReactModal>
     </>
   );

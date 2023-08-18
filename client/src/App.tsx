@@ -7,6 +7,7 @@ import Layout from './pages/Layout/Layout';
 import Main from './pages/Main/Main';
 import { ApplyForMentorship, BecomeMentor } from './pages/Mentorship';
 import Resources from './pages/Resources/Resources';
+import UserProfile from './pages/UserProfile/UserProfile';
 import Volunteering from './pages/Volunteering/Volunteering';
 
 const router = createBrowserRouter([
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: 'volunteering',
         Component: Volunteering,
+      },
+      {
+        path: 'profile/my',
+        Component: UserProfile,
       },
     ],
   },
