@@ -1,4 +1,5 @@
 @use '../../../common/styles/colors';
+@use '../../../common/styles/mixins';
 
 .container {
   background-color: colors.$orange-normal;
@@ -33,10 +34,6 @@
 }
 
 .profileImage {
-  width: 200px;
-  height: 200px;
-  border-radius: 200px;
-  border: 2px solid colors.$orange-light;
   position: absolute;
   top: 150px;
   left: 40px;
@@ -44,7 +41,7 @@
 }
 
 .imageInput {
-  display: none;
+  @extend %visually-hidden;
 }
 
 .editIcon {

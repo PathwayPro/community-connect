@@ -2,39 +2,14 @@
 @use '../../common/styles/fonts';
 @use '../../common/styles/mixins';
 
-.box {
-  background: colors.$blue-light;
-  width: 26%;
-  min-height: 100px;
-  padding: 26px 16px;
-  border-radius: 15px;
-  position: relative;
-
-  @extend %flex-column-left-center;
-}
-
-.title {
-  @include fonts.bigText;
-}
-
 .connections {
   width: 100%;
-  margin-bottom: 16px;
-
-  @extend %flex-column-center;
 }
 
-.seeMore {
-  position: absolute;
-  bottom: 26px;
-  right: 16px;
-  color: colors.$black;
+.navLink {
+  display: block;
+  margin-left: auto;
+  text-decoration: none;
 
   @include fonts.mainText($font-size: 13px);
-}
-
-a {
-  text-decoration: none;
-  color: colors.$black;
-  cursor: pointer;
 }

@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 
+import Avatar from '../../../common/components/Avatar/Avatar';
 import IconSVG from '../../../common/components/IconSVG/IconSVG';
 import Toast from '../../../common/components/Toast/Toast';
 import formatDate from '../../../common/utils/formatDateUtils';
@@ -30,11 +31,11 @@ const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content })
   return (
     <div className={styles.box}>
       <div className={styles.userInfo}>
-        <img src={imgPath} alt="connection img" className={styles.image} />
+        <Avatar src={imgPath} size="medium" className={styles.image} />
         <div className={styles.info}>
-          <div className={styles.name}>{name}</div>
-          <div className={styles.position}>{position}</div>
-          <div className={styles.date}>{formatDate(date)}</div>
+          <span className={styles.name}>{name}</span>
+          <span className={styles.position}>{position}</span>
+          <span className={styles.date}>{formatDate(date)}</span>
         </div>
       </div>
       <div className={styles.setting}>

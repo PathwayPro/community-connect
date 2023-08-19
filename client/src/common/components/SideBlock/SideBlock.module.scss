@@ -1,0 +1,31 @@
+@use '../../styles/colors.scss';
+@use '../../styles/fonts.scss';
+@use '../../styles/media.scss';
+@use '../../styles/mixins.scss';
+
+.sideBlock {
+  position: relative;
+  @extend %flex-column;
+  align-items: center;
+  width: 26%;
+  min-height: 100px;
+  border-radius: 15px;
+  background: colors.$blue-light;
+
+  &.small {
+    padding: 26px 16px;
+  }
+
+  &.normal {
+    padding: 26px;
+  }
+}
+
+.title {
+  margin-bottom: 16px;
+  @include fonts.headingText;
+}
+
+.subtitle {
+  @include fonts.hintText;
+}

@@ -7,7 +7,7 @@ import ShowPost from './ShowPost/ShowPost';
 
 import styles from './Posts.module.scss';
 
-import defaultProfileImage from '../../images/Main/defaultProfileImg.png';
+import defaultProfileImage from '../../images/defaultProfileImg.svg';
 
 interface PostProps {
   id: number;

@@ -1,10 +1,13 @@
 import { FC } from 'react';
+import { NavLink } from 'react-router-dom';
+
+import SideBlock from '../../common/components/SideBlock/SideBlock';
 
 import Connection from './Connection/Connection';
 
 import styles from './Connections.module.scss';
 
-import defaultProfileImage from '../../images/Main/defaultProfileImg.png';
+import defaultProfileImage from '../../images/defaultProfileImg.svg';
 
 interface connectionProps {
   id: number;
@@ -17,12 +20,12 @@ const connectionList: connectionProps[] = [
   { id: 1, imgPath: defaultProfileImage, name: 'Clark Mante', position: 'Technician' },
   { id: 2, imgPath: defaultProfileImage, name: 'Adam Kenedi', position: 'Developer' },
   { id: 3, imgPath: '', name: 'Hana Allen', position: 'Designer' },
+  { id: 4, imgPath: defaultProfileImage, name: 'Geoffrey Donnelly', position: 'Developer' },
 ];
 
 const Connections: FC = () => {
   return (
-    <div className={styles.box}>
-      <div className={styles.title}>Connections</div>
+    <SideBlock title="Connections">
       <div className={styles.connections}>
         {connectionList &&
           connectionList.map((connection) => (
@@ -34,11 +37,10 @@ const Connections: FC = () => {
             />
           ))}
       </div>
-      <div className={styles.seeMore}>
-        {/* Replace with NavLink */}
-        <a href="/">View all</a>
-      </div>
-    </div>
+      <NavLink to="/" className={styles.navLink}>
+        View all
+      </NavLink>
+    </SideBlock>
   );
 };
 

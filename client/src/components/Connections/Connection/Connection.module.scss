@@ -1,35 +1,26 @@
+@use '../../../common/styles/colors';
 @use '../../../common/styles/fonts';
 @use '../../../common/styles/mixins';
-@use '../../../common/styles/colors';
-
-.box {
-  margin: 16px;
-  width: 100%;
-
-  @extend %flex-column;
-  gap: 15px;
-}
 
 .connection {
-  @extend %flex-row-left;
+  display: flex;
+  padding-bottom: 16px;
 }
 
 .image {
   border: 2px solid colors.$orange-normal;
   width: 50px;
   height: 50px;
+  margin-right: 3px;
   border-radius: 50%;
-  margin-right: 20px;
 }
 
 .info {
-  @extend %flex-column-left;
+  margin-bottom: 16px;
+  margin-left: 16px;
+  @extend %flex-column;
 }
 
 .position {
   @include fonts.hintText($font-size: 16px);
-}
-
-.btn {
-  @extend %flex-center;
 }
