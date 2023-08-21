@@ -138,15 +138,6 @@ export const apiSlice = createApi({
         }
       },
     }),
-
-    // Get user profile
-    getUserProfile: builder.query({
-      query: (data) => ({
-        url: `/v1/auth/users/profile`,
-        method: 'GET',
-        body: data,
-      }),
-    }),
   }),
 });
 
@@ -160,5 +151,4 @@ export const {
   useForgotPasswordMutation,
   useResetPasswordMutation,
   useLogoutQuery,
-  useGetUserProfileQuery,
 } = apiSlice;

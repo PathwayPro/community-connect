@@ -1,11 +1,8 @@
 /* eslint-disable max-len */
 import { format } from 'date-fns';
 import { FC } from 'react';
-// import { FC, useState, useEffect } from 'react';
 
 import { useAppDispatch } from '../../../app/hooks';
-// import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-// import { useGetUserProfileQuery } from '../../../app/slices/apiSlice';
 import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
 import Button from '../../../common/components/Button/Button';
 import Icon, { iconProps } from '../../../common/components/Icon/Icon';
@@ -47,37 +44,6 @@ interface InfoProps {
 }
 
 const Info: FC<InfoProps> = ({ myProfile, userProfile }) => {
-  // const [userProfileData, setUserProfileData] = useState(null);
-
-
-  // const credentials = useAppSelector((state) => state.auth.token);
-
-
-  // const [getUserProfile] = useGetUserProfileQuery();
-
-  // const data = {
-  //   token: credentials,
-  // };
-
-  // useEffect(() => {
-  //   const fetchUserProfile = async () => {
-  //     try {
-  //       const response = await getUserProfile(data);
-  //       if (!response.ok) {
-  //         throw new Error('Failed to fetch user profile');
-  //       }
-  //       const userData = await response.json();
-  //       setUserProfileData(userData);
-  //     } catch (error) {
-  //       console.error('Error fetching user profile:', error);
-  //     }
-  //   };
-
-  //   fetchUserProfile();
-  // }, []);
-
-  // console.log(userProfileData);
-
   const dispatch = useAppDispatch();
 
   const openModal = (e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.KeyboardEvent<HTMLButtonElement>) => {
