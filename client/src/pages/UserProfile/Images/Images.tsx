@@ -1,3 +1,4 @@
+import axios from 'axios';
 import classNames from 'classnames';
 import { useState, useRef, FC } from 'react';
 
@@ -11,7 +12,6 @@ import defaultProfileImage from '../../../images/Main/defaultProfileImg.png';
 const Images: FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [alertOpen, setAlertOpen] = useState(false);
-  const [imageClassName, setImageClassName] = useState('');
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -21,17 +21,34 @@ const Images: FC = () => {
     }
   };
 
+  const handleUpload = async () => {
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+
+      try {
+        const response = await axios.post('/upload', formData);
+        console.log('File uploaded successfully!', response.data);
+      } catch (error) {
+        console.error('Error uploading file:', error);
+      }
+    }
+  };
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setSelectedFile(file);
       const img = new Image();
       img.src = URL.createObjectURL(file);
       img.onload = () => {
-        if (img.width / img.height < 1) {
-          setImageClassName('contain');
+        const tolerance = 1; //tolerance for aspect ratio
+
+        const isImgInRange = Math.abs(img.width/img.height - 1320/250) <= tolerance;
+        if (isImgInRange) {
+          setSelectedFile(file);
+          handleUpload();
         } else {
-          setImageClassName('cover');
+          setAlertOpen(true);
         }
       };
     }
@@ -48,7 +65,7 @@ const Images: FC = () => {
     <div className={styles.container}>
       {selectedFile && (
         <div
-          className={classNames(styles.backgroundImage, styles[imageClassName])}
+          className={classNames(styles.backgroundImage)}
           style={{ backgroundImage: `url(${URL.createObjectURL(selectedFile)})` }}
         >
           <img className={styles.hidden} src={URL.createObjectURL(selectedFile)} />
