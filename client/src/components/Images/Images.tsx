@@ -1,11 +1,13 @@
 import { useState, useRef, FC } from 'react';
 
-import Alert from '../../../common/components/Alert/Alert';
-import IconSVG from '../../../common/components/IconSVG/IconSVG';
+import Alert from '../../common/components/Alert/Alert';
+import IconSVG from '../../common/components/IconSVG/IconSVG';
 
 import styles from './Images.module.scss';
 
-import defaultProfileImage from '../../../images/Main/defaultProfileImg.svg';
+import defaultProfileImage from '../../images/Main/defaultProfileImg.svg';
+
+
 
 interface ImagesProps {
   myProfile: boolean;

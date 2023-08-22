@@ -3,14 +3,13 @@ import { FC } from 'react';
 import Container from '../../common/components/Container/Container';
 import Connections from '../../components/Connections/Connections';
 import Events from '../../components/Events/Events';
+import Images from '../../components/Images/Images';
+import Info from '../../components/Info/Info';
 import Posts from '../../components/Posts/Posts';
-
-import Images from './Images/Images';
-import Info from './Info/Info';
 
 import styles from './Profile.module.scss';
 
-const MyProfile: FC = () => {
+const UserProfile: FC = () => {
   return (
     <Container>
       <div className={styles.page}>
@@ -26,4 +25,4 @@ const MyProfile: FC = () => {
   );
 };
 
-export default MyProfile;
+export default UserProfile;

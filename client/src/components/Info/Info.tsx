@@ -2,11 +2,11 @@
 import { format } from 'date-fns';
 import { FC } from 'react';
 
-import { useAppDispatch } from '../../../app/hooks';
-import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
-import Button from '../../../common/components/Button/Button';
-import Icon, { iconProps } from '../../../common/components/Icon/Icon';
-import IconSVG from '../../../common/components/IconSVG/IconSVG';
+import { useAppDispatch } from '../../app/hooks';
+import { showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
+import Button from '../../common/components/Button/Button';
+import Icon, { iconProps } from '../../common/components/Icon/Icon';
+import IconSVG from '../../common/components/IconSVG/IconSVG';
 
 import styles from './Info.module.scss';
 
