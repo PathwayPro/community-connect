@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { useState, useRef, FC } from 'react';
 
-import Alert from '../../../common/components/Alert/Alert';
-import Avatar from '../../../common/components/Avatar/Avatar';
-import IconSVG from '../../../common/components/IconSVG/Button/IconSVG';
+import Alert from '../../common/components/Alert/Alert';
+import Avatar from '../../common/components/Avatar/Avatar';
+import IconSVG from '../../common/components/IconSVG/Button/IconSVG';
 
 import styles from './Images.module.scss';
 
