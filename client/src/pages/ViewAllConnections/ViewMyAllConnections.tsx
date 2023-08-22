@@ -1,9 +1,11 @@
 import { FC } from 'react';
 
 import Container from '../../common/components/Container/Container';
-// import Connections from '../../components/Connections/Connections';
 import Images from '../../components/Images/Images';
 import Info from '../../components/Info/Info';
+
+import Connections from './Connections/Connections';
+import Requests from './Requests/Requests';
 
 import styles from './ViewAllConnections.module.scss';
 
@@ -14,7 +16,8 @@ const ViewMyAllConnections: FC = () => {
         <Images myProfile={true} />
         <Info myProfile={true} userProfile={false} />
         <div className={styles.socials}>
-          {/* <Connections /> */}
+          <Requests />
+          <Connections />
         </div>
       </div>
     </Container>

@@ -49,6 +49,7 @@ const Connections: FC = () => {
             imgPath={connection.imgPath ? connection.imgPath : defaultProfileImage}
             name={connection.name}
             position={connection.position}
+            buttonText='View Profile'
           />
         ))}
       </div>

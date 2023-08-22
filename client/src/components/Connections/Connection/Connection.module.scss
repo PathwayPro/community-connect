@@ -30,6 +30,14 @@
   @include fonts.hintText($font-size: 16px);
 }
 
-.btn {
+.singleBtn {
   @extend %flex-center;
+}
+
+.twoBtns {
+  margin-left: 5px;
+  margin-right: 5px;
+  
+  display: flex;
+  justify-content: space-between;
 }

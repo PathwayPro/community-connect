@@ -1,0 +1,32 @@
+@use '../../../common/styles/colors';
+@use '../../../common/styles/fonts';
+@use '../../../common/styles/mixins';
+
+.box {
+  width: 72%;
+  max-height: 875px;
+  margin-bottom: 8px;
+}
+
+.title {
+  margin-bottom: 20px;
+  margin-top: 10px;
+  text-align: center;
+
+  @include fonts.bigText($font-size: 33px);
+}
+
+.connections {
+  margin-bottom: 8px;
+  background: colors.$blue-light;
+  padding: 40px 29px;
+  border-radius: 15px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.connection {
+  width: 29%;
+  margin: 16px;
+
+}
