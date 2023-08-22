@@ -8,10 +8,10 @@ import useWindowSize from '../../../common/utils/useWindowSize';
 import { SendVerificationEmail, VerifyEmail } from '../../../components/ConfirmEmail';
 import FillUserProfile from '../../../components/FillUserProfileForm/FillUserProfileForm';
 import ForgotPasswordForm from '../../../components/ForgotPasswordForm/ForgotPasswordForm';
+import MessageModal from '../../../components/Info/MessageModal/MessageModal';
 import LoginForm from '../../../components/LoginForm/LoginForm';
 import RegisterForm from '../../../components/RegisterForm/RegisterForm';
 import ResetPasswordForm from '../../../components/ResetPasswordForm/ResetPasswordForm';
-import MessageModal from '../../../pages/Profile/MessageModal/MessageModal';
 import PostModal from '../Posts/AddPost/PostModal';
 
 import styles from './Modal.module.scss';
@@ -26,7 +26,7 @@ const Modal: FC = () => {
   const [isTall, setIsTall] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // add class ".tall" when modal is highter that clientHeight
+  // add class ".tall" when modal is highter than clientHeight
   useEffect(() => {
     if (isOpen) {
       const timer = setTimeout(() => {
