@@ -31,8 +31,8 @@ const ViewUserAllConnections: FC = () => {
         <Images myProfile={true} />
         <Info myProfile={true} userProfile={false} />
         <div className={styles.socials}>
-          <Requests size={maxSize} onSizeChange={handleRequestsSizeChange} />
-          <Connections size={maxSize} onSizeChange={handleConnectionsSizeChange} />
+          <Requests maxSize={maxSize} onSizeChange={handleRequestsSizeChange} />
+          <Connections maxSize={maxSize} onSizeChange={handleConnectionsSizeChange} />
         </div>
       </div>
     </Container>

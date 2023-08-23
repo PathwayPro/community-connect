@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Connection from './Connection/Connection';
@@ -26,13 +26,27 @@ const connectionList: connectionProps[] = [
 
 interface ConnectionsProps {
   myProfile?: boolean;
+  maxSize: number;
+  onSizeChange: (size: number) => void;
 }
 
 const Connections: FC<ConnectionsProps> = (
   {
     myProfile,
+    maxSize,
+    onSizeChange,
   }
 ) => {
+
+  const connectionsRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (connectionsRef.current) {
+      const connections = connectionsRef.current;
+      const connectionsHeight = connections.clientHeight;
+      onSizeChange(connectionsHeight);
+    }
+  }, [onSizeChange]);
 
   const navigate = useNavigate();
   const [showConnections, setShowConnections] = useState<number>(0);
@@ -48,11 +62,15 @@ const Connections: FC<ConnectionsProps> = (
     setShowConnections(maxConnections);
   }, []);
 
+  const divStyles = {
+    height: maxSize ? `${maxSize}px` : 'none',
+  };
+
 
   return (
-    <div className={styles.box}>
+    <div className={styles.box} style={divStyles}>
       <div className={styles.title}>Connections</div>
-      <div className={styles.connections}>
+      <div className={styles.connections} ref={connectionsRef}>
         {connectionList.slice(0, showConnections).map((connection) => (
           <Connection
             key={connection.id}

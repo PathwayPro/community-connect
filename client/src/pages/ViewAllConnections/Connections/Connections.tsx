@@ -37,7 +37,15 @@ const connectionList: connectionProps[] = [
 
 ];
 
-const Connections: FC<{ size: number, onSizeChange: (size: number) => void }> = ({ size, onSizeChange }) => {
+interface ConnectionsProps {
+  maxSize: number;
+  onSizeChange: (size: number) => void;
+}
+
+const Connections: FC<ConnectionsProps> = ({
+  maxSize,
+  onSizeChange,
+}) => {
 
   const connectionsRef = useRef<HTMLDivElement | null>(null);
 
@@ -53,7 +61,7 @@ const Connections: FC<{ size: number, onSizeChange: (size: number) => void }> = 
   return (
     <div className={styles.box}>
       <div className={styles.title}>Connections</div>
-      <Scroll height={size}>
+      <Scroll height={maxSize}>
         <div className={styles.connections} ref={connectionsRef}>
           {connectionList.map((connection) => (
             <div key={connection.id} className={styles.connection}>

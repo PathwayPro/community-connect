@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useRef, useEffect } from 'react';
 
 import Scroll from '../../common/components/Scroll/Scroll';
 
@@ -55,15 +55,30 @@ const userInfo: userInfoProps = {
 
 interface PostsProps {
   myProfile: boolean;
+  maxSize: number;
+  onSizeChange: (size: number) => void;
 }
 
 const Posts: FC<PostsProps> = ({
   myProfile,
+  maxSize,
+  onSizeChange,
 }) => {
+
+  const postsRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (postsRef.current) {
+      const posts = postsRef.current;
+      const postsHeight = posts.clientHeight;
+      onSizeChange(postsHeight);
+    }
+  }, [onSizeChange]);
+
 return (
   <div className={styles.box}>
-    <Scroll>
-      <div className={styles.posts}>
+    <Scroll height={maxSize}>
+      <div className={styles.posts} ref={postsRef}>
         {myProfile && <AddPost imgPath={userInfo.imgPath ? userInfo.imgPath : defaultProfileImage} />}
         {posts.length > 0 && posts.map((post) => (
           <ShowPost

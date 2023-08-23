@@ -31,7 +31,15 @@ const connectionList: connectionProps[] = [
   { id: 15, imgPath: '', name: 'Hana Allen', position: 'Designer' },
 ];
 
-const Requests: FC<{ size: number, onSizeChange: (size: number) => void }> = ({ size, onSizeChange }) => {
+interface RequestsProps {
+  maxSize: number;
+  onSizeChange: (size: number) => void;
+}
+
+const Requests: FC<RequestsProps> = ({
+  maxSize,
+  onSizeChange,
+}) => {
 
   const requestsRef = useRef<HTMLDivElement | null>(null);
 
@@ -46,7 +54,7 @@ const Requests: FC<{ size: number, onSizeChange: (size: number) => void }> = ({ 
   return (
     <div className={styles.box}>
       <div className={styles.title}>Requests</div>
-      <Scroll height={size}>
+      <Scroll height={maxSize}>
         <div className={styles.connections} ref={requestsRef}>
           {connectionList.map((connection) => (
             <Connection

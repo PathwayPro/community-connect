@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 
 import Container from '../../common/components/Container/Container';
 import Connections from '../../components/Connections/Connections';
@@ -10,15 +10,36 @@ import Posts from '../../components/Posts/Posts';
 import styles from './Profile.module.scss';
 
 const UserProfile: FC = () => {
+
+  const [maxSize, setMaxSize] = useState<number>(525);
+
+  const handleConnectionsSizeChange = (size: number) => {
+    if (size < maxSize) {
+      setMaxSize(size);
+    }
+  };
+
+  const handlePostsSizeChange = (size: number) => {
+    if (size < maxSize) {
+      setMaxSize(size);
+    }
+  };
+
+  const handleEventsSizeChange = (size: number) => {
+    if (size < maxSize) {
+      setMaxSize(size);
+    }
+  };
+
   return (
     <Container>
       <div className={styles.page}>
         <Images myProfile={false} />
         <Info myProfile={false} userProfile={true} />
         <div className={styles.socials}>
-          <Events />
-          <Posts myProfile={false} />
-          <Connections />
+          <Events maxSize={maxSize} onSizeChange={handleEventsSizeChange} />
+          <Posts myProfile={false} maxSize={maxSize} onSizeChange={handlePostsSizeChange} />
+          <Connections maxSize={maxSize} onSizeChange={handleConnectionsSizeChange} />
         </div>
       </div>
     </Container>
