@@ -18,7 +18,7 @@ const MyProfile: FC = () => {
         <div className={styles.socials}>
           <Events />
           <Posts myProfile={true} />
-          <Connections />
+          <Connections myProfile={true} />
         </div>
       </div>
     </Container>

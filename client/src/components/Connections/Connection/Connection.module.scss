@@ -3,7 +3,7 @@
 @use '../../../common/styles/colors';
 
 .box {
-  margin: 16px;
+  margin-bottom: 16px;
   width: 100%;
 
   @extend %flex-column;
@@ -37,7 +37,5 @@
 .twoBtns {
   margin-left: 5px;
   margin-right: 5px;
-  
-  display: flex;
-  justify-content: space-between;
+  @extend %flex-space-between;
 }

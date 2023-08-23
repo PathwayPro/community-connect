@@ -24,13 +24,23 @@ const connectionList: connectionProps[] = [
   { id: 7, imgPath: '', name: 'Hana Allen', position: 'Designer' },
 ];
 
-const Connections: FC = () => {
+interface ConnectionsProps {
+  myProfile?: boolean;
+}
+
+const Connections: FC<ConnectionsProps> = (
+  {
+    myProfile,
+  }
+) => {
 
   const navigate = useNavigate();
   const [showConnections, setShowConnections] = useState<number>(0);
 
   const handleViewAllClick = () => {
-    navigate('/', { state: { connections: connectionList } });
+    myProfile
+      ? navigate('/connections/my', { state: { connections: connectionList } })
+      : navigate('/connections/user/id', { state: { connections: connectionList } });
   };
 
   useEffect(() => {

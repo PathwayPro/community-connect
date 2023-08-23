@@ -2,7 +2,7 @@
 @use '../../common/styles/mixins';
 
 .page {
-  margin: 20px 0px 80px 0px;
+  margin: 20px 0px 55px 0px;
   gap: 10px;
   @extend %flex-column-center;
 }

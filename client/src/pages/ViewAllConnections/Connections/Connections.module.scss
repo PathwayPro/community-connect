@@ -19,13 +19,15 @@
 .connections {
   margin-bottom: 8px;
   background: colors.$blue-light;
-  padding: 40px 29px;
+  padding: 40px 45px;
   border-radius: 15px;
   display: flex;
   flex-wrap: wrap;
 }
 
 .connection {
-  width: 29%;
-  margin: 16px;
+  border-bottom: 1px solid colors.$blue-dark-hover;
+  padding-bottom: 10px;
+  margin-bottom: 16px;
+  width: 32%;
 }
