@@ -4,13 +4,13 @@
 
 .box {
   width: 28%;
-  max-height: 875px;
   margin-bottom: 8px;
+  overflow-y: auto;
 }
 
 .title {
+  margin-top: 10px;
   margin-bottom: 20px;
-  margin-top: 10x;
   text-align: center;
 
   @include fonts.bigText($font-size: 33px);
@@ -25,3 +25,7 @@
   flex-wrap: wrap;
 }
 
+.connection {
+  padding-bottom: 23px;
+  border-bottom: 1px solid colors.$blue-dark-hover;
+}

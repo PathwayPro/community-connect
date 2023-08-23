@@ -4,13 +4,13 @@
 
 .box {
   width: 72%;
-  max-height: 875px;
   margin-bottom: 8px;
+  overflow-y: auto;
 }
 
 .title {
-  margin-bottom: 20px;
   margin-top: 10px;
+  margin-bottom: 20px;
   text-align: center;
 
   @include fonts.bigText($font-size: 33px);
@@ -28,5 +28,4 @@
 .connection {
   width: 29%;
   margin: 16px;
-
 }

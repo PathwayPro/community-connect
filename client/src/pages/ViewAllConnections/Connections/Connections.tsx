@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useRef, useEffect } from 'react';
 
 import Scroll from '../../../common/components/Scroll/Scroll';
 import Connection from '../../../components/Connections/Connection/Connection';
@@ -22,15 +22,39 @@ const connectionList: connectionProps[] = [
   { id: 5, imgPath: '', name: 'Hana Allen', position: 'Designer' },
   { id: 6, imgPath: '', name: 'Hana Allen', position: 'Designer' },
   { id: 7, imgPath: '', name: 'Hana Allen', position: 'Designer' },
+  { id: 8, imgPath: '', name: 'Hana Allen', position: 'Designer' },
+  { id: 9, imgPath: '', name: 'Hana Allen', position: 'Designer' },
+  { id: 10, imgPath: '', name: 'Hana Allen', position: 'Designer' },
+  { id: 11, imgPath: defaultProfileImage, name: 'Clark Mante', position: 'Technician' },
+  { id: 12, imgPath: defaultProfileImage, name: 'Adam Kenedi', position: 'Developer' },
+  { id: 13, imgPath: '', name: 'Hana Allen', position: 'Designer' },
+  { id: 14, imgPath: '', name: 'Hana Allen', position: 'Designer' },
+  { id: 15, imgPath: '', name: 'Hana Allen', position: 'Designer' },
+  { id: 16, imgPath: '', name: 'Hana Allen', position: 'Designer' },
+  { id: 17, imgPath: '', name: 'Hana Allen', position: 'Designer' },
+  { id: 18, imgPath: '', name: 'Hana Allen', position: 'Designer' },
+  { id: 19, imgPath: '', name: 'Hana Allen', position: 'Designer' },
+
 ];
 
-const Connections: FC = () => {
+const Connections: FC<{ size: number, onSizeChange: (size: number) => void }> = ({ size, onSizeChange }) => {
+
+  const connectionsRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (connectionsRef.current) {
+      const connections = connectionsRef.current;
+      const connectionsHeight = connections.clientHeight;
+        onSizeChange(connectionsHeight);
+    }
+  }, [onSizeChange]);
+
 
   return (
-    <div  className={styles.box}>
+    <div className={styles.box}>
       <div className={styles.title}>Connections</div>
-      <Scroll>
-        <div className={styles.connections}>
+      <Scroll height={size}>
+        <div className={styles.connections} ref={connectionsRef}>
           {connectionList.map((connection) => (
             <div key={connection.id} className={styles.connection}>
               <Connection

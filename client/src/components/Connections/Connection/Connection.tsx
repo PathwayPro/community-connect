@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC } from 'react';
 
 import Button from '../../../common/components/Button/Button';
@@ -5,6 +6,7 @@ import Button from '../../../common/components/Button/Button';
 import styles from './Connection.module.scss';
 
 export interface connectionProps {
+  className?: string;
   imgPath: string;
   name: string;
   position: string;
@@ -13,6 +15,7 @@ export interface connectionProps {
 }
 
 const Connection: FC<connectionProps> = ({
+  className,
   imgPath,
   name,
   position,
@@ -23,7 +26,7 @@ const Connection: FC<connectionProps> = ({
   const onGreyButtonClick = () => console.log('click');
 
   return (
-    <div className={styles.box}>
+    <div className={classNames(styles.box, className)}>
       <div className={styles.connection}>
         <img src={imgPath} alt="connection img" className={styles.image} />
         <div className={styles.info}>

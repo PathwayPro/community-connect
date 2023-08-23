@@ -8,6 +8,7 @@
 }
 
 .socials {
-  @extend %flex-row;
   gap: 26px;
+
+  @extend %flex-row;
 }

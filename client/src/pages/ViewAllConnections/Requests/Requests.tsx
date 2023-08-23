@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useRef, useEffect } from 'react';
 
 import Scroll from '../../../common/components/Scroll/Scroll';
 import Connection from '../../../components/Connections/Connection/Connection';
@@ -22,18 +22,36 @@ const connectionList: connectionProps[] = [
   { id: 5, imgPath: '', name: 'Hana Allen', position: 'Designer' },
   { id: 6, imgPath: '', name: 'Hana Allen', position: 'Designer' },
   { id: 7, imgPath: '', name: 'Hana Allen', position: 'Designer' },
+  { id: 9, imgPath: defaultProfileImage, name: 'Clark Mante', position: 'Technician' },
+  { id: 10, imgPath: defaultProfileImage, name: 'Adam Kenedi', position: 'Developer' },
+  { id: 11, imgPath: '', name: 'Hana Allen', position: 'Designer' },
+  { id: 12, imgPath: '', name: 'Hana Allen', position: 'Designer' },
+  { id: 13, imgPath: '', name: 'Hana Allen', position: 'Designer' },
+  { id: 14, imgPath: '', name: 'Hana Allen', position: 'Designer' },
+  { id: 15, imgPath: '', name: 'Hana Allen', position: 'Designer' },
 ];
 
-const Requests: FC = () => {
+const Requests: FC<{ size: number, onSizeChange: (size: number) => void }> = ({ size, onSizeChange }) => {
+
+  const requestsRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (requestsRef.current) {
+      const requests = requestsRef.current;
+      const requestsHeight = requests.clientHeight;
+      onSizeChange(requestsHeight);
+  }
+}, [onSizeChange]);
 
   return (
-    <div  className={styles.box}>
+    <div className={styles.box}>
       <div className={styles.title}>Requests</div>
-      <Scroll>
-        <div className={styles.connections}>
+      <Scroll height={size}>
+        <div className={styles.connections} ref={requestsRef}>
           {connectionList.map((connection) => (
             <Connection
               key={connection.id}
+              className={styles.connection}
               imgPath={connection.imgPath ? connection.imgPath : defaultProfileImage}
               name={connection.name}
               position={connection.position}
