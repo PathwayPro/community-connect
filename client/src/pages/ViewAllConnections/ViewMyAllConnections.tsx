@@ -10,7 +10,7 @@ import Requests from './Requests/Requests';
 import styles from './ViewAllConnections.module.scss';
 
 const ViewMyAllConnections: FC = () => {
-  
+
   const [maxSize, setMaxSize] = useState<number>(875);
 
   const handleConnectionsSizeChange = (size: number) => {
