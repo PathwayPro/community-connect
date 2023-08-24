@@ -95,3 +95,5 @@ const FillUserProfileForm: FC = () => {
 };
 
 export default FillUserProfileForm;
+
+export { styles };

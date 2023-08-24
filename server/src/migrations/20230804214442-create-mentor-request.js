@@ -1,4 +1,4 @@
-const { mentorshipRequestStatuses } = require('../config/mentorship');
+const { mentorStatuses } = require('../config/mentorship');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -10,20 +10,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      firstName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      lastName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       fieldOfExpertise: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      yearsOfExperiences: {
-        type: Sequelize.INTEGER,
+      yearsOfExperience: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       numberOfMentees: {
@@ -31,7 +23,7 @@ module.exports = {
         allowNull: false,
       },
       availability: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       otherMentorships: {
@@ -40,7 +32,7 @@ module.exports = {
       },
       status: {
         type: Sequelize.ENUM,
-        values: [mentorshipRequestStatuses.PENDING, mentorshipRequestStatuses.RESOLVED],
+        values: [mentorStatuses.PENDING, mentorStatuses.APPROVED, mentorStatuses.REJECTED],
         allowNull: false,
       },
       createdAt: {

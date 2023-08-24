@@ -72,9 +72,6 @@ export const apiSlice = createApi({
         method: 'POST',
         body: data,
       }),
-      transformResponse: (response: { user: IUser; token: string }) => {
-        return { user: null, token: response.token };
-      },
     }),
 
     // Login
@@ -84,6 +81,10 @@ export const apiSlice = createApi({
         method: 'POST',
         body: data,
       }),
+      transformResponse: (response: { user: IUser; token: string; roles: Record<'name', string>[] }) => {
+        const rolesArray = response.roles.map((role) => role.name);
+        return { user: { ...response.user, roles: rolesArray }, token: response.token };
+      },
     }),
 
     // Request Verification Email
@@ -138,6 +139,22 @@ export const apiSlice = createApi({
         }
       },
     }),
+
+    // Mentorship
+    applyForMentorship: builder.mutation({
+      query: (data) => ({
+        url: `/v1/mentorship/apply`,
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    becomeMentor: builder.mutation({
+      query: (data) => ({
+        url: `/v1/mentorship/becomeMentor`,
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -151,4 +168,6 @@ export const {
   useForgotPasswordMutation,
   useResetPasswordMutation,
   useLogoutQuery,
+  useApplyForMentorshipMutation,
+  useBecomeMentorMutation,
 } = apiSlice;

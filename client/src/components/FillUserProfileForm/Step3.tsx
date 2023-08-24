@@ -2,35 +2,22 @@ import classNames from 'classnames';
 import { FC, useState, MouseEvent, KeyboardEvent } from 'react';
 
 import ResumeInput from '../../common/components/ResumeDownloadInput/ResumeDownloadInput';
+import { fileSize, resumeFileFormat } from '../../common/utils/filesValidation';
 
-import { StepRegisterProps } from './FillUserProfileForm';
-
-import styles from './FillUserProfileForm.module.scss';
+import { StepRegisterProps, styles } from './FillUserProfileForm';
 
 const Step3: FC<StepRegisterProps> = ({ formId, errors, register }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const resume = register('resume', {
     validate: {
-      fileFormat: (value: FileList | undefined) => {
-        const file = value ? value[0] : undefined;
-        if (
-          file &&
-          ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'].includes(
-            file.type
-          )
-        ) {
-          return true;
-        }
-        return 'File must be a .docx or .pdf';
+      checkSize: (value: FileList | undefined) => {
+        if (!value?.length) return;
+        return fileSize(value[0], 5);
       },
-      fileSize: (value: FileList | undefined) => {
-        const file = value ? value[0] : undefined;
-        if (file && file.size <= 5 * 1024 * 1024) {
-          // 5MB
-          return true;
-        }
-        return 'File must be less than 5MB';
+      checkFormat: (value: FileList | undefined) => {
+        if (!value?.length) return;
+        return resumeFileFormat(value[0]);
       },
     },
   });
