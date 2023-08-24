@@ -39,24 +39,21 @@ const Connections: FC<ConnectionsProps> = (
 ) => {
 
   const connectionsRef = useRef<HTMLDivElement | null>(null);
+  const navigate = useNavigate();
+  const [showConnections, setShowConnections] = useState<number>(0);
 
   useEffect(() => {
     if (connectionsRef.current) {
       const connections = connectionsRef.current;
       const connectionsHeight = connections.clientHeight;
       onSizeChange(connectionsHeight);
+
+      // Calculate the maximum number of connections that can be shown based on maxSize
+      const maxConnections = Math.floor(maxSize / 110); // single connection height is 110
+      // reduce the number by one to allow space for the 'View all' div
+      setShowConnections(maxConnections - 1);
     }
-  }, [onSizeChange]);
-
-
-  const navigate = useNavigate();
-  const [showConnections, setShowConnections] = useState<number>(0);
-
-  useEffect(() => {
-    const maxConnections = Math.min(7, connectionList.length);
-    setShowConnections(maxConnections);
-  }, []);
-
+  }, [maxSize, onSizeChange]);
 
   const handleViewAllClick = () => {
     myProfile
@@ -67,7 +64,6 @@ const Connections: FC<ConnectionsProps> = (
   const divStyles = {
     height: maxSize ? `${maxSize}px` : 'none',
   };
-
 
   return (
     <div className={styles.box} style={divStyles}>
@@ -83,7 +79,7 @@ const Connections: FC<ConnectionsProps> = (
           />
         ))}
       </div>
-      {showConnections < connectionList.length && (
+      {connectionList.length > 0 && connectionList.length > showConnections && (
         <div className={styles.seeMore}>
           <div onClick={handleViewAllClick}>View all</div>
         </div>

@@ -14,25 +14,25 @@ const MyProfile: FC = () => {
   const [maxSize, setMaxSize] = useState<number>(1000);
 
   const handleConnectionsSizeChange = (size: number) => {
-    // min height for the sections is 295px
-    if (size < maxSize && size < 295) {
-      setMaxSize(295);
+    // min height for the sections is 360px
+    if (size < maxSize && size < 360) {
+      setMaxSize(360);
     } else if (size < maxSize) {
       setMaxSize(size);
     }
   };
 
   const handlePostsSizeChange = (size: number) => {
-    if (size < maxSize && size < 295) {
-      setMaxSize(295);
+    if (size < maxSize && size < 360) {
+      setMaxSize(360);
     } else if (size < maxSize) {
       setMaxSize(size);
     }
   };
 
   const handleEventsSizeChange = (size: number) => {
-    if (size < maxSize && size < 295) {
-      setMaxSize(295);
+    if (size < maxSize && size < 360) {
+      setMaxSize(360);
     } else if (size < maxSize) {
       setMaxSize(size);
     }
