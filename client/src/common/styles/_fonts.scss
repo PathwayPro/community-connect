@@ -63,21 +63,7 @@
   }
 }
 
-@mixin hintText($font-size: 0.8rem, $font-weight: 300, $color: colors.$black, $line-height: 1.25) {
-  @extend %font-family;
-  font-size: $font-size;
-  font-weight: $font-weight;
-  line-height: $line-height;
-  color: $color;
-}
-
-@mixin headingText($font-weight: 700, $line-height: 1.5) {
-  @extend %font-family;
-  font-weight: $font-weight;
-  line-height: $line-height;
-}
-
-@mixin boldText($font-size: 16px, $font-weight: 700, $line-height: 1.5) {
+@mixin weightText($font-size: 16px, $font-weight: 700, $line-height: 1.5) {
   @extend %font-family;
   font-size: $font-size;
   font-weight: $font-weight;
@@ -91,6 +77,20 @@
     font-size: 13px;
     line-height: 1.25;
   }
+}
+
+@mixin hintText($font-size: 0.8rem, $font-weight: 300, $color: colors.$black, $line-height: 1.25) {
+  @extend %font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
+}
+
+@mixin headingText($font-weight: 700, $line-height: 1.5) {
+  @extend %font-family;
+  font-weight: $font-weight;
+  line-height: $line-height;
 }
 
 @mixin navText($font-size: 1.45rem, $font-weight: 700, $color: colors.$white-light) {

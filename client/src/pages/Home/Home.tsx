@@ -3,10 +3,10 @@ import { FC } from 'react';
 import Container from '../../common/components/Container/Container';
 import Connections from '../../components/Connections/Connections';
 import Events from '../../components/Events/Events';
-import Posts from '../../components/Posts/Posts';
+import Resources from '../../components/Resources/Resources';
+import UserProfileMini from '../../components/UserProfileMini/UserProfileMini';
 
-// import Images from './Images/Images';
-// import Info from './Info/Info';
+import ConnectionPosts from './ConnectionPosts/ConnectionPosts';
 
 import styles from './Home.module.scss';
 
@@ -14,13 +14,12 @@ const Home: FC = () => {
   return (
     <Container>
       <div className={styles.page}>
-        {/* <Images /> */}
         <div className={styles.side}>
-          {/* <UserProfileMini /> */}
+          <UserProfileMini />
           <Connections />
-          {/* <Resources /> */}
+          <Resources />
         </div>
-        <Posts />
+        <ConnectionPosts />
         <div className={styles.side}>
           {/* <Mentorship /> */}
           <Events />

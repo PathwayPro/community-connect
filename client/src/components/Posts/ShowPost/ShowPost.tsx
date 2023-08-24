@@ -8,14 +8,13 @@ import formatDate from '../../../common/utils/formatDateUtils';
 import styles from './ShowPost.module.scss';
 
 export interface ShowPostProps {
-  imgPath: string;
   name: string;
   position: string;
   date: Date;
   content: string;
 }
 
-const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content }) => {
+const ShowPost: FC<ShowPostProps> = ({ name, position, date, content }) => {
   const [showToast, setShowToast] = useState(false);
 
   // TODO: Add POst actions
@@ -31,7 +30,7 @@ const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content })
   return (
     <div className={styles.box}>
       <div className={styles.userInfo}>
-        <Avatar src={imgPath} size="medium" className={styles.image} />
+        <Avatar size="medium" className={styles.image} />
         <div className={styles.info}>
           <span className={styles.name}>{name}</span>
           <span className={styles.position}>{position}</span>

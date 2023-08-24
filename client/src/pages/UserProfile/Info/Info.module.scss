@@ -43,7 +43,7 @@
 .title {
   margin-right: 10px;
 
-  @include fonts.boldText($font-size: 19px);
+  @include fonts.weightText($font-size: 19px);
 }
 
 .detail {

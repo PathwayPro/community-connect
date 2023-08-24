@@ -1,0 +1,56 @@
+@use '../../common/styles/colors';
+@use '../../common/styles/fonts';
+@use '../../common/styles/mixins';
+
+.userProfile {
+  max-width: 300px;
+  width: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.backgroundImage {
+  width: 100%;
+  padding: 16px 0;
+  background-color: colors.$orange-normal;
+}
+
+.profileImage {
+  display: block;
+  margin: auto;
+}
+
+.infoBlock {
+  padding: 4px 16px 26px;
+  background-color: colors.$blue-light;
+}
+
+.mainInfo {
+  position: relative;
+  margin-bottom: 1.625rem;
+  @extend %flex-column-center;
+}
+
+.info {
+  @include fonts.weightText($font-weight: 300);
+}
+
+.editIcon {
+  position: absolute;
+  bottom: 6px;
+  right: 0;
+}
+
+.navLinks {
+  @include fonts.weightText($font-weight: 300);
+}
+
+.navLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

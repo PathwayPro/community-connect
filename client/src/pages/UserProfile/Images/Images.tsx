@@ -58,7 +58,7 @@ const Images: FC = () => {
 
       {/* <img className={styles.profileImage} src={source} alt="Your Image" /> */}
 
-      <Avatar size="big" className={styles.profileImage} />
+      <Avatar size="big" borderColor="white" className={styles.profileImage} />
 
       <IconSVG name={'editIcon'} className={styles.editIcon} onClick={handleButtonClick} />
 

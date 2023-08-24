@@ -1,0 +1,33 @@
+@use '../../../common/styles/colors';
+@use '../../../common/styles/fonts';
+@use '../../../common/styles/mixins';
+
+.resource {
+  display: flex;
+  padding: 16px;
+  border-radius: 15px;
+  background-color: colors.$blue-light;
+  @include fonts.weightText($font-size: 13px, $font-weight: 300);
+
+  svg {
+    flex-shrink: 0;
+    margin-right: 8px;
+  }
+
+  &.green svg path {
+    fill: colors.$icon-green;
+  }
+
+  &.red svg path {
+    fill: colors.$icon-red;
+  }
+
+  &.yellow svg path {
+    fill: colors.$orange-normal-hover;
+  }
+}
+
+.title {
+  text-decoration: none;
+  color: inherit;
+}

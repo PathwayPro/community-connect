@@ -31,7 +31,7 @@
 }
 
 .name {
-  @include fonts.boldText;
+  @include fonts.weightText;
 }
 
 .position {
