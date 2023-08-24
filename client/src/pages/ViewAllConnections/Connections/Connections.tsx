@@ -61,7 +61,7 @@ const Connections: FC<ConnectionsProps> = ({
   return (
     <div className={styles.box}>
       <div className={styles.title}>Connections</div>
-      <Scroll height={maxSize}>
+      <Scroll className={styles.scroll} height={maxSize}>
         <div className={styles.connections} ref={connectionsRef}>
           {connectionList.map((connection) => (
             <div key={connection.id} className={styles.connection}>

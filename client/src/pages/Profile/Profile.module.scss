@@ -4,10 +4,13 @@
 .page {
   margin: 20px 0px 55px 0px;
   gap: 10px;
+  
   @extend %flex-column-center;
 }
 
 .socials {
-  @extend %flex-row;
+  width: 100%;
   gap: 26px;
+
+  @extend %flex-row;
 }

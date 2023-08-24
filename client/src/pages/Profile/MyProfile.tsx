@@ -10,23 +10,30 @@ import Posts from '../../components/Posts/Posts';
 import styles from './Profile.module.scss';
 
 const MyProfile: FC = () => {
-
-  const [maxSize, setMaxSize] = useState<number>(525);
+  // max height for the sections is 1000px
+  const [maxSize, setMaxSize] = useState<number>(1000);
 
   const handleConnectionsSizeChange = (size: number) => {
-    if (size < maxSize) {
+    // min height for the sections is 295px
+    if (size < maxSize && size < 295) {
+      setMaxSize(295);
+    } else if (size < maxSize) {
       setMaxSize(size);
     }
   };
 
   const handlePostsSizeChange = (size: number) => {
-    if (size < maxSize) {
+    if (size < maxSize && size < 295) {
+      setMaxSize(295);
+    } else if (size < maxSize) {
       setMaxSize(size);
     }
   };
 
   const handleEventsSizeChange = (size: number) => {
-    if (size < maxSize) {
+    if (size < maxSize && size < 295) {
+      setMaxSize(295);
+    } else if (size < maxSize) {
       setMaxSize(size);
     }
   };
@@ -37,10 +44,9 @@ const MyProfile: FC = () => {
         <Images myProfile={true} />
         <Info myProfile={true} userProfile={false} />
         <div className={styles.socials}>
-        <Events maxSize={maxSize} onSizeChange={handleEventsSizeChange} />
-          <Posts myProfile={true}  maxSize={maxSize} onSizeChange={handlePostsSizeChange} />
+          <Events maxSize={maxSize} onSizeChange={handleEventsSizeChange} />
+          <Posts myProfile={true} maxSize={maxSize} onSizeChange={handlePostsSizeChange} />
           <Connections myProfile={true} maxSize={maxSize} onSizeChange={handleConnectionsSizeChange} />
-
         </div>
       </div>
     </Container>

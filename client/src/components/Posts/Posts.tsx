@@ -76,8 +76,8 @@ const Posts: FC<PostsProps> = ({
   }, [onSizeChange]);
 
 return (
-  <div className={styles.box}>
-    <Scroll height={maxSize}>
+  <div className={posts.length > 0 ? styles.box : styles.emptyBox}>
+    <Scroll className={styles.scroll} height={maxSize}>
       <div className={styles.posts} ref={postsRef}>
         {myProfile && <AddPost imgPath={userInfo.imgPath ? userInfo.imgPath : defaultProfileImage} />}
         {posts.length > 0 && posts.map((post) => (

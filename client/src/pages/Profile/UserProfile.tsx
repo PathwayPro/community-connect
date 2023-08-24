@@ -11,22 +11,33 @@ import styles from './Profile.module.scss';
 
 const UserProfile: FC = () => {
 
-  const [maxSize, setMaxSize] = useState<number>(525);
+  // max height for the sections is 1000px
+  const [maxSize, setMaxSize] = useState<number>(1000);
 
   const handleConnectionsSizeChange = (size: number) => {
-    if (size < maxSize) {
+    // min height for the sections is 295px
+    if (size < maxSize && size < 295) {
+      setMaxSize(295);
+    }
+    else if (size < maxSize) {
       setMaxSize(size);
     }
   };
 
   const handlePostsSizeChange = (size: number) => {
-    if (size < maxSize) {
+    if (size < maxSize && size < 295) {
+      setMaxSize(295);
+    }
+    else if (size < maxSize) {
       setMaxSize(size);
     }
   };
 
   const handleEventsSizeChange = (size: number) => {
-    if (size < maxSize) {
+    if (size < maxSize && size < 295) {
+      setMaxSize(295);
+    }
+    else if (size < maxSize) {
       setMaxSize(size);
     }
   };

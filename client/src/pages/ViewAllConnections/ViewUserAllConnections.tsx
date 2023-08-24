@@ -11,16 +11,24 @@ import styles from './ViewAllConnections.module.scss';
 
 const ViewUserAllConnections: FC = () => {
 
+  // max height for the sections is 875px
   const [maxSize, setMaxSize] = useState<number>(875);
 
   const handleConnectionsSizeChange = (size: number) => {
-    if (size < maxSize) {
+    // min height for the sections is 235px
+    if (size < maxSize && size < 235) {
+      setMaxSize(235);
+    }
+    else if (size < maxSize) {
       setMaxSize(size);
     }
   };
 
   const handleRequestsSizeChange = (size: number) => {
-    if (size < maxSize) {
+    if (size < maxSize && size < 235) {
+      setMaxSize(235);
+    }
+    else if (size < maxSize) {
       setMaxSize(size);
     }
   };

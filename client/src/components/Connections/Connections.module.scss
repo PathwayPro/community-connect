@@ -3,12 +3,12 @@
 @use '../../common/styles/mixins';
 
 .box {
-  background: colors.$blue-light;
   width: 26%;
-  min-height: 100px;
+  position: relative;
+  margin-bottom: 8px;
+  background: colors.$blue-light;
   padding: 26px 16px;
   border-radius: 15px;
-  position: relative;
 
   @extend %flex-column-left-center;
 }

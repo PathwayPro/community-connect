@@ -4,7 +4,6 @@
 
 .box {
   width: 28%;
-  margin-bottom: 8px;
   overflow-y: auto;
 }
 
@@ -16,11 +15,15 @@
   @include fonts.bigText($font-size: 33px);
 }
 
-.connections {
+.scroll
+{
   margin-bottom: 8px;
   background: colors.$blue-light;
   padding: 40px 45px;
   border-radius: 15px;
+}
+
+.connections {
   display: flex;
   flex-wrap: wrap;
 }

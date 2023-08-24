@@ -1,7 +1,16 @@
 @use '../../common/styles/mixins';
+@use '../../common/styles/colors';
 
 .box {
   width: 60%;
+}
+
+.emptyBox
+{
+  width: 60%;
+  background: colors.$blue-light;
+  border-radius: 15px;
+  height: 295px;
 }
 
 .posts {

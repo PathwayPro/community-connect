@@ -48,19 +48,21 @@ const Connections: FC<ConnectionsProps> = (
     }
   }, [onSizeChange]);
 
+
   const navigate = useNavigate();
   const [showConnections, setShowConnections] = useState<number>(0);
+
+  useEffect(() => {
+    const maxConnections = Math.min(7, connectionList.length);
+    setShowConnections(maxConnections);
+  }, []);
+
 
   const handleViewAllClick = () => {
     myProfile
       ? navigate('/connections/my', { state: { connections: connectionList } })
       : navigate('/connections/user/id', { state: { connections: connectionList } });
   };
-
-  useEffect(() => {
-    const maxConnections = Math.min(3, connectionList.length);
-    setShowConnections(maxConnections);
-  }, []);
 
   const divStyles = {
     height: maxSize ? `${maxSize}px` : 'none',
