@@ -13,36 +13,14 @@ interface connectionProps {
   name: string;
   position: string;
 }
-
-const connectionList: connectionProps[] = [
-  { id: 1, imgPath: defaultProfileImage, name: 'Clark Mante', position: 'Technician' },
-  { id: 2, imgPath: defaultProfileImage, name: 'Adam Kenedi', position: 'Developer' },
-  { id: 3, imgPath: '', name: 'Hana Allen', position: 'Designer' },
-  { id: 4, imgPath: '', name: 'Hana Allen', position: 'Designer' },
-  { id: 5, imgPath: '', name: 'Hana Allen', position: 'Designer' },
-  { id: 6, imgPath: '', name: 'Hana Allen', position: 'Designer' },
-  { id: 7, imgPath: '', name: 'Hana Allen', position: 'Designer' },
-  { id: 8, imgPath: '', name: 'Hana Allen', position: 'Designer' },
-  { id: 9, imgPath: '', name: 'Hana Allen', position: 'Designer' },
-  { id: 10, imgPath: '', name: 'Hana Allen', position: 'Designer' },
-  { id: 11, imgPath: defaultProfileImage, name: 'Clark Mante', position: 'Technician' },
-  { id: 12, imgPath: defaultProfileImage, name: 'Adam Kenedi', position: 'Developer' },
-  { id: 13, imgPath: '', name: 'Hana Allen', position: 'Designer' },
-  { id: 14, imgPath: '', name: 'Hana Allen', position: 'Designer' },
-  { id: 15, imgPath: '', name: 'Hana Allen', position: 'Designer' },
-  { id: 16, imgPath: '', name: 'Hana Allen', position: 'Designer' },
-  { id: 17, imgPath: '', name: 'Hana Allen', position: 'Designer' },
-  { id: 18, imgPath: '', name: 'Hana Allen', position: 'Designer' },
-  { id: 19, imgPath: '', name: 'Hana Allen', position: 'Designer' },
-
-];
-
 interface ConnectionsProps {
+  data?: connectionProps[];
   maxSize: number;
   onSizeChange: (size: number) => void;
 }
 
 const Connections: FC<ConnectionsProps> = ({
+  data,
   maxSize,
   onSizeChange,
 }) => {
@@ -63,7 +41,7 @@ const Connections: FC<ConnectionsProps> = ({
       <div className={styles.title}>Connections</div>
       <Scroll className={styles.scroll} height={maxSize}>
         <div className={styles.connections} ref={connectionsRef}>
-          {connectionList.map((connection) => (
+          {data?.length != null && data?.map((connection) => (
             <div key={connection.id} className={styles.connection}>
               <Connection
                 imgPath={connection.imgPath ? connection.imgPath : defaultProfileImage}

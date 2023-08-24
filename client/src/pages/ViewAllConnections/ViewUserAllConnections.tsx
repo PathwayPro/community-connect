@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import Container from '../../common/components/Container/Container';
 import Images from '../../components/Images/Images';
@@ -10,6 +11,9 @@ import Requests from './Requests/Requests';
 import styles from './ViewAllConnections.module.scss';
 
 const ViewUserAllConnections: FC = () => {
+
+  const location = useLocation();
+  const connections = location.state.connections;
 
   // max height for the sections is 875px
   const [maxSize, setMaxSize] = useState<number>(875);
@@ -36,11 +40,11 @@ const ViewUserAllConnections: FC = () => {
   return (
     <Container>
       <div className={styles.page}>
-        <Images myProfile={true} />
-        <Info myProfile={true} userProfile={false} />
+        <Images myProfile={false} />
+        <Info myProfile={false} userProfile={true} />
         <div className={styles.socials}>
           <Requests maxSize={maxSize} onSizeChange={handleRequestsSizeChange} />
-          <Connections maxSize={maxSize} onSizeChange={handleConnectionsSizeChange} />
+          <Connections data={connections} maxSize={maxSize} onSizeChange={handleConnectionsSizeChange} />
         </div>
       </div>
     </Container>

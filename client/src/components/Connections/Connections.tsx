@@ -55,10 +55,13 @@ const Connections: FC<ConnectionsProps> = (
     }
   }, [maxSize, onSizeChange]);
 
+  //TODO: get real id:
+  const id = 20;
+
   const handleViewAllClick = () => {
     myProfile
       ? navigate('/connections/my', { state: { connections: connectionList } })
-      : navigate('/connections/user/id', { state: { connections: connectionList } });
+      : navigate(`/connections/user/${id}`, { state: { connections: connectionList } });
   };
 
   const divStyles = {
