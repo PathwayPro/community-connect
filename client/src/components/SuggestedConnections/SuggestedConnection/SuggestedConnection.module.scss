@@ -1,0 +1,34 @@
+@use '../../../common/styles/colors';
+@use '../../../common/styles/fonts';
+@use '../../../common/styles/mixins';
+
+.connection {
+  display: flex;
+
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}
+
+.image {
+  border: 2px solid colors.$orange-normal;
+  width: 50px;
+  height: 50px;
+  margin-right: 1rem;
+  border-radius: 50%;
+}
+
+.info {
+  @extend %flex-column;
+}
+
+.name {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.position {
+  margin-bottom: 0.8rem;
+  @include fonts.hintText($font-size: 16px);
+}

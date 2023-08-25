@@ -1,9 +1,10 @@
 import { FC } from 'react';
 
 import Container from '../../common/components/Container/Container';
-import Connections from '../../components/Connections/Connections';
 import Events from '../../components/Events/Events';
+import MentorshipPromo from '../../components/MentorshipPromo/MentorshipPromo';
 import Resources from '../../components/Resources/Resources';
+import SuggestedConnections from '../../components/SuggestedConnections/SuggestedConnections';
 import UserProfileMini from '../../components/UserProfileMini/UserProfileMini';
 
 import ConnectionPosts from './ConnectionPosts/ConnectionPosts';
@@ -16,13 +17,13 @@ const Home: FC = () => {
       <div className={styles.page}>
         <div className={styles.side}>
           <UserProfileMini />
-          <Connections />
+          <SuggestedConnections />
           <Resources />
         </div>
         <ConnectionPosts />
         <div className={styles.side}>
-          {/* <Mentorship /> */}
-          <Events />
+          <MentorshipPromo />
+          <Events itemsToShow={5} />
         </div>
       </div>
     </Container>
