@@ -17,7 +17,7 @@ interface IconSVGProps {
 /*
   'small'  15 x 15 – for edit pencil
   'medium' 20 x 20 – for delete can
-  'big'    38 x 32 – for header icons
+  'big'    fit x 30 – for header icons
   'wide'   33 x 20 – for repost icon
 */
 const IconSVG: FC<IconSVGProps> = ({

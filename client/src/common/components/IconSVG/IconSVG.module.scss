@@ -28,8 +28,8 @@
   }
 
   &.big {
-    max-width: 38px;
-    height: 32px;
+    max-width: fit-content;
+    height: 30px;
   }
 
   &.wide {
@@ -43,6 +43,10 @@
 
   &.orange {
     fill: colors.$orange-normal;
+
+    &:hover {
+      fill: colors.$orange-normal-hover;
+    }
   }
 
   &.orangeLight {

@@ -4,7 +4,7 @@
 @use '../../../common/styles/media';
 
 @mixin margin-right {
-  margin-right: 3.5rem;
+  margin-right: 2.5rem;
 
   @include media.media-xl {
     margin-right: 2rem;
@@ -43,6 +43,7 @@
 
   @include media.media-s {
     flex-direction: column;
+    margin-bottom: 10px;
   }
 }
 
@@ -97,4 +98,15 @@
 
 .hidden {
   display: none;
+}
+
+.icons {
+  position: relative;
+  top: -6px;
+  display: flex;
+  gap: 1rem;
+
+  @include media.media-s {
+    top: 0;
+  }
 }

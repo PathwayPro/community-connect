@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 import iconMap from './IconMap';
 
@@ -9,23 +10,21 @@ interface IconSVGProps {
   name: keyof typeof iconMap;
   label?: string;
   color?: 'black' | 'orange';
-  size?: 'small' | 'medium' | 'big' | 'wide';
+  size?: 'small' | 'big';
   className?: string;
   href: string;
 }
 /*
   'small'  15 x 15 – for edit pencil
-  'medium' 20 x 20 – for delete can
-  'big'    38 x 32 – for header icons
-  'wide'   33 x 20 – for repost icon
+  'big'    fit x 30 – for header icons
 */
 const IconLinkSVG: FC<IconSVGProps> = ({ name, label = 'icon', color = 'black', size = 'medium', className, href }) => {
   const Icon = iconMap[name];
   return (
-    <a className={classNames(className, styles.button, color && styles[color], styles[size])} href={href}>
+    <Link to={href} className={classNames(className, styles.button, color && styles[color], styles[size])}>
       <Icon />
       <span className={styles.label}>{label}</span>
-    </a>
+    </Link>
   );
 };
 
