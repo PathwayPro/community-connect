@@ -17,17 +17,4 @@
   &.green svg path {
     fill: colors.$icon-green;
   }
-
-  &.red svg path {
-    fill: colors.$icon-red;
-  }
-
-  &.yellow svg path {
-    fill: colors.$orange-normal-hover;
-  }
-}
-
-.title {
-  text-decoration: none;
-  color: inherit;
 }

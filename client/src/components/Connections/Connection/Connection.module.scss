@@ -4,23 +4,25 @@
 
 .connection {
   display: flex;
-  padding-bottom: 16px;
+
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
 }
 
 .image {
   border: 2px solid colors.$orange-normal;
   width: 50px;
   height: 50px;
-  margin-right: 3px;
+  margin-right: 1rem;
   border-radius: 50%;
 }
 
 .info {
-  margin-bottom: 16px;
-  margin-left: 16px;
   @extend %flex-column;
 }
 
 .position {
+  margin-bottom: 0.8rem;
   @include fonts.hintText($font-size: 16px);
 }

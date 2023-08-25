@@ -10,8 +10,9 @@
   flex-shrink: 0;
   width: 300px;
   min-height: 100px;
+  height: fit-content;
   border-radius: 15px;
-  background: colors.$blue-light-hover;
+  background-color: colors.$blue-light-hover;
 
   &.small {
     padding: 26px 16px;
@@ -42,5 +43,17 @@
     content: '';
     display: block;
     margin-top: -10px; /* negate the margin-bottom of title */
+  }
+}
+
+.link {
+  display: block;
+  font-size: 13px;
+  margin-top: 1rem;
+  margin-left: auto;
+  padding: 0px 5px;
+
+  &:hover {
+    text-decoration: underline;
   }
 }

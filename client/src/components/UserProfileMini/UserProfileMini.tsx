@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { useAppDispatch } from '../../app/hooks';
 import { showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
@@ -37,13 +37,13 @@ const Info: FC = () => {
           <span className={styles.info}>{userData.background}</span>
           <IconSVG name="editIcon" size="small" className={styles.editIcon} onClick={openModal} />
         </div>
-        <div className={styles.navLinks}>
-          <NavLink to="/" className={styles.navLink}>
+        <div className={styles.links}>
+          <Link to="/connections" className={styles.link}>
             Your Connections
-          </NavLink>
-          <NavLink to="/" className={styles.navLink}>
+          </Link>
+          <Link to="/" className={styles.link}>
             Manage Events
-          </NavLink>
+          </Link>
         </div>
       </div>
     </div>

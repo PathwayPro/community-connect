@@ -41,14 +41,12 @@
   right: 0;
 }
 
-.navLinks {
+.links {
   @include fonts.weightText($font-weight: 300);
 }
 
-.navLink {
+.link {
   display: block;
-  text-decoration: none;
-  color: inherit;
 
   &:hover {
     text-decoration: underline;

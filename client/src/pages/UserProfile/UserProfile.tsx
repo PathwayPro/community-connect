@@ -18,7 +18,7 @@ const UserProfile: FC = () => {
         <Images />
         <Info />
         <div className={styles.socials}>
-          <Events />
+          <Events itemsToShow={4} />
           <Scroll>
             <UserPosts />
           </Scroll>

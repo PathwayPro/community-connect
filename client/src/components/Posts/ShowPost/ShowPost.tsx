@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import Avatar from '../../../common/components/Avatar/Avatar';
 import IconSVG from '../../../common/components/IconSVG/IconSVG';
@@ -8,13 +9,14 @@ import formatDate from '../../../common/utils/formatDateUtils';
 import styles from './ShowPost.module.scss';
 
 export interface ShowPostProps {
+  id: number;
   name: string;
   position: string;
   date: Date;
   content: string;
 }
 
-const ShowPost: FC<ShowPostProps> = ({ name, position, date, content }) => {
+const ShowPost: FC<ShowPostProps> = ({ id, name, position, date, content }) => {
   const [showToast, setShowToast] = useState(false);
 
   // TODO: Add POst actions
@@ -32,7 +34,9 @@ const ShowPost: FC<ShowPostProps> = ({ name, position, date, content }) => {
       <div className={styles.userInfo}>
         <Avatar size="medium" className={styles.image} />
         <div className={styles.info}>
-          <span className={styles.name}>{name}</span>
+          <Link to={`/profile/user/${id}`} className={styles.name}>
+            {name}
+          </Link>
           <span className={styles.position}>{position}</span>
           <span className={styles.date}>{formatDate(date)}</span>
         </div>

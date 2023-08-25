@@ -23,7 +23,14 @@ const Posts: FC<PostsProps> = ({ posts }) => {
       <AddPost />
       {posts.length &&
         posts.map((post) => (
-          <ShowPost key={post.id} name={post.name} position={post.position} date={post.date} content={post.content} />
+          <ShowPost
+            id={post.id}
+            key={post.id}
+            name={post.name}
+            position={post.position}
+            date={post.date}
+            content={post.content}
+          />
         ))}
     </div>
   );

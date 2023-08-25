@@ -32,7 +32,7 @@ const posts: PostProps[] = [
     content: 'Debitis repellendus dolores suscipit quo. Rerum iste voluptas eum debitis temporibus ut.',
   },
   {
-    id: 4,
+    id: 5,
     name: 'Constance Ward III',
     position: 'Coordinator',
     date: new Date('2023-08-07'),

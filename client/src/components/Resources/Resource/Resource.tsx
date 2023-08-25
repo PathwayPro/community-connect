@@ -1,23 +1,22 @@
 import classNames from 'classnames';
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
-import { ReactComponent as IconCircle } from './images/bookmark-circle.svg';
 import { ReactComponent as IconRead } from './images/bookmark-read.svg';
 
 import styles from './Resource.module.scss';
 
 export interface ResourceProps {
   title: string;
-  status: 'green' | 'red' | 'yellow';
 }
 
-const Resource: FC<ResourceProps> = ({ title, status }) => {
+const Resource: FC<ResourceProps> = ({ title }) => {
   return (
-    <div className={classNames(styles.resource, styles[status])}>
-      {status === 'red' ? <IconCircle /> : <IconRead />}
-      <a className={styles.title} href="/">
+    <div className={classNames(styles.resource, styles.green)}>
+      <IconRead />
+      <Link className={styles.title} to="/">
         {title}
-      </a>
+      </Link>
     </div>
   );
 };

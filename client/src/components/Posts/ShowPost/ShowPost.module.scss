@@ -32,6 +32,10 @@
 
 .name {
   @include fonts.weightText;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .position {

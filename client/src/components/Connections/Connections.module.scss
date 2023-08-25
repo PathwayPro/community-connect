@@ -5,11 +5,3 @@
 .connections {
   width: 100%;
 }
-
-.navLink {
-  display: block;
-  margin-left: auto;
-  text-decoration: none;
-
-  @include fonts.mainText($font-size: 13px);
-}
