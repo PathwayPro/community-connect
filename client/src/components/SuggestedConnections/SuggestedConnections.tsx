@@ -15,7 +15,7 @@ interface suggestedConnectionProps {
 const suggestedConnectionList: suggestedConnectionProps[] = [
   { id: 1, name: 'Clark Mante', position: 'Technician' },
   { id: 2, name: 'Adam Kenedi', position: 'Developer' },
-  { id: 3, name: 'Hana Allen', position: 'Designer' },
+  { id: 3, name: 'Theneshkumar Sathiyaseelan', position: 'Designer' },
 ];
 
 const SuggestedConnections: FC = () => {

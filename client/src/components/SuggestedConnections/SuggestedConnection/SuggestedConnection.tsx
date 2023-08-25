@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Avatar from '../../../common/components/Avatar/Avatar';
 import Button from '../../../common/components/Button/Button';
+import { truncateString } from '../../../common/utils/truncateUtils';
 
 import styles from './SuggestedConnection.module.scss';
 
@@ -23,7 +24,7 @@ const SuggestedConnection: FC<connectionProps> = ({ id, name, position }) => {
       <div>
         <div className={styles.info}>
           <Link to={`/profile/user/${id}`} className={styles.name}>
-            {name}
+            {truncateString(name, 20)}
           </Link>
           <span className={styles.position}>{position}</span>
         </div>

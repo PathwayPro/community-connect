@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React, { MouseEvent, KeyboardEvent } from 'react';
 
+import { truncateFileName } from '../../../common/utils/truncateUtils';
 import useWindowSize, { BREAKPOINTS } from '../../../common/utils/useWindowSize';
 import IconSVG from '../IconSVG/IconSVG';
 
@@ -16,16 +17,6 @@ interface FileInputProps {
   onDeleteClick: (e: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>) => void;
   selectedFile: File | null;
 }
-
-const truncateFileName = (fileName: string, maxLength: number): string => {
-  if (fileName.length <= maxLength) {
-    return fileName;
-  }
-
-  const fileFormat = fileName.split('.').pop();
-  const truncatedName = fileName.slice(0, maxLength - 4);
-  return `${truncatedName}[...].${fileFormat}`;
-};
 
 const ResumeDownloadInputInner = (
   { title, name, id, className = '', errorMessage, onChange, onDeleteClick, selectedFile }: FileInputProps,
