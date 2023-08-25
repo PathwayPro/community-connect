@@ -205,15 +205,19 @@ const RegisterForm: FC = () => {
             render={({ field, fieldState }) => (
               <input
                 type="checkbox"
-                id={`${formId}-agreement}`}
+                id={`${formId}-agreement`}
                 {...field}
                 className={classNames(styles.checkbox, fieldState.error && styles.error)}
               />
             )}
           />
-          <label htmlFor={`${formId}-agreement}`}>
+          <label htmlFor={`${formId}-agreement`} className={styles.checkboxLabel}>
             <span>Do&nbsp;you agree to&nbsp;our </span>
-            <a href="#">Terms and Conditions, Privacy Statement, and Security Policy</a>
+            <a href="#">Terms and Conditions</a>
+            {', '}
+            <a href="#">Privacy Statement</a>
+            {', and '}
+            <a href="#">Security Policy</a>
           </label>
         </fieldset>
       </div>

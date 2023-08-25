@@ -49,7 +49,6 @@
 .navLink {
   @include fonts.navText;
   @include margin-right;
-  text-decoration: none;
 
   &.active,
   &.pending {

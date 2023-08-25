@@ -24,7 +24,6 @@
   @extend %flex-center;
   @include fonts.navText;
   cursor: pointer;
-  text-decoration: none;
 
   &.active,
   &.pending {
