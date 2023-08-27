@@ -16,7 +16,7 @@ module.exports = {
           yearsOfExperience: '5+',
           bio: 'I am a software developer with 5 years of experience...',
           linkedInURL: 'https://www.linkedin.com/yourprofile',
-          instaURL: 'https://www.instagram.com/yourprofile',
+          instagramURL: 'https://www.instagram.com/yourprofile',
           twitterURL: 'https://twitter.com/yourprofile',
           githubURL: 'https://github.com/yourprofile',
           behanceURL: 'https://www.behance.net/yourprofile',

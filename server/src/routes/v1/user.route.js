@@ -293,7 +293,7 @@ module.exports = router;
  *               linkedInURL:
  *                 type: string
  *                 format: uri
- *               instaURL:
+ *               instagramURL:
  *                 type: string
  *                 format: uri
  *               twitterURL:
@@ -324,7 +324,7 @@ module.exports = router;
  *               yearsOfExperience: "10"
  *               bio: "I am a web developer"
  *               linkedInURL: "https://linkedin.com/in/my-profile"
- *               instaURL: "https://instagram.com/my-profile"
+ *               instagramURL: "https://instagram.com/my-profile"
  *               twitterURL: "https://twitter.com/my-profile"
  *               githubURL: "https://github.com/my-profile"
  *               behanceURL: "https://behance.net/my-profile"

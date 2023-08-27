@@ -10,14 +10,6 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.hasMany(models.UserProfile, { foreignKey: 'provinceId' });
     }
-
-    toSanitizedJSON() {
-      const values = this.get();
-      delete values.createdAt;
-      delete values.updatedAt;
-      delete values.deletedAt;
-      return values;
-    }
   }
   Province.init(
     {
