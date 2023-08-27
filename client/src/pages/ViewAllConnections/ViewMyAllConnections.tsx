@@ -18,17 +18,7 @@ const ViewMyAllConnections: FC = () => {
   // max height for the sections is 875px
   const [maxSize, setMaxSize] = useState<number>(875);
 
-  const handleConnectionsSizeChange = (size: number) => {
-    // min height for the sections is 235px
-    if (size < maxSize && size < 235) {
-      setMaxSize(235);
-    }
-    else if (size < maxSize) {
-      setMaxSize(size);
-    }
-  };
-
-  const handleRequestsSizeChange = (size: number) => {
+  const handleSizeChange = (size: number) => {
     if (size < maxSize && size < 235) {
       setMaxSize(235);
     }
@@ -43,8 +33,12 @@ const ViewMyAllConnections: FC = () => {
         <Images myProfile={true} />
         <Info myProfile={true} userProfile={false} />
         <div className={styles.socials}>
-          <Requests maxSize={maxSize} onSizeChange={handleRequestsSizeChange} />
-          <Connections data={connections} maxSize={maxSize} onSizeChange={handleConnectionsSizeChange} />
+          <div className={styles.requests}>
+            <Requests maxSize={maxSize} onSizeChange={handleSizeChange} />
+          </div>
+          <div className={styles.connections}>
+            <Connections data={connections} maxSize={maxSize} onSizeChange={handleSizeChange} />
+          </div>
         </div>
       </div>
     </Container>

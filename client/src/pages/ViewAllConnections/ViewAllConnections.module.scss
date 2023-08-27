@@ -13,3 +13,15 @@
 
   @extend %flex-row;
 }
+
+.connectionsOnly {
+  width: 100%;
+}
+
+.connections {
+  width: 72%;
+}
+
+.requests {
+  width: 28%;
+}
