@@ -1,5 +1,7 @@
 @use '../../../common/styles/colors';
 @use '../../../common/styles/mixins';
+@use '../../../common/styles/fonts';
+@use '../../../common/styles/media';
 
 .block {
   display: flex;
@@ -8,19 +10,88 @@
   border-radius: 15px;
   padding: 60px 0;
   margin-bottom: 2rem;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  @include media.media-s {
+    padding: 2rem 0;
+  }
 }
 
 .form {
+  box-sizing: border-box;
   max-width: 600px;
   width: 100%;
+  padding: 0 1rem;
   @extend %flex-center;
   flex-direction: column;
 }
 
-.textarea {
+.formRow {
+  margin-bottom: 1.6rem;
   width: 100%;
 }
 
-.mentorshipButton {
-  margin-top: 1.6rem;
+.applyResume {
+  height: 155px;
+  padding: 0;
+  background-size: 15%;
+  border-width: 3px;
+  &::after {
+    @include fonts.mainText($font-size: 19px);
+    bottom: 10%;
+  }
+
+  @include media.media-s {
+    background-size: 30%;
+    background-position-y: 27%;
+  }
+}
+
+.applyLabel {
+  display: block;
+  margin-bottom: 0.7rem;
+  @extend %reset-p;
+}
+
+.center {
+  text-align: center;
+}
+
+.message {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 0.5rem;
+  }
+}
+
+.errorMessage {
+  @include fonts.mainText($color: colors.$error);
+
+  &::before {
+    background: url('/images/Icon/error.svg') no-repeat center center / cover;
+  }
+}
+
+.successMessage {
+  @include fonts.mainText($color: colors.$success);
+
+  &::before {
+    background: url('/images/Icon/success.svg') no-repeat center center / cover;
+  }
+}
+
+.loadingMessage {
+  @include fonts.mainText($color: colors.$warning);
+
+  &::before {
+    background: url('/images/Icon/warning.svg') no-repeat center center / cover;
+  }
 }

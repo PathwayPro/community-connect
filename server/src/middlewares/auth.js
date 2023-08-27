@@ -9,9 +9,15 @@ const verifyCallback = (req, resolve, reject, requiredRights) => async (err, use
   }
   req.user = user;
   if (requiredRights.length) {
-    const userRights = roleRights.get(user.role);
-    const hasRequiredRights = requiredRights.every((requiredRight) => userRights.includes(requiredRight));
-    if (!hasRequiredRights && req.params.userId !== user.id) {
+    let hasRequiredRights;
+    if (user.roles) {
+      const userRights = {};
+      user.roles.forEach((role) => {
+        userRights[role.name] = roleRights.get(role.name);
+        hasRequiredRights = requiredRights.every((requiredRight) => userRights[role.name].includes(requiredRight));
+      });
+    }
+    if (!user.roles || (!hasRequiredRights && req.params.userId !== user.id)) {
       return reject(new ApiError(httpStatus.FORBIDDEN, 'Forbidden'));
     }
   }

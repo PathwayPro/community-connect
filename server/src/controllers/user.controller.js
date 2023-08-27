@@ -2,7 +2,7 @@ const httpStatus = require('http-status');
 const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
-const { userService } = require('../services');
+const { userService, userRoleService } = require('../services');
 
 const createUser = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
@@ -43,7 +43,11 @@ const getProfile = catchAsync(async (req, res) => {
 });
 
 const createOrUpdateProfile = catchAsync(async (req, res) => {
-  await userService.createOrUpdateProfile(req.user.id, req.body);
+  const userProfile = await userService.createOrUpdateProfile(req.user.id, req.body);
+  // Use this if you want to return userProfile Object
+  // res.status(httpStatus.CREATED).send(userProfile);
+  const preUserRole = await userRoleService.getRoleByName('user');
+  await userRoleService.createUserRole(userProfile.userId, preUserRole.id);
   res.status(httpStatus.CREATED).send();
 });
 

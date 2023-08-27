@@ -5,6 +5,7 @@ import { Controller } from 'react-hook-form';
 import Dropdown from '../../common/components/Dropdown/Dropdown';
 import Input from '../../common/components/Input/Input';
 import Textarea from '../../common/components/Textarea/Textarea';
+import { fileSize, imageFileFormat } from '../../common/utils/filesValidation';
 import {
   NAME_REGEX,
   ERROR_MESSAGE_NAME,
@@ -13,10 +14,9 @@ import {
   LANGUAGES_REGEX,
   LANGUAGES_MESSAGE_NAME,
 } from '../../common/utils/formComponentsUtils';
+import { years } from '../../common/utils/userProfile';
 
-import { StepAllProps } from './FillUserProfileForm';
-
-import styles from './FillUserProfileForm.module.scss';
+import { StepAllProps, styles } from './FillUserProfileForm';
 
 const countries = [
   { value: 'option1', label: 'Option 1' },
@@ -30,34 +30,19 @@ const provinces = [
   { value: 'option3', label: 'Option 3' },
 ];
 
-const years = [
-  { value: 'less than 1', label: 'less than 1' },
-  { value: 'less than 3', label: 'less than 3' },
-  { value: 'less than 5', label: 'less than 5' },
-  { value: 'less than 8', label: 'less than 8' },
-  { value: 'more than 8', label: 'more than 8' },
-];
-
 const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }) => {
   // TODO: add file preview
   // TODO: save file to the redux store because when you back / forward files are not saving and you need to upload files again
   const avatar = register('avatar', {
-    required: 'User photo is required',
+    required: false,
     validate: {
-      fileFormat: (value: FileList | undefined) => {
-        const file = value ? value[0] : undefined;
-        if (file && ['image/jpg', 'image/jpeg', 'image/png'].includes(file.type)) {
-          return true;
-        }
-        return 'Image must be a .jpg, .jpeg or .png format';
+      checkFormat: (value: FileList | undefined) => {
+        if (!value?.length) return;
+        return imageFileFormat(value[0]);
       },
-      fileSize: (value: FileList | undefined) => {
-        const file = value ? value[0] : undefined;
-        if (file && file.size <= 8 * 1024 * 1024) {
-          // 8MB
-          return true;
-        }
-        return 'Image must be less than 8MB';
+      checkSize: (value: FileList | undefined) => {
+        if (!value?.length) return;
+        return fileSize(value[0], 8);
       },
     },
   });
@@ -123,7 +108,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
   return (
     <>
       <div className={classNames(styles.formRow, styles.column, styles.avatarWrap)}>
-        <p className={styles.avatarTitle}>Add Photo *</p>
+        <p className={styles.avatarTitle}>Add Photo</p>
         <label htmlFor={`${formId}-${avatar.name}`} className={styles.avatarLabel}></label>
         <input
           type="file"

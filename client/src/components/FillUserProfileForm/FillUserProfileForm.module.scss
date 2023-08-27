@@ -35,8 +35,8 @@
   }
 
   &.column {
-    flex-direction: column;
     @extend %flex-center;
+    flex-direction: column;
   }
 
   &.error {
