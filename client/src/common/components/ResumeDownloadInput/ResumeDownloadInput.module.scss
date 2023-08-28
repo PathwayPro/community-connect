@@ -14,9 +14,10 @@
 
 .label {
   position: relative;
+  display: inline-block;
+  width: 100%;
   height: 355px;
   margin-bottom: 30px;
-  padding: 26px;
   background: url('/images/FillUserProfileForm/cloud-download.svg') no-repeat center 38%;
   border-radius: 15px;
   border: colors.$blue-normal 5px dashed;
@@ -32,16 +33,14 @@
   &::after {
     content: 'Browse Files to upload';
     position: absolute;
-    bottom: 78px;
+    bottom: 15%;
     right: 50%;
     transform: translateX(50%);
     @include fonts.navText($color: colors.$black);
 
     @include media.media-s {
-      bottom: 40px;
-      right: 20%;
+      bottom: 10%;
       font-size: 15px;
-      transform: unset;
     }
   }
 }

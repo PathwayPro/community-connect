@@ -3,9 +3,7 @@ import { Controller } from 'react-hook-form';
 
 import Dropdown from '../../common/components/Dropdown/Dropdown';
 
-import { StepControlProps } from './FillUserProfileForm';
-
-import styles from './FillUserProfileForm.module.scss';
+import { StepControlProps, styles } from './FillUserProfileForm';
 
 const years = [
   { value: 'less than 1', label: 'less than 1' },

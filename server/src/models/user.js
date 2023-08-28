@@ -9,9 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsToMany(models.Role, { through: models.UserRole });
+      this.belongsToMany(models.Role, { through: models.UserRole, as: 'roles', foreignKey: 'userId' });
       this.hasMany(models.Token, { foreignKey: 'userId', onDelete: 'CASCADE' });
-      this.hasMany(models.MentorshipRequest, { foreignKey: 'userId', onDelete: 'CASCADE' });
+      this.hasMany(models.MenteeRequest, { foreignKey: 'userId', onDelete: 'CASCADE' });
       this.hasMany(models.MentorRequest, { foreignKey: 'userId', onDelete: 'CASCADE' });
       this.hasOne(models.UserProfile, { foreignKey: 'userId', onDelete: 'CASCADE' });
       this.hasMany(models.UserConnection, { foreignKey: 'senderId', as: 'asSender' });

@@ -1,9 +1,9 @@
-const { mentorshipRequestStatuses } = require('../config/mentorship');
+const { menteeStatuses } = require('../config/mentorship');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('MentorshipRequests', {
+    await queryInterface.createTable('MenteeRequests', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -20,7 +20,7 @@ module.exports = {
       },
       status: {
         type: Sequelize.ENUM,
-        values: [mentorshipRequestStatuses.PENDING, mentorshipRequestStatuses.RESOLVED],
+        values: [menteeStatuses.PENDING, menteeStatuses.IN_PROGRESS, menteeStatuses.MATCHED],
         allowNull: false,
       },
       createdAt: {
@@ -44,6 +44,6 @@ module.exports = {
     });
   },
   async down(queryInterface) {
-    await queryInterface.dropTable('MentorshipRequests');
+    await queryInterface.dropTable('MenteeRequests');
   },
 };

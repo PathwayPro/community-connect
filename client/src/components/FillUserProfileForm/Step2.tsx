@@ -2,9 +2,7 @@ import { FC } from 'react';
 
 import Input from '../../common/components/Input/Input';
 
-import { StepRegisterProps } from './FillUserProfileForm';
-
-import styles from './FillUserProfileForm.module.scss';
+import { StepRegisterProps, styles } from './FillUserProfileForm';
 
 const Step2: FC<StepRegisterProps> = ({ formId, errors, register }) => {
   const linkedInURL = register('linkedInURL');

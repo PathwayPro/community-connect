@@ -12,6 +12,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string;
   successMessage?: string;
   autoComplete?: string;
+  disabled?: boolean;
   className?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
@@ -27,6 +28,7 @@ const InputInner = (
     errorMessage = '',
     successMessage = '',
     autoComplete = 'off',
+    disabled = false,
     className = '',
     onChange,
     onBlur,
@@ -46,10 +48,16 @@ const InputInner = (
         type={type}
         placeholder={placeholder}
         autoComplete={autoComplete}
-        className={classNames(styles.input, errorMessage && styles.error, successMessage && styles.success)}
+        className={classNames(
+          styles.input,
+          errorMessage && styles.error,
+          successMessage && styles.success,
+          disabled && styles.disabled
+        )}
         onChange={onChange}
         onBlur={onBlur}
         ref={ref}
+        disabled={disabled}
       ></input>
       {errorMessage && <div className={classNames(styles.message, styles.errorMessage)}>{errorMessage}</div>}
       {!errorMessage && successMessage && (

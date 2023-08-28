@@ -1,10 +1,11 @@
 import { FC, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useLocation } from 'react-router-dom';
 
 import { useAppDispatch } from '../../app/hooks';
 import { useLoginUserMutation } from '../../app/slices/apiSlice';
-import { setCredentials } from '../../app/slices/authSlice';
-import { showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
+import { setCredentials, login } from '../../app/slices/authSlice';
+import { showModal, MODAL_TYPE, closeModal } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 import Heading from '../../common/components/Heading/Heading';
 import Input from '../../common/components/Input/Input';
@@ -22,6 +23,7 @@ const formId = 'login';
 const LoginForm: FC = () => {
   const dispatch = useAppDispatch();
   const [errorMessage, setErrorMessage] = useState('');
+  const location = useLocation();
 
   const {
     register,
@@ -52,8 +54,16 @@ const LoginForm: FC = () => {
           dispatch(setCredentials({ user: null, token: null }));
         } else {
           dispatch(setCredentials(data));
-          // TODO: Add check if user doesn't have profile
-          dispatch(showModal({ content: MODAL_TYPE.FILL_USER_PROFILE, closeOnOverlayClick: false }));
+          dispatch(login());
+          if (
+            data.user?.roles &&
+            !data.user.roles.includes('user') &&
+            location.pathname != '/mentorship/become-mentor'
+          ) {
+            dispatch(showModal({ content: MODAL_TYPE.FILL_USER_PROFILE, closeOnOverlayClick: false }));
+          } else {
+            dispatch(closeModal());
+          }
         }
       })
       .catch((error) => {
