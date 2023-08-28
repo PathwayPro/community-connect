@@ -155,6 +155,20 @@ export const apiSlice = createApi({
         body: data,
       }),
     }),
+
+    // User
+    createUserProfile: builder.mutation({
+      query: (data) => ({
+        url: `/v1/users/profile`,
+        method: 'POST',
+        body: data,
+      }),
+    }),
+
+    // Utils
+    getCountries: builder.query({
+      query: () => '/v1/utils/countries',
+    }),
   }),
 });
 
@@ -170,4 +184,6 @@ export const {
   useLogoutQuery,
   useApplyForMentorshipMutation,
   useBecomeMentorMutation,
+  useCreateUserProfileMutation,
+  useGetCountriesQuery,
 } = apiSlice;

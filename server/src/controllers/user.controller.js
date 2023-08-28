@@ -44,10 +44,10 @@ const getProfile = catchAsync(async (req, res) => {
 
 const createOrUpdateProfile = catchAsync(async (req, res) => {
   const userProfile = await userService.createOrUpdateProfile(req.user.id, req.body);
-  // Use this if you want to return userProfile Object
-  // res.status(httpStatus.CREATED).send(userProfile);
-  const preUserRole = await userRoleService.getRoleByName('user');
-  await userRoleService.createUserRole(userProfile.userId, preUserRole.id);
+
+  const userRole = await userRoleService.getRoleByName('user');
+  await userRoleService.createUserRole(userProfile.userId, userRole.id);
+
   res.status(httpStatus.CREATED).send();
 });
 

@@ -56,10 +56,24 @@
 }
 
 .errorMessage {
+  padding-left: 1.2rem;
   @include fonts.hintText($color: colors.$error);
+  text-align: center;
 
   &::before {
+    content: '';
     background: url('/images/Icon/error.svg') no-repeat center center / cover;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    position: relative;
+    left: -6px;
+    top: 2px;
+
+    @include media.media-s {
+      width: 11px;
+      height: 11px;
+    }
   }
 }
 
@@ -133,23 +147,4 @@
   overflow: hidden;
   position: absolute;
   z-index: -1;
-}
-
-.avatarMessage {
-  padding-left: 1.2rem;
-
-  &::before {
-    content: '';
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    position: relative;
-    left: -6px;
-    top: 2px;
-
-    @include media.media-s {
-      width: 11px;
-      height: 11px;
-    }
-  }
 }
