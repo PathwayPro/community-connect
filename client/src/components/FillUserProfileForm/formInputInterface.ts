@@ -1,9 +1,9 @@
 export interface IFormInput {
-  avatar?: FileList;
+  image?: FileList;
   bio?: string;
   behanceURL?: string;
   birthDate?: string;
-  isBirthdayVisible?: boolean;
+  isBirthDateVisible?: boolean;
   githubURL?: string;
   goal?: string;
   fieldOfExpertise?: string;
@@ -11,8 +11,8 @@ export interface IFormInput {
   instagramURL?: string;
   lastName: string;
   linkedInURL?: string;
-  province?: string;
-  originCountry?: string;
+  provinceId?: string;
+  countryId?: string;
   resume?: FileList;
   spokenLanguage?: string;
   twitterURL?: string;

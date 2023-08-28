@@ -42,15 +42,25 @@ const updateUser = {
 
 const createProfile = {
   body: Joi.object().keys({
-    bio: Joi.string().required(),
-    birthDate: Joi.date().required(),
+    firstName: Joi.string().required(),
+    lastName: Joi.string().required(),
+    image: Joi.any().optional(),
+    birthDate: Joi.date().allow(null).optional(),
+    isBirthDateVisible: Joi.boolean().optional(),
+    spokenLanguage: Joi.array().allow('', null).items(Joi.string()).optional(),
     fieldOfExpertise: Joi.string().required(),
-    yearsOfExperience: Joi.number().integer().min(0).required(),
-    countryId: Joi.number().integer().required(),
-    provinceId: Joi.number().integer().required(),
-    spokenLanguage: Joi.string().required(),
-    interestAndHobby: Joi.string().required(),
-    linkedInURL: Joi.string().uri().required(),
+    yearsOfExperience: Joi.string().required(),
+    bio: Joi.string().required(),
+    linkedInURL: Joi.string().allow('').uri().optional(),
+    instagramURL: Joi.string().allow('').uri().optional(),
+    twitterURL: Joi.string().allow('').uri().optional(),
+    githubURL: Joi.string().allow('').uri().optional(),
+    behanceURL: Joi.string().allow('').uri().optional(),
+    resume: Joi.any().optional(),
+    timeInCanada: Joi.string().optional(),
+    goal: Joi.string().optional(),
+    countryId: Joi.number().integer().optional(),
+    provinceId: Joi.number().integer().optional(),
   }),
 };
 

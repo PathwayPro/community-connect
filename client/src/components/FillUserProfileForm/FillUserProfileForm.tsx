@@ -2,9 +2,11 @@ import { FC, useState } from 'react';
 import { useForm, UseFormRegister, UseFormSetValue, SubmitHandler, FieldErrors, Control } from 'react-hook-form';
 
 import { useAppDispatch } from '../../app/hooks';
+import { useCreateUserProfileMutation } from '../../app/slices/apiSlice';
 import { closeModal } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 import Heading from '../../common/components/Heading/Heading';
+import { ERROR_MESSAGES } from '../../common/utils/errors';
 
 import { IFormInput } from './formInputInterface';
 import ProgressBar from './ProgressBar/ProgressBar';
@@ -36,6 +38,8 @@ const formId = 'fillUserProfile';
 const FillUserProfileForm: FC = () => {
   const dispatch = useAppDispatch();
   const [step, setStep] = useState(1);
+  const [errorMessage, setErrorMessage] = useState('');
+
   const {
     register,
     control,
@@ -45,17 +49,33 @@ const FillUserProfileForm: FC = () => {
   } = useForm<IFormInput>({
     mode: 'onChange',
     defaultValues: {
-      isBirthdayVisible: false,
+      isBirthDateVisible: false,
     },
   });
 
-  // TODO: send data to backend
+  const [createProfile] = useCreateUserProfileMutation();
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
     if (step != 4) {
       setStep((prevStep) => prevStep + 1);
     } else {
-      console.log(values);
-      dispatch(closeModal());
+      const { spokenLanguage, birthDate, ...profileData } = values;
+
+      const laguagesArray = spokenLanguage ? spokenLanguage?.replaceAll(' ', '').split(',') : [];
+      // TODO If birthDate were passed, update it to the proper date format (replace new Date())
+      const birtDateToDate = birthDate ? new Date() : null;
+      await createProfile({ ...profileData, spokenLanguage: laguagesArray, birthDate: birtDateToDate })
+        .unwrap()
+        .then(() => {
+          // TODO: save profile data to the store
+          dispatch(closeModal());
+        })
+        .catch((error) => {
+          if (error?.data?.message) {
+            setErrorMessage(error?.data?.message);
+          } else {
+            setErrorMessage(ERROR_MESSAGES.SERVER_ERROR);
+          }
+        });
     }
   };
 
@@ -67,6 +87,7 @@ const FillUserProfileForm: FC = () => {
         {step === 3 && 'Resume / CV'}
         {step === 4 && 'Your Goal'}
       </Heading>
+      {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
       <ProgressBar step={step} />
       <div className={styles.content}>
         {step === 1 && (

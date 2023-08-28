@@ -1,7 +1,8 @@
 import classNames from 'classnames';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Controller } from 'react-hook-form';
 
+import { useGetCountriesQuery } from '../../app/slices/apiSlice';
 import Dropdown from '../../common/components/Dropdown/Dropdown';
 import Input from '../../common/components/Input/Input';
 import Textarea from '../../common/components/Textarea/Textarea';
@@ -18,22 +19,37 @@ import { years } from '../../common/utils/userProfile';
 
 import { StepAllProps, styles } from './FillUserProfileForm';
 
-const countries = [
-  { value: 'option1', label: 'Option 1' },
-  { value: 'option2', label: 'Option 2' },
-  { value: 'option3', label: 'Option 3' },
+const provinces = [
+  { value: '1', label: 'Alberta' },
+  { value: '2', label: 'British Columbia' },
+  { value: '3', label: 'Ontario' },
 ];
 
-const provinces = [
-  { value: 'option1', label: 'Option 1' },
-  { value: 'option2', label: 'Option 2' },
-  { value: 'option3', label: 'Option 3' },
-];
+interface OptionType {
+  value: string;
+  label: string;
+}
 
 const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }) => {
+  // Get countries list
+  const [preparedValues, setPreparedValues] = useState([] as OptionType[]);
+  const { data: contriesQuery } = useGetCountriesQuery({});
+
+  useEffect(() => {
+    if (!contriesQuery) return;
+    const preparedValues1: OptionType[] = contriesQuery.map((element: Record<string, string>) => {
+      const preparedElement: OptionType = { value: '', label: '' };
+      preparedElement.value = element.id;
+      preparedElement.label = element.country;
+      return preparedElement;
+    });
+    setPreparedValues(preparedValues1);
+    return;
+  }, [contriesQuery]);
+
   // TODO: add file preview
   // TODO: save file to the redux store because when you back / forward files are not saving and you need to upload files again
-  const avatar = register('avatar', {
+  const avatar = register('image', {
     required: false,
     validate: {
       checkFormat: (value: FileList | undefined) => {
@@ -120,9 +136,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
           onBlur={avatar.onBlur}
           ref={avatar.ref}
         />
-        {errors.avatar && (
-          <div className={classNames(styles.avatarMessage, styles.errorMessage)}>{errors.avatar.message}</div>
-        )}
+        {errors.image && <div className={styles.errorMessage}>{errors.image.message}</div>}
       </div>
       <div className={styles.formRow}>
         <Input
@@ -150,23 +164,23 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
       </div>
       <div className={styles.formRow}>
         <Controller
-          name="originCountry"
+          name="countryId"
           control={control}
           render={({ field }) => (
             <Dropdown
               name={field.name}
               id={`${formId}-${field.name}`}
               label="Country of origin"
-              options={countries}
+              options={preparedValues}
               className={styles.formField}
               onChange={field.onChange}
               onBlur={field.onBlur}
-              errorMessage={errors.originCountry?.message}
+              errorMessage={errors.countryId?.message}
             />
           )}
         />
         <Controller
-          name="province"
+          name="provinceId"
           control={control}
           render={({ field }) => (
             <Dropdown
@@ -177,7 +191,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
               className={styles.formField}
               onChange={field.onChange}
               onBlur={field.onBlur}
-              errorMessage={errors.province?.message}
+              errorMessage={errors.provinceId?.message}
             />
           )}
         />
@@ -197,7 +211,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
           />
           <fieldset className={styles.checkboxField}>
             <Controller
-              name="isBirthdayVisible"
+              name="isBirthDateVisible"
               control={control}
               render={({ field: { value, name, ...field } }) => (
                 <input
@@ -209,7 +223,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
                 />
               )}
             />
-            <label htmlFor={`${formId}-isBirthdayVisible`}>Show my birthday date on my profile.</label>
+            <label htmlFor={`${formId}-isBirthDateVisible`}>Show my birthday date on my profile.</label>
           </fieldset>
         </div>
 
