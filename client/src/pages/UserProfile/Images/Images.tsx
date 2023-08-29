@@ -1,6 +1,6 @@
 import axios from 'axios';
 import classNames from 'classnames';
-import { useState, useRef, FC } from 'react';
+import { useEffect, useState, useRef, FC } from 'react';
 
 import Alert from '../../../common/components/Alert/Alert';
 import IconSVG from '../../../common/components/IconSVG/IconSVG';
@@ -12,6 +12,12 @@ import defaultProfileImage from '../../../images/Main/defaultProfileImg.png';
 const Images: FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [alertOpen, setAlertOpen] = useState(false);
+
+  useEffect(() => {
+    if (selectedFile) {
+      handleUpload();
+    }
+  }, [selectedFile]);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -27,8 +33,8 @@ const Images: FC = () => {
       formData.append('file', selectedFile);
 
       try {
-        const response = await axios.post('/upload', formData);
-        console.log('File uploaded successfully!', response.data);
+        const response = await axios.post('/firebase', formData);
+        console.log('File uploaded successfully!', response.data.filename);
       } catch (error) {
         console.error('Error uploading file:', error);
       }
@@ -43,10 +49,10 @@ const Images: FC = () => {
       img.onload = () => {
         const tolerance = 1; //tolerance for aspect ratio
 
-        const isImgInRange = Math.abs(img.width/img.height - 1320/250) <= tolerance;
+        const isImgInRange = 1 <= tolerance;
+        // const isImgInRange = Math.abs(img.width/img.height - 1320/250) <= tolerance;
         if (isImgInRange) {
           setSelectedFile(file);
-          handleUpload();
         } else {
           setAlertOpen(true);
         }

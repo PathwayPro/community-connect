@@ -128,12 +128,6 @@ const getUserProfileByUserId = async (userId) => {
   });
 };
 
-const getUserProfileByUserId = async (userId) => {
-  return UserProfile.findOne({
-    where: { userId },
-  });
-};
-
 module.exports = {
   createUser,
   queryUsers,
