@@ -63,19 +63,21 @@ const FillUserProfileForm: FC = () => {
 
       const laguagesArray = spokenLanguage ? spokenLanguage?.replaceAll(' ', '').split(',') : [];
       // TODO If birthDate were passed, update it to the proper date format (replace new Date())
-      const birtDateToDate = birthDate ? new Date() : null;
+      const birtDateToDate = birthDate ? new Date(birthDate) : null;
 
-      console.log('Data being sent to the backend:', {
+      const dataToSend = {
         ...profileData,
         spokenLanguage: laguagesArray,
         birthDate: birtDateToDate,
-      });
+      };
+
+      console.log('Data being sent to the backend:', dataToSend);
+
+      dispatch(setUserProfile(dataToSend));
 
       await createProfile({ ...profileData, spokenLanguage: laguagesArray, birthDate: birtDateToDate })
         .unwrap()
-        .then((response) => {
-          console.log('API Response:', response);
-          dispatch(setUserProfile(response));
+        .then(() => {
           dispatch(closeModal());
         })
         .catch((error) => {

@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface UserProfileState {
-  image?: FileList;
+  // image?: FileList;
   bio?: string;
   behanceURL?: string;
-  birthDate?: string;
+  birthDate?: Date | null | undefined;
   isBirthDateVisible?: boolean;
   githubURL?: string;
   goal?: string;
@@ -15,8 +15,8 @@ interface UserProfileState {
   linkedInURL?: string;
   provinceId?: number;
   countryId?: number;
-  resume?: FileList;
-  spokenLanguage?: string;
+  // resume?: FileList;
+  // spokenLanguage?: string;
   twitterURL?: string;
   timeInCanada?: string;
   yearsOfExperience?: string;
