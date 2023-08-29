@@ -3,6 +3,7 @@ import { FC, useEffect, useState } from 'react';
 import { Controller } from 'react-hook-form';
 
 import { useGetCountriesQuery } from '../../app/slices/apiSlice';
+import { useGetProvincesQuery } from '../../app/slices/apiSlice';
 import Dropdown from '../../common/components/Dropdown/Dropdown';
 import Input from '../../common/components/Input/Input';
 import Textarea from '../../common/components/Textarea/Textarea';
@@ -19,12 +20,6 @@ import { years } from '../../common/utils/userProfile';
 
 import { StepAllProps, styles } from './FillUserProfileForm';
 
-const provinces = [
-  { value: '1', label: 'Alberta' },
-  { value: '2', label: 'British Columbia' },
-  { value: '3', label: 'Ontario' },
-];
-
 interface OptionType {
   value: string;
   label: string;
@@ -32,20 +27,35 @@ interface OptionType {
 
 const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }) => {
   // Get countries list
-  const [preparedValues, setPreparedValues] = useState([] as OptionType[]);
-  const { data: contriesQuery } = useGetCountriesQuery({});
+  const [preparedCountries, setPreparedCountries] = useState([] as OptionType[]);
+  const [preparedProvinces, setPreparedProvinces] = useState([] as OptionType[]);
+
+  const { data: countriesQuery } = useGetCountriesQuery({});
+  const { data: provincesQuery } = useGetProvincesQuery({});
 
   useEffect(() => {
-    if (!contriesQuery) return;
-    const preparedValues1: OptionType[] = contriesQuery.map((element: Record<string, string>) => {
+    if (!countriesQuery) return;
+    const preparedCountriesList: OptionType[] = countriesQuery
+      .map((element: Record<string, string>) => {
+        const preparedElement: OptionType = { value: '', label: '' };
+        preparedElement.value = element.id;
+        preparedElement.label = element.country;
+        return preparedElement;
+      })
+      .sort((a: OptionType, b: OptionType) => a.label.localeCompare(b.label));
+    setPreparedCountries(preparedCountriesList);
+  }, [countriesQuery]);
+
+  useEffect(() => {
+    if (!provincesQuery) return;
+    const preparedProvincesList: OptionType[] = provincesQuery.map((element: Record<string, string>) => {
       const preparedElement: OptionType = { value: '', label: '' };
       preparedElement.value = element.id;
-      preparedElement.label = element.country;
+      preparedElement.label = element.provinceAndTerritory; // Assuming the province name is stored in a property called 'province'
       return preparedElement;
     });
-    setPreparedValues(preparedValues1);
-    return;
-  }, [contriesQuery]);
+    setPreparedProvinces(preparedProvincesList);
+  }, [provincesQuery]);
 
   // TODO: add file preview
   // TODO: save file to the redux store because when you back / forward files are not saving and you need to upload files again
@@ -171,7 +181,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
               name={field.name}
               id={`${formId}-${field.name}`}
               label="Country of origin"
-              options={preparedValues}
+              options={preparedCountries}
               className={styles.formField}
               onChange={field.onChange}
               onBlur={field.onBlur}
@@ -187,7 +197,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
               name={field.name}
               id={`${formId}-${field.name}`}
               label="Province"
-              options={provinces}
+              options={preparedProvinces}
               className={styles.formField}
               onChange={field.onChange}
               onBlur={field.onBlur}
