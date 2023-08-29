@@ -7,8 +7,9 @@ import Home from './pages/Home/Home';
 import Layout from './pages/Layout/Layout';
 import Main from './pages/Main/Main';
 import { ApplyForMentorship, BecomeMentor } from './pages/Mentorship';
+import MyProfile from './pages/Profile/MyProfile';
+import UserProfile from './pages/Profile/UserProfile';
 import Resources from './pages/Resources/Resources';
-import UserProfile from './pages/UserProfile/UserProfile';
 import Volunteering from './pages/Volunteering/Volunteering';
 
 const router = createBrowserRouter([
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       },
       {
         path: 'profile/my',
+        Component: MyProfile,
+      },
+      {
+        path: 'profile/user/:Id',
         Component: UserProfile,
       },
       {

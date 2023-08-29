@@ -1,13 +1,17 @@
 import classNames from 'classnames';
 import { useState, useRef, FC } from 'react';
 
-import Alert from '../../../common/components/Alert/Alert';
-import Avatar from '../../../common/components/Avatar/Avatar';
-import IconSVG from '../../../common/components/IconSVG/Button/IconSVG';
+import Alert from '../../common/components/Alert/Alert';
+import Avatar from '../../common/components/Avatar/Avatar';
+import IconSVG from '../../common/components/IconSVG/Button/IconSVG';
 
 import styles from './Images.module.scss';
 
-const Images: FC = () => {
+interface ImagesProps {
+  myProfile: boolean;
+}
+
+const Images: FC<ImagesProps> = ({ myProfile }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [alertOpen, setAlertOpen] = useState(false);
   const [imageClassName, setImageClassName] = useState('');
@@ -29,6 +33,7 @@ const Images: FC = () => {
       img.onload = () => {
         if (img.width / img.height < 1) {
           setImageClassName('contain');
+          setAlertOpen(true);
         } else {
           setImageClassName('cover');
         }
@@ -51,11 +56,9 @@ const Images: FC = () => {
         </div>
       )}
 
-      {/* <img className={styles.profileImage} src={source} alt="Your Image" /> */}
-
       <Avatar size="big" borderColor="white" className={styles.profileImage} />
 
-      <IconSVG name={'editIcon'} className={styles.editIcon} onClick={handleButtonClick} />
+      {myProfile && <IconSVG name={'editIcon'} className={styles.editIcon} onClick={handleButtonClick} />}
 
       <input
         className={styles.imageInput}
@@ -67,8 +70,8 @@ const Images: FC = () => {
       <Alert
         isOpen={alertOpen}
         onClose={closeAlert}
-        title="Image Aspect Ratio Error!"
-        content="Please choose an image that is 1320 x 250  pixels."
+        title="Image Aspect Ratio Suggestion"
+        content="Please choose an image that is rectangular"
       />
     </div>
   );

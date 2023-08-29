@@ -1,6 +1,6 @@
-@use '../../../common/styles/colors';
-@use '../../../common/styles/fonts';
-@use '../../../common/styles/mixins';
+@use '../../common/styles/colors';
+@use '../../common/styles/fonts';
+@use '../../common/styles/mixins';
 
 .personal {
   background: colors.$blue-light;
@@ -11,6 +11,16 @@
   position: relative;
 
   @extend %flex-column;
+}
+
+.infoButtons {
+  @extend %flex-space-between;
+}
+
+.connectionBtns {
+  gap: 12px;
+  margin-right: 6px;
+  @extend %flex-row-right;
 }
 
 .mainInfo {
