@@ -33,6 +33,7 @@ const Images: FC<ImagesProps> = ({ myProfile }) => {
       img.onload = () => {
         if (img.width / img.height < 1) {
           setImageClassName('contain');
+          setAlertOpen(true);
         } else {
           setImageClassName('cover');
         }
@@ -55,8 +56,6 @@ const Images: FC<ImagesProps> = ({ myProfile }) => {
         </div>
       )}
 
-      {/* <img className={styles.profileImage} src={source} alt="Your Image" /> */}
-
       <Avatar size="big" borderColor="white" className={styles.profileImage} />
 
       {myProfile && <IconSVG name={'editIcon'} className={styles.editIcon} onClick={handleButtonClick} />}
@@ -71,8 +70,8 @@ const Images: FC<ImagesProps> = ({ myProfile }) => {
       <Alert
         isOpen={alertOpen}
         onClose={closeAlert}
-        title="Image Aspect Ratio Error!"
-        content="Please choose an image that is 1320 x 250  pixels."
+        title="Image Aspect Ratio Suggestion"
+        content="Please choose an image that is rectangular"
       />
     </div>
   );

@@ -3,7 +3,7 @@
 @use '../../../common/styles/colors';
 
 .modalWindow {
-	position: relative;
+  position: relative;
   padding: 1.6rem;
 
   @extend %flex-column;
@@ -11,20 +11,19 @@
 }
 
 .title {
-  @extend %flex-column-center;
-	@include fonts.weightText($font-size: 28px, $font-weight: 700);
+  text-align: center;
 }
 
 .closeBtn {
-	position: absolute;
-	top: 26px;
-	right: 26px;
-	cursor: pointer;
+  position: absolute;
+  top: 26px;
+  right: 26px;
+  cursor: pointer;
 }
 
-.userInfo{
-	@extend %flex-left-center;
-	gap: 17px;
+.userInfo {
+  @extend %flex-left-center;
+  gap: 17px;
 }
 
 .image {
@@ -35,11 +34,11 @@
 }
 
 .name {
-	@include fonts.mainText;
+  @include fonts.mainText;
 }
 
 .input {
-	position: relative;
+  position: relative;
   background: colors.$white;
   width: 633px;
   min-height: 148px;
@@ -52,7 +51,7 @@
 }
 
 .input::placeholder {
-	position: absolute;
+  position: absolute;
   top: 16px;
   left: 16px;
 }

@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import Container from '../../common/components/Container/Container';
+import Scroll from '../../common/components/Scroll/Scroll';
 import Connections from '../../components/Connections/Connections';
 import Events from '../../components/Events/Events';
 import Images from '../../components/Images/Images';
@@ -17,7 +18,9 @@ const UserProfile: FC = () => {
         <Info myProfile={false} userProfile={true} />
         <div className={styles.socials}>
           <Events itemsToShow={4} />
-          <UserPosts />
+          <Scroll>
+            <UserPosts />
+          </Scroll>
           <Connections />
         </div>
       </div>

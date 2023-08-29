@@ -59,6 +59,7 @@ const Modal: FC = () => {
       if (content === MODAL_TYPE.VERIFY_EMAIL) return <VerifyEmail />;
       if (content === MODAL_TYPE.FILL_USER_PROFILE) return <FillUserProfile />;
       if (content === MODAL_TYPE.WRITE_POST) return <PostModal />;
+      if (content === MODAL_TYPE.WRITE_MESSAGE) return <MessageModal />;
     }
     return null;
   }, [content]);

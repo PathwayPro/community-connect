@@ -9,6 +9,7 @@ export const MODAL_TYPE = {
   VERIFY_EMAIL: 'verifyEmail',
   FILL_USER_PROFILE: 'fillUserProfile',
   WRITE_POST: 'writePost',
+  WRITE_MESSAGE: 'writeMessage',
 };
 
 type initialStateType = {
