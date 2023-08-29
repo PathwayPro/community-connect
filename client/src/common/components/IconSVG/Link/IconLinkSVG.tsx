@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import iconMap from './IconMap';
+import iconMap from '../IconMap';
 
 import styles from './IconLinkSVG.module.scss';
 

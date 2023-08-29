@@ -6,8 +6,8 @@ import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
 import Button from '../../../common/components/Button/Button';
 import Heading from '../../../common/components/Heading/Heading';
-import IconLinkSVG from '../../../common/components/IconLinkSVG/IconLinkSVG';
-import IconSVG from '../../../common/components/IconSVG/IconSVG';
+import IconSVG from '../../../common/components/IconSVG/Button/IconSVG';
+import IconLinkSVG from '../../../common/components/IconSVG/Link/IconLinkSVG';
 import useWindowSize, { BREAKPOINTS } from '../../../common/utils/useWindowSize';
 import HeaderDropDown from '../HeaderDropDown/HeaderDropDown';
 
@@ -39,10 +39,6 @@ const HeaderNav: FC = () => {
 
   const handleMobileDropDownClose = () => {
     setNavDropDownActive(false);
-  };
-
-  const onClick1 = (e: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>) => {
-    e.preventDefault();
   };
 
   return (
@@ -137,7 +133,7 @@ const HeaderNav: FC = () => {
               color="orange"
               className={styles.headerIcon}
               label="Messages"
-              onClick={onClick1}
+              onClick={(e) => e.preventDefault()}
             />
             <IconSVG
               name="headerNotificationIcon"
@@ -145,7 +141,7 @@ const HeaderNav: FC = () => {
               color="orange"
               className={styles.headerIcon}
               label="Notifications"
-              onClick={onClick1}
+              onClick={(e) => e.preventDefault()}
             />
             <IconSVG
               name="headerSearchIcon"
@@ -153,7 +149,7 @@ const HeaderNav: FC = () => {
               color="orange"
               className={styles.headerIcon}
               label="Search"
-              onClick={onClick1}
+              onClick={(e) => e.preventDefault()}
             />
           </div>
         )}

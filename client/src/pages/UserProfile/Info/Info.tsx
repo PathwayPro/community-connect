@@ -5,7 +5,7 @@ import { useAppDispatch } from '../../../app/hooks';
 import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
 import Heading from '../../../common/components/Heading/Heading';
 import Icon, { iconProps } from '../../../common/components/Icon/Icon';
-import IconSVG from '../../../common/components/IconSVG/IconSVG';
+import IconSVG from '../../../common/components/IconSVG/Button/IconSVG';
 
 import styles from './Info.module.scss';
 

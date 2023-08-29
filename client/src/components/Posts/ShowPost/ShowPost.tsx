@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Avatar from '../../../common/components/Avatar/Avatar';
-import IconSVG from '../../../common/components/IconSVG/IconSVG';
+import IconSVG from '../../../common/components/IconSVG/Button/IconSVG';
 import Toast from '../../../common/components/Toast/Toast';
 import formatDate from '../../../common/utils/formatDateUtils';
 

@@ -24,25 +24,17 @@
 }
 
 .title {
-  margin-bottom: 16px;
+  margin-bottom: 1.625rem;
   @include fonts.headingText;
 }
 
 .subtitle {
+  margin-bottom: 1.625rem;
+  margin-top: -10px;
   @include fonts.hintText;
 
   @include media.media-l {
     font-size: 13px;
-  }
-}
-
-.title + .subtitle {
-  margin-bottom: 1.625rem;
-
-  &::before {
-    content: '';
-    display: block;
-    margin-top: -10px; /* negate the margin-bottom of title */
   }
 }
 

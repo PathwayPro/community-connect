@@ -3,7 +3,7 @@ import React, { MouseEvent, KeyboardEvent } from 'react';
 
 import { truncateFileName } from '../../../common/utils/truncateUtils';
 import useWindowSize, { BREAKPOINTS } from '../../../common/utils/useWindowSize';
-import IconSVG from '../IconSVG/IconSVG';
+import IconSVG from '../IconSVG/Button/IconSVG';
 
 import styles from './ResumeDownloadInput.module.scss';
 

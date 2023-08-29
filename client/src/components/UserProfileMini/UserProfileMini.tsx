@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import Avatar from '../../common/components/Avatar/Avatar';
-import IconLinkSVG from '../../common/components/IconLinkSVG/IconLinkSVG';
+import IconLinkSVG from '../../common/components/IconSVG/Link/IconLinkSVG';
 
 import styles from './UserProfileMini.module.scss';
 

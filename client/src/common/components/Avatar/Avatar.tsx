@@ -21,15 +21,17 @@ const Avatar: FC<AvatarProps> = ({
   className,
 }) => {
   return (
-    <img
-      src={src}
-      alt={alt}
-      className={classNames(className, styles.avatar, size && styles[size], borderColor && styles[borderColor])}
-      onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-        const imgElement = e.target as HTMLImageElement;
-        imgElement.src = DEFAULT_AVATAR;
-      }}
-    />
+    <div className={classNames(className, styles.avatar, size && styles[size], borderColor && styles[borderColor])}>
+      <img
+        src={src}
+        alt={alt}
+        className={styles.avatarImg}
+        onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+          const imgElement = e.target as HTMLImageElement;
+          imgElement.src = DEFAULT_AVATAR;
+        }}
+      />
+    </div>
   );
 };
 

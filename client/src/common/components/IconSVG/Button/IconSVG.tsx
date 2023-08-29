@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC, KeyboardEventHandler, MouseEvent, KeyboardEvent } from 'react';
 
-import iconMap from './IconMap';
+import iconMap from '../IconMap';
 
 import styles from './IconSVG.module.scss';
 

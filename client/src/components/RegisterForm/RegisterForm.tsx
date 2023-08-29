@@ -213,11 +213,11 @@ const RegisterForm: FC = () => {
           />
           <label htmlFor={`${formId}-agreement`} className={styles.checkboxLabel}>
             <span>Do&nbsp;you agree to&nbsp;our </span>
-            <a href="#">Terms and Conditions</a>
+            <a href="#" className={styles.checkboxLabelLink}>Terms and Conditions</a>
             {', '}
-            <a href="#">Privacy Statement</a>
+            <a href="#" className={styles.checkboxLabelLink}>Privacy Statement</a>
             {', and '}
-            <a href="#">Security Policy</a>
+            <a href="#" className={styles.checkboxLabelLink}>Security Policy</a>
           </label>
         </fieldset>
       </div>

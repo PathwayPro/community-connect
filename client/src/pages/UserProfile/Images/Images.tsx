@@ -3,11 +3,9 @@ import { useState, useRef, FC } from 'react';
 
 import Alert from '../../../common/components/Alert/Alert';
 import Avatar from '../../../common/components/Avatar/Avatar';
-import IconSVG from '../../../common/components/IconSVG/IconSVG';
+import IconSVG from '../../../common/components/IconSVG/Button/IconSVG';
 
 import styles from './Images.module.scss';
-
-// import defaultProfileImage from '../../../images/defaultProfileImg.svg';
 
 const Images: FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -41,9 +39,6 @@ const Images: FC = () => {
   const closeAlert = () => {
     setAlertOpen(false);
   };
-
-  // const isProfileImageAvailable = false;
-  // const source = !isProfileImageAvailable ? defaultProfileImage : '';
 
   return (
     <div className={styles.container}>

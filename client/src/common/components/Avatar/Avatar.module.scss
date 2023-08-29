@@ -2,9 +2,9 @@
 
 .avatar {
   border-radius: 50%;
-  object-fit: cover;
   background-color: colors.$white;
   border: 2px solid;
+  overflow: hidden;
 
   &.small {
     width: 50px;
@@ -32,4 +32,8 @@
   &.white {
     border-color: colors.$orange-light;
   }
+}
+
+.avatarImg {
+  width: 100%;
 }

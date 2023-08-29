@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import Posts, { PostProps } from '../../../components/Posts/Posts';
+import Posts, { PostProps } from '../Posts/Posts';
 
 const posts: PostProps[] = [
   {
