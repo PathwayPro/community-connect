@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import Avatar from '../../common/components/Avatar/Avatar';
@@ -6,26 +7,19 @@ import IconLinkSVG from '../../common/components/IconSVG/Link/IconLinkSVG';
 
 import styles from './UserProfileMini.module.scss';
 
-interface userDataProps {
-  name: string;
-  background: string;
-}
-
-const userData: userDataProps = {
-  name: 'Niloofar Karyar',
-  background: 'UI/UX Designer',
-};
-
 const Info: FC = () => {
+  const userData = useSelector((state: any) => state.userProfile);
+  const fullName = `${userData.firstName} ${userData.lastName}`;
+
   return (
     <div className={styles.userProfile}>
       <div className={styles.backgroundImage}>
-        <Avatar size="medium" borderColor="blue" className={styles.profileImage} />
+        <Avatar src={userData.image} size="medium" borderColor="blue" className={styles.profileImage} />
       </div>
       <div className={styles.infoBlock}>
         <div className={styles.mainInfo}>
-          <span>{userData.name}</span>
-          <span className={styles.info}>{userData.background}</span>
+          <span>{fullName}</span>
+          <span className={styles.info}>{userData.fieldOfExpertise}</span>
           <IconLinkSVG
             name="editIcon"
             size="small"
@@ -38,7 +32,7 @@ const Info: FC = () => {
           <Link to="/connections" className={styles.link}>
             Your Connections
           </Link>
-          <Link to="/" className={styles.link}>
+          <Link to="/events" className={styles.link}>
             Manage Events
           </Link>
         </div>
