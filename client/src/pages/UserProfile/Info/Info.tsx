@@ -5,7 +5,7 @@ import { useAppDispatch } from '../../../app/hooks';
 import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
 import Heading from '../../../common/components/Heading/Heading';
 import Icon, { iconProps } from '../../../common/components/Icon/Icon';
-import IconSVG from '../../../common/components/IconSVG/IconSVG';
+import IconSVG from '../../../common/components/IconSVG/Button/IconSVG';
 
 import styles from './Info.module.scss';
 
@@ -53,35 +53,35 @@ const Info: FC = () => {
       <IconSVG name={'editIcon'} className={styles.editIcon} onClick={openModal} />
       <div className={styles.mainInfo}>
         <Heading tagType="h4">{userData.name}</Heading>
-        <div className={styles.experience}>{userData.background}</div>
-        <div className={styles.experience}>{userData.experience}</div>
+        <span className={styles.experience}>{userData.background}</span>
+        <span className={styles.experience}>{userData.experience}</span>
       </div>
       <div className={styles.otherInfo}>
         <div className={styles.infoRow}>
-          <div className={styles.title}>Location :</div>
-          <div className={styles.detail}>{userData.location}</div>
+          <span className={styles.title}>Location :</span>
+          <span className={styles.detail}>{userData.location}</span>
         </div>
         <div className={styles.infoRow}>
-          <div className={styles.title}>Birthday :</div>
-          <div className={styles.detail}>
+          <span className={styles.title}>Birthday :</span>
+          <span className={styles.detail}>
             {format(
               new Date(userData.birthday.getTime() + userData.birthday.getTimezoneOffset() * 60000),
               'MMMM d, yyyy'
             )}
-          </div>
+          </span>
         </div>
         <div className={styles.infoRow}>
-          <div className={styles.title}>Bio&nbsp;:</div>
-          <div className={styles.detail}>{userData.bio}</div>
+          <span className={styles.title}>Bio&nbsp;:</span>
+          <p className={styles.detail}>{userData.bio}</p>
         </div>
         <div className={styles.infoRow}>
-          <div className={styles.title}>Spoken language :</div>
+          <span className={styles.title}>Spoken language :</span>
           <div className={styles.languageDetail}>
             {userData.language.map((item) => {
               return (
-                <div key={item} className={styles.languageItem}>
+                <span key={item} className={styles.languageItem}>
                   {item}
-                </div>
+                </span>
               );
             })}
           </div>

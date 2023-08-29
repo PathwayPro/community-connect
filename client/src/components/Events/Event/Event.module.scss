@@ -1,0 +1,52 @@
+@use '../../../common/styles/colors';
+@use '../../../common/styles/fonts';
+@use '../../../common/styles/mixins';
+
+.event {
+  @extend %flex-column;
+  align-items: center;
+  padding: 16px;
+  border-radius: 15px;
+  background-color: colors.$blue-light;
+}
+
+.company {
+  margin-bottom: 1rem;
+  @include fonts.weightText($font-weight: 300);
+}
+
+.dateBlock {
+  @extend %flex-column-left;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.date {
+  position: relative;
+  padding-left: 26px;
+  font-size: 13px;
+  font-weight: 300;
+
+  &::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 18px;
+    height: 18px;
+  }
+
+  &:first-child {
+    margin-bottom: 6px;
+
+    &::before {
+      content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M16.9746 18H2.12183V7H16.9746M13.7919 0V2H5.30457V0H3.18274V2H2.12183C0.944213 2 0 2.89 0 4V18C0 18.5304 0.223549 19.0391 0.621469 19.4142C1.01939 19.7893 1.55908 20 2.12183 20H16.9746C17.5374 20 18.0771 19.7893 18.475 19.4142C18.8729 19.0391 19.0964 18.5304 19.0964 18V4C19.0964 2.89 18.1416 2 16.9746 2H15.9137V0' fill='%23E3A953'/%3E%3C/svg%3E");
+    }
+  }
+
+  &:last-child {
+    &::before {
+      content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='M9 16.2C10.9096 16.2 12.7409 15.4414 14.0912 14.0912C15.4414 12.7409 16.2 10.9096 16.2 9C16.2 7.09044 15.4414 5.25909 14.0912 3.90883C12.7409 2.55857 10.9096 1.8 9 1.8C7.09044 1.8 5.25909 2.55857 3.90883 3.90883C2.55857 5.25909 1.8 7.09044 1.8 9C1.8 10.9096 2.55857 12.7409 3.90883 14.0912C5.25909 15.4414 7.09044 16.2 9 16.2ZM9 0C10.1819 0 11.3522 0.232792 12.4442 0.685084C13.5361 1.13738 14.5282 1.80031 15.364 2.63604C16.1997 3.47177 16.8626 4.46392 17.3149 5.55585C17.7672 6.64778 18 7.8181 18 9C18 11.3869 17.0518 13.6761 15.364 15.364C13.6761 17.0518 11.3869 18 9 18C4.023 18 0 13.95 0 9C0 6.61305 0.948211 4.32387 2.63604 2.63604C4.32387 0.948211 6.61305 0 9 0ZM9.45 4.5V9.225L13.5 11.628L12.825 12.735L8.1 9.9V4.5H9.45Z' fill='%23E3A953'/%3E%3C/svg%3E");
+    }
+  }
+}

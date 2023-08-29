@@ -2,11 +2,10 @@ import classNames from 'classnames';
 import { useState, useRef, FC } from 'react';
 
 import Alert from '../../../common/components/Alert/Alert';
-import IconSVG from '../../../common/components/IconSVG/IconSVG';
+import Avatar from '../../../common/components/Avatar/Avatar';
+import IconSVG from '../../../common/components/IconSVG/Button/IconSVG';
 
 import styles from './Images.module.scss';
-
-import defaultProfileImage from '../../../images/Main/defaultProfileImg.png';
 
 const Images: FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -41,9 +40,6 @@ const Images: FC = () => {
     setAlertOpen(false);
   };
 
-  const isProfileImageAvailable = false;
-  const source = !isProfileImageAvailable ? defaultProfileImage : '';
-
   return (
     <div className={styles.container}>
       {selectedFile && (
@@ -55,7 +51,9 @@ const Images: FC = () => {
         </div>
       )}
 
-      <img className={styles.profileImage} src={source} alt="Your Image" />
+      {/* <img className={styles.profileImage} src={source} alt="Your Image" /> */}
+
+      <Avatar size="big" borderColor="white" className={styles.profileImage} />
 
       <IconSVG name={'editIcon'} className={styles.editIcon} onClick={handleButtonClick} />
 

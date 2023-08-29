@@ -1,6 +1,6 @@
 import { ReactComponent as blogCommentIcon } from './img/blog-comment.svg';
 import { ReactComponent as blogRepostIcon } from './img/blog-repost.svg';
-import { ReactComponent as DeleteIcon } from './img/delete-can.svg';
+import { ReactComponent as deleteIcon } from './img/delete-can.svg';
 import { ReactComponent as editIcon } from './img/edit-pen.svg';
 import { ReactComponent as headerNotificationIcon } from './img/header-bell.svg';
 import { ReactComponent as headerHomeIcon } from './img/header-home.svg';
@@ -25,7 +25,7 @@ interface IconMap {
 const iconMap: IconMap = {
   blogCommentIcon: blogCommentIcon,
   blogRepostIcon: blogRepostIcon,
-  deleteIcon: DeleteIcon,
+  deleteIcon: deleteIcon,
   editIcon: editIcon,
   headerNotificationIcon: headerNotificationIcon,
   headerHomeIcon: headerHomeIcon,

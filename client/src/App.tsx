@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import AboutUs from './pages/AboutUs/AboutUs';
 import Events from './pages/Events/Events';
+import Home from './pages/Home/Home';
 import Layout from './pages/Layout/Layout';
 import Main from './pages/Main/Main';
 import { ApplyForMentorship, BecomeMentor } from './pages/Mentorship';
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: 'profile/my',
         Component: UserProfile,
+      },
+      {
+        path: 'home',
+        Component: Home,
       },
     ],
   },

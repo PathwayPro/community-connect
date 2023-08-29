@@ -1,9 +1,10 @@
 import { FC } from 'react';
 
 import Container from '../../common/components/Container/Container';
+import Scroll from '../../common/components/Scroll/Scroll';
 import Connections from '../../components/Connections/Connections';
 import Events from '../../components/Events/Events';
-import Posts from '../../components/Posts/Posts';
+import UserPosts from '../../components/UserPosts/UserPosts';
 
 import Images from './Images/Images';
 import Info from './Info/Info';
@@ -17,8 +18,10 @@ const UserProfile: FC = () => {
         <Images />
         <Info />
         <div className={styles.socials}>
-          <Events />
-          <Posts />
+          <Events itemsToShow={4} />
+          <Scroll>
+            <UserPosts />
+          </Scroll>
           <Connections />
         </div>
       </div>

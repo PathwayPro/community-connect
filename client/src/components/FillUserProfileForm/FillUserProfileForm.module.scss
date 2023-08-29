@@ -135,16 +135,11 @@
   height: var(--size);
   margin-bottom: 7px;
   padding: 26px;
-  background: colors.$orange-light url('/images/FillUserProfileForm/avatar.svg') no-repeat center;
+  background: colors.$orange-light url('/images/defaultProfileImg.svg') no-repeat center;
   border-radius: 15px;
   cursor: pointer;
 }
 
 .avatar {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
+  @extend %visually-hidden;
 }

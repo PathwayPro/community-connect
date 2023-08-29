@@ -1,4 +1,4 @@
-@use '../../styles/colors';
+@use '../../../styles/colors';
 
 .button {
   width: 100%;
@@ -22,19 +22,9 @@
     height: 15px;
   }
 
-  &.medium {
-    max-width: 20px;
-    height: 20px;
-  }
-
   &.big {
-    max-width: 38px;
-    height: 32px;
-  }
-
-  &.wide {
-    max-width: 33px;
-    height: 20px;
+    max-width: fit-content;
+    height: 30px;
   }
 
   &.black {
@@ -43,14 +33,10 @@
 
   &.orange {
     fill: colors.$orange-normal;
-  }
 
-  &.orangeLight {
-    fill: colors.$orange-normal-hover;
-  }
-
-  &.grey {
-    fill: colors.$white-dark-active;
+    &:hover {
+      fill: colors.$orange-normal-hover;
+    }
   }
 }
 
