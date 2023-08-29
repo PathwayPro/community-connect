@@ -11,11 +11,11 @@ export interface IFormInput {
   instagramURL?: string;
   lastName: string;
   linkedInURL?: string;
-  provinceId?: string;
-  countryId?: string;
+  provinceId?: number;
+  countryId?: number;
   resume?: FileList;
   spokenLanguage?: string;
   twitterURL?: string;
-  timeInCanada?: number;
-  yearsOfExperience?: number;
+  timeInCanada?: string;
+  yearsOfExperience?: string;
 }

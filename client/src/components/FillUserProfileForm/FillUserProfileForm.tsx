@@ -4,6 +4,7 @@ import { useForm, UseFormRegister, UseFormSetValue, SubmitHandler, FieldErrors, 
 import { useAppDispatch } from '../../app/hooks';
 import { useCreateUserProfileMutation } from '../../app/slices/apiSlice';
 import { closeModal } from '../../app/slices/modalSlice';
+import { setUserProfile } from '../../app/slices/userProfileSlice';
 import Button from '../../common/components/Button/Button';
 import Heading from '../../common/components/Heading/Heading';
 import { ERROR_MESSAGES } from '../../common/utils/errors';
@@ -63,10 +64,18 @@ const FillUserProfileForm: FC = () => {
       const laguagesArray = spokenLanguage ? spokenLanguage?.replaceAll(' ', '').split(',') : [];
       // TODO If birthDate were passed, update it to the proper date format (replace new Date())
       const birtDateToDate = birthDate ? new Date() : null;
+
+      console.log('Data being sent to the backend:', {
+        ...profileData,
+        spokenLanguage: laguagesArray,
+        birthDate: birtDateToDate,
+      });
+
       await createProfile({ ...profileData, spokenLanguage: laguagesArray, birthDate: birtDateToDate })
         .unwrap()
-        .then(() => {
-          // TODO: save profile data to the store
+        .then((response) => {
+          console.log('API Response:', response);
+          dispatch(setUserProfile(response));
           dispatch(closeModal());
         })
         .catch((error) => {
