@@ -1,31 +1,15 @@
 const { UserRole } = require('../models');
-
-function generateUserRoles(roleId, n) {
-  const userRoles = [];
-
-  for (let i = 1; i <= n; i += 1) {
-    const userRoleObject = {
-      userId: i,
-      roleId,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-
-    userRoles.push(userRoleObject);
-  }
-
-  return userRoles;
-}
+const { preUserRoles, adminRole, userRoles } = require('./utils/users');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up() {
     // Create 'preUser' roles
-    await UserRole.bulkCreate([...generateUserRoles(1, 45)]);
+    await UserRole.bulkCreate([...preUserRoles]);
     // Create 'admin' roles
-    await UserRole.bulkCreate([...generateUserRoles(4, 1)]);
+    await UserRole.bulkCreate([...adminRole]);
     // Create 'user' roles
-    await UserRole.bulkCreate([...generateUserRoles(2, 40)]);
+    await UserRole.bulkCreate([...userRoles]);
   },
 
   async down(queryInterface) {
