@@ -1,28 +1,37 @@
 import { FC, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import IconSVG from '../../../common/components/IconSVG/IconSVG';
+import Avatar from '../../../common/components/Avatar/Avatar';
+import IconSVG from '../../../common/components/IconSVG/Button/IconSVG';
 import Toast from '../../../common/components/Toast/Toast';
 import formatDate from '../../../common/utils/formatDateUtils';
 
 import styles from './ShowPost.module.scss';
 
 export interface ShowPostProps {
-  imgPath: string;
+  id: number;
   name: string;
   position: string;
   date: Date;
   content: string;
 }
 
-const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content }) => {
+const ShowPost: FC<ShowPostProps> = ({ id, name, position, date, content }) => {
   const [showToast, setShowToast] = useState(false);
 
-  // TODO: Add POst actions
-  const leaveComment = () => console.log('comment');
+  // TODO: Add Post actions
+  const [showCommentBox, setshowCommentBox] = useState(false);
+  const [likeBtnGrey, setlikeBtnGrey] = useState(true);
+
+  const leaveComment = () => {
+    setshowCommentBox(!showCommentBox);
+  };
   const repostPost = () => console.log('repost');
-  const likePost = () => console.log('like');
+  const likePost = () => {
+    setlikeBtnGrey(!likeBtnGrey);
+  };
+  const sendMessage = () => console.log('send message');
   const copyPost = () => {
-    console.log('copy post link');
     setShowToast(false);
   };
   const handleClick = () => setShowToast(!showToast);
@@ -30,11 +39,13 @@ const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content })
   return (
     <div className={styles.box}>
       <div className={styles.userInfo}>
-        <img src={imgPath} alt="connection img" className={styles.image} />
+        <Avatar size="medium" className={styles.image} />
         <div className={styles.info}>
-          <div className={styles.name}>{name}</div>
-          <div className={styles.position}>{position}</div>
-          <div className={styles.date}>{formatDate(date)}</div>
+          <Link to={`/profile/user/${id}`} className={styles.name}>
+            {name}
+          </Link>
+          <span className={styles.position}>{position}</span>
+          <span className={styles.date}>{formatDate(date)}</span>
         </div>
       </div>
       <div className={styles.setting}>
@@ -47,8 +58,15 @@ const ShowPost: FC<ShowPostProps> = ({ imgPath, name, position, date, content })
           <IconSVG name={'blogCommentIcon'} color="orangeLight" onClick={leaveComment} />
           <IconSVG name={'blogRepostIcon'} color="orangeLight" size="wide" onClick={repostPost} />
         </div>
-        <IconSVG name={'likeIcon'} color="grey" onClick={likePost} />
+        <IconSVG name={'likeIcon'} color={likeBtnGrey ? 'grey' : 'green'} onClick={likePost} />
       </div>
+      {showCommentBox && (
+        <div className={styles.commentBox}>
+          <Avatar size="small" className={styles.image} />
+          <textarea className={styles.comment} placeholder="Comment" />
+          <IconSVG name={'sendMessageIcon'} color={'grey'} size="wide" onClick={sendMessage} />
+        </div>
+      )}
     </div>
   );
 };

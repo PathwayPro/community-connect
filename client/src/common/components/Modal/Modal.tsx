@@ -8,7 +8,9 @@ import useWindowSize from '../../../common/utils/useWindowSize';
 import { SendVerificationEmail, VerifyEmail } from '../../../components/ConfirmEmail';
 import FillUserProfile from '../../../components/FillUserProfileForm/FillUserProfileForm';
 import ForgotPasswordForm from '../../../components/ForgotPasswordForm/ForgotPasswordForm';
+import MessageModal from '../../../components/Info/MessageModal/MessageModal';
 import LoginForm from '../../../components/LoginForm/LoginForm';
+import PostModal from '../../../components/Posts/AddPost/PostModal';
 import RegisterForm from '../../../components/RegisterForm/RegisterForm';
 import ResetPasswordForm from '../../../components/ResetPasswordForm/ResetPasswordForm';
 
@@ -24,7 +26,7 @@ const Modal: FC = () => {
   const [isTall, setIsTall] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // add class ".tall" when modal is highter that clientHeight
+  // add class ".tall" when modal is highter than clientHeight
   useEffect(() => {
     if (isOpen) {
       const timer = setTimeout(() => {
@@ -56,6 +58,8 @@ const Modal: FC = () => {
       if (content === MODAL_TYPE.SEND_CONFIRMATION_EMAIL) return <SendVerificationEmail />;
       if (content === MODAL_TYPE.VERIFY_EMAIL) return <VerifyEmail />;
       if (content === MODAL_TYPE.FILL_USER_PROFILE) return <FillUserProfile />;
+      if (content === MODAL_TYPE.WRITE_POST) return <PostModal />;
+      if (content === MODAL_TYPE.WRITE_MESSAGE) return <MessageModal />;
     }
     return null;
   }, [content]);

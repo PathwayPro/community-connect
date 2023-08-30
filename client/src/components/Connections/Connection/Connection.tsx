@@ -1,29 +1,27 @@
 import { FC } from 'react';
 
-import Button from '../../../common/components/Button/Button';
+import Avatar from '../../../common/components/Avatar/Avatar';
+import ButtonLink from '../../../common/components/ButtonLink/ButtonLink';
 
 import styles from './Connection.module.scss';
 
 export interface connectionProps {
+  id: number;
   imgPath: string;
   name: string;
   position: string;
 }
 
-const Connection: FC<connectionProps> = ({ imgPath, name, position }) => {
-  const viewProfile = () => console.log('click');
-
+const Connection: FC<connectionProps> = ({ id, imgPath, name, position }) => {
   return (
-    <div className={styles.box}>
-      <div className={styles.connection}>
-        <img src={imgPath} alt="connection img" className={styles.image} />
+    <div className={styles.connection}>
+      <Avatar src={imgPath} size="small" className={styles.image} />
+      <div>
         <div className={styles.info}>
-          <div>{name}</div>
-          <div className={styles.position}>{position}</div>
+          <span>{name}</span>
+          <span className={styles.position}>{position}</span>
+          <ButtonLink label={'View Profile'} size={'small'} color={'orange'} to={`/profile/user/${id}`}></ButtonLink>
         </div>
-      </div>
-      <div className={styles.btn}>
-        <Button label={'View Profile'} size={'small'} color={'orange'} onClick={viewProfile}></Button>
       </div>
     </div>
   );

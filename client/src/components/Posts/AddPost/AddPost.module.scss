@@ -14,10 +14,7 @@
 }
 
 .image {
-  border: 2px solid colors.$orange-normal;
-  border-radius: 50%;
-  width: 70px;
-  height: 70px;
+  flex-shrink: 0;
 }
 
 .input {
@@ -27,6 +24,7 @@
   padding: 12px;
   border: 1px solid #d5d4dc;
   border-radius: 8px;
+  cursor: pointer;
 
   @include fonts.mainText;
 }

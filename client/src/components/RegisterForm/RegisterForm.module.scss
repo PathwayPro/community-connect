@@ -104,6 +104,10 @@
   }
 }
 
+.checkboxLabelLink {
+  text-decoration: underline;
+}
+
 .formBottomText {
   @extend %reset-p;
   text-align: center;

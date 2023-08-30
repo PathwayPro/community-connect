@@ -2,10 +2,12 @@ import classNames from 'classnames';
 import React, { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { useAppDispatch } from '../../../app/hooks';
+import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
 import Button from '../../../common/components/Button/Button';
 import Heading from '../../../common/components/Heading/Heading';
+import IconSVG from '../../../common/components/IconSVG/Button/IconSVG';
+import IconLinkSVG from '../../../common/components/IconSVG/Link/IconLinkSVG';
 import useWindowSize, { BREAKPOINTS } from '../../../common/utils/useWindowSize';
 import HeaderDropDown from '../HeaderDropDown/HeaderDropDown';
 
@@ -13,6 +15,7 @@ import styles from './HeaderNav.module.scss';
 
 const HeaderNav: FC = () => {
   const [isNavDropDownActive, setNavDropDownActive] = useState(false);
+  const isLogin = useAppSelector((state) => state.auth.login);
   const dispatch = useAppDispatch();
 
   // Using window width size to update nav view: desktop or mobile
@@ -114,21 +117,59 @@ const HeaderNav: FC = () => {
             About Us
           </NavLink>
         </nav>
-        <div className={styles.buttons}>
-          <Button
-            label="Login"
-            color="hollow"
-            size={width <= BREAKPOINTS.small ? 'small' : 'normal'}
-            onClick={onLoginClick}
-            className={styles.navButton}
-          />
-          <Button
-            label="Register"
-            color="orangeLight"
-            size={width <= BREAKPOINTS.small ? 'small' : 'normal'}
-            onClick={onRegisterClick}
-          />
-        </div>
+        {isLogin && (
+          <div className={styles.icons}>
+            <IconLinkSVG
+              name="headerHomeIcon"
+              size="big"
+              color="orange"
+              className={styles.headerIcon}
+              href="/home"
+              label="Link to User Profile"
+            />
+            <IconSVG
+              name="headerMsgIcon"
+              size="big"
+              color="orange"
+              className={styles.headerIcon}
+              label="Messages"
+              onClick={(e) => e.preventDefault()}
+            />
+            <IconSVG
+              name="headerNotificationIcon"
+              size="big"
+              color="orange"
+              className={styles.headerIcon}
+              label="Notifications"
+              onClick={(e) => e.preventDefault()}
+            />
+            <IconSVG
+              name="headerSearchIcon"
+              size="big"
+              color="orange"
+              className={styles.headerIcon}
+              label="Search"
+              onClick={(e) => e.preventDefault()}
+            />
+          </div>
+        )}
+        {!isLogin && (
+          <div className={styles.buttons}>
+            <Button
+              label="Login"
+              color="hollow"
+              size={width <= BREAKPOINTS.small ? 'small' : 'normal'}
+              onClick={onLoginClick}
+              className={styles.navButton}
+            />
+            <Button
+              label="Register"
+              color="orangeLight"
+              size={width <= BREAKPOINTS.small ? 'small' : 'normal'}
+              onClick={onRegisterClick}
+            />
+          </div>
+        )}
       </div>
     </>
   );

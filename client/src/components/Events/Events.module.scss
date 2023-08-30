@@ -3,13 +3,7 @@
 @use '../../common/styles/mixins';
 
 .events {
-  background: colors.$blue-light;
-  width: 26%;
-  min-height: 100px;
-  padding: 26px;
-  border-radius: 15px;
-
-  @include fonts.bigText;
-
-  @extend %flex-column-left-center;
+  @extend %flex-column;
+  gap: 1rem;
+  width: 100%;
 }

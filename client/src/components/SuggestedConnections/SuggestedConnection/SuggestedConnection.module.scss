@@ -1,0 +1,30 @@
+@use '../../../common/styles/colors';
+@use '../../../common/styles/fonts';
+@use '../../../common/styles/mixins';
+
+.connection {
+  display: flex;
+
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}
+
+.image {
+  margin-right: 1rem;
+}
+
+.info {
+  @extend %flex-column;
+}
+
+.name {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.position {
+  margin-bottom: 0.8rem;
+  @include fonts.hintText($font-size: 16px);
+}

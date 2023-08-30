@@ -9,7 +9,8 @@ const upload = multer();
 const router = express.Router();
 
 router
-  .route('/apply')
+  .route('/mentees')
+  .get(auth('manageMentorship'), validate(mentorshipValidation.getMenteesRequests), mentorshipController.getMenteesRequests)
   .post(
     auth('applyForMentorship'),
     upload.single('resume'),
@@ -18,7 +19,18 @@ router
   );
 
 router
-  .route('/becomeMentor')
+  .route('/mentees/:id')
+  .get(auth('manageMentorship'), mentorshipController.getMenteeRequest)
+  .put(auth('manageMentorship'), mentorshipController.updateMenteeRequest);
+
+router
+  .route('/mentors')
+  .get(auth('manageMentorship'), validate(mentorshipValidation.getMentorsRequests), mentorshipController.getMentorsRequests)
   .post(auth('becomeMentor'), validate(mentorshipValidation.becomeMentor), mentorshipController.createMentorRequest);
+
+router
+  .route('/mentors/:id')
+  .get(auth('manageMentorship'), mentorshipController.getMentorRequest)
+  .put(auth('manageMentorship'), mentorshipController.updateMentorRequest);
 
 module.exports = router;

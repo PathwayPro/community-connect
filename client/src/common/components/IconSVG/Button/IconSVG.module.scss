@@ -1,0 +1,68 @@
+@use '../../../styles/colors';
+
+.button {
+  width: 100%;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  svg {
+    height: inherit;
+    width: 100%;
+    fill: inherit;
+
+    path {
+      fill: inherit;
+    }
+  }
+
+  &.small {
+    max-width: 15px;
+    height: 15px;
+  }
+
+  &.medium {
+    max-width: 20px;
+    height: 20px;
+  }
+
+  &.big {
+    max-width: fit-content;
+    height: 30px;
+  }
+
+  &.wide {
+    max-width: 33px;
+    height: 20px;
+  }
+
+  &.black {
+    fill: colors.$black;
+  }
+
+  &.orange {
+    fill: colors.$orange-normal;
+
+    &:hover {
+      fill: colors.$orange-normal-hover;
+    }
+  }
+
+  &.orangeLight {
+    fill: colors.$orange-normal-hover;
+  }
+
+  &.grey {
+    fill: colors.$white-dark-active;
+  }
+
+  &.green {
+    fill: colors.$green-dark;
+  }
+}
+
+.label {
+  font-size: 0;
+  line-height: 0;
+}

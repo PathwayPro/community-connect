@@ -98,6 +98,18 @@
   min-width: 0;
 }
 
+%visually-hidden {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  opacity: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
 /* MIXINS */
 
 @mixin common-transition($properties: all) {

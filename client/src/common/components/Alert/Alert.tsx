@@ -21,7 +21,7 @@ const Alert: FC<alertInterface> = ({ isOpen, onClose, title, content }) => {
     <div className={styles.customAlertOverlay}>
       <div className={styles.customAlert}>
         {title && (
-          <Heading tagType="h5" className={styles.title}>
+          <Heading tagType="h6" className={styles.title}>
             {title}
           </Heading>
         )}
