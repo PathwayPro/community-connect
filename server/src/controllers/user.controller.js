@@ -1,8 +1,14 @@
+/* eslint-disable no-console */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/no-extraneous-dependencies */
 const httpStatus = require('http-status');
+const { initializeApp, cert } = require('firebase-admin/app');
+const { getStorage, getDownloadURL } = require('firebase-admin/storage');
 const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
 const { userService, userRoleService } = require('../services');
+const serviceAccount = require('../config/serviceAccountKey');
 
 const createUser = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
@@ -51,6 +57,37 @@ const createOrUpdateProfile = catchAsync(async (req, res) => {
   res.status(httpStatus.CREATED).send();
 });
 
+const uploadFile = catchAsync(async (req, res) => {
+  console.log('req.file', serviceAccount);
+  initializeApp({
+    credential: cert(serviceAccount),
+    storageBucket: 'gs://community-connect-1c332.appspot.com',
+  });
+
+  const storage = getStorage();
+  const bucket = storage.bucket();
+
+  const { file } = req;
+  if (file) {
+    const blob = bucket.file(file.originalname);
+
+    const blobWriter = blob.createWriteStream({
+      metadata: {
+        contentType: file.mimetype,
+      },
+    });
+    blobWriter.on('error', (err) => console.log(err));
+    blobWriter.on('finish', () => {
+      const fileRef = bucket.file(file.originalname);
+      getDownloadURL(fileRef).then((url) => {
+        // TODO: Save the file URL in DB
+        res.status(200).json({ message: 'File uploaded successfully!', url });
+      });
+    });
+    blobWriter.end(file.buffer);
+  }
+});
+
 module.exports = {
   createUser,
   getUsers,
@@ -59,4 +96,5 @@ module.exports = {
   deleteUser,
   createOrUpdateProfile,
   getProfile,
+  uploadFile,
 };

@@ -169,6 +169,15 @@ export const apiSlice = createApi({
     getCountries: builder.query({
       query: () => '/v1/utils/countries',
     }),
+
+    // Firebase
+    uploadImage: builder.mutation({
+      query: (data) => ({
+        url: `/v1/users/firebase`,
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -186,4 +195,5 @@ export const {
   useBecomeMentorMutation,
   useCreateUserProfileMutation,
   useGetCountriesQuery,
+  useUploadImageMutation,
 } = apiSlice;

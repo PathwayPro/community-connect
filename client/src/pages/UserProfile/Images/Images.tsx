@@ -1,7 +1,7 @@
-import axios from 'axios';
 import classNames from 'classnames';
 import { useEffect, useState, useRef, FC } from 'react';
 
+import { useUploadImageMutation } from '../../../app/slices/apiSlice';
 import Alert from '../../../common/components/Alert/Alert';
 import IconSVG from '../../../common/components/IconSVG/IconSVG';
 
@@ -21,6 +21,8 @@ const Images: FC = () => {
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
+  const [uploadImage] = useUploadImageMutation();
+
   const handleButtonClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
@@ -32,12 +34,14 @@ const Images: FC = () => {
       const formData = new FormData();
       formData.append('file', selectedFile);
 
-      try {
-        const response = await axios.post('/firebase', formData);
-        console.log('File uploaded successfully!', response.data.filename);
-      } catch (error) {
-        console.error('Error uploading file:', error);
-      }
+      await uploadImage(formData)
+        .unwrap()
+        .then((data) => {
+          console.log('File uploaded successfully!', data);
+        })
+        .catch((err) => {
+          console.error('Error uploading file:', err);
+        });
     }
   };
 
