@@ -182,6 +182,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
               label="Country of origin"
               options={preparedCountries}
               className={styles.formField}
+              isSearchable
               onChange={field.onChange}
               onBlur={field.onBlur}
               errorMessage={errors.countryId?.message}
@@ -198,6 +199,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
               label="Province"
               options={preparedProvinces}
               className={styles.formField}
+              isSearchable
               onChange={field.onChange}
               onBlur={field.onBlur}
               errorMessage={errors.provinceId?.message}
