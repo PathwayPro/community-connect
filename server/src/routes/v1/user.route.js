@@ -18,7 +18,7 @@ router
   .get(auth(), userController.getProfile)
   .post(auth(), validate(userValidation.createProfile), userController.createOrUpdateProfile);
 
-router.route('/firebase').post(upload.single('file'), userController.uploadFile);
+router.route('/firebase').post(auth(), upload.single('file'), userController.uploadFile);
 
 router
   .route('/:userId')
