@@ -1,4 +1,4 @@
-import { MouseEvent, FC } from 'react';
+import { MouseEvent, FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Avatar from '../../../common/components/Avatar/Avatar';
@@ -14,8 +14,11 @@ export interface connectionProps {
 }
 
 const SuggestedConnection: FC<connectionProps> = ({ id, name, position }) => {
+  const [isConnected, setIsConnected] = useState(false);
+
   const onClick = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
+    setIsConnected((prevIsConnected) => !prevIsConnected);
   };
 
   return (
@@ -28,7 +31,13 @@ const SuggestedConnection: FC<connectionProps> = ({ id, name, position }) => {
           </Link>
           <span className={styles.position}>{position}</span>
         </div>
-        <Button label="Connect" size="small" color="orange" onClick={onClick}></Button>
+        <Button
+          label={isConnected ? 'Disconnect' : 'Connect'}
+          size="small"
+          color="orange"
+          onClick={onClick}
+          isDisabled={isConnected ? true : false}
+        />
       </div>
     </div>
   );

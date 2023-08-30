@@ -9,7 +9,6 @@ import styles from './UserProfileMini.module.scss';
 
 const Info: FC = () => {
   const userData = useSelector((state: any) => state.userProfile);
-  const fullName = `${userData.firstName} ${userData.lastName}`;
 
   return (
     <div className={styles.userProfile}>
@@ -18,7 +17,7 @@ const Info: FC = () => {
       </div>
       <div className={styles.infoBlock}>
         <div className={styles.mainInfo}>
-          <span>{fullName}</span>
+          <span>{`${userData.firstName} ${userData.lastName}`}</span>
           <span className={styles.info}>{userData.fieldOfExpertise}</span>
           <IconLinkSVG
             name="editIcon"

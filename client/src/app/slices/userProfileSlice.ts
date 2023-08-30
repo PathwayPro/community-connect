@@ -4,7 +4,7 @@ interface UserProfileState {
   // image?: FileList;
   bio?: string;
   behanceURL?: string;
-  birthDate?: Date | null | undefined;
+  birthDate?: string;
   isBirthDateVisible?: boolean;
   githubURL?: string;
   goal?: string;
@@ -22,11 +22,7 @@ interface UserProfileState {
   yearsOfExperience?: string;
 }
 
-interface IInitialState {
-  profile: UserProfileState;
-}
-
-const initialState: IInitialState = {} as IInitialState;
+const initialState: UserProfileState = {} as UserProfileState;
 
 const userProfileSlice = createSlice({
   name: 'userProfile',

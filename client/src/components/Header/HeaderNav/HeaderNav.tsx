@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { useAppSelector, useAppDispatch } from '../../../app/hooks';
+import { useAppDispatch } from '../../../app/hooks';
 import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
 import Button from '../../../common/components/Button/Button';
 import Heading from '../../../common/components/Heading/Heading';
@@ -13,9 +13,12 @@ import HeaderDropDown from '../HeaderDropDown/HeaderDropDown';
 
 import styles from './HeaderNav.module.scss';
 
-const HeaderNav: FC = () => {
+interface HeaderNavProps {
+  isLogin: boolean;
+}
+
+const HeaderNav: FC<HeaderNavProps> = ({ isLogin }) => {
   const [isNavDropDownActive, setNavDropDownActive] = useState(false);
-  const isLogin = useAppSelector((state) => state.auth.login);
   const dispatch = useAppDispatch();
 
   // Using window width size to update nav view: desktop or mobile

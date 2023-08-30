@@ -26,7 +26,6 @@ interface OptionType {
 }
 
 const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }) => {
-  // Get countries list
   const [preparedCountries, setPreparedCountries] = useState([] as OptionType[]);
   const [preparedProvinces, setPreparedProvinces] = useState([] as OptionType[]);
 
@@ -51,7 +50,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
     const preparedProvincesList: OptionType[] = provincesQuery.map((element: Record<string, string>) => {
       const preparedElement: OptionType = { value: '', label: '' };
       preparedElement.value = element.id;
-      preparedElement.label = element.provinceAndTerritory; // Assuming the province name is stored in a property called 'province'
+      preparedElement.label = element.provinceAndTerritory;
       return preparedElement;
     });
     setPreparedProvinces(preparedProvincesList);
@@ -179,7 +178,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
           render={({ field }) => (
             <Dropdown
               name={field.name}
-              id={`${formId}-${field.name}`}
+              id={`${field.name}`}
               label="Country of origin"
               options={preparedCountries}
               className={styles.formField}
@@ -195,7 +194,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
           render={({ field }) => (
             <Dropdown
               name={field.name}
-              id={`${formId}-${field.name}`}
+              id={`${field.name}`}
               label="Province"
               options={preparedProvinces}
               className={styles.formField}
@@ -269,7 +268,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
           render={({ field }) => (
             <Dropdown
               name={field.name}
-              id={`${formId}-${field.name}`}
+              id={`${field.name}`}
               label="Years of experience *"
               options={years}
               className={styles.formField}

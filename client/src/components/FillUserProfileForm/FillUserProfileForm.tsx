@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import { useForm, UseFormRegister, UseFormSetValue, SubmitHandler, FieldErrors, Control } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from '../../app/hooks';
 import { useCreateUserProfileMutation } from '../../app/slices/apiSlice';
@@ -39,6 +40,7 @@ const formId = 'fillUserProfile';
 
 const FillUserProfileForm: FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -56,32 +58,30 @@ const FillUserProfileForm: FC = () => {
   });
 
   const [createProfile] = useCreateUserProfileMutation();
+
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
     if (step != 4) {
       setStep((prevStep) => prevStep + 1);
     } else {
-      const { spokenLanguage, birthDate, ...profileData } = values;
+      const { spokenLanguage, ...profileData } = values;
 
       const laguagesArray = spokenLanguage ? spokenLanguage?.replaceAll(' ', '').split(',') : [];
-      // TODO If birthDate were passed, update it to the proper date format (replace new Date())
-      const birtDateToDate = birthDate ? new Date(birthDate) : null;
 
       const dataToSend = {
         ...profileData,
         spokenLanguage: laguagesArray,
-        birthDate: birtDateToDate,
       };
       delete dataToSend.image;
       delete dataToSend.resume;
 
-      console.log('Data being sent to the backend:', dataToSend);
-
-      await createProfile({ ...profileData, spokenLanguage: laguagesArray, birthDate: birtDateToDate })
+      await createProfile({ ...profileData, spokenLanguage: laguagesArray })
         .unwrap()
         .then((response) => {
           dispatch(setUserProfile(dataToSend));
           dispatch(setUserRole(response.role.name));
           dispatch(closeModal());
+
+          navigate('/home');
         })
         .catch((error) => {
           if (error?.data?.message) {
