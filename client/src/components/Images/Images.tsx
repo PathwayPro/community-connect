@@ -60,7 +60,7 @@ const Images: FC<ImagesProps> = ({ myProfile }) => {
           setImageClassName('contain');
           setAlertOpen(true);
         } else {
-          setAlertOpen(true);
+          setImageClassName('cover');
         }
       };
     }

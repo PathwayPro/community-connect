@@ -1,5 +1,9 @@
-const allowedOrigins = ['https://www.yoursite.com', 'http://localhost:3200/', 'http://localhost:3000'];
-
+const allowedOrigins = [
+  'https://community-builders-production-9472.up.railway.app/',
+  'http://localhost:3200/',
+  'http://localhost:3000',
+  'http://localhost:5173',
+];
 const corsOptions = {
   origin: (origin, callback) => {
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
