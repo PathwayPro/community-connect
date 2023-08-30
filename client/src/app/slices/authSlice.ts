@@ -8,7 +8,7 @@ export interface IUser {
   email: string | null;
   isEmailVerified: boolean | null;
   id: number | null;
-  roles: string[] | null;
+  roles: string[];
 }
 
 interface IInitialState {
@@ -35,6 +35,9 @@ const authSlice = createSlice({
     setResetPasswordToken: (state, action) => {
       state.resetPasswordToken = action.payload;
     },
+    setUserRole: (state, action) => {
+      state.user?.roles.push(action.payload);
+    },
     login: (state) => {
       state.login = true;
     },
@@ -46,7 +49,8 @@ const authSlice = createSlice({
   },
 });
 
-export const { setCredentials, setVerifyEmailToken, setResetPasswordToken, login, logout } = authSlice.actions;
+export const { setCredentials, setVerifyEmailToken, setResetPasswordToken, setUserRole, login, logout } =
+  authSlice.actions;
 
 export default authSlice.reducer;
 

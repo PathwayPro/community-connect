@@ -3,6 +3,7 @@ import { useForm, UseFormRegister, UseFormSetValue, SubmitHandler, FieldErrors, 
 
 import { useAppDispatch } from '../../app/hooks';
 import { useCreateUserProfileMutation } from '../../app/slices/apiSlice';
+import { setUserRole } from '../../app/slices/authSlice';
 import { closeModal } from '../../app/slices/modalSlice';
 import { setUserProfile } from '../../app/slices/userProfileSlice';
 import Button from '../../common/components/Button/Button';
@@ -70,14 +71,16 @@ const FillUserProfileForm: FC = () => {
         spokenLanguage: laguagesArray,
         birthDate: birtDateToDate,
       };
+      delete dataToSend.image;
+      delete dataToSend.resume;
 
       console.log('Data being sent to the backend:', dataToSend);
 
-      dispatch(setUserProfile(dataToSend));
-
       await createProfile({ ...profileData, spokenLanguage: laguagesArray, birthDate: birtDateToDate })
         .unwrap()
-        .then(() => {
+        .then((response) => {
+          dispatch(setUserProfile(dataToSend));
+          dispatch(setUserRole(response.role.name));
           dispatch(closeModal());
         })
         .catch((error) => {

@@ -9,20 +9,24 @@ interface UserProfileState {
   githubURL?: string;
   goal?: string;
   fieldOfExpertise?: string;
-  // firstName: string;
+  firstName: string;
   instagramURL?: string;
-  // lastName: string;
+  lastName: string;
   linkedInURL?: string;
   provinceId?: number;
   countryId?: number;
   // resume?: FileList;
-  // spokenLanguage?: string;
+  spokenLanguage?: string[];
   twitterURL?: string;
   timeInCanada?: string;
   yearsOfExperience?: string;
 }
 
-const initialState: UserProfileState = {};
+interface IInitialState {
+  profile: UserProfileState;
+}
+
+const initialState: IInitialState = {} as IInitialState;
 
 const userProfileSlice = createSlice({
   name: 'userProfile',
