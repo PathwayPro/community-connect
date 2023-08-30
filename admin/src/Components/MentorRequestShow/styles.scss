@@ -1,0 +1,17 @@
+@use '../../styles/styles';
+
+.MuiTypography-root.title {
+  font-weight: bold;
+}
+
+.MuiTypography-root.statusButton {
+  @include styles.mainText($font-weight: 700);
+  background-color: styles.$purple;
+  color: styles.$white;
+  width: 160px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

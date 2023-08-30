@@ -143,14 +143,14 @@ export const apiSlice = createApi({
     // Mentorship
     applyForMentorship: builder.mutation({
       query: (data) => ({
-        url: `/v1/mentorship/apply`,
+        url: `/v1/mentorship/mentees`,
         method: 'POST',
         body: data,
       }),
     }),
     becomeMentor: builder.mutation({
       query: (data) => ({
-        url: `/v1/mentorship/becomeMentor`,
+        url: `/v1/mentorship/mentors`,
         method: 'POST',
         body: data,
       }),
