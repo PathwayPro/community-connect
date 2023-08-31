@@ -276,6 +276,10 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
+ *               firstName:
+ *                 type: string
+ *               lastName:
+ *                 type: string
  *               image:
  *                 type: string
  *                 format: binary
@@ -321,6 +325,8 @@ module.exports = router;
  *               provinceId:
  *                 type: integer
  *             example:
+ *               firstName: "John"
+ *               lastName: "Doe"
  *               birthDate: "1990-12-31"
  *               isBirthDateVisible: true
  *               spokenLanguage: ["English", "Spanish"]

@@ -52,7 +52,7 @@ const createOrUpdateProfile = catchAsync(async (req, res) => {
   const userRole = await userRoleService.getRoleByName('user');
   await userRoleService.createUserRole(userProfile.userId, userRole.id);
 
-  res.status(httpStatus.CREATED).send();
+  res.status(httpStatus.CREATED).send(userProfile);
 });
 
 const uploadFile = catchAsync(async (req, res) => {
