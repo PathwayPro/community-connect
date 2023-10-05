@@ -41,7 +41,6 @@ function generateUsers(n, isEmailConfirmed, offset = 1) {
     };
 
     const user = {
-      // id: i,
       firstName: `${randomString(6)}`,
       lastName: `${randomString(8)}`,
       password: `12345Qwerty!`,

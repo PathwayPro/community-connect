@@ -16,9 +16,6 @@ const createUser = async (userBody) => {
   const createdAt = new Date();
   const updatedAt = new Date();
 
-  console.log("createUser is executed");
-  console.log({ ...userBody, createdAt, updatedAt });
-
   return User.create({ ...userBody, createdAt, updatedAt });
 };
 
