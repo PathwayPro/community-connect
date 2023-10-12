@@ -2,7 +2,7 @@ const allowedOrigins = [
   'https://community-builders-production-9472.up.railway.app/',
   'http://localhost:3200',
   'http://localhost:3000',
-  'http://localhost:5174',
+  'http://localhost:5173',
 ];
 
 const corsOptions = {
