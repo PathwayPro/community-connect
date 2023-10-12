@@ -41,7 +41,6 @@ function generateUsers(n, isEmailConfirmed, offset = 1) {
     };
 
     const user = {
-      id: i,
       firstName: `${randomString(6)}`,
       lastName: `${randomString(8)}`,
       password: `12345Qwerty!`,
@@ -95,11 +94,11 @@ const goals = ['connections', 'mentorship', 'careerSwitch', 'learningLanguage', 
 function generateProfiles(users) {
   const preparedProfiles = [];
 
-  users.map((user) => {
+  users.map((user, index) => {
     showBirthday = !showBirthday;
     const randomNumber = Math.floor(Math.random() * 13);
     preparedProfiles.push({
-      userId: user.id,
+      userId: 1,
       image: null,
       countryId: randomNumber || 6,
       provinceId: randomNumber || 2,
@@ -107,10 +106,10 @@ function generateProfiles(users) {
       isBirthDateVisible: showBirthday,
       spokenLanguage: ['English', 'French'],
       fieldOfExpertise:
-        fieldOfExpertise.length >= user.id
-          ? fieldOfExpertise[user.id - 1]
-          : fieldOfExpertise[Math.floor(user.id / 2 / fieldOfExpertise.length)],
-      yearsOfExperience: years.length >= user.id ? years[user.id - 1] : years[2],
+        fieldOfExpertise.length > index
+          ? fieldOfExpertise[index]
+          : fieldOfExpertise[Math.floor((index + 1) / 2 / fieldOfExpertise.length)],
+      yearsOfExperience: years.length > index ? years[index] : years[2],
       bio: bioExample,
       linkedInURL: 'https://www.linkedin.com/yourprofile',
       instagramURL: 'https://www.instagram.com/yourprofile',
@@ -118,8 +117,8 @@ function generateProfiles(users) {
       githubURL: 'https://github.com/yourprofile',
       behanceURL: showBirthday ? 'https://www.behance.net/yourprofile' : '',
       resume: null,
-      timeInCanada: years.length >= user.id ? years[user.id - 1] : years[1],
-      goal: goals.length >= user.id ? goals[user.id - 1] : goals[1],
+      timeInCanada: years.length > index ? years[index] : years[1],
+      goal: goals.length > index ? goals[index] : goals[1],
       createdAt: new Date(),
       updatedAt: new Date(),
     });
