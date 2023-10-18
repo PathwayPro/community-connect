@@ -8,7 +8,8 @@ import { ERROR_MESSAGES } from '../../common/utils/errors';
 
 import styles from './ConfirmEmail.module.scss';
 
-import image from '../../images/ConfirmEmail/confirmed.png';
+import confirmedImage from '../../images/ConfirmEmail/confirmed.png';
+import failedImage from '../../images/ConfirmEmail/failed.png';
 
 const SendVerificationEmail: FC = () => {
   const dispatch = useAppDispatch();
@@ -36,18 +37,21 @@ const SendVerificationEmail: FC = () => {
 
   return (
     <div className={styles.container}>
-      <div>
-        <img src={image} />
-      </div>
       {isLoading && <p className={styles.textCentered}>Loading...</p>}
       {isError && errorMessage && (
         <>
+          <div>
+            <img src={failedImage} />
+          </div>
           <p className={styles.textCentered}>{errorMessage}</p>
           <Button label="Ok" onClick={() => dispatch(closeModal())} size="small" className={styles.buttonConfirm} />
         </>
       )}
       {isSuccess && (
         <>
+          <div>
+            <img src={confirmedImage} />
+          </div>
           <p className={styles.text}>
             Before creating your user account, please check your email for a&nbsp;confirmation request
           </p>

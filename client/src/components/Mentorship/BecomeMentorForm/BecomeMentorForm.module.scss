@@ -1,6 +1,7 @@
 @use '../../../common/styles/colors';
 @use '../../../common/styles/mixins';
 @use '../../../common/styles/media';
+@use '../../../common/styles/fonts';
 
 .block {
   display: flex;
@@ -9,11 +10,20 @@
   border-radius: 15px;
   padding: 60px 16px;
   margin-bottom: 2rem;
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @include media.media-s {
+    padding: 2rem 0;
+  }
 }
 
 .form {
-  max-width: 620px;
+  box-sizing: border-box;
+  max-width: 650px;
   width: 100%;
+  padding: 0 1rem;
   @extend %flex-center;
   flex-direction: column;
 }
@@ -53,4 +63,46 @@
 
 .mentorshipButton {
   margin-top: 1.6rem;
+}
+
+.center {
+  text-align: center;
+}
+
+.message {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 0.5rem;
+  }
+}
+
+.errorMessage {
+  @include fonts.mainText($color: colors.$error);
+
+  &::before {
+    background: url('/images/Icon/error.svg') no-repeat center center / cover;
+  }
+}
+
+.successMessage {
+  @include fonts.mainText($color: colors.$success);
+
+  &::before {
+    background: url('/images/Icon/success.svg') no-repeat center center / cover;
+  }
+}
+
+.loadingMessage {
+  @include fonts.mainText($color: colors.$warning);
+
+  &::before {
+    background: url('/images/Icon/warning.svg') no-repeat center center / cover;
+  }
 }

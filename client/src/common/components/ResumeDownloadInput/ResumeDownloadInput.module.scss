@@ -1,0 +1,106 @@
+@use '../../styles/colors';
+@use '../../styles/fonts';
+@use '../../styles/media';
+@use '../../styles/mixins';
+
+.title {
+  font-size: 1.18rem;
+  margin-top: 0;
+  margin-bottom: 8px;
+
+  @include media.media-s {
+    margin-bottom: 0;
+  }
+}
+
+.label {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 355px;
+  margin-bottom: 30px;
+  background: url('/images/FillUserProfileForm/cloud-download.svg') no-repeat center 38%;
+  border-radius: 15px;
+  border: colors.$blue-normal 5px dashed;
+  cursor: pointer;
+
+  @include media.media-s {
+    height: 210px;
+    margin-bottom: 15px;
+    background-size: 42%;
+    background-position-y: 27%;
+  }
+
+  &::after {
+    content: 'Browse Files to upload';
+    position: absolute;
+    bottom: 15%;
+    right: 50%;
+    transform: translateX(50%);
+    @include fonts.navText($color: colors.$black);
+
+    @include media.media-s {
+      bottom: 10%;
+      font-size: 15px;
+    }
+  }
+}
+
+.inputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 17px 30px 17px 55px;
+  background-color: colors.$blue-light-hover;
+  border-radius: 24px;
+
+  &::before {
+    position: absolute;
+    pointer-events: none;
+    top: 17px;
+    left: 30px;
+    height: 20px;
+    width: 20px;
+    content: '';
+    background: url('/images/Icon/text-file.svg') no-repeat center center / cover;
+  }
+}
+
+.input {
+  @extend %visually-hidden;
+}
+
+.message {
+  padding-top: 0.5rem;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    position: relative;
+    left: -6px;
+    top: 2px;
+
+    @include media.media-s {
+      width: 11px;
+      height: 11px;
+    }
+  }
+}
+
+.errorMessage {
+  @include fonts.hintText($color: colors.$error);
+
+  &::before {
+    background: url('/images/Icon/error.svg') no-repeat center center / cover;
+  }
+}
+
+.fileName {
+  margin-right: 10px;
+  font-size: 13px;
+  white-space: nowrap;
+}

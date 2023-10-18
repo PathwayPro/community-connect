@@ -4,7 +4,7 @@
 @use '../../../common/styles/colors';
 
 @mixin margin-right {
-  margin-right: 3.5rem;
+  margin-right: 2.5rem;
 
   @include media.media-xl {
     margin-right: 2rem;
@@ -24,7 +24,6 @@
   @extend %flex-center;
   @include fonts.navText;
   cursor: pointer;
-  text-decoration: none;
 
   &.active,
   &.pending {

@@ -4,17 +4,22 @@
 
 .modal {
   @extend %flex-center;
-  flex-direction: column;
-  border-radius: 20px;
-  padding: 5rem;
-  background-color: colors.$blue-light;
   position: absolute;
   top: 50%;
   left: 50%;
+  flex-direction: column;
+  padding: 4rem;
+  border-radius: 20px;
+  background-color: colors.$blue-light;
   transform: translate(-50%, -50%);
 
   @include media.media-s {
     padding: 2rem;
+  }
+
+  &.tall {
+    top: 20px;
+    transform: translate(-50%, 0);
   }
 }
 
@@ -29,4 +34,8 @@
   z-index: 12;
   background-color: rgba(0, 0, 0, 0.5);
   overflow-y: auto;
+}
+
+:global(.lock) {
+  overflow: hidden;
 }

@@ -1,10 +1,16 @@
-const mentorshipRequestStatuses = {
+const menteeStatuses = {
   PENDING: 'pending',
-  ACCEPTED: 'accepted',
   IN_PROGRESS: 'inProgress',
-  RESOLVED: 'resolved',
+  MATCHED: 'matched',
+};
+
+const mentorStatuses = {
+  PENDING: 'pending',
+  APPROVED: 'approved',
+  REJECTED: 'rejected',
 };
 
 module.exports = {
-  mentorshipRequestStatuses,
+  menteeStatuses,
+  mentorStatuses,
 };

@@ -19,6 +19,8 @@ interface IFormInput {
   rePassword: string;
 }
 
+const formId = 'resetPassword';
+
 const ResetPasswordForm: FC = () => {
   const resetPasswordToken = useAppSelector((state) => state.auth.resetPasswordToken);
   const dispatch = useAppDispatch();
@@ -81,6 +83,7 @@ const ResetPasswordForm: FC = () => {
       {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
       <Input
         name={password.name}
+        id={`${formId}-${password.name}`}
         label="New Password *"
         type="password"
         className={classNames(styles.formField, errors.password && styles.errorPassword)}
@@ -91,6 +94,7 @@ const ResetPasswordForm: FC = () => {
       />
       <Input
         name={rePassword.name}
+        id={`${formId}-${rePassword.name}`}
         label="Re-enter New Password *"
         type="password"
         className={styles.formField}

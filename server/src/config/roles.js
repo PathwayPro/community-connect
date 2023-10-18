@@ -1,7 +1,8 @@
 const allRoles = {
-  user: [''],
+  preUser: ['becomeMentor'], // registered, no user profile
+  user: ['applyForMentorship'], // created user profile
   mentor: [''],
-  admin: ['getUsers', 'manageUsers'],
+  admin: ['getUsers', 'manageUsers', 'manageMentorship'],
   superAdmin: ['createAdmin'],
 };
 

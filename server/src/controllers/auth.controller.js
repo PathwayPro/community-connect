@@ -1,12 +1,15 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
-const { authService, userService, tokenService, emailService } = require('../services');
+const { authService, userService, tokenService, emailService, userRoleService } = require('../services');
 
 const register = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
   const tokens = await tokenService.generateAuthTokens(user);
 
   await authService.updateRefreshTokenCookie(req, res, tokens.refresh);
+
+  const preUserRole = await userRoleService.getRoleByName('preUser');
+  await userRoleService.createUserRole(user.id, preUserRole.id);
 
   res.status(httpStatus.CREATED).send({ user, token: tokens.access.token });
 });
@@ -15,10 +18,11 @@ const login = catchAsync(async (req, res) => {
   const { email, password } = req.body;
   const user = await authService.loginUserWithEmailAndPassword(email, password);
   const tokens = await tokenService.generateAuthTokens(user);
+  const userRoles = await userRoleService.getRolesByUserId(user.id);
 
   await authService.updateRefreshTokenCookie(req, res, tokens.refresh);
 
-  res.send({ user, token: tokens.access.token });
+  res.send({ user, token: tokens.access.token, roles: userRoles });
 });
 
 const logout = catchAsync(async (req, res) => {

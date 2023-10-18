@@ -1,0 +1,12 @@
+@use '../../common/styles/mixins';
+
+.page {
+  display: flex;
+  gap: 1.625rem;
+  padding: 16px 0 26px;
+}
+
+.side {
+  @extend %flex-column;
+  row-gap: 1rem;
+}

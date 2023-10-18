@@ -1,4 +1,9 @@
-const allowedOrigins = ['https://www.yoursite.com', 'http://localhost:3200', 'http://localhost:3000'];
+const allowedOrigins = [
+  'https://community-builders-production-9472.up.railway.app/',
+  'http://localhost:3200',
+  'http://localhost:3000',
+  'http://localhost:5173',
+];
 
 const corsOptions = {
   origin: (origin, callback) => {
@@ -15,6 +20,7 @@ const credentials = (req, res, next) => {
   const { origin } = req.headers;
   if (allowedOrigins.includes(origin)) {
     res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Expose-Headers', 'Content-Range');
   }
   next();
 };

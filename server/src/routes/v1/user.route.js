@@ -12,12 +12,15 @@ router
   .get(auth('getUsers'), validate(userValidation.getUsers), userController.getUsers);
 
 router
+  .route('/profile')
+  .get(auth(), userController.getProfile)
+  .post(auth(), validate(userValidation.createProfile), userController.createOrUpdateProfile);
+
+router
   .route('/:userId')
   .get(auth('getUsers'), validate(userValidation.getUser), userController.getUser)
   .patch(auth('manageUsers'), validate(userValidation.updateUser), userController.updateUser)
   .delete(auth('manageUsers'), validate(userValidation.deleteUser), userController.deleteUser);
-
-router.route('/profile').post(auth(), validate(userValidation.createProfile), userController.createOrUpdateProfile);
 
 module.exports = router;
 
@@ -269,41 +272,107 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
- *               bio:
+ *               firstName:
  *                 type: string
+ *               lastName:
+ *                 type: string
+ *               image:
+ *                 type: string
+ *                 format: binary
  *               birthDate:
  *                 type: string
  *                 format: date
+ *               isBirthDateVisible:
+ *                 type: boolean
+ *               spokenLanguage:
+ *                 type: array
+ *                 items:
+ *                   type: string
  *               fieldOfExpertise:
  *                 type: string
  *               yearsOfExperience:
- *                 type: integer
- *               countryId:
- *                 type: integer
- *               provinceId:
- *                 type: integer
- *               spokenLanguage:
  *                 type: string
- *               interestAndHobby:
+ *               bio:
  *                 type: string
  *               linkedInURL:
  *                 type: string
  *                 format: uri
+ *               instagramURL:
+ *                 type: string
+ *                 format: uri
+ *               twitterURL:
+ *                 type: string
+ *                 format: uri
+ *               githubURL:
+ *                 type: string
+ *                 format: uri
+ *               behanceURL:
+ *                 type: string
+ *                 format: uri
+ *               resume:
+ *                 type: string
+ *                 format: binary
+ *               timeInCanada:
+ *                 type: string
+ *               goal:
+ *                 type: string
+ *               countryId:
+ *                 type: integer
+ *               provinceId:
+ *                 type: integer
  *             example:
- *               bio: Software Developer
- *               birthDate: 1990-12-31
- *               fieldOfExpertise: Web Development
- *               yearsOfExperience: 10
- *               countryId: 1
- *               provinceId: 2
- *               spokenLanguage: English
- *               interestAndHobby: Reading
- *               linkedInURL: https://linkedin.com/in/my-profile
+ *               firstName: "John"
+ *               lastName: "Doe"
+ *               birthDate: "1990-12-31"
+ *               isBirthDateVisible: true
+ *               spokenLanguage: ["English", "Spanish"]
+ *               fieldOfExpertise: "Web Development"
+ *               yearsOfExperience: "10"
+ *               bio: "I am a web developer"
+ *               linkedInURL: "https://linkedin.com/in/my-profile"
+ *               instagramURL: "https://instagram.com/my-profile"
+ *               twitterURL: "https://twitter.com/my-profile"
+ *               githubURL: "https://github.com/my-profile"
+ *               behanceURL: "https://behance.net/my-profile"
  *     responses:
  *       "201":
- *         description: Profile Created
- *       "400":
- *         $ref: '#/components/responses/BadRequest'
+ *         description: Profile Created or Updated
  *       "401":
  *         $ref: '#/components/responses/Unauthorized'
+ */
+
+/**
+ * @swagger
+ * /users/profile:
+ *   get:
+ *     summary: Retrieve User Profile
+ *     description: Get the profile of the currently authenticated user.
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       "200":
+ *         description: Successful retrieval of user profile
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 bio:
+ *                   type: string
+ *                 birthDate:
+ *                   type: string
+ *                   format: date
+ *                 # ... (add all other profile properties here)
+ *             example:
+ *               id: 1
+ *               bio: Software Developer
+ *               birthDate: 1990-12-31
+ *               # ... (add example values for other properties)
+ *       "401":
+ *         $ref: '#/components/responses/Unauthorized'
+ *       "404":
+ *         $ref: '#/components/responses/NotFound'
  */

@@ -1,0 +1,34 @@
+@use '../../styles/colors';
+@use '../../styles/mixins';
+
+.customAlertOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: colors.$black-light;
+  z-index: 1;
+
+  @extend %flex-center;
+}
+
+.customAlert {
+  background-color: colors.$white;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 4px colors.$black-light;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin-bottom: 1.5rem;
+}
+
+.content {
+  @extend %reset-p;
+  margin-bottom: 1.5rem;
+}

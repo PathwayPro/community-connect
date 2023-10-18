@@ -1,8 +1,7 @@
 const httpStatus = require('http-status');
-const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
-const { userService } = require('../services');
+const { userService, userRoleService } = require('../services');
 
 const createUser = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
@@ -10,10 +9,9 @@ const createUser = catchAsync(async (req, res) => {
 });
 
 const getUsers = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['name', 'role']);
-  const options = pick(req.query, ['sortBy', 'limit', 'page']);
-  const result = await userService.queryUsers(filter, options);
-  res.send(result);
+  const filter = JSON.parse(req.query.filter);
+  const result = await userService.queryUsers(filter);
+  res.send(result.rows);
 });
 
 const getUser = catchAsync(async (req, res) => {
@@ -34,11 +32,21 @@ const deleteUser = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const getProfile = catchAsync(async (req, res) => {
+  const userProfile = await userService.getUserProfileByUserId(req.user.id);
+  if (!userProfile) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User Profile not found');
+  }
+  res.send(userProfile);
+});
+
 const createOrUpdateProfile = catchAsync(async (req, res) => {
   const userProfile = await userService.createOrUpdateProfile(req.user.id, req.body);
-  // Use this if you want to return userProfile Object
-  // res.status(httpStatus.CREATED).send(userProfile);
-  res.status(httpStatus.CREATED).send();
+
+  const userRole = await userRoleService.getRoleByName('user');
+  await userRoleService.createUserRole(userProfile.userId, userRole.id);
+
+  res.status(httpStatus.CREATED).send(userProfile);
 });
 
 module.exports = {
@@ -48,4 +56,5 @@ module.exports = {
   updateUser,
   deleteUser,
   createOrUpdateProfile,
+  getProfile,
 };

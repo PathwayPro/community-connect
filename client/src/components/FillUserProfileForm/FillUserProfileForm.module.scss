@@ -1,0 +1,145 @@
+@use '../../common/styles/colors';
+@use '../../common/styles/mixins';
+@use '../../common/styles/fonts';
+@use '../../common/styles/media';
+
+.title {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.2rem;
+  margin-bottom: 26px;
+}
+
+.btnWrapper {
+  @extend %flex-space-between;
+}
+
+.formRow {
+  display: flex;
+  column-gap: 1rem;
+
+  @include media.media-s {
+    flex-direction: column;
+    row-gap: 1rem;
+    align-items: center;
+    margin-bottom: 0;
+  }
+
+  &.column {
+    @extend %flex-center;
+    flex-direction: column;
+  }
+
+  &.error {
+    padding-bottom: 1rem;
+
+    @include media.media-s {
+      padding-bottom: 0;
+    }
+  }
+}
+
+.formField {
+  width: 300px;
+}
+
+.formFieldWide {
+  width: 614px;
+  @include media.media-s {
+    width: 300px;
+  }
+}
+
+.errorMessage {
+  padding-left: 1.2rem;
+  @include fonts.hintText($color: colors.$error);
+  text-align: center;
+
+  &::before {
+    content: '';
+    background: url('/images/Icon/error.svg') no-repeat center center / cover;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    position: relative;
+    left: -6px;
+    top: 2px;
+
+    @include media.media-s {
+      width: 11px;
+      height: 11px;
+    }
+  }
+}
+
+// checkbox
+
+.checkboxField {
+  display: flex;
+  align-items: flex-end;
+  margin: 8px 0 0;
+  padding: 0;
+  @include fonts.hintText($font-size: 0.8rem, $font-weight: 700);
+  border: none;
+}
+
+.checkbox {
+  position: relative;
+  @extend %flex-center;
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  margin-right: 6px;
+  background: transparent;
+  border: 2px solid colors.$grey-dark;
+  border-radius: 3px;
+  appearance: none;
+  z-index: 1;
+
+  &:checked {
+    background: colors.$focus;
+    border: colors.$focus;
+
+    &::before {
+      position: absolute;
+      content: url('/images/Icon/check.svg');
+      width: 12px;
+      height: 12px;
+      z-index: 10;
+      top: 2px;
+    }
+  }
+}
+
+// avatar
+
+.avatarWrap {
+  position: relative;
+}
+
+.avatarTitle {
+  font-size: 1.18rem;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.avatarLabel {
+  --size: 194px;
+
+  width: var(--size);
+  height: var(--size);
+  margin-bottom: 7px;
+  padding: 26px;
+  background: colors.$orange-light url('/images/defaultProfileImg.svg') no-repeat center;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.avatar {
+  @extend %visually-hidden;
+}

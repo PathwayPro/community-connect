@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 
 import Container from '../../common/components/Container/Container';
 
-import styles from './Header.module.scss';
 import HeaderNav from './HeaderNav/HeaderNav';
+
+import styles from './Header.module.scss';
 
 const Header: FC = () => {
   return (

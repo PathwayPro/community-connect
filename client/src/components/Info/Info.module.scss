@@ -1,0 +1,86 @@
+@use '../../common/styles/colors';
+@use '../../common/styles/fonts';
+@use '../../common/styles/mixins';
+
+.personal {
+  background: colors.$blue-light;
+  width: 100%;
+  min-height: 200px;
+  padding: 15px 26px;
+  border-radius: 15px;
+  position: relative;
+
+  @extend %flex-column;
+}
+
+.infoButtons {
+  @extend %flex-space-between;
+}
+
+.connectionBtns {
+  gap: 12px;
+  margin-right: 6px;
+  @extend %flex-row-right;
+}
+
+.mainInfo {
+  margin-left: 260px;
+  margin-bottom: 1.625rem;
+
+  @extend %flex-column;
+}
+
+.experience {
+  @include fonts.hintText($font-size: 19px);
+}
+
+.editIcon {
+  position: absolute;
+  top: 26px;
+  right: 26px;
+}
+
+.otherInfo {
+  gap: 1rem;
+
+  @extend %flex-column;
+}
+
+.infoRow {
+  display: flex;
+}
+
+.title {
+  margin-right: 10px;
+
+  @include fonts.weightText($font-size: 19px);
+}
+
+.detail {
+  margin: 0;
+  @include fonts.mainText($font-size: 19px);
+}
+
+.languageDetail {
+  @include fonts.mainText($font-size: 19px);
+  @extend %flex-center;
+}
+
+.languageItem {
+  background-color: colors.$orange-normal;
+  padding: 0px 12px;
+  margin-left: 1px;
+  border-radius: 16px;
+}
+
+.socials {
+  @extend %flex-row-right;
+}
+
+.icons {
+  margin-left: 8px;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}

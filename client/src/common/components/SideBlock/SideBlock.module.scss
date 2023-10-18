@@ -1,0 +1,51 @@
+@use '../../styles/colors.scss';
+@use '../../styles/fonts.scss';
+@use '../../styles/media.scss';
+@use '../../styles/mixins.scss';
+
+.sideBlock {
+  position: relative;
+  @extend %flex-column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 300px;
+  min-height: 100px;
+  height: fit-content;
+  border-radius: 15px;
+  background-color: colors.$blue-light-hover;
+
+  &.small {
+    padding: 26px 16px;
+  }
+
+  &.normal {
+    padding: 26px;
+  }
+}
+
+.title {
+  margin-bottom: 1.625rem;
+  @include fonts.headingText;
+}
+
+.subtitle {
+  margin-bottom: 1.625rem;
+  margin-top: -10px;
+  @include fonts.hintText;
+
+  @include media.media-l {
+    font-size: 13px;
+  }
+}
+
+.link {
+  display: block;
+  font-size: 13px;
+  margin-top: 1rem;
+  margin-left: auto;
+  padding: 0px 5px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

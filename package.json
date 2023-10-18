@@ -6,11 +6,12 @@
   "private": true,
   "workspaces": [
     "server",
-    "client"
+    "client",
+    "admin"
   ],
   "scripts": {
     "start": "concurrently \"yarn workspace server start\" \"yarn workspace client start\"",
-    "dev": "concurrently \"yarn workspace server dev\" \"yarn workspace client start\"",
+    "dev": "concurrently \"yarn workspace server dev\" \"yarn workspace client start\" \"yarn workspace admin dev\"",
     "start-backendonly": "yarn workspace server start",
     "dev-backendonly": "yarn workspace server dev"
   },
