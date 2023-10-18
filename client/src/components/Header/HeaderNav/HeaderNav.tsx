@@ -70,7 +70,7 @@ const HeaderNav: FC = () => {
             }
             onClick={handleMobileDropDownClose}
           >
-            Events
+            News and Events
           </NavLink>
 
           <NavLink

@@ -29,8 +29,8 @@ const Hero: FC = () => {
             Empowering Immigrants Through Connection
           </Heading>
           <p className={styles.text}>
-            Step into a vibrant and inclusive digital space exclusively designed for immigrants in tech.
-            CommunityConnect is your gateway to empowerment and connection within the immigrant Tech community.
+            Step into a vibrant and inclusive digital space designed exclusively for immigrants. CommunityConnect is
+            your gateway to empowerment and connection within the immigrant community.
           </p>
           <Button label="Get Started" color="orange" onClick={onRegisterClick} className={styles.buttonHero} />
         </div>
