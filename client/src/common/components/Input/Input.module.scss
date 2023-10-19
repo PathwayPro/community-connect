@@ -12,6 +12,19 @@
   position: relative;
 }
 
+.eyeIconAndInput {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.eyeIcon {
+  cursor: pointer;
+  position: absolute;
+  right: 0.75rem;
+  top: 0.75rem;
+}
+
 .input {
   width: 100%;
   height: 3rem;
