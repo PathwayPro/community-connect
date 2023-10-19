@@ -169,6 +169,7 @@ const RegisterForm: FC = () => {
           id={`${formId}-${password.name}`}
           label="Password *"
           type="password"
+          isPassword={true}
           className={classNames(
             styles.formField,
             errors.password &&
@@ -186,6 +187,7 @@ const RegisterForm: FC = () => {
           id={`${formId}-${rePassword.name}`}
           label="Re-enter Password *"
           type="password"
+          isPassword={true}
           className={styles.formField}
           onChange={rePassword.onChange}
           onBlur={rePassword.onBlur}

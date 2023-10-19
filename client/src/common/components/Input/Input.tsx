@@ -1,5 +1,7 @@
 import classNames from 'classnames';
-import React, { InputHTMLAttributes } from 'react';
+import React, { InputHTMLAttributes, useState } from 'react';
+
+import EyeIcon from './EyeIcon';
 
 import styles from './Input.module.scss';
 
@@ -8,6 +10,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   id: string;
   type?: string;
+  isPassword?: boolean;
   placeholder?: string;
   errorMessage?: string;
   successMessage?: string;
@@ -24,6 +27,7 @@ const InputInner = (
     name,
     id,
     type = 'text',
+    isPassword = false,
     placeholder = '',
     errorMessage = '',
     successMessage = '',
@@ -35,6 +39,12 @@ const InputInner = (
   }: InputProps,
   ref: React.ForwardedRef<HTMLInputElement>
 ) => {
+  const [isPasswordVisible, setPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible((prev) => !prev);
+  };
+
   return (
     <fieldset className={classNames(styles.fieldset, className)}>
       {label && (
@@ -42,23 +52,31 @@ const InputInner = (
           {label}
         </label>
       )}
-      <input
-        name={name}
-        id={id}
-        type={type}
-        placeholder={placeholder}
-        autoComplete={autoComplete}
-        className={classNames(
-          styles.input,
-          errorMessage && styles.error,
-          successMessage && styles.success,
-          disabled && styles.disabled
+      <div className={styles.eyeIconAndInput}>
+        {isPassword && (
+          <div className={styles.eyeIcon} onClick={togglePasswordVisibility}>
+            <EyeIcon visible={isPasswordVisible} />
+          </div>
         )}
-        onChange={onChange}
-        onBlur={onBlur}
-        ref={ref}
-        disabled={disabled}
-      ></input>
+        <input
+          name={name}
+          id={id}
+          type={isPasswordVisible ? 'text' : type}
+          placeholder={placeholder}
+          autoComplete={autoComplete}
+          className={classNames(
+            styles.input,
+            errorMessage && styles.error,
+            successMessage && styles.success,
+            disabled && styles.disabled
+          )}
+          onChange={onChange}
+          onBlur={onBlur}
+          ref={ref}
+          disabled={disabled}
+        ></input>
+      </div>
+
       {errorMessage && <div className={classNames(styles.message, styles.errorMessage)}>{errorMessage}</div>}
       {!errorMessage && successMessage && (
         <div className={classNames(styles.message, styles.successMessage)}>{successMessage}</div>
