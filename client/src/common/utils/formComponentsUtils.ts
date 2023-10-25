@@ -4,7 +4,7 @@ const ERROR_MESSAGE_NAME = 'Only letters are allowed';
 
 const EMAIL_REGEX = /^[\w-.]+@([\w-]+\.)+[\w-]{2,5}$/;
 
-const ERROR_MESSAGE_EMAIL = 'Please enter a valid emai';
+const ERROR_MESSAGE_EMAIL = 'Please enter a valid email';
 
 const PASS_REGEX = /^(?=.*\d)(?=.*[!@#$%^&*\-_])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
