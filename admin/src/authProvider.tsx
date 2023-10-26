@@ -1,12 +1,13 @@
-import { AuthProvider } from "react-admin";
-import { APP_URL } from "./dataProvider";
+import { AuthProvider } from 'react-admin';
+import { APP_URL } from './dataProvider';
+
 export const authProvider: AuthProvider = {
   // called when the user attempts to log in
   login: async ({ username, password }) => {
     const request = new Request(`${APP_URL}/auth/login`, {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify({ email: username, password }),
-      headers: new Headers({ "Content-Type": "application/json" }),
+      headers: new Headers({ 'Content-Type': 'application/json' }),
     });
     await fetch(request)
       .then((response) => {
@@ -16,34 +17,34 @@ export const authProvider: AuthProvider = {
         return response.json();
       })
       .then(({ user, token }) => {
-        localStorage.setItem("authToken", JSON.stringify(token));
-        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem('authToken', JSON.stringify(token));
+        localStorage.setItem('user', JSON.stringify(user));
         return { redirectTo: true };
       })
       .catch(() => {
-        throw new Error("Network error");
+        throw new Error('Network error');
       });
   },
   // called when the user clicks on the logout button
   logout: () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("authToken");
+    localStorage.removeItem('user');
+    localStorage.removeItem('authToken');
     return Promise.resolve();
   },
   // called when the API returns an error
   checkError: async ({ status }: { status: number }) => {
     if (status === 403) {
-      localStorage.removeItem("user");
-      localStorage.removeItem("authToken");
+      localStorage.removeItem('user');
+      localStorage.removeItem('authToken');
       return Promise.reject();
     }
     if (status === 401) {
-      const token = JSON.parse(localStorage.getItem("authToken") || "");
+      const token = JSON.parse(localStorage.getItem('authToken') || '');
 
       const request = new Request(`${APP_URL}/auth/refresh-tokens`, {
-        method: "GET",
+        method: 'GET',
         headers: new Headers({
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         }),
       });
@@ -55,18 +56,18 @@ export const authProvider: AuthProvider = {
           return response.json();
         })
         .then(({ token }) => {
-          localStorage.setItem("authToken", JSON.stringify(token));
+          localStorage.setItem('authToken', JSON.stringify(token));
           return { redirectTo: true };
         })
         .catch(() => {
-          throw new Error("Network error");
+          throw new Error('Network error');
         });
     }
     return Promise.resolve();
   },
   // called when the user navigates to a new location, to check for authentication
   checkAuth: () => {
-    return localStorage.getItem("user") ? Promise.resolve() : Promise.reject();
+    return localStorage.getItem('user') ? Promise.resolve() : Promise.reject();
   },
   // called when the user navigates to a new location, to check for permissions / roles
   getPermissions: () => Promise.resolve(),
