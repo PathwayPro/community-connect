@@ -31,7 +31,6 @@ const HeaderNav: FC = () => {
   const onLogoutClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
     handleMobileDropDownClose();
-    console.log('logout');
     dispatch(logout());
   };
 
