@@ -47,13 +47,13 @@
 
   &.error {
     border: 1px solid colors.$error;
-    margin-bottom: 1.6rem;
+    margin-bottom: 0.5rem;
     background-color: colors.$error-bg !important;
   }
 
   &.success {
     border: 1px solid colors.$success;
-    margin-bottom: 1.6rem;
+    margin-bottom: 0.5rem;
     &:-webkit-autofill,
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus,
@@ -77,8 +77,6 @@
 }
 
 .message {
-  position: absolute;
-  bottom: 0;
   padding-left: 1.2rem;
 
   &::before {
