@@ -3,6 +3,7 @@ import React, { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
+import { logout } from '../../../app/slices/authSlice';
 import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
 import Button from '../../../common/components/Button/Button';
 import Heading from '../../../common/components/Heading/Heading';
@@ -29,9 +30,9 @@ const HeaderNav: FC = () => {
 
   const onLogoutClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
-    // handleMobileDropDownClose();
-    // dispatch(showModal({ content: MODAL_TYPE.LOGIN }));
+    handleMobileDropDownClose();
     console.log('logout');
+    dispatch(logout());
   };
 
   const onRegisterClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
