@@ -3,6 +3,7 @@ import React, { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
+import { logout } from '../../../app/slices/authSlice';
 import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
 import Button from '../../../common/components/Button/Button';
 import Heading from '../../../common/components/Heading/Heading';
@@ -25,6 +26,12 @@ const HeaderNav: FC = () => {
     e.preventDefault();
     handleMobileDropDownClose();
     dispatch(showModal({ content: MODAL_TYPE.LOGIN }));
+  };
+
+  const onLogoutClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    e.preventDefault();
+    handleMobileDropDownClose();
+    dispatch(logout());
   };
 
   const onRegisterClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -118,40 +125,52 @@ const HeaderNav: FC = () => {
           </NavLink>
         </nav>
         {isLogin && (
-          <div className={styles.icons}>
-            <IconLinkSVG
-              name="headerHomeIcon"
-              size="big"
-              color="orange"
-              className={styles.headerIcon}
-              href="/home"
-              label="Link to User Profile"
-            />
-            <IconSVG
-              name="headerMsgIcon"
-              size="big"
-              color="orange"
-              className={styles.headerIcon}
-              label="Messages"
-              onClick={(e) => e.preventDefault()}
-            />
-            <IconSVG
-              name="headerNotificationIcon"
-              size="big"
-              color="orange"
-              className={styles.headerIcon}
-              label="Notifications"
-              onClick={(e) => e.preventDefault()}
-            />
-            <IconSVG
-              name="headerSearchIcon"
-              size="big"
-              color="orange"
-              className={styles.headerIcon}
-              label="Search"
-              onClick={(e) => e.preventDefault()}
-            />
-          </div>
+          <>
+            <div className={styles.icons}>
+              <IconLinkSVG
+                name="headerHomeIcon"
+                size="big"
+                color="orange"
+                className={styles.headerIcon}
+                href="/home"
+                label="Link to User Profile"
+              />
+              <IconSVG
+                name="headerMsgIcon"
+                size="big"
+                color="orange"
+                className={styles.headerIcon}
+                label="Messages"
+                onClick={(e) => e.preventDefault()}
+              />
+              <IconSVG
+                name="headerNotificationIcon"
+                size="big"
+                color="orange"
+                className={styles.headerIcon}
+                label="Notifications"
+                onClick={(e) => e.preventDefault()}
+              />
+              <IconSVG
+                name="headerSearchIcon"
+                size="big"
+                color="orange"
+                className={styles.headerIcon}
+                label="Search"
+                onClick={(e) => e.preventDefault()}
+              />
+            </div>
+
+            <div className={styles.buttons}>
+              <Button
+                label="Log out"
+                color="hollow"
+                size={width <= BREAKPOINTS.small ? 'small' : 'normal'}
+                onClick={onLogoutClick}
+                className={styles.navButton}
+              />
+            </div>
+          </>
         )}
         {!isLogin && (
           <div className={styles.buttons}>
