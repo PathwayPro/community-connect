@@ -165,9 +165,16 @@ export const apiSlice = createApi({
       }),
     }),
 
+    getUserProfile: builder.query({
+      query: () => '/v1/users/profile',
+    }),
+
     // Utils
     getCountries: builder.query({
       query: () => '/v1/utils/countries',
+    }),
+    getProvinces: builder.query({
+      query: () => '/v1/utils/provinces',
     }),
   }),
 });
@@ -185,5 +192,7 @@ export const {
   useApplyForMentorshipMutation,
   useBecomeMentorMutation,
   useCreateUserProfileMutation,
+  useGetUserProfileQuery,
   useGetCountriesQuery,
+  useGetProvincesQuery,
 } = apiSlice;

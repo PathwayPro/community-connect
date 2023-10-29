@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { FC, useEffect, useState } from 'react';
 import { Controller } from 'react-hook-form';
 
-import { useGetCountriesQuery } from '../../app/slices/apiSlice';
+import {useGetCountriesQuery, useGetProvincesQuery} from '../../app/slices/apiSlice';
 import Dropdown from '../../common/components/Dropdown/Dropdown';
 import Input from '../../common/components/Input/Input';
 import Textarea from '../../common/components/Textarea/Textarea';
@@ -19,12 +19,6 @@ import { years } from '../../common/utils/userProfile';
 
 import { StepAllProps, styles } from './FillUserProfileForm';
 
-const provinces = [
-  { value: '1', label: 'Alberta' },
-  { value: '2', label: 'British Columbia' },
-  { value: '3', label: 'Ontario' },
-];
-
 interface OptionType {
   value: string;
   label: string;
@@ -33,8 +27,20 @@ interface OptionType {
 const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }) => {
   // Get countries list
   const [preparedValues, setPreparedValues] = useState([] as OptionType[]);
+  const [preparedProvinces, setPreparedProvinces] = useState([] as OptionType[]);
   const { data: contriesQuery } = useGetCountriesQuery({});
+  const { data: provincesQuery } = useGetProvincesQuery({});
 
+  useEffect(() => {
+    if (!provincesQuery) return;
+    const preparedProvinces: OptionType[] = provincesQuery.map((element: Record<string, string>) => {
+      const preparedElement: OptionType = { value: '', label: ''};
+      preparedElement.value = element.id;
+      preparedElement.label = `${element.provinceAndTerritory}, ${element.abbreviation}`;
+      return preparedElement;
+    });
+    setPreparedProvinces(preparedProvinces);
+  }, [provincesQuery]);
   useEffect(() => {
     if (!contriesQuery) return;
     const preparedValues1: OptionType[] = contriesQuery.map((element: Record<string, string>) => {
@@ -123,6 +129,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
 
   return (
     <>
+      <button onClick={(e) => {e.preventDefault(); console.log(preparedProvinces)}}>CHELLO</button>
       <div className={classNames(styles.formRow, styles.column, styles.avatarWrap)}>
         <p className={styles.avatarTitle}>Add Photo</p>
         <label htmlFor={`${formId}-${avatar.name}`} className={styles.avatarLabel}></label>
@@ -187,7 +194,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
               name={field.name}
               id={`${formId}-${field.name}`}
               label="Province"
-              options={provinces}
+              options={preparedProvinces}
               className={styles.formField}
               onChange={field.onChange}
               onBlur={field.onBlur}
