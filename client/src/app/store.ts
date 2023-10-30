@@ -7,10 +7,12 @@ import { persistConfig } from "./persistent/config";
 import { apiSlice } from './slices/apiSlice';
 import authSlice from './slices/authSlice';
 import modalSlice from './slices/modalSlice';
+import userSlice from "./slices/userSlice";
 
 const reducer = combineReducers({
   auth: authSlice,
   modal: modalSlice,
+  user: userSlice,
   [apiSlice.reducerPath]: apiSlice.reducer,
 });
 

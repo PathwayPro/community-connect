@@ -33,11 +33,12 @@ const deleteUser = catchAsync(async (req, res) => {
 });
 
 const getProfile = catchAsync(async (req, res) => {
+  const user = await userService.getUserById(req.user.id);
   const userProfile = await userService.getUserProfileByUserId(req.user.id);
-  if (!userProfile) {
+  if (!userProfile || !user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User Profile not found');
   }
-  res.send(userProfile);
+  res.send({ userProfile, user });
 });
 
 const createOrUpdateProfile = catchAsync(async (req, res) => {

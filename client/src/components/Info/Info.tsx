@@ -1,7 +1,8 @@
 import { format } from 'date-fns';
-import { FC } from 'react';
+import {FC, useEffect, useState} from 'react';
 
-import { useAppDispatch } from '../../app/hooks';
+import {useAppDispatch} from '../../app/hooks';
+import {useGetProvincesQuery} from "../../app/slices/apiSlice";
 import { showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 import Heading from '../../common/components/Heading/Heading';
@@ -10,13 +11,11 @@ import IconSVG from '../../common/components/IconSVG/Button/IconSVG';
 
 import styles from './Info.module.scss';
 
-interface userDataProps {
-  firstName: string;
-  lastName: string;
+interface UserProfile {
   fieldOfExpertise: string;
   experience: string;
   provinceId: number;
-  birthDate: Date;
+  birthDate: string;
   bio: string;
   spokenLanguage: string[];
   linkedInURL: string;
@@ -26,42 +25,44 @@ interface userDataProps {
   behanceURL: string;
 }
 
-const userData: userDataProps = {
-  firstName: 'Niloofar',
-  lastName: 'Karyar',
-  fieldOfExpertise: 'UI/UX Designer',
-  experience: '7 Years Experience',
-  provinceId: 1,
-  birthDate: new Date('1990-01-01'),
-  bio: 'Ut ullam numquam voluptas amet dolores incidunt. Dolorum temporibus exercitationem. Perspiciatis saepe velit eos illo atque ut consequatur. At dignissimos esse doloribus dicta ut. Reiciendis at quae a sed et laboriosam commodi cupiditate. Odit rerum illo assumenda nulla dolores harum eius beatae perspiciatis.',
-  spokenLanguage: ['English', 'Farsi'],
-  linkedInURL: '/',
-  instagramURL: '',
-  twitterURL: '/',
-  githubURL: '/',
-  behanceURL: '/',
-};
-
-// TODO: get data from BE
-// TODO: get province name from BE
-const province = userData.provinceId == 1 ? 'Alberta' : 'British Columbia';
-
-const socialsList: iconProps[] = [
-  { href: userData.behanceURL, type: 'be' },
-  { href: userData.githubURL, type: 'git' },
-  { href: userData.twitterURL, type: 'tw' },
-  { href: userData.linkedInURL, type: 'in' },
-  { href: userData.instagramURL, type: 'inst' },
-];
-
-interface InfoProps {
-  myProfile: boolean;
-  userProfile: boolean;
+interface User {
+  firstName: string;
+  lastName: string;
+}
+interface userDataProps {
+  userProfile: UserProfile;
+  user: User;
 }
 
-const Info: FC<InfoProps> = ({ myProfile, userProfile }) => {
-  const dispatch = useAppDispatch();
+interface ProvinceType {
+  id: number;
+  provinceAndTerritory: string;
+  abbreviation: string;
+}
 
+interface InfoProps {
+  myProfile: boolean,
+  userProfile: boolean,
+  userData: userDataProps
+}
+
+const Info: FC<InfoProps> = ({ myProfile, userProfile, userData }) => {
+  const dispatch = useAppDispatch();
+  const [provinces, setProvinces] = useState<ProvinceType | undefined>(undefined);
+  const { data: provincesQuery } = useGetProvincesQuery({});
+
+  useEffect(() => {
+    if (!provincesQuery) return;
+    setProvinces(provincesQuery.find((p: ProvinceType) => p.id === userData.userProfile.provinceId));
+  }, [provincesQuery]);
+
+  const socialsList: iconProps[] = [
+    { href: userData.userProfile.behanceURL, type: 'be' },
+    { href: userData.userProfile.githubURL, type: 'git' },
+    { href: userData.userProfile.twitterURL, type: 'tw' },
+    { href: userData.userProfile.linkedInURL, type: 'in' },
+    { href: userData.userProfile.instagramURL, type: 'inst' },
+  ];
   const openModal = (e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.KeyboardEvent<HTMLButtonElement>) => {
     e.preventDefault();
     dispatch(showModal({ content: MODAL_TYPE.FILL_USER_PROFILE, closeOnOverlayClick: false }));
@@ -72,13 +73,18 @@ const Info: FC<InfoProps> = ({ myProfile, userProfile }) => {
   };
   const connectUser = () => console.log('connect');
 
+  // Create a new Date object for birthdate. If birthdate does not exist, default to the current date.
+  const birthDateObject = userData.userProfile.birthDate
+    ? new Date(userData.userProfile.birthDate)
+    : new Date();
+
   return (
     <div className={styles.personal}>
       {myProfile && <IconSVG name={'editIcon'} className={styles.editIcon} onClick={openModal} />}
       <div className={styles.mainInfo}>
-        <Heading tagType="h4">{`${userData.firstName} ${userData.lastName}`}</Heading>
-        <span className={styles.experience}>{userData.fieldOfExpertise}</span>
-        <span className={styles.experience}>{userData.experience}</span>
+        <Heading tagType="h4">{`${userData.user.firstName} ${userData.user.lastName}`}</Heading>
+        <span className={styles.experience}>{userData.userProfile.fieldOfExpertise}</span>
+        <span className={styles.experience}>{userData.userProfile.experience}</span>
         {userProfile && (
           <div className={styles.connectionBtns}>
             <Button label={'Message'} size={'small'} color={'orangeLight'} onClick={messageUser}></Button>
@@ -89,31 +95,35 @@ const Info: FC<InfoProps> = ({ myProfile, userProfile }) => {
       <div className={styles.otherInfo}>
         <div className={styles.infoRow}>
           <span className={styles.title}>Location :</span>
-          <span className={styles.detail}>{province}</span>
+          <span className={styles.detail}>{`${provinces?.provinceAndTerritory}, ${provinces?.abbreviation}`}</span>
         </div>
         <div className={styles.infoRow}>
           <span className={styles.title}>Birthday :</span>
           <div className={styles.detail}>
             {format(
-              new Date(userData.birthDate.getTime() + userData.birthDate.getTimezoneOffset() * 60000),
+              new Date(birthDateObject.getTime() + birthDateObject.getTimezoneOffset() * 60000),
               'MMMM d, yyyy'
             )}
           </div>
         </div>
         <div className={styles.infoRow}>
           <span className={styles.title}>Bio&nbsp;:</span>
-          <p className={styles.detail}>{userData.bio}</p>
+          <p className={styles.detail}>{userData.userProfile.bio}</p>
         </div>
         <div className={styles.infoRow}>
           <span className={styles.title}>Spoken language :</span>
           <div className={styles.languageDetail}>
-            {userData.spokenLanguage.map((item) => {
-              return (
-                <span key={item} className={styles.languageItem}>
-                  {item}
-                </span>
-              );
-            })}
+            {userData.userProfile.spokenLanguage && userData.userProfile.spokenLanguage.length > 0 ? (
+              userData.userProfile.spokenLanguage.map((item) => {
+                return (
+                  <span key={item} className={styles.languageItem}>
+                {item}
+              </span>
+                );
+              })
+            ) : (
+              <span>No languages specified</span>
+            )}
           </div>
         </div>
         <div className={styles.socials}>

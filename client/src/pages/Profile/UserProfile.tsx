@@ -1,5 +1,6 @@
-import { FC } from 'react';
+import {FC} from 'react';
 
+import {useAppSelector} from "../../app/hooks";
 import Container from '../../common/components/Container/Container';
 import Scroll from '../../common/components/Scroll/Scroll';
 import Connections from '../../components/Connections/Connections';
@@ -11,11 +12,14 @@ import UserPosts from '../../components/UserPosts/UserPosts';
 import styles from './Profile.module.scss';
 
 const UserProfile: FC = () => {
+
+  const userData = useAppSelector((state) => state.user);
+
   return (
     <Container>
       <div className={styles.page}>
         <Images myProfile={false} />
-        <Info myProfile={false} userProfile={true} />
+        <Info userData={userData} myProfile={false} userProfile={true} />
         <div className={styles.socials}>
           <Events itemsToShow={4} />
           <Scroll>
