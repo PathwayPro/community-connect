@@ -104,6 +104,7 @@ const LoginForm: FC = () => {
         id={`${formId}-${password.name}`}
         label="Password *"
         type="password"
+        isPassword={true}
         className={styles.formField}
         onChange={(event) => onChange(event, password.onChange)}
         onBlur={password.onBlur}

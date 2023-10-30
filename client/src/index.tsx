@@ -1,6 +1,8 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
+import {persistStore} from "redux-persist";
+import {PersistGate} from "redux-persist/integration/react";
 
 import App from './App';
 import { store } from './app/store';
@@ -11,11 +13,14 @@ import './index.scss';
 const container = document.getElementById('root');
 if (!container) throw new Error('Failed to find the root element');
 const root = createRoot(container);
+const persistor = persistStore(store);
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <PersistGate persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );

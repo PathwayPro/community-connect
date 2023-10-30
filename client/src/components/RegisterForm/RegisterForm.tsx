@@ -169,6 +169,7 @@ const RegisterForm: FC = () => {
           id={`${formId}-${password.name}`}
           label="Password *"
           type="password"
+          isPassword={true}
           className={classNames(
             styles.formField,
             errors.password &&
@@ -186,6 +187,7 @@ const RegisterForm: FC = () => {
           id={`${formId}-${rePassword.name}`}
           label="Re-enter Password *"
           type="password"
+          isPassword={true}
           className={styles.formField}
           onChange={rePassword.onChange}
           onBlur={rePassword.onBlur}
@@ -212,7 +214,7 @@ const RegisterForm: FC = () => {
             )}
           />
           <label htmlFor={`${formId}-agreement`} className={styles.checkboxLabel}>
-            <span>Do&nbsp;you agree to&nbsp;our </span>
+            <span>You&nbsp;agree&nbsp;to&nbsp;our&nbsp;</span>
             <a href="#" className={styles.checkboxLabelLink}>
               Terms and Conditions
             </a>
@@ -230,7 +232,7 @@ const RegisterForm: FC = () => {
 
       <div className={styles.formButton}>
         <Button
-          label="Sign Up"
+          label="Register"
           isSubmit
           isDisabled={!isValid || !isDirty}
           onClick={handleSubmit(onSubmit)}
@@ -247,7 +249,7 @@ const RegisterForm: FC = () => {
             dispatch(showModal({ content: MODAL_TYPE.LOGIN }));
           }}
         >
-          Sign&nbsp;in&nbsp;now
+          Log&nbsp;in&nbsp;now
         </a>
       </p>
     </form>
