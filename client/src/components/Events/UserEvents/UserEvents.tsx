@@ -3,11 +3,10 @@ import ButtonLink from '../../../common/components/ButtonLink/ButtonLink';
 import styles from './UserEvents.module.scss';
 
 type UserEventsProps = {
-  haveEvents: boolean;
-  eventsQuantity: number;
+  haveEvents: number;
 };
 
-const UserEvents: React.FC<UserEventsProps> = ({ haveEvents, eventsQuantity }) => {
+const UserEvents: React.FC<UserEventsProps> = ({ haveEvents }) => {
   return (
     // <div className={styles.events}>
     <>
@@ -15,7 +14,7 @@ const UserEvents: React.FC<UserEventsProps> = ({ haveEvents, eventsQuantity }) =
         <div className={styles.event}>
           <div>
             You are registered for &nbsp;
-            {eventsQuantity}
+            {haveEvents}
             &nbsp; events.
           </div>
           <ButtonLink label="Go to Calendar" size={'small'} color={'orange'} />

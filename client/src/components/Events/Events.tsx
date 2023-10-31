@@ -43,7 +43,7 @@ const Events: FC<EventsProps> = ({ itemsToShow }) => {
   return (
     <>
       <SideBlock title="Your Events" paddingWidth="normal">
-        <UserEvents haveEvents={true} eventsQuantity={2} />
+        <UserEvents haveEvents={2} />
       </SideBlock>
 
       <SideBlock title="Upcoming Events" paddingWidth="normal" linkTo="/events">
