@@ -1,0 +1,16 @@
+@use '../../../common/styles/colors';
+@use '../../../common/styles/fonts';
+@use '../../../common/styles/mixins';
+
+.event {
+  @extend %flex-column;
+  align-items: center;
+  padding: 16px;
+  border-radius: 15px;
+  background-color: colors.$blue-light;
+
+  div {
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+}
