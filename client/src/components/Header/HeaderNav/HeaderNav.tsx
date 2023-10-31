@@ -167,7 +167,6 @@ const HeaderNav: FC = () => {
                 color="hollow"
                 size={width <= BREAKPOINTS.small ? 'small' : 'normal'}
                 onClick={onLogoutClick}
-                className={styles.navButton}
               />
             </div>
           </>
