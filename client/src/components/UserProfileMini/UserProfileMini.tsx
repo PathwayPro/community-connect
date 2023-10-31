@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
 
 import Avatar from '../../common/components/Avatar/Avatar';
 import IconLinkSVG from '../../common/components/IconSVG/Link/IconLinkSVG';
@@ -22,7 +21,7 @@ interface ProfileMiniProps {
   userData: userDataProps;
 }
 
-const Info: FC<ProfileMiniProps> = ({userData}) => {
+const Info: FC<ProfileMiniProps> = ({ userData }) => {
   return (
     <div className={styles.userProfile}>
       <div className={styles.backgroundImage}>
@@ -39,14 +38,6 @@ const Info: FC<ProfileMiniProps> = ({userData}) => {
             href="/profile/my"
             label="Link to User Profile"
           />
-        </div>
-        <div className={styles.links}>
-          <Link to="/connections" className={styles.link}>
-            Your Connections
-          </Link>
-          <Link to="/" className={styles.link}>
-            Manage Events
-          </Link>
         </div>
       </div>
     </div>
