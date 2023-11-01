@@ -9,7 +9,7 @@ import { StepRegisterProps, styles } from './FillUserProfileForm';
 
 const Step3: FC<StepRegisterProps> = ({ formId, errors, register }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [progress, setProgress] = useState<number | null>(null);
+  const [progress, setProgress] = useState<number>(0);
   const [uploadMessage, setUploadMessage] = useState<string>('');
 
   const resume = register('resume', {
@@ -28,7 +28,7 @@ const Step3: FC<StepRegisterProps> = ({ formId, errors, register }) => {
   const handleDeleteClick = (e: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setSelectedFile(null);
-    setProgress(null);
+    setProgress(0);
     setUploadMessage("");
   };
   // TODO: save file to the redux store because when you back / forward files are not saving and you need to upload files again
@@ -37,23 +37,23 @@ const Step3: FC<StepRegisterProps> = ({ formId, errors, register }) => {
     if (!files?.length) return;
     setSelectedFile(files[0]);
     const formData = new FormData();
-    formData.append('file', selectedFile!);
+    formData.append('file', files[0]);
     setUploadMessage("Uploading...");
     axios.post("http://httpbin.org/post", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
       onUploadProgress: (e) => {
-        setProgress(e.progress! * 100);
+        if (e.progress) setProgress(e.progress * 100);
       },
     })
       .then(() => {
         setUploadMessage("");
-        setProgress(null);
+        setProgress(0);
       })
       .catch(err => {
         setUploadMessage("Upload failed");
-        setProgress(null);
+        setProgress(0);
         console.log(err);
       });
     resume.onChange(e);
@@ -72,7 +72,7 @@ const Step3: FC<StepRegisterProps> = ({ formId, errors, register }) => {
           errorMessage={errors.resume?.message}
           className={styles.formFieldWide}
           ref={resume.ref}
-          progress={progress!}
+          progress={progress}
           uploadMessage={uploadMessage}
         />
       </div>
