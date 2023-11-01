@@ -18,6 +18,7 @@ import {
   PASS_REGEX,
   ERROR_MESSAGE_PASSWORD,
   ERROR_MESSAGE_REPASSWORD,
+  ERROR_MESSAGE_TERMS_AND_CONDITIONS,
 } from '../../common/utils/formComponentsUtils';
 
 import styles from './RegisterForm.module.scss';
@@ -43,7 +44,8 @@ const RegisterForm: FC = () => {
     getValues,
     handleSubmit,
     control,
-    formState: { errors, isValid, isDirty },
+    // formState: { errors, isValid, isDirty },
+    formState: { errors },
   } = useForm<IFormInput>({ mode: 'onChange' });
 
   const firstName = register('firstName', {
@@ -129,7 +131,7 @@ const RegisterForm: FC = () => {
         <Input
           name={firstName.name}
           id={`${formId}-${firstName.name}`}
-          label="First name *"
+          label="First name"
           autoComplete="on"
           className={styles.formField}
           onChange={firstName.onChange}
@@ -140,7 +142,7 @@ const RegisterForm: FC = () => {
         <Input
           name={lastName.name}
           id={`${formId}-${lastName.name}`}
-          label="Last name *"
+          label="Last name"
           autoComplete="on"
           className={styles.formField}
           onChange={lastName.onChange}
@@ -153,7 +155,7 @@ const RegisterForm: FC = () => {
         <Input
           name={email.name}
           id={`${formId}-${email.name}`}
-          label="Email *"
+          label="Email"
           type="email"
           autoComplete="on"
           className={styles.formField}
@@ -167,7 +169,7 @@ const RegisterForm: FC = () => {
         <Input
           name={password.name}
           id={`${formId}-${password.name}`}
-          label="Password *"
+          label="Password"
           type="password"
           isPassword={true}
           className={classNames(
@@ -185,7 +187,7 @@ const RegisterForm: FC = () => {
         <Input
           name={rePassword.name}
           id={`${formId}-${rePassword.name}`}
-          label="Re-enter Password *"
+          label="Re-enter Password"
           type="password"
           isPassword={true}
           className={styles.formField}
@@ -210,9 +212,13 @@ const RegisterForm: FC = () => {
                 id={`${formId}-agreement`}
                 {...field}
                 className={classNames(styles.checkbox, fieldState.error && styles.error)}
+                onChange={(e) => {
+                  field.onChange(e);
+                }}
               />
             )}
           />
+
           <label htmlFor={`${formId}-agreement`} className={styles.checkboxLabel}>
             <span>You&nbsp;agree&nbsp;to&nbsp;our&nbsp;</span>
             <a href="#" className={styles.checkboxLabelLink}>
@@ -230,14 +236,12 @@ const RegisterForm: FC = () => {
         </fieldset>
       </div>
 
+      {!getValues('agreement') && errors.agreement && (
+        <div className={styles.agreementErrorMessage}>{ERROR_MESSAGE_TERMS_AND_CONDITIONS}</div>
+      )}
+
       <div className={styles.formButton}>
-        <Button
-          label="Register"
-          isSubmit
-          isDisabled={!isValid || !isDirty}
-          onClick={handleSubmit(onSubmit)}
-          size="small"
-        />
+        <Button label="Register" isSubmit onClick={handleSubmit(onSubmit)} size="small" />
       </div>
       <p className={styles.formBottomText}>
         <span>Already have an account? </span>
