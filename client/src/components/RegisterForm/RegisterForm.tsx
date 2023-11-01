@@ -87,19 +87,6 @@ const RegisterForm: FC = () => {
     },
   });
 
-  // const agreement = register('agreement', {
-  //   required: 'Please accept Terms and Conditions.',
-  //   validate: (value) => {
-  //     if (!value) {
-  //       return 'Please accept Terms and Conditions.';
-  //     }
-  //     return true; // Return true if validation passes
-  //   },
-  // });
-  // console.log('agreement', agreement);
-
-  // console.log(' formState: { errors }', errors);
-
   const [registerUser] = useRegisterUserMutation();
 
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
@@ -250,10 +237,7 @@ const RegisterForm: FC = () => {
       </div>
 
       {!getValues('agreement') && errors.agreement && (
-        <div className={styles.agreementErrorMessage}>
-          {ERROR_MESSAGE_TERMS_AND_CONDITIONS}
-          {/* {errors.agreement.message} */}
-        </div>
+        <div className={styles.agreementErrorMessage}>{ERROR_MESSAGE_TERMS_AND_CONDITIONS}</div>
       )}
 
       <div className={styles.formButton}>
