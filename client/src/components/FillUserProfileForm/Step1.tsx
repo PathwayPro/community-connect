@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { FC, useEffect, useState } from 'react';
 import { Controller } from 'react-hook-form';
 
-import {useGetCountriesQuery, useGetProvincesQuery} from '../../app/slices/apiSlice';
+import { useGetCountriesQuery, useGetProvincesQuery } from '../../app/slices/apiSlice';
 import Dropdown from '../../common/components/Dropdown/Dropdown';
 import Input from '../../common/components/Input/Input';
 import Textarea from '../../common/components/Textarea/Textarea';
@@ -34,7 +34,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
   useEffect(() => {
     if (!provincesQuery) return;
     const preparedProvinces: OptionType[] = provincesQuery.map((element: Record<string, string>) => {
-      const preparedElement: OptionType = { value: '', label: ''};
+      const preparedElement: OptionType = { value: '', label: '' };
       preparedElement.value = element.id;
       preparedElement.label = `${element.provinceAndTerritory}, ${element.abbreviation}`;
       return preparedElement;
@@ -49,6 +49,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
       preparedElement.label = element.country;
       return preparedElement;
     });
+    preparedValues1.sort((a, b) => a.label.localeCompare(b.label));
     setPreparedValues(preparedValues1);
     return;
   }, [contriesQuery]);
@@ -129,7 +130,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
 
   return (
     <>
-      <button onClick={(e) => {e.preventDefault(); console.log(preparedProvinces)}}>CHELLO</button>
+      <button onClick={(e) => { e.preventDefault(); console.log(preparedProvinces); }}>CHELLO</button>
       <div className={classNames(styles.formRow, styles.column, styles.avatarWrap)}>
         <p className={styles.avatarTitle}>Add Photo</p>
         <label htmlFor={`${formId}-${avatar.name}`} className={styles.avatarLabel}></label>
