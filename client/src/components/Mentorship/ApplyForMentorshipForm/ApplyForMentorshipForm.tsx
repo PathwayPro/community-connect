@@ -1,3 +1,4 @@
+import axios from 'axios';
 import classNames from 'classnames';
 import { FC, useState, MouseEvent, KeyboardEvent, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -26,6 +27,8 @@ const ApplyForMentorshipForm: FC = () => {
   const dispatch = useAppDispatch();
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [progress, setProgress] = useState<number | null>(null);
+  const [uploadMessage, setUploadMessage] = useState<string>('');
 
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -55,14 +58,34 @@ const ApplyForMentorshipForm: FC = () => {
   const handleDeleteClick = (e: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setSelectedFile(null);
+    setProgress(null);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (files) {
-      setSelectedFile(files[0]);
-      resume.onChange(e);
-    }
+    if (!files?.length) return;
+    setSelectedFile(files[0]);
+    const formData = new FormData();
+    formData.append('file', selectedFile!);
+    setUploadMessage("Uploading...");
+    axios.post("http://httpbin.org/post", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      onUploadProgress: (e) => {
+        setProgress(e.progress! * 100);
+      },
+    })
+      .then(() => {
+        setUploadMessage("");
+        setProgress(null);
+      })
+      .catch(err => {
+        setUploadMessage("Upload failed");
+        setProgress(null);
+        console.log(err);
+      });
+    resume.onChange(e);
   };
 
   const [applyMenteeRequest, { isLoading }] = useApplyForMentorshipMutation();
@@ -129,6 +152,8 @@ const ApplyForMentorshipForm: FC = () => {
                 errorMessage={errors.resume?.message}
                 ref={resume.ref}
                 className={styles.applyResume}
+                progress={progress!}
+                uploadMessage={uploadMessage}
               />
             </div>
             <Button label="Apply" size="small" isSubmit onClick={handleSubmit(onSubmit)} />
