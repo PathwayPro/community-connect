@@ -19,14 +19,15 @@
   }
 
   &.normal {
-    padding: 26px;
+    // padding: 26px;
+    padding: 10px 26px;
   }
 }
 
-.title {
-  margin-bottom: 1.625rem;
-  @include fonts.headingText;
-}
+// .title {
+//   margin-bottom: 1.625rem;
+//   @include fonts.headingText;
+// }
 
 .subtitle {
   margin-bottom: 1.625rem;

@@ -6,7 +6,7 @@ import styles from './SideBlock.module.scss';
 
 interface SideBlockProps {
   children: ReactNode;
-  title: string;
+  title?: string;
   subtitle?: string;
   paddingWidth?: 'small' | 'normal';
   linkTo?: string;
