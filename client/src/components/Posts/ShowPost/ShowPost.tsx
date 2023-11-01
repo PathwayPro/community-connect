@@ -56,7 +56,9 @@ const ShowPost: FC<ShowPostProps> = ({ id, name, position, date, content }) => {
       <div className={styles.reactions}>
         <div className={styles.repostComment}>
           <IconSVG name={'blogCommentIcon'} color="orangeLight" onClick={leaveComment} />
+          <div className={styles.quantity}>3</div>
           <IconSVG name={'blogRepostIcon'} color="orangeLight" size="wide" onClick={repostPost} />
+          <div className={styles.quantity}>3</div>
         </div>
         <IconSVG name={'likeIcon'} color={likeBtnGrey ? 'grey' : 'green'} onClick={likePost} />
       </div>
