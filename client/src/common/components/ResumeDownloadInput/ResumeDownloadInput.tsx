@@ -16,10 +16,12 @@ interface FileInputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onDeleteClick: (e: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>) => void;
   selectedFile: File | null;
+  progress: number;
+  uploadMessage: string;
 }
 
 const ResumeDownloadInputInner = (
-  { title, name, id, className = '', errorMessage, onChange, onDeleteClick, selectedFile }: FileInputProps,
+  { title, name, id, className = '', errorMessage, onChange, onDeleteClick, selectedFile, progress, uploadMessage }: FileInputProps,
   ref: React.ForwardedRef<HTMLInputElement>
 ) => {
   const windowSize = useWindowSize();
@@ -29,7 +31,7 @@ const ResumeDownloadInputInner = (
     <>
       {title && <p className={styles.title}>{title}</p>}
       <label htmlFor={id} className={classNames(styles.label, className)} />
-      <div className={styles.inputWrap}>
+      <div className={classNames(styles.inputWrap, selectedFile ? styles.fileUploaded : "")}>
         <input
           type="file"
           id={id}
@@ -39,6 +41,10 @@ const ResumeDownloadInputInner = (
           onChange={onChange}
           ref={ref}
         />
+        <div className={styles.uploadStatus}>
+          {uploadMessage && <span className={styles.uploadMessage}>{uploadMessage}</span>}
+          {progress && <progress className={styles.uploadProgress} max="100" value={progress} />}
+        </div>
         <span className={styles.fileName}>
           {selectedFile ? truncateFileName(selectedFile.name, maxFileNameLength) : 'No selected File'}
         </span>
