@@ -43,7 +43,7 @@ const ResumeDownloadInputInner = (
         />
         <div className={styles.uploadStatus}>
           {uploadMessage && <span className={styles.uploadMessage}>{uploadMessage}</span>}
-          {progress && <progress className={styles.uploadProgress} max="100" value={progress} />}
+          {progress > 0 && <progress className={styles.uploadProgress} max="100" value={progress} />}
         </div>
         <span className={styles.fileName}>
           {selectedFile ? truncateFileName(selectedFile.name, maxFileNameLength) : 'No selected File'}
