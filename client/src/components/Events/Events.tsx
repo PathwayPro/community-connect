@@ -42,11 +42,9 @@ const eventList: EventProps[] = [
 const Events: FC<EventsProps> = ({ itemsToShow }) => {
   return (
     <>
-      <SideBlock title="Your Events" paddingWidth="normal">
+      <SideBlock title="Your Events" paddingWidth="normal" linkTo="/events">
         <UserEvents haveEvents={2} />
-      </SideBlock>
-
-      <SideBlock title="Upcoming Events" paddingWidth="normal" linkTo="/events">
+        <div className={styles.title}>Upcoming Events</div>
         <div className={styles.events}>
           {eventList &&
             eventList
