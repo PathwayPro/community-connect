@@ -1,3 +1,4 @@
+import axios from 'axios';
 import classNames from 'classnames';
 import { FC, useState, MouseEvent, KeyboardEvent } from 'react';
 
@@ -8,6 +9,8 @@ import { StepRegisterProps, styles } from './FillUserProfileForm';
 
 const Step3: FC<StepRegisterProps> = ({ formId, errors, register }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [progress, setProgress] = useState<number | null>(null);
+  const [uploadMessage, setUploadMessage] = useState<string>('');
 
   const resume = register('resume', {
     validate: {
@@ -25,11 +28,34 @@ const Step3: FC<StepRegisterProps> = ({ formId, errors, register }) => {
   const handleDeleteClick = (e: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setSelectedFile(null);
+    setProgress(null);
+    setUploadMessage("");
   };
   // TODO: save file to the redux store because when you back / forward files are not saving and you need to upload files again
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (files) setSelectedFile(files[0]);
+    if (!files?.length) return;
+    setSelectedFile(files[0]);
+    const formData = new FormData();
+    formData.append('file', selectedFile!);
+    setUploadMessage("Uploading...");
+    axios.post("http://httpbin.org/post", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      onUploadProgress: (e) => {
+        setProgress(e.progress! * 100);
+      },
+    })
+      .then(() => {
+        setUploadMessage("Upload successful");
+        // setProgress(null);
+      })
+      .catch(err => {
+        setUploadMessage("Upload failed");
+        setProgress(null);
+        console.log(err);
+      });
     resume.onChange(e);
   };
 
@@ -46,6 +72,8 @@ const Step3: FC<StepRegisterProps> = ({ formId, errors, register }) => {
           errorMessage={errors.resume?.message}
           className={styles.formFieldWide}
           ref={resume.ref}
+          progress={progress!}
+          uploadMessage={uploadMessage}
         />
       </div>
     </>
