@@ -16,6 +16,8 @@ module.exports = (sequelize, DataTypes) => {
       this.hasOne(models.UserProfile, { foreignKey: 'userId', onDelete: 'CASCADE' });
       this.hasMany(models.UserConnection, { foreignKey: 'senderId', as: 'asSender' });
       this.hasMany(models.UserConnection, { foreignKey: 'receiverId', as: 'asReceiver' });
+      this.hasMany(models.Post, { foreignKey: 'userId', as: 'posts' });
+      this.hasMany(models.Repost, { foreignKey: 'userId', as: 'reposts' });
 
       this.belongsToMany(models.User, {
         as: 'sender',
