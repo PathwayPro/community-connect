@@ -45,7 +45,7 @@ const createOrUpdateProfile = catchAsync(async (req, res) => {
   const userProfile = await userService.createOrUpdateProfile(req.user.id, req.body);
 
   const userRole = await userRoleService.getRoleByName('user');
-  await userRoleService.createUserRole(userProfile.userId, userRole.id);
+  await userRoleService.createOrUpdateUserRole(userProfile.userId, userRole.id);
 
   res.status(httpStatus.CREATED).send(userProfile);
 });
