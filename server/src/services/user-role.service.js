@@ -14,7 +14,6 @@ const createOrUpdateUserRole = async (userId, roleId) => {
     where: { userId, roleId },
     defaults: { createdAt, updatedAt }
   });
-  // return UserRole.create({ userId, roleId, createdAt, updatedAt });
 };
 
 /**
