@@ -114,7 +114,7 @@ const createOrUpdateProfile = async (userId, updateBody) => {
       await user.save({ transaction: t });
     }
     t.commit();
-    return userProfile;
+    return { userProfile, user };
   } catch (error) {
     t.rollback();
     throw new ApiError(httpStatus.NOT_FOUND, 'Failed to save profile updates');
