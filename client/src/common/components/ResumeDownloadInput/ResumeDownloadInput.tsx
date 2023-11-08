@@ -42,7 +42,18 @@ const ResumeDownloadInputInner = (
           ref={ref}
         />
         <div className={styles.uploadStatus}>
-          {uploadMessage && <span className={styles.uploadMessage}>{uploadMessage}</span>}
+          {/* {uploadMessage && (
+            <div className={classNames(styles.uploadMessage, styles.errorMessage)}>{uploadMessage}</div>
+          )} */}
+          {uploadMessage && (
+            <div className={classNames(
+              styles.uploadMessage,
+              uploadMessage === "Upload successful" && styles.successUpload,
+              uploadMessage === "Upload failed" && styles.errorUpload
+            )}>
+              {uploadMessage}
+            </div>
+          )}
           {progress > 0 && <progress className={styles.uploadProgress} max="100" value={progress} />}
         </div>
         <span className={styles.fileName}>
