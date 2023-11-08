@@ -48,12 +48,10 @@ const Step3: FC<StepRegisterProps> = ({ formId, errors, register }) => {
       },
     })
       .then(() => {
-        setUploadMessage("");
-        setProgress(0);
+        setUploadMessage("Upload successful");
       })
       .catch(err => {
         setUploadMessage("Upload failed");
-        setProgress(0);
         console.log(err);
       });
     resume.onChange(e);
