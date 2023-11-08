@@ -42,9 +42,6 @@ const ResumeDownloadInputInner = (
           ref={ref}
         />
         <div className={styles.uploadStatus}>
-          {/* {uploadMessage && (
-            <div className={classNames(styles.uploadMessage, styles.errorMessage)}>{uploadMessage}</div>
-          )} */}
           {uploadMessage && (
             <div className={classNames(
               styles.uploadMessage,
