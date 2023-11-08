@@ -63,7 +63,7 @@ const FillUserProfileForm: FC = () => {
 
       const laguagesArray = spokenLanguage ? spokenLanguage?.replaceAll(' ', '').split(',') : [];
       // TODO If birthDate were passed, update it to the proper date format (replace new Date())
-      const birtDateToDate = birthDate ? new Date() : null;
+      const birtDateToDate = birthDate || null;
       await createProfile({ ...profileData, spokenLanguage: laguagesArray, birthDate: birtDateToDate })
         .unwrap()
         .then((data) => {

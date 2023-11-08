@@ -10,8 +10,8 @@ import { fileSize, imageFileFormat } from '../../common/utils/filesValidation';
 import {
   NAME_REGEX,
   ERROR_MESSAGE_NAME,
-  BIRTHDATE_REGEX,
-  ERROR_MESSAGE_BIRTHDATE,
+  // BIRTHDATE_REGEX,
+  // ERROR_MESSAGE_BIRTHDATE,
   LANGUAGES_REGEX,
   LANGUAGES_MESSAGE_NAME,
 } from '../../common/utils/formComponentsUtils';
@@ -87,29 +87,32 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
   });
 
   const birthDate = register('birthDate', {
-    pattern: {
-      value: BIRTHDATE_REGEX,
-      message: ERROR_MESSAGE_BIRTHDATE,
-    },
+    // pattern: {
+    //   value: BIRTHDATE_REGEX,
+    //   message: ERROR_MESSAGE_BIRTHDATE,
+    // },
+    // onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+    //   let { value } = e.target;
+    //   if (
+    //     (e.nativeEvent instanceof InputEvent && e.nativeEvent.inputType === 'deleteContentBackward') ||
+    //     (e.nativeEvent instanceof KeyboardEvent && e.nativeEvent.key === 'Backspace')
+    //   ) {
+    //     return;
+    //   }
+    //   // TODO: fix unexpected behaviour: if delete some numbers from from year and month string will be updated incorrectly
+    //   value = value.replace(/[^0-9]/g, ''); // allow only numbers
+    //   if (value.length >= 4) {
+    //     value = value.slice(0, 4) + '/' + value.slice(4);
+
+    //     if (value.length >= 7) {
+    //       value = value.slice(0, 7) + '/' + value.slice(7);
+    //     }
+    //   }
+
+    //   setValue('birthDate', value);
+    // },
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-      let { value } = e.target;
-      if (
-        (e.nativeEvent instanceof InputEvent && e.nativeEvent.inputType === 'deleteContentBackward') ||
-        (e.nativeEvent instanceof KeyboardEvent && e.nativeEvent.key === 'Backspace')
-      ) {
-        return;
-      }
-      // TODO: fix unexpected behaviour: if delete some numbers from from year and month string will be updated incorrectly
-      value = value.replace(/[^0-9]/g, ''); // allow only numbers
-      if (value.length >= 4) {
-        value = value.slice(0, 4) + '/' + value.slice(4);
-
-        if (value.length >= 7) {
-          value = value.slice(0, 7) + '/' + value.slice(7);
-        }
-      }
-
-      setValue('birthDate', value);
+      setValue('birthDate', e.target.value);
     },
   });
 
@@ -210,7 +213,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
             name={birthDate.name}
             id={`${formId}-${birthDate.name}`}
             label="Date of Birth"
-            placeholder="yyyy/mm/dd"
+            type="date"
             className={styles.formField}
             onChange={(e) => birthDate.onChange(e)}
             onBlur={birthDate.onBlur}
