@@ -3,6 +3,7 @@ const authRoute = require('./auth.route');
 const userRoute = require('./user.route');
 const utilRoute = require('./util.route');
 const docsRoute = require('./docs.route');
+const postRoute = require('./post.route');
 const mentorshipRoute = require('./mentorship.route');
 const config = require('../../config/config');
 
@@ -24,6 +25,10 @@ const defaultRoutes = [
   {
     path: '/utils',
     route: utilRoute,
+  },
+  {
+    path: '/posts',
+    route: postRoute,
   },
 ];
 

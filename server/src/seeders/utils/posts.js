@@ -4,7 +4,7 @@ const generatePosts = (numberOfUsers, postsPerUser = 3) => {
     for (let i = 0; i < postsPerUser; i += 1) {
       posts.push({
         userId,
-        content: `Post content ${i} by user ${userId}`,
+        content: `Post content ${i} by user ${userId} | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
         createdAt: new Date(),
         updatedAt: new Date(),
       });

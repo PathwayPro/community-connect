@@ -176,6 +176,21 @@ export const apiSlice = createApi({
     getProvinces: builder.query({
       query: () => '/v1/utils/provinces',
     }),
+    // Posts
+    getPosts: builder.query({
+      query: () => '/v1/posts',
+    }),
+    // Reposts
+    createRepost: builder.mutation({
+      query: ({ postId }) => ({
+        url: `/v1/posts/${postId}/reposts`,
+        method: 'POST',
+      }),
+    }),
+    // Posts & Reposts by userId
+    getUserContent: builder.query({
+      query: (userId) => `/v1/users/${userId}/content`,
+    }),
   }),
 });
 
@@ -195,4 +210,7 @@ export const {
   useGetUserProfileQuery,
   useGetCountriesQuery,
   useGetProvincesQuery,
+  useGetPostsQuery,
+  useCreateRepostMutation,
+  useGetUserContentQuery,
 } = apiSlice;
