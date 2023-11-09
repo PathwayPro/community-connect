@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import {useCreateRepostMutation} from "../../../app/slices/apiSlice";
 import Avatar from '../../../common/components/Avatar/Avatar';
 import IconSVG from '../../../common/components/IconSVG/Button/IconSVG';
 import Toast from '../../../common/components/Toast/Toast';
@@ -12,7 +13,7 @@ export interface ShowPostProps {
   id: number;
   name: string;
   position: string;
-  date: Date;
+  date: string;
   content: string;
 }
 
@@ -23,15 +24,28 @@ const ShowPost: FC<ShowPostProps> = ({ id, name, position, date, content }) => {
   const [showCommentBox, setshowCommentBox] = useState(false);
   const [likeBtnGrey, setlikeBtnGrey] = useState(true);
 
+  const [createRepost] = useCreateRepostMutation();
+
   const leaveComment = () => {
     setshowCommentBox(!showCommentBox);
   };
-  const repostPost = () => console.log('repost');
+  const repostPost = async () => {
+    try {
+      // Call the createRepost mutation with the post ID
+      await createRepost({ postId: id }).unwrap();
+      console.log('The post was successfuly reposted')
+      // Here will be th post-repost logic, like showing a success message (toast)
+    } catch (error) {
+      // Handle the error case
+      console.error('Failed to repost:', error);
+    }
+  };
   const likePost = () => {
     setlikeBtnGrey(!likeBtnGrey);
   };
   const sendMessage = () => console.log('send message');
   const copyPost = () => {
+    console.log(`post id: ${id} copied`)
     setShowToast(false);
   };
   const handleClick = () => setShowToast(!showToast);
@@ -45,7 +59,7 @@ const ShowPost: FC<ShowPostProps> = ({ id, name, position, date, content }) => {
             {name}
           </Link>
           <span className={styles.position}>{position}</span>
-          <span className={styles.date}>{formatDate(date)}</span>
+          <span className={styles.date}>{formatDate(new Date(date))}</span>
         </div>
       </div>
       <div className={styles.setting}>

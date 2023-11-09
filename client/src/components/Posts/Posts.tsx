@@ -6,16 +6,26 @@ import ShowPost from './ShowPost/ShowPost';
 
 import styles from './Posts.module.scss';
 
-export interface PostProps {
+export interface PostWithRepostsProps {
   id: number;
-  name: string;
-  position: string;
-  date: Date;
   content: string;
+  postDate: string; // or Date if you want it to be a Date object
+  author: {
+    name: string;
+    position: string;
+  };
+  reposts: Array<{
+    id: number;
+    repostDate: string; // or Date if you want it to be a Date object
+    user: {
+      name: string;
+      position: string;
+    };
+  }>;
 }
 
 interface PostsProps {
-  posts: PostProps[];
+  posts: PostWithRepostsProps[];
 }
 
 const Posts: FC<PostsProps> = ({ posts }) => {
@@ -23,14 +33,14 @@ const Posts: FC<PostsProps> = ({ posts }) => {
   return (
     <div className={styles.posts}>
       {location.pathname.includes('/my') && <AddPost />}
-      {posts.length &&
-        posts.map((post) => (
+      {posts?.length &&
+        posts?.map((post) => (
           <ShowPost
             id={post.id}
             key={post.id}
-            name={post.name}
-            position={post.position}
-            date={post.date}
+            name={post.author.name}
+            position={post.author.position}
+            date={post.postDate}
             content={post.content}
           />
         ))}

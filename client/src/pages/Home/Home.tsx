@@ -40,7 +40,6 @@ const Home: FC = () => {
     if (profileQuery) {
       dispatch(setUserData(profileQuery));
     }
-    console.log(profileQuery);
   }, [profileQuery]);
 
   const userData = {userFullName, userFieldOfExp};

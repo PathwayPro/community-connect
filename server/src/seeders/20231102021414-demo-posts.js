@@ -6,11 +6,11 @@ const { generatePosts } = require('./utils/posts');
 
 module.exports = {
   async up() {
-    // Предполагается, что вы хотите генерировать посты только для пользователей с подтвержденными email.
-    // Поэтому сначала получим количество таких пользователей.
+    // Generate posts only for verified users
+    // First of all, getting the verified users
     const numberOfVerifiedUsers = await User.count({ where: { isEmailVerified: true } });
 
-    // Теперь генерируем посты для этого количества пользователей.
+    // Now generating the posts for it
     const posts = generatePosts(numberOfVerifiedUsers);
     await Post.bulkCreate(posts);
   },

@@ -6,11 +6,11 @@ const { generateReposts } = require('./utils/posts');
 
 module.exports = {
   async up() {
-    // Получаем количество существующих постов для генерации репостов
+    // Getting posts for createing reposts
     const numberOfPosts = await Post.count();
 
-    // Генерируем репосты
-    const reposts = generateReposts(numberOfPosts, 30); // 30 репостов
+    // Generating the reposts
+    const reposts = generateReposts(numberOfPosts, 30); // 30 reposts
     await Repost.bulkCreate(reposts);
   },
 

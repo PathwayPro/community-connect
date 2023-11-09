@@ -4,7 +4,7 @@ const generatePosts = (numberOfUsers, postsPerUser = 3) => {
     for (let i = 0; i < postsPerUser; i += 1) {
       posts.push({
         userId,
-        content: `Post content ${i} by user ${userId}`,
+        content: `Post content ${i} by user ${userId} | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
         createdAt: new Date(),
         updatedAt: new Date(),
       });
@@ -16,8 +16,6 @@ const generatePosts = (numberOfUsers, postsPerUser = 3) => {
 const generateReposts = (numberOfPosts, numberOfReposts = 30) => {
   const reposts = [];
   for (let i = 0; i < numberOfReposts; i += 1) {
-    // Предположим, что у нас уже есть пользователи и посты, которые они могут репостить.
-    // Генерируем случайного пользователя и пост для репоста.
     const numberOfUsers = 40;
     const userId = Math.floor(Math.random() * numberOfUsers) + 1;
     const originalPostId = Math.floor(Math.random() * numberOfPosts) + 1;
