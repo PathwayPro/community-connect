@@ -64,7 +64,7 @@ const ShowPost: FC<ShowPostProps> = ({ id, name, position, date, content }) => {
       </div>
       <div className={styles.setting}>
         <IconSVG name={'settingIcon'} onClick={handleClick} />
-        {showToast && <Toast onToastClick={copyPost} toastContent={`Copy link to post`} />}
+        {showToast && <Toast onToastClick={copyPost} toastContent={`Copy link to post`}  type={"info"}/>}
       </div>
       <div className={styles.content}>{content}</div>
       <div className={styles.reactions}>
