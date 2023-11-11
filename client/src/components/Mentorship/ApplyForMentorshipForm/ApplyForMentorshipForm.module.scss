@@ -35,7 +35,7 @@
 .applyResume {
   height: 155px;
   padding: 0;
-  background-size: 15%;
+  background-size: 80px;
   border-width: 3px;
   &::after {
     @include fonts.mainText($font-size: 19px);

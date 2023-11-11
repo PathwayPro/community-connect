@@ -23,11 +23,11 @@
   border-radius: 15px;
   border: colors.$blue-normal 5px dashed;
   cursor: pointer;
+  background-size: 80px;
 
   @include media.media-s {
     height: 210px;
     margin-bottom: 15px;
-    background-size: 42%;
     background-position-y: 27%;
   }
 
