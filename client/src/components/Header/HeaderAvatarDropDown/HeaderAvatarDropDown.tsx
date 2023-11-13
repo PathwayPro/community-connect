@@ -70,7 +70,10 @@ const HeaderAvatarDropDown: FC<HeaderAvatarDropDownProps> = ({ onLogoutClick }) 
         to=""
         onClick={(e) => toggleDropdown(e)}
       >
-        <Avatar size="medium" borderColor="blue" className={styles.profileImage} />
+        <div className={styles.avatarWrapper}>
+          <Avatar size="medium" borderColor="blue" className={styles.profileImage} />
+          <span className={styles.triangle}></span>
+        </div>
       </NavLink>
 
       <Transition in={isOpen} timeout={300} unmountOnExit nodeRef={nodeRef}>

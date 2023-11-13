@@ -32,7 +32,7 @@
 
 .options {
   position: absolute;
-  top: 80px;
+  top: 77px;
   left: -10%;
   transform: translateX(-50%);
   background: colors.$orange-light;
@@ -85,4 +85,23 @@
       left: 16px;
     }
   }
+}
+
+//
+.avatarWrapper {
+  text-align: center;
+  position: relative;
+  margin-top: -5px;
+}
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #fcbc5c;
+  flex-shrink: 0;
+
+  position: absolute;
+  bottom: -10px;
+  left: 25px;
 }
