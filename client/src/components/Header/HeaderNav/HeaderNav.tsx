@@ -162,6 +162,8 @@ const HeaderNav: FC = () => {
               />
             </div>
 
+            <input type="text" placeholder="Search" className={styles.input} />
+
             {width > BREAKPOINTS.small ? (
               <div className={styles.buttons}>
                 <HeaderAvatarDropDown onLogoutClick={onLogoutClick} />
