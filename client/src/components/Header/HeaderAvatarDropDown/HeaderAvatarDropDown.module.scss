@@ -1,0 +1,88 @@
+@use '../../../common/styles/mixins';
+@use '../../../common/styles/fonts';
+@use '../../../common/styles/media';
+@use '../../../common/styles/colors';
+
+@mixin margin-right {
+  margin-right: 2.5rem;
+
+  @include media.media-xl {
+    margin-right: 2rem;
+  }
+  @include media.media-s {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.dropdown {
+  position: relative;
+  // @include margin-right;
+}
+
+.link {
+  @extend %flex-center;
+  @include fonts.navText;
+  cursor: pointer;
+
+  &.active,
+  &.pending {
+    text-decoration: underline;
+  }
+}
+
+.options {
+  position: absolute;
+  top: 80px;
+  left: -10%;
+  transform: translateX(-50%);
+  background: colors.$blue-normal;
+  box-shadow: 0 2px 2px colors.$white-darker;
+  border-radius: 0px 2px 2px 0px;
+  overflow: hidden;
+  z-index: 10;
+  transition: opacity 300ms ease;
+  opacity: 0;
+
+  &.entering {
+    opacity: 0;
+  }
+  &.entered {
+    opacity: 1;
+  }
+  &.exiting {
+    opacity: 1;
+  }
+  &.exited {
+    opacity: 0;
+  }
+}
+
+.option {
+  display: block;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  text-align: left !important;
+  color: colors.$white;
+  white-space: nowrap;
+  text-align: center;
+
+  &:hover {
+    background: colors.$orange-normal-hover;
+  }
+
+  &:last-child {
+    position: relative;
+
+    &::before {
+      content: '';
+      display: block;
+      width: calc(100% - 32px);
+      height: 1px;
+      background: colors.$white;
+      position: absolute;
+      top: 0;
+      left: 16px;
+    }
+  }
+}
