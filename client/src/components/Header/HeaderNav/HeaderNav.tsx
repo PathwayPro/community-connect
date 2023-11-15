@@ -124,6 +124,15 @@ const HeaderNav: FC = () => {
           >
             About Us
           </NavLink>
+          <NavLink
+            to="/contact-us"
+            className={({ isActive, isPending }) =>
+              classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
+            }
+            onClick={handleMobileDropDownClose}
+          >
+            Contact Us
+          </NavLink>
         </nav>
         {isLogin && (
           <>

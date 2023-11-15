@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import AboutUs from './pages/AboutUs/AboutUs';
+import ContactUs from './pages/ContactUs/ContactUs';
 import Events from './pages/Events/Events';
 import Home from './pages/Home/Home';
 import Layout from './pages/Layout/Layout';
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: 'home',
         Component: Home,
+      },
+      {
+        path: 'contact-us',
+        Component: ContactUs,
       },
     ],
   },
