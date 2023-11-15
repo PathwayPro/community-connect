@@ -43,7 +43,8 @@
 
 .message {
   height: 100%;
-  width: 582px;
+  width: 100%;
+  max-width: 582px;
   padding: 40px 0 0 60px;
 
   @media (max-width: 896px) {

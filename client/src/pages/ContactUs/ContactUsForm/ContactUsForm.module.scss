@@ -73,3 +73,31 @@
     border-color: colors.$focus;
   }
 }
+
+.submitMessage {
+  width: 100%;
+  max-width: 470px;
+  height: 237px;
+  background: colors.$orange-light;
+  border-radius: 15px;
+  margin: 81px 74px 81px 0px;
+  padding: 40px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+
+  @media (max-width: 896px) {
+    margin: 0 auto;
+  }
+}
+
+.image {
+  text-align: center;
+}
+.text {
+  margin-top: 8px;
+  width: 100%;
+  max-width: 390px;
+  text-align: center;
+}
