@@ -17,8 +17,20 @@ const ContactUsForm = () => {
         <Input label="Reason (optional)" className={styles.input} />
       </div>
 
-      <div className={styles.formRow}>
+      {/* <div className={styles.formRow}>
         <Input label="Message" className={styles.input} />
+      </div> */}
+
+      {/* <div className={`${styles.formRow} ${styles.textarea}`}>
+        <label htmlFor="message">Message</label>
+        <textarea id="message" name="message" />
+      </div> */}
+
+      <label htmlFor="message" className={styles.label}>
+        Message
+      </label>
+      <div className={styles.formRow}>
+        <textarea id="message" name="message" className={styles.textarea} />
       </div>
 
       <div className={styles.formButton}>
