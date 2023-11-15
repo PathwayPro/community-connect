@@ -1,5 +1,6 @@
 @use '../../../common/styles/colors';
 @use '../../../common/styles/media';
+@use '../../../common/styles/fonts';
 
 .form {
   padding: 40px 60px;
@@ -50,6 +51,8 @@
   display: block;
   width: 100%;
 
+  padding: 12px !important;
+
   width: 100%;
   height: 120px;
   background-color: colors.$white;
@@ -58,4 +61,15 @@
   padding: 0 0.75rem;
   appearance: none;
   outline: none;
+
+  @include fonts.mainText;
+
+  &::placeholder {
+    color: colors.$grey;
+  }
+  &:focus,
+  &:active,
+  &:focus-visible {
+    border-color: colors.$focus;
+  }
 }
