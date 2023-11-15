@@ -7,8 +7,8 @@ import styles from './Input.module.scss';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  name: string;
-  id: string;
+  name?: string;
+  id?: string;
   type?: string;
   isPassword?: boolean;
   placeholder?: string;
@@ -17,8 +17,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   autoComplete?: string;
   disabled?: boolean;
   className?: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 const InputInner = (

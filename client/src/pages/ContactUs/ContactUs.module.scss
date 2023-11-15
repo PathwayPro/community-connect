@@ -30,17 +30,27 @@
 .formWrapper {
   margin-bottom: 100px;
   width: 100%;
-  height: 511px;
+  min-height: 511px;
   background: colors.$blue-light;
   border-radius: 15px;
   display: flex;
+
+  @media (max-width: 896px) {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .message {
-  border: 1px solid rgb(0, 255, 47);
+  //   border: 1px solid rgb(0, 255, 47);
   height: 100%;
   width: 582px;
   padding: 40px 0 0 60px;
+
+  @media (max-width: 896px) {
+    padding: 20px 20px 0px 20px;
+  }
 }
 
 .text {
@@ -98,9 +108,58 @@
   background-size: contain;
   background-repeat: no-repeat;
 }
-
+//-----------------------------
 .form {
-  border: 1px solid red;
+  padding: 40px 60px;
+  //   border: 1px solid red;
   width: 738px;
   height: 100%;
+
+  display: inline-flex;
+  flex-direction: column;
+
+  @media (max-width: 896px) {
+    padding: 35px;
+  }
 }
+
+.formRow {
+  display: flex;
+  column-gap: 1rem;
+  margin-bottom: 1rem;
+
+  @include media.media-s {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0;
+  }
+}
+
+.formButton {
+  margin-top: 26px;
+}
+
+.input {
+  margin-top: 8px;
+}
+
+// .input {
+//   background: colors.$white;
+//   width: 100%;
+//   max-width: 250px;
+//   height: 48px;
+//   margin: 0 1rem;
+//   padding: 12px;
+//   border: 1px solid #d5d4dc;
+//   border-radius: 8px;
+//   outline: none;
+//   cursor: pointer;
+
+//   @include fonts.mainText;
+// }
+
+// @media (max-width: 768px) {
+//   .input {
+//     margin: 1rem 1rem;
+//   }
+// }
