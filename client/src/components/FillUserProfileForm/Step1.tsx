@@ -23,12 +23,25 @@ interface OptionType {
 }
 
 const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, watch }) => {
-  const { fields, append, remove } = useFieldArray({
+  const {
+    fields: languageFields,
+    append: languageAppend,
+    remove: languageRemove,
+  } = useFieldArray({
     control,
     name: "spokenLanguage",
   });
+  const {
+    fields: expertiseFields,
+    append: expertiseAppend,
+    remove: expertiseRemove,
+  } = useFieldArray({
+    control,
+    name: "fieldOfExpertise",
+  });
 
   const languages = watch("spokenLanguage");
+  const expertises = watch("fieldOfExpertise");
 
   const [language, setLanguage] = useState('');
   const languageOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,8 +54,24 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
 
     if ((key === ',' || key === "Enter") && trimmedInput.length) {
       e.preventDefault();
-      append({ value: trimmedInput });
+      languageAppend({ value: trimmedInput });
       setLanguage('');
+    }
+  };
+
+  const [expertise, setExpertise] = useState('');
+  const expertiseOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setExpertise(value);
+  };
+  const expertiseOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const { key } = e;
+    const trimmedInput = expertise.trim();
+
+    if ((key === ',' || key === "Enter") && trimmedInput.length) {
+      e.preventDefault();
+      expertiseAppend({ value: trimmedInput });
+      setExpertise('');
     }
   };
 
@@ -111,10 +140,6 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
       setValue('birthDate', e.target.value);
     },
-  });
-
-  const fieldOfExpertise = register('fieldOfExpertise', {
-    required: 'Field of expertise is required',
   });
 
   const bio = register('bio', {
@@ -241,12 +266,12 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
           />
           {languages && (
             <div className={styles.items}>
-              {fields.map((item, index) => {
+              {languageFields.map((item, index) => {
                 return (
                   <>
                     <span key={item.id} className={styles.item}>
                       {languages[index].value}
-                      <XIcon className={styles.itemIcon} onClick={() => remove(index)} />
+                      <XIcon className={styles.itemIcon} onClick={() => languageRemove(index)} />
                     </span>
                   </>
                 );
@@ -255,36 +280,51 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
           )}
         </div>
       </div>
-      <div className={styles.formRow}>
+      <Controller
+        name="yearsOfExperience"
+        control={control}
+        rules={{
+          required: 'Years of experience are required',
+        }}
+        render={({ field }) => (
+          <Dropdown
+            name={field.name}
+            id={`${formId}-${field.name}`}
+            label="Years of experience *"
+            options={years}
+            className={styles.formField}
+            onChange={field.onChange}
+            onBlur={field.onBlur}
+            errorMessage={errors.yearsOfExperience?.message}
+          />
+        )}
+      />
+      <div className={styles.column}>
         <Input
-          name={fieldOfExpertise.name}
-          id={`${formId}-${fieldOfExpertise.name}`}
           label="Field of expertise *"
-          className={styles.formField}
-          onChange={fieldOfExpertise.onChange}
-          onBlur={fieldOfExpertise.onBlur}
-          ref={fieldOfExpertise.ref}
-          errorMessage={errors.fieldOfExpertise?.message}
+          name={"fieldOfExpertise"}
+          id={`${formId}-fieldOfExpertise`}
+          value={expertise}
+          placeholder="List separated by commas"
+          onChange={expertiseOnChange}
+          onKeyDown={expertiseOnKeyDown}
+        // onBlur={}
+        // errorMessage={}
         />
-        <Controller
-          name="yearsOfExperience"
-          control={control}
-          rules={{
-            required: 'Years of experience are required',
-          }}
-          render={({ field }) => (
-            <Dropdown
-              name={field.name}
-              id={`${formId}-${field.name}`}
-              label="Years of experience *"
-              options={years}
-              className={styles.formField}
-              onChange={field.onChange}
-              onBlur={field.onBlur}
-              errorMessage={errors.yearsOfExperience?.message}
-            />
-          )}
-        />
+        {expertises && (
+          <div className={styles.items}>
+            {expertiseFields.map((item, index) => {
+              return (
+                <>
+                  <span key={item.id} className={styles.item}>
+                    {expertises[index].value}
+                    <XIcon className={styles.itemIcon} onClick={() => expertiseRemove(index)} />
+                  </span>
+                </>
+              );
+            })}
+          </div>
+        )}
       </div>
       <div className={styles.formRow}>
         <Textarea

@@ -65,21 +65,43 @@ const FillUserProfileForm: FC = () => {
     return languagesArray;
   };
 
+  const getExpertises = (expertises: { value: string; }[]) => {
+    let fieldOfExpertiseString = "";
+    for (const expertise of expertises) {
+      if (fieldOfExpertiseString.length > 0) {
+        fieldOfExpertiseString += ", ";
+      }
+      fieldOfExpertiseString += expertise.value;
+    }
+
+    return fieldOfExpertiseString;
+  };
+
   const [createProfile] = useCreateUserProfileMutation();
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
     if (step != 4) {
       setStep((prevStep) => prevStep + 1);
     } else {
-      const { spokenLanguage, birthDate, ...profileData } = values;
+      const { birthDate, spokenLanguage, fieldOfExpertise, ...profileData } = values;
 
       // const laguagesArray = spokenLanguage ? spokenLanguage?.replaceAll(' ', '').split(',') : [];
       let languagesArray: string[] = [];
       if (spokenLanguage) {
         languagesArray = getLanguages(spokenLanguage);
       }
+
+      let fieldOfExpertiseString = "";
+      if (fieldOfExpertise) {
+        fieldOfExpertiseString = getExpertises(fieldOfExpertise);
+      }
       // TODO If birthDate were passed, update it to the proper date format (replace new Date())
       const birtDateToDate = birthDate || null;
-      await createProfile({ ...profileData, spokenLanguage: languagesArray, birthDate: birtDateToDate })
+      await createProfile({
+        ...profileData,
+        birthDate: birtDateToDate,
+        spokenLanguage: languagesArray,
+        fieldOfExpertise: fieldOfExpertiseString,
+      })
         .unwrap()
         .then((data) => {
           // TODO: save profile data to the store
