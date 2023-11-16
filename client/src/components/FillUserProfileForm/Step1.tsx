@@ -29,14 +29,13 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
   });
 
   const languages = watch("spokenLanguage");
-  console.log(languages);
 
   const [language, setLanguage] = useState('');
   const languageOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setLanguage(value);
   };
-  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const languageOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const { key } = e;
     const trimmedInput = language.trim();
 
@@ -238,7 +237,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
             placeholder="List separated by commas"
             className={styles.formField}
             onChange={languageOnChange}
-            onKeyDown={onKeyDown}
+            onKeyDown={languageOnKeyDown}
           />
           {languages && (
             <div className={styles.items}>
