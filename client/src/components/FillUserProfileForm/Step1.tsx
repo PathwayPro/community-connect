@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { FC, useEffect, useState } from 'react';
-import { Controller } from 'react-hook-form';
+import { useFieldArray, Controller } from 'react-hook-form';
 
 import { useGetCountriesQuery, useGetProvincesQuery } from '../../app/slices/apiSlice';
 import Dropdown from '../../common/components/Dropdown/Dropdown';
@@ -10,19 +10,43 @@ import { fileSize, imageFileFormat } from '../../common/utils/filesValidation';
 import {
   NAME_REGEX,
   ERROR_MESSAGE_NAME,
-  LANGUAGES_REGEX,
-  LANGUAGES_MESSAGE_NAME,
 } from '../../common/utils/formComponentsUtils';
 import { years } from '../../common/utils/userProfile';
 
 import { StepAllProps, styles } from './FillUserProfileForm';
+
+import { ReactComponent as XIcon } from '../../images/Icon/x.svg';
 
 interface OptionType {
   value: string;
   label: string;
 }
 
-const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }) => {
+const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, watch }) => {
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "spokenLanguage",
+  });
+
+  const languages = watch("spokenLanguage");
+  console.log(languages);
+
+  const [language, setLanguage] = useState('');
+  const languageOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setLanguage(value);
+  };
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const { key } = e;
+    const trimmedInput = language.trim();
+
+    if ((key === ',' || key === "Enter") && trimmedInput.length) {
+      e.preventDefault();
+      append({ value: trimmedInput });
+      setLanguage('');
+    }
+  };
+
   // Get countries list
   const [preparedValues, setPreparedValues] = useState([] as OptionType[]);
   const [preparedProvinces, setPreparedProvinces] = useState([] as OptionType[]);
@@ -87,13 +111,6 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
   const birthDate = register('birthDate', {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
       setValue('birthDate', e.target.value);
-    },
-  });
-
-  const spokenLanguage = register('spokenLanguage', {
-    pattern: {
-      value: LANGUAGES_REGEX,
-      message: LANGUAGES_MESSAGE_NAME,
     },
   });
 
@@ -212,17 +229,32 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
           </fieldset>
         </div>
 
-        <Input
-          name={spokenLanguage.name}
-          id={`${formId}-${spokenLanguage.name}`}
-          label="Spoken languages"
-          placeholder="List separated by commas"
-          className={styles.formField}
-          onChange={spokenLanguage.onChange}
-          onBlur={spokenLanguage.onBlur}
-          ref={spokenLanguage.ref}
-          errorMessage={errors.spokenLanguage?.message}
-        />
+        <div className={styles.column}>
+          <Input
+            label="Spoken languages"
+            name={"spokenLanguage"}
+            id={`${formId}-spokenLanguage`}
+            value={language}
+            placeholder="List separated by commas"
+            className={styles.formField}
+            onChange={languageOnChange}
+            onKeyDown={onKeyDown}
+          />
+          {languages && (
+            <div className={styles.items}>
+              {fields.map((item, index) => {
+                return (
+                  <>
+                    <span key={item.id} className={styles.item}>
+                      {languages[index].value}
+                      <XIcon className={styles.itemIcon} onClick={() => remove(index)} />
+                    </span>
+                  </>
+                );
+              })}
+            </div>
+          )}
+        </div>
       </div>
       <div className={styles.formRow}>
         <Input

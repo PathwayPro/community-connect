@@ -14,7 +14,7 @@ export interface IFormInput {
   provinceId?: string;
   countryId?: string;
   resume?: FileList;
-  spokenLanguage?: string;
+  spokenLanguage?: { value: string; }[];
   twitterURL?: string;
   timeInCanada?: number;
   yearsOfExperience?: number;

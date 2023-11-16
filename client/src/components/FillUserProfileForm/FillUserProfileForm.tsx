@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { useForm, UseFormRegister, UseFormSetValue, SubmitHandler, FieldErrors, Control } from 'react-hook-form';
+import { useForm, UseFormRegister, UseFormSetValue, UseFormWatch, SubmitHandler, FieldErrors, Control } from 'react-hook-form';
 
 import { useAppDispatch } from '../../app/hooks';
 import { useCreateUserProfileMutation } from '../../app/slices/apiSlice';
@@ -32,6 +32,7 @@ export interface StepRegisterProps extends StepGeneralProps {
 
 export interface StepAllProps extends StepControlProps, StepRegisterProps {
   setValue: UseFormSetValue<IFormInput>;
+  watch: UseFormWatch<IFormInput>;
 }
 
 const formId = 'fillUserProfile';
@@ -46,6 +47,7 @@ const FillUserProfileForm: FC = () => {
     control,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<IFormInput>({
     mode: 'onChange',
@@ -54,6 +56,15 @@ const FillUserProfileForm: FC = () => {
     },
   });
 
+  const getLanguages = (languages: { value: string; }[]) => {
+    const languagesArray = [];
+    for (const language of languages) {
+      languagesArray.push(language.value);
+    }
+
+    return languagesArray;
+  };
+
   const [createProfile] = useCreateUserProfileMutation();
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
     if (step != 4) {
@@ -61,10 +72,14 @@ const FillUserProfileForm: FC = () => {
     } else {
       const { spokenLanguage, birthDate, ...profileData } = values;
 
-      const laguagesArray = spokenLanguage ? spokenLanguage?.replaceAll(' ', '').split(',') : [];
+      // const laguagesArray = spokenLanguage ? spokenLanguage?.replaceAll(' ', '').split(',') : [];
+      let languagesArray: string[] = [];
+      if (spokenLanguage) {
+        languagesArray = getLanguages(spokenLanguage);
+      }
       // TODO If birthDate were passed, update it to the proper date format (replace new Date())
       const birtDateToDate = birthDate || null;
-      await createProfile({ ...profileData, spokenLanguage: laguagesArray, birthDate: birtDateToDate })
+      await createProfile({ ...profileData, spokenLanguage: languagesArray, birthDate: birtDateToDate })
         .unwrap()
         .then((data) => {
           // TODO: save profile data to the store
@@ -94,7 +109,14 @@ const FillUserProfileForm: FC = () => {
       <ProgressBar step={step} />
       <div className={styles.content}>
         {step === 1 && (
-          <Step1 register={register} formId={formId} errors={errors} control={control} setValue={setValue} />
+          <Step1
+            register={register}
+            formId={formId}
+            errors={errors}
+            control={control}
+            setValue={setValue}
+            watch={watch}
+          />
         )}
         {step === 2 && <Step2 register={register} formId={formId} errors={errors} />}
         {step === 3 && <Step3 register={register} formId={formId} errors={errors} />}

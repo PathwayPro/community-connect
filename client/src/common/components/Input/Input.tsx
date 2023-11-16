@@ -10,6 +10,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   id: string;
   type?: string;
+  value?: string;
   isPassword?: boolean;
   placeholder?: string;
   errorMessage?: string;
@@ -18,7 +19,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   disabled?: boolean;
   className?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const InputInner = (
@@ -27,6 +29,7 @@ const InputInner = (
     name,
     id,
     type = 'text',
+    value,
     isPassword = false,
     placeholder = '',
     errorMessage = '',
@@ -36,6 +39,7 @@ const InputInner = (
     className = '',
     onChange,
     onBlur,
+    onKeyDown,
   }: InputProps,
   ref: React.ForwardedRef<HTMLInputElement>
 ) => {
@@ -62,6 +66,7 @@ const InputInner = (
           name={name}
           id={id}
           type={isPasswordVisible ? 'text' : type}
+          value={value}
           placeholder={placeholder}
           autoComplete={autoComplete}
           className={classNames(
@@ -72,6 +77,7 @@ const InputInner = (
           )}
           onChange={onChange}
           onBlur={onBlur}
+          onKeyDown={onKeyDown}
           ref={ref}
           disabled={disabled}
         ></input>
