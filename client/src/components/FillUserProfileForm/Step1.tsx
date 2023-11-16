@@ -145,9 +145,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
     },
   });
 
-  const bio = register('bio', {
-    required: 'Bio is required',
-  });
+  const bio = register('bio', {});
 
   return (
     <>
@@ -332,14 +330,13 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
         <Textarea
           name={bio.name}
           id={`${formId}-${bio.name}`}
-          label="Bio *"
+          label="Bio"
           rows={3}
           placeholder="Please provide a brief description about yourself."
           className={styles.formField}
           onChange={bio.onChange}
           onBlur={bio.onBlur}
           ref={bio.ref}
-          errorMessage={errors.bio?.message}
         />
       </div>
     </>
