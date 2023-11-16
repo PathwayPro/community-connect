@@ -38,6 +38,9 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
   } = useFieldArray({
     control,
     name: "fieldOfExpertise",
+    rules: {
+      required: "Field of expertise is required",
+    },
   });
 
   const languages = watch("spokenLanguage");
@@ -308,8 +311,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
           placeholder="List separated by commas"
           onChange={expertiseOnChange}
           onKeyDown={expertiseOnKeyDown}
-        // onBlur={}
-        // errorMessage={}
+          errorMessage={errors.fieldOfExpertise?.root?.message}
         />
         {expertises && (
           <div className={styles.items}>
