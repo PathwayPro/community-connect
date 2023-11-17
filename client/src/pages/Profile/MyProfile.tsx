@@ -1,6 +1,8 @@
-import {FC} from 'react';
+import { FC, useEffect } from 'react';
 
-import {useAppSelector} from '../../app/hooks';
+import {useAppDispatch, useAppSelector} from '../../app/hooks';
+import {useGetUserProfileQuery} from '../../app/slices/apiSlice';
+import {setUserData} from '../../app/slices/userSlice';
 import Container from '../../common/components/Container/Container';
 import Scroll from '../../common/components/Scroll/Scroll';
 import Connections from '../../components/Connections/Connections';
@@ -27,6 +29,9 @@ let prevUserProfile: {
 } | null = null;
 
 const MyProfile: FC = () => {
+  const dispatch = useAppDispatch();
+  const { data: profileQuery } = useGetUserProfileQuery({});
+
   const user = useAppSelector((state) => {
     const newUser = {
       firstName: state.user.user.firstName,
@@ -35,7 +40,7 @@ const MyProfile: FC = () => {
     if (JSON.stringify(prevUser) !== JSON.stringify(newUser)) {
       prevUser = newUser;
     }
-    return prevUser ?? {firstName: '', lastName: ''};
+    return prevUser ?? { firstName: '', lastName: '' };
   });
 
   //We use custom memoization here nad on line 31 to avoid unnecessary re-rendering.
@@ -71,7 +76,14 @@ const MyProfile: FC = () => {
     };
   });
 
-  const userData = {user, userProfile};
+  useEffect(() => {
+    if (profileQuery) {
+      dispatch(setUserData(profileQuery));
+    }
+    console.log(profileQuery);
+  }, [profileQuery]);
+
+  const userData = { user, userProfile };
 
   return (
     <Container>

@@ -1,9 +1,10 @@
 import { FC, useState } from 'react';
-import { useForm, UseFormRegister, UseFormSetValue, SubmitHandler, FieldErrors, Control } from 'react-hook-form';
+import { useForm, UseFormRegister, UseFormSetValue, UseFormWatch, SubmitHandler, FieldErrors, Control } from 'react-hook-form';
 
 import { useAppDispatch } from '../../app/hooks';
 import { useCreateUserProfileMutation } from '../../app/slices/apiSlice';
 import { closeModal } from '../../app/slices/modalSlice';
+import { setUserData } from '../../app/slices/userSlice';
 import Button from '../../common/components/Button/Button';
 import Heading from '../../common/components/Heading/Heading';
 import { ERROR_MESSAGES } from '../../common/utils/errors';
@@ -31,6 +32,7 @@ export interface StepRegisterProps extends StepGeneralProps {
 
 export interface StepAllProps extends StepControlProps, StepRegisterProps {
   setValue: UseFormSetValue<IFormInput>;
+  watch: UseFormWatch<IFormInput>;
 }
 
 const formId = 'fillUserProfile';
@@ -45,6 +47,7 @@ const FillUserProfileForm: FC = () => {
     control,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<IFormInput>({
     mode: 'onChange',
@@ -53,21 +56,58 @@ const FillUserProfileForm: FC = () => {
     },
   });
 
+  const getLanguages = (languages: { value: string; }[]) => {
+    const languagesArray = [];
+    for (const language of languages) {
+      languagesArray.push(language.value);
+    }
+
+    return languagesArray;
+  };
+
+  const getExpertises = (expertises: { value: string; }[]) => {
+    let fieldOfExpertiseString = "";
+    for (const expertise of expertises) {
+      if (fieldOfExpertiseString.length > 0) {
+        fieldOfExpertiseString += ", ";
+      }
+      fieldOfExpertiseString += expertise.value;
+    }
+
+    return fieldOfExpertiseString;
+  };
+
   const [createProfile] = useCreateUserProfileMutation();
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
     if (step != 4) {
       setStep((prevStep) => prevStep + 1);
     } else {
-      const { spokenLanguage, birthDate, ...profileData } = values;
+      const { birthDate, spokenLanguage, fieldOfExpertise, ...profileData } = values;
 
-      const laguagesArray = spokenLanguage ? spokenLanguage?.replaceAll(' ', '').split(',') : [];
+      // const laguagesArray = spokenLanguage ? spokenLanguage?.replaceAll(' ', '').split(',') : [];
+      let languagesArray: string[] = [];
+      if (spokenLanguage) {
+        languagesArray = getLanguages(spokenLanguage);
+      }
+
+      let fieldOfExpertiseString = "";
+      if (fieldOfExpertise) {
+        fieldOfExpertiseString = getExpertises(fieldOfExpertise);
+      }
       // TODO If birthDate were passed, update it to the proper date format (replace new Date())
-      const birtDateToDate = birthDate ? new Date() : null;
-      await createProfile({ ...profileData, spokenLanguage: laguagesArray, birthDate: birtDateToDate })
+      const birtDateToDate = birthDate || null;
+      await createProfile({
+        ...profileData,
+        birthDate: birtDateToDate,
+        spokenLanguage: languagesArray,
+        fieldOfExpertise: fieldOfExpertiseString,
+      })
         .unwrap()
-        .then(() => {
+        .then((data) => {
           // TODO: save profile data to the store
           dispatch(closeModal());
+          dispatch(setUserData(data));
+          console.log(data);
         })
         .catch((error) => {
           if (error?.data?.message) {
@@ -91,7 +131,14 @@ const FillUserProfileForm: FC = () => {
       <ProgressBar step={step} />
       <div className={styles.content}>
         {step === 1 && (
-          <Step1 register={register} formId={formId} errors={errors} control={control} setValue={setValue} />
+          <Step1
+            register={register}
+            formId={formId}
+            errors={errors}
+            control={control}
+            setValue={setValue}
+            watch={watch}
+          />
         )}
         {step === 2 && <Step2 register={register} formId={formId} errors={errors} />}
         {step === 3 && <Step3 register={register} formId={formId} errors={errors} />}

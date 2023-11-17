@@ -1,8 +1,8 @@
 import { format } from 'date-fns';
-import {FC, useEffect, useState} from 'react';
+import { FC, useEffect, useState } from 'react';
 
-import {useAppDispatch} from '../../app/hooks';
-import {useGetProvincesQuery} from "../../app/slices/apiSlice";
+import { useAppDispatch } from '../../app/hooks';
+import { useGetProvincesQuery } from "../../app/slices/apiSlice";
 import { showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 import Heading from '../../common/components/Heading/Heading';
@@ -43,7 +43,7 @@ interface ProvinceType {
 interface InfoProps {
   myProfile: boolean,
   userProfile: boolean,
-  userData: userDataProps
+  userData: userDataProps;
 }
 
 const Info: FC<InfoProps> = ({ myProfile, userProfile, userData }) => {
@@ -54,7 +54,7 @@ const Info: FC<InfoProps> = ({ myProfile, userProfile, userData }) => {
   useEffect(() => {
     if (!provincesQuery) return;
     setProvinces(provincesQuery.find((p: ProvinceType) => p.id === userData.userProfile.provinceId));
-  }, [provincesQuery]);
+  }, [provincesQuery, userData]);
 
   const socialsList: iconProps[] = [
     { href: userData.userProfile.behanceURL, type: 'be' },
@@ -117,8 +117,8 @@ const Info: FC<InfoProps> = ({ myProfile, userProfile, userData }) => {
               userData.userProfile.spokenLanguage.map((item) => {
                 return (
                   <span key={item} className={styles.languageItem}>
-                {item}
-              </span>
+                    {item}
+                  </span>
                 );
               })
             ) : (
