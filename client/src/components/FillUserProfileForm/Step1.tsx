@@ -57,6 +57,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
 
     if ((key === ',' || key === "Enter") && trimmedInput.length) {
       e.preventDefault();
+      if (!findDuplicate(trimmedInput, languages)) return;
       languageAppend({ value: trimmedInput });
       setLanguage('');
     }
@@ -73,9 +74,22 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
 
     if ((key === ',' || key === "Enter") && trimmedInput.length) {
       e.preventDefault();
+      if (!findDuplicate(trimmedInput, expertises)) return;
       expertiseAppend({ value: trimmedInput });
       setExpertise('');
     }
+  };
+
+  const findDuplicate = (input: string, array: { value: string; }[] | undefined) => {
+    const newArray = [];
+    if (array === undefined) return true;
+    for (const item of array) {
+      newArray.push(item.value);
+    }
+    if (newArray.includes(input)) {
+      return false;
+    }
+    return true;
   };
 
   // Get countries list
