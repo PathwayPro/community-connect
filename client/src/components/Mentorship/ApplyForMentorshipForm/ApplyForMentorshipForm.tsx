@@ -59,6 +59,7 @@ const ApplyForMentorshipForm: FC = () => {
     e.preventDefault();
     setSelectedFile(null);
     setProgress(0);
+    setUploadMessage("");
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,12 +78,10 @@ const ApplyForMentorshipForm: FC = () => {
       },
     })
       .then(() => {
-        setUploadMessage("");
-        setProgress(0);
+        setUploadMessage("Upload successful");
       })
       .catch(err => {
         setUploadMessage("Upload failed");
-        setProgress(0);
         console.log(err);
       });
     resume.onChange(e);

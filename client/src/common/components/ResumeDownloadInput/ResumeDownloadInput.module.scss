@@ -23,11 +23,11 @@
   border-radius: 15px;
   border: colors.$blue-normal 5px dashed;
   cursor: pointer;
+  background-size: 80px;
 
   @include media.media-s {
     height: 210px;
     margin-bottom: 15px;
-    background-size: 42%;
     background-position-y: 27%;
   }
 
@@ -120,6 +120,30 @@
 
 .uploadMessage {
   text-align: center;
+  font-size: 13px;
+  white-space: nowrap;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    position: relative;
+    left: -6px;
+    top: 2px;
+  }
+}
+
+.errorUpload {
+  &::before {
+    background: url('/images/Icon/error.svg') no-repeat center center / cover;
+  }
+}
+
+.successUpload {
+  &::before {
+    background: url('/images/Icon/success.svg') no-repeat center center / cover;
+  }
 }
 
 .uploadProgress {

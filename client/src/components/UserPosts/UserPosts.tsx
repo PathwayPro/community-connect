@@ -1,46 +1,23 @@
-import { FC } from 'react';
+import {FC, useEffect, useState} from 'react';
 
-import Posts, { PostProps } from '../Posts/Posts';
-
-const posts: PostProps[] = [
-  {
-    id: 1,
-    name: 'Clark Mante',
-    position: 'Technician',
-    date: new Date(),
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl.',
-  },
-  {
-    id: 2,
-    name: 'Clark Mante',
-    position: 'Technician',
-    date: new Date('2023-01-01'),
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl.',
-  },
-  {
-    id: 3,
-    name: 'Clark Mante',
-    position: 'Technician',
-    date: new Date('2022-10-21'),
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl.',
-  },
-  {
-    id: 4,
-    name: 'Clark Mante',
-    position: 'Technician',
-    date: new Date('2023-2-28'),
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl.',
-  },
-];
+import {useGetUserContentQuery} from "../../app/slices/apiSlice";
+import Posts from '../Posts/Posts';
 
 const UserPosts: FC = () => {
-  // TODO: fetch data
+  const [userId, setUserId] = useState<number | null>(null);
+  useEffect(() => {
+    const storedData = localStorage.getItem('persist:main');
+    if (storedData) {
+      const parsedData = JSON.parse(JSON.parse(storedData).auth);
+      setUserId(parsedData?.user?.id);
+    }
+  }, []);
 
-  return <Posts posts={posts} />;
+  const { data: userContent } = useGetUserContentQuery(userId, {
+    skip: !userId, // Skipping the query if userId is not yet set
+  });
+
+  return <Posts posts={userContent} />;
 };
 
 export default UserPosts;

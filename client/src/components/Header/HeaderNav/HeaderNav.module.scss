@@ -110,3 +110,25 @@
     top: 0;
   }
 }
+
+.input {
+  background: colors.$white;
+  width: 100%;
+  // max-width: 300px;
+  max-width: 250px;
+  height: 48px;
+  margin: 0 1rem;
+  padding: 12px;
+  border: 1px solid #d5d4dc;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+
+  @include fonts.mainText;
+}
+
+@media (max-width: 768px) {
+  .input {
+    margin: 1rem 1rem;
+  }
+}

@@ -3,13 +3,14 @@ import React, { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
-import { logout } from '../../../app/slices/authSlice';
+import { useLogoutQuery } from '../../../app/slices/apiSlice';
 import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
 import Button from '../../../common/components/Button/Button';
 import Heading from '../../../common/components/Heading/Heading';
 import IconSVG from '../../../common/components/IconSVG/Button/IconSVG';
 import IconLinkSVG from '../../../common/components/IconSVG/Link/IconLinkSVG';
 import useWindowSize, { BREAKPOINTS } from '../../../common/utils/useWindowSize';
+import HeaderAvatarDropDown from '../HeaderAvatarDropDown/HeaderAvatarDropDown';
 import HeaderDropDown from '../HeaderDropDown/HeaderDropDown';
 
 import styles from './HeaderNav.module.scss';
@@ -18,6 +19,7 @@ const HeaderNav: FC = () => {
   const [isNavDropDownActive, setNavDropDownActive] = useState(false);
   const isLogin = useAppSelector((state) => state.auth.login);
   const dispatch = useAppDispatch();
+  const { refetch } = useLogoutQuery({});
 
   // Using window width size to update nav view: desktop or mobile
   const { width } = useWindowSize();
@@ -28,10 +30,9 @@ const HeaderNav: FC = () => {
     dispatch(showModal({ content: MODAL_TYPE.LOGIN }));
   };
 
-  const onLogoutClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    e.preventDefault();
+  const onLogoutClick = () => {
     handleMobileDropDownClose();
-    dispatch(logout());
+    refetch();
   };
 
   const onRegisterClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -123,6 +124,15 @@ const HeaderNav: FC = () => {
           >
             About Us
           </NavLink>
+          <NavLink
+            to="/contact-us"
+            className={({ isActive, isPending }) =>
+              classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
+            }
+            onClick={handleMobileDropDownClose}
+          >
+            Contact Us
+          </NavLink>
         </nav>
         {isLogin && (
           <>
@@ -161,14 +171,79 @@ const HeaderNav: FC = () => {
               />
             </div>
 
-            <div className={styles.buttons}>
-              <Button
-                label="Log Out"
-                color="hollow"
-                size={width <= BREAKPOINTS.small ? 'small' : 'normal'}
-                onClick={onLogoutClick}
-              />
-            </div>
+            <input type="text" placeholder="Search" className={styles.input} />
+
+            {width > BREAKPOINTS.small ? (
+              <div className={styles.buttons}>
+                <HeaderAvatarDropDown onLogoutClick={onLogoutClick} />
+              </div>
+            ) : (
+              <>
+                <NavLink
+                  to="profile/my"
+                  className={({ isActive, isPending }) =>
+                    classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
+                  }
+                  onClick={handleMobileDropDownClose}
+                >
+                  Profile
+                </NavLink>
+                <NavLink
+                  to="connections"
+                  className={({ isActive, isPending }) =>
+                    classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
+                  }
+                  onClick={handleMobileDropDownClose}
+                >
+                  Connections
+                </NavLink>
+                <NavLink
+                  to="events"
+                  className={({ isActive, isPending }) =>
+                    classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
+                  }
+                  onClick={handleMobileDropDownClose}
+                >
+                  Events
+                </NavLink>
+                <NavLink
+                  to="mentorship/apply"
+                  className={({ isActive, isPending }) =>
+                    classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
+                  }
+                  onClick={handleMobileDropDownClose}
+                >
+                  Mentorship
+                </NavLink>
+                <NavLink
+                  to="resources"
+                  className={({ isActive, isPending }) =>
+                    classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
+                  }
+                  onClick={handleMobileDropDownClose}
+                >
+                  Save Resources
+                </NavLink>
+                <NavLink
+                  to="reset-password"
+                  className={({ isActive, isPending }) =>
+                    classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
+                  }
+                  onClick={handleMobileDropDownClose}
+                >
+                  Reset Password
+                </NavLink>
+                <NavLink
+                  to="events"
+                  className={({ isActive, isPending }) =>
+                    classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
+                  }
+                  onClick={onLogoutClick}
+                >
+                  Log Out
+                </NavLink>
+              </>
+            )}
           </>
         )}
         {!isLogin && (
