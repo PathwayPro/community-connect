@@ -18,4 +18,5 @@ export interface IFormInput {
   twitterURL?: string;
   timeInCanada?: number;
   yearsOfExperience?: number;
+  interestList?: { value: string; }[];
 }
