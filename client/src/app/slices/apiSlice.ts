@@ -203,7 +203,7 @@ export const {
   useVerifyEmailMutation,
   useForgotPasswordMutation,
   useResetPasswordMutation,
-  useLogoutQuery,
+  useLazyLogoutQuery,
   useApplyForMentorshipMutation,
   useBecomeMentorMutation,
   useCreateUserProfileMutation,

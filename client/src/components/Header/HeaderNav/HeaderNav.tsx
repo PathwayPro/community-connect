@@ -3,7 +3,7 @@ import React, { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
-import { useLogoutQuery } from '../../../app/slices/apiSlice';
+import { useLazyLogoutQuery } from '../../../app/slices/apiSlice';
 import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
 import Button from '../../../common/components/Button/Button';
 import Heading from '../../../common/components/Heading/Heading';
@@ -19,7 +19,7 @@ const HeaderNav: FC = () => {
   const [isNavDropDownActive, setNavDropDownActive] = useState(false);
   const isLogin = useAppSelector((state) => state.auth.login);
   const dispatch = useAppDispatch();
-  const { refetch } = useLogoutQuery({});
+  const [trigger] = useLazyLogoutQuery({});
 
   // Using window width size to update nav view: desktop or mobile
   const { width } = useWindowSize();
@@ -32,7 +32,7 @@ const HeaderNav: FC = () => {
 
   const onLogoutClick = () => {
     handleMobileDropDownClose();
-    refetch();
+    trigger({});
   };
 
   const onRegisterClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
