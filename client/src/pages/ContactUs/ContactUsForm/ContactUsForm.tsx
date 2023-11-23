@@ -5,6 +5,8 @@ import Input from '../../../common/components/Input/Input';
 
 import styles from './ContactUsForm.module.scss';
 
+import submitIcon from '../../../images/ContactUs/submit-icon.png';
+
 interface FormData {
   firstName: string;
   lastName: string;
@@ -43,7 +45,7 @@ const ContactUsForm: React.FC = () => {
       {onSubmit ? (
         <div className={styles.submitMessage}>
           <div className={styles.image}>
-            <img src="../../../images/ContactUs/submit-icon.png" />
+            <img src={submitIcon} />
           </div>
           <div className={styles.text}>Thank you for reaching out!</div>
           <div className={styles.text}>
