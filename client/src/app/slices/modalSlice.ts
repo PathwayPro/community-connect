@@ -10,17 +10,25 @@ export const MODAL_TYPE = {
   FILL_USER_PROFILE: 'fillUserProfile',
   WRITE_POST: 'writePost',
   WRITE_MESSAGE: 'writeMessage',
+  REPOST: 'repost',
+};
+
+type postData = {
+  name: string;
+  content: string;
 };
 
 type initialStateType = {
   content: string;
   isOpen: boolean;
   closeOnOverlayClick: boolean;
+  postData?: postData;
 };
 
 type payloadType = {
   content: string;
   closeOnOverlayClick?: boolean;
+  postData?: postData;
 };
 
 type actionType = {
@@ -47,6 +55,7 @@ const modalSlice = createSlice({
       state.content = action.payload.content;
       state.isOpen = true;
       state.closeOnOverlayClick = action.payload.closeOnOverlayClick ?? initialState.closeOnOverlayClick;
+      state.postData = action.payload.postData;
     },
   },
 });

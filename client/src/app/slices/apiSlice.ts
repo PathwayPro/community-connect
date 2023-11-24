@@ -180,6 +180,12 @@ export const apiSlice = createApi({
     getPosts: builder.query({
       query: () => '/v1/posts',
     }),
+    addLikeToPost: builder.mutation({
+      query: (postId) => ({
+        url: `/v1/posts/${postId}/like`,
+        method: 'POST',
+      }),
+    }),
     // Reposts
     createRepost: builder.mutation({
       query: ({ postId }) => ({
@@ -211,6 +217,7 @@ export const {
   useGetCountriesQuery,
   useGetProvincesQuery,
   useGetPostsQuery,
+  useAddLikeToPostMutation,
   useCreateRepostMutation,
   useGetUserContentQuery,
 } = apiSlice;

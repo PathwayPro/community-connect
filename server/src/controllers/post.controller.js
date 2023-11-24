@@ -64,6 +64,9 @@ const getPosts = catchAsync(async (req, res) => {
       name: `${post.author.firstName} ${post.author.lastName}`,
       position: post.author.UserProfile.fieldOfExpertise, // Make sure to handle null UserProfile if necessary
     },
+    likesCount: post.likesCount,
+    repostsCount: post.repostsCount,
+    commentsCount: post.commentsCount,
     reposts: post.reposts.map((repost) => ({
       id: repost.id,
       repostDate: repost.repostDate,
@@ -124,6 +127,9 @@ const getPostWithReposts = catchAsync(async (req, res) => {
       name: `${post.author.firstName} ${post.author.lastName}`,
       position: post.author.UserProfile.fieldOfExpertise,
     },
+    likesCount: post.likesCount,
+    repostsCount: post.repostsCount,
+    commentsCount: post.commentsCount,
     reposts: post.reposts.map((repost) => ({
       id: repost.id,
       repostDate: repost.repostDate,
@@ -165,6 +171,9 @@ const getPostById = catchAsync(async (req, res) => {
     position: post.author.UserProfile.fieldOfExpertise,
     date: post.postDate,
     content: post.content,
+    likesCount: post.likesCount,
+    repostsCount: post.repostsCount,
+    commentsCount: post.commentsCount,
   };
 
   res.send(postFormatted);
@@ -218,6 +227,9 @@ const getPostsByUserId = catchAsync(async (req, res) => {
       name: `${post.author.firstName} ${post.author.lastName}`,
       position: post.author.UserProfile.fieldOfExpertise,
     },
+    likesCount: post.likesCount,
+    repostsCount: post.repostsCount,
+    commentsCount: post.commentsCount,
     reposts: post.reposts.map((repost) => ({
       id: repost.id,
       repostDate: repost.repostDate,
@@ -294,6 +306,9 @@ const getPostsAndRepostsByUserId = catchAsync(async (req, res) => {
     id: post.id,
     content: post.content,
     date: post.createdAt, // assuming you have a createdAt field
+    likesCount: post.likesCount,
+    repostsCount: post.repostsCount,
+    commentsCount: post.commentsCount,
     author: {
       name: `${post.author.firstName} ${post.author.lastName}`,
       position: post.author.UserProfile.fieldOfExpertise,
@@ -319,6 +334,20 @@ const getPostsAndRepostsByUserId = catchAsync(async (req, res) => {
   res.send(combinedPosts);
 });
 
+const addLikeToPost = catchAsync(async (req, res) => {
+  const { postId } = req.params;
+  const post = await Post.findByPk(postId);
+
+  if (!post) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Post not found');
+  }
+
+  post.likesCount += 1;
+  await post.save();
+
+  res.status(httpStatus.OK).send({ likesCount: post.likesCount });
+});
+
 module.exports = {
   createPost,
   createRepost,
@@ -327,4 +356,5 @@ module.exports = {
   getPostById,
   getPostsByUserId,
   getPostsAndRepostsByUserId,
+  addLikeToPost,
 };
