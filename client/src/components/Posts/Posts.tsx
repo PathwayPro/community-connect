@@ -14,6 +14,9 @@ export interface PostWithRepostsProps {
     name: string;
     position: string;
   };
+  likesCount: number;
+  repostsCount: number;
+  commentsCount: number;
   reposts: Array<{
     id: number;
     repostDate: string; // or Date if you want it to be a Date object
@@ -42,6 +45,9 @@ const Posts: FC<PostsProps> = ({ posts }) => {
             position={post.author.position}
             date={post.postDate}
             content={post.content}
+            likesCount={post.likesCount}
+            repostsCount={post.repostsCount}
+            commentsCount={post.commentsCount}
           />
         ))}
     </div>
