@@ -28,14 +28,14 @@ const ContactUs: FC = () => {
           <div className={`${styles.contacts} ${styles.icon} ${styles.phone}`}>
             <a href="tel:8779589626">
               <div>Phone</div>
-              877-958-9626
+              <span>877-958-9626</span>
             </a>
           </div>
 
           <div className={`${styles.contacts} ${styles.icon} ${styles.mail}`}>
             <a href="mailto:immigranttechiesab@gmail.com">
               <div>Email</div>
-              immigranttechiesab@gmail.com
+              <span>immigranttechiesab@gmail.com</span>
             </a>
           </div>
         </div>
