@@ -66,23 +66,22 @@
 
 .contacts {
   margin-bottom: 26px;
-  @include fonts.mainText;
-
-  @include media.media-s {
-    max-width: 100%;
-    margin-bottom: 16px;
-  }
-}
-
-.contacts {
   position: relative;
   padding-left: 32px;
+  word-wrap: break-word;
 
   div {
     display: inline;
     font-size: 13px;
     font-weight: 700;
     margin-right: 16px;
+  }
+
+  @include fonts.mainText;
+
+  @include media.media-s {
+    max-width: 100%;
+    margin-bottom: 16px;
   }
 }
 

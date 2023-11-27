@@ -115,24 +115,28 @@ const HeaderNav: FC = () => {
               </NavLink>
             </>
           )}
-          <NavLink
-            to="/about"
-            className={({ isActive, isPending }) =>
-              classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
-            }
-            onClick={handleMobileDropDownClose}
-          >
-            About Us
-          </NavLink>
-          <NavLink
-            to="/contact-us"
-            className={({ isActive, isPending }) =>
-              classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
-            }
-            onClick={handleMobileDropDownClose}
-          >
-            Contact Us
-          </NavLink>
+          {!isLogin && (
+            <>
+              <NavLink
+                to="/about"
+                className={({ isActive, isPending }) =>
+                  classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
+                }
+                onClick={handleMobileDropDownClose}
+              >
+                About Us
+              </NavLink>
+              <NavLink
+                to="/contact-us"
+                className={({ isActive, isPending }) =>
+                  classNames(styles.navLink, isPending && styles.pending, isActive && styles.active)
+                }
+                onClick={handleMobileDropDownClose}
+              >
+                Contact Us
+              </NavLink>
+            </>
+          )}
         </nav>
         {isLogin && (
           <>
@@ -171,10 +175,9 @@ const HeaderNav: FC = () => {
               />
             </div>
 
-            <input type="text" placeholder="Search" className={styles.input} />
-
             {width > BREAKPOINTS.small ? (
               <div className={styles.buttons}>
+                <input type="text" placeholder="Search" className={styles.input} />
                 <HeaderAvatarDropDown onLogoutClick={onLogoutClick} />
               </div>
             ) : (
