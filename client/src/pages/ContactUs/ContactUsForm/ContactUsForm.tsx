@@ -2,11 +2,9 @@ import React, { useState, ChangeEvent } from 'react';
 
 import Button from '../../../common/components/Button/Button';
 import Input from '../../../common/components/Input/Input';
+import SuccessMessage from '../../../common/components/SuccessMessage/SuccessMessage';
 
 import styles from './ContactUsForm.module.scss';
-
-import submitIcon from '../../../images/ContactUs/submit-icon.png';
-
 interface FormData {
   firstName: string;
   lastName: string;
@@ -43,14 +41,11 @@ const ContactUsForm: React.FC = () => {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       {onSubmit ? (
-        <div className={styles.submitMessage}>
-          <div className={styles.image}>
-            <img src={submitIcon} />
-          </div>
-          <div className={styles.text}>Thank you for reaching out!</div>
-          <div className={styles.text}>
-            Your message has been successfully submitted. We&apos;ll get back to you as soon as possible!
-          </div>
+        <div className={styles.successMessageWrapper}>
+          <SuccessMessage
+            heading="Thank you for reaching out!"
+            message="Your message has been successfully submitted. We'll get back to you as soon as possible!"
+          />
         </div>
       ) : (
         <>
