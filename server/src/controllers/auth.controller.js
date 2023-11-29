@@ -9,7 +9,7 @@ const register = catchAsync(async (req, res) => {
   await authService.updateRefreshTokenCookie(req, res, tokens.refresh);
 
   const preUserRole = await userRoleService.getRoleByName('preUser');
-  await userRoleService.createUserRole(user.id, preUserRole.id);
+  await userRoleService.createOrUpdateUserRole(user.id, preUserRole.id);
 
   res.status(httpStatus.CREATED).send({ user, token: tokens.access.token });
 });
