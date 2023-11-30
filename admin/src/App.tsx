@@ -3,7 +3,7 @@ import { Admin, Resource } from 'react-admin';
 import { dataProvider } from './dataProvider';
 import { authProvider } from './authProvider';
 import { Dashboard } from './Pages/Dashboard';
-import { MenteesList } from './Pages/MenteesList';
+import { MenteesList } from './Pages/MenteesList/MenteesList';
 import { MentorsList } from './Pages/MentorsList';
 import MentorRequestShow from './Components/MentorRequestShow/MentorRequestShow';
 import MentorRequestEdit from './Components/MentorRequestEdit/MentorRequestEdit';
@@ -20,7 +20,7 @@ export const App = () => (
     authProvider={authProvider}
     authCallbackPage={Dashboard}
     theme={myTheme}
-    defaultTheme="light"
+    // defaultTheme="light"
   >
     <Resource name="dashboard" list={Dashboard} icon={IconDashboard} options={{ label: 'Dashboard' }} />
     <Resource
