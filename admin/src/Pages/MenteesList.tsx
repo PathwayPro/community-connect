@@ -1,14 +1,14 @@
-import { List, Datagrid, TextField, EmailField, FunctionField, ShowButton, ReferenceField } from 'react-admin';
+import { ShowButton, List, Datagrid, TextField, EmailField, ReferenceField, FunctionField } from 'react-admin';
 
-import styles from './MentorsList.module.scss';
+import styles from '../App.module.scss';
 
-import searchIcon from '../../images/icon-search.svg';
+import searchIcon from '../images/icon-search.svg';
 
-export const MentorsList = () => {
+export const MenteesList = () => {
   return (
     <List className={styles.list} exporter={false}>
       <div className={styles.listHeading}>
-        <div className={styles.headingText}>Mentors List</div>
+        <div className={styles.headingText}>Mentees List</div>
         <form className={styles.form}>
           <label htmlFor="searchInput" className={styles.formInputWrapper}>
             <img src={searchIcon} alt="Search Icon" />
@@ -24,8 +24,7 @@ export const MentorsList = () => {
         <ReferenceField label="Email" source="userId" reference="users">
           <EmailField source="email" />
         </ReferenceField>
-        <TextField source="fieldOfExpertise" />
-        <TextField source="yearsOfExperience" />
+        <TextField label="Resume" source="resume.type" />
         <TextField source="status" />
         <ShowButton />
       </Datagrid>
