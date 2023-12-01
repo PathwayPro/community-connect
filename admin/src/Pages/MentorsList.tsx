@@ -4,6 +4,8 @@ import styles from '../App.module.scss';
 import { ListHeading } from '../common/ListHeading/ListHeading';
 import { CustomPagination } from '../common/CustomPagination/CustomPagination';
 
+import eyeArrowRightOutline from '../images/eye-arrow-right-outline.svg';
+
 export const MentorsList = () => {
   return (
     <>
@@ -22,7 +24,8 @@ export const MentorsList = () => {
           <TextField source="fieldOfExpertise" />
           <TextField source="yearsOfExperience" />
           <TextField source="status" />
-          <ShowButton />
+          {/* <ShowButton /> */}
+          <ShowButton label="" />
         </Datagrid>
         <div className={styles.listFooter}>Showing data 1 to 12 of 256K entries</div>
       </List>

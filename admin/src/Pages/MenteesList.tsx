@@ -18,7 +18,8 @@ export const MenteesList = () => {
         </ReferenceField>
         <TextField label="Resume" source="resume.type" />
         <TextField source="status" />
-        <ShowButton />
+        {/* <ShowButton /> */}
+        <ShowButton label="" />
       </Datagrid>
       <div className={styles.listFooter}>Showing data 1 to 12 of 256K entries</div>
     </List>
