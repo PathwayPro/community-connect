@@ -66,15 +66,13 @@ const FillUserProfileForm: FC = () => {
   };
 
   const getExpertises = (expertises: { value: string; }[]) => {
-    let fieldOfExpertiseString = "";
-    for (const expertise of expertises) {
-      if (fieldOfExpertiseString.length > 0) {
-        fieldOfExpertiseString += ", ";
-      }
-      fieldOfExpertiseString += expertise.value;
-    }
+    const items = expertises.map((e) => e.value);
+    return items.join(", ");
+  };
 
-    return fieldOfExpertiseString;
+  const getInterests = (interests: { value: string; }[]) => {
+    const items = interests.map((i) => i.value);
+    return items.join(", ");
   };
 
   const [createProfile] = useCreateUserProfileMutation();
@@ -82,7 +80,7 @@ const FillUserProfileForm: FC = () => {
     if (step != 4) {
       setStep((prevStep) => prevStep + 1);
     } else {
-      const { birthDate, spokenLanguage, fieldOfExpertise, ...profileData } = values;
+      const { birthDate, spokenLanguage, fieldOfExpertise, interestList, ...profileData } = values;
 
       // const laguagesArray = spokenLanguage ? spokenLanguage?.replaceAll(' ', '').split(',') : [];
       let languagesArray: string[] = [];
@@ -93,6 +91,12 @@ const FillUserProfileForm: FC = () => {
       let fieldOfExpertiseString = "";
       if (fieldOfExpertise) {
         fieldOfExpertiseString = getExpertises(fieldOfExpertise);
+      }
+
+      let interestsString = "";
+      if (interestList) {
+        interestsString = getInterests(interestList);
+        console.log(interestsString);
       }
       // TODO If birthDate were passed, update it to the proper date format (replace new Date())
       const birtDateToDate = birthDate || null;

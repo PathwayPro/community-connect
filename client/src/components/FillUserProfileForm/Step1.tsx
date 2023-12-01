@@ -11,7 +11,7 @@ import {
   NAME_REGEX,
   ERROR_MESSAGE_NAME,
 } from '../../common/utils/formComponentsUtils';
-import { years } from '../../common/utils/userProfile';
+import { years, allInterests } from '../../common/utils/userProfile';
 
 import { StepAllProps, styles } from './FillUserProfileForm';
 
@@ -42,9 +42,18 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
       required: "Field of expertise is required",
     },
   });
+  const {
+    fields: interestFields,
+    append: interestAppend,
+    remove: interestRemove,
+  } = useFieldArray({
+    control,
+    name: "interestList",
+  });
 
   const languages = watch("spokenLanguage");
   const expertises = watch("fieldOfExpertise");
+  const interests = watch("interestList");
 
   const [language, setLanguage] = useState('');
   const languageOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,6 +87,11 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
       expertiseAppend({ value: trimmedInput });
       setExpertise('');
     }
+  };
+
+  const interestOnChange = (newValue: any) => {
+    if (!findDuplicate(newValue, interests)) return;
+    interestAppend({ value: newValue });
   };
 
   const findDuplicate = (input: string, array: { value: string; }[] | undefined) => {
@@ -339,6 +353,32 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
             })}
           </div>
         )}
+      </div>
+      <div className={styles.column}>
+        <Dropdown
+          name={"interestList"}
+          id={`${formId}-interestList`}
+          label="Interests"
+          options={allInterests}
+          className={styles.interests}
+          onChange={interestOnChange}
+        />
+        {interests && (
+          <div className={styles.items}>
+            {interestFields.map((item, index) => {
+              return (
+                <>
+                  <span key={item.id} className={styles.item}>
+                    {interests[index].value}
+                    <XIcon className={styles.itemIcon} onClick={() => interestRemove(index)} />
+                  </span>
+                </>
+              );
+            })}
+          </div>
+        )}
+
+
       </div>
       <div className={styles.formRow}>
         <Textarea
