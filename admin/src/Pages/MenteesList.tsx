@@ -1,10 +1,11 @@
 import { ShowButton, List, Datagrid, TextField, EmailField, ReferenceField, FunctionField } from 'react-admin';
 import styles from '../App.module.scss';
 import { ListHeading } from '../common/ListHeading/ListHeading';
+import { CustomPagination } from '../common/CustomPagination/CustomPagination';
 
 export const MenteesList = () => {
   return (
-    <List className={styles.list} exporter={false}>
+    <List className={styles.list} exporter={false} pagination={<CustomPagination />}>
       <div className={styles.greet}>Hello Evano 👋🏼,</div>
       <ListHeading listName="Mentees" isButton={true} />
 

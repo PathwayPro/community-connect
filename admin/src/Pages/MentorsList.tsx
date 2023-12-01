@@ -1,31 +1,8 @@
-import React from 'react';
-import {
-  List,
-  Datagrid,
-  TextField,
-  EmailField,
-  FunctionField,
-  ShowButton,
-  ReferenceField,
-  Pagination,
-} from 'react-admin';
+import { List, Datagrid, TextField, EmailField, FunctionField, ShowButton, ReferenceField } from 'react-admin';
 
 import styles from '../App.module.scss';
 import { ListHeading } from '../common/ListHeading/ListHeading';
-
-interface CustomPaginationProps {
-  page: number;
-  perPage: number;
-  setPage?: () => void;
-  setPerPage?: () => void;
-  total: number;
-}
-
-const CustomPagination: React.FC<CustomPaginationProps> = ({ page, perPage, total, ...rest }) => {
-  const totalPages = Math.ceil(total / perPage) || 1;
-
-  return <Pagination rowsPerPageOptions={[11]} page={page} count={totalPages} {...rest} />;
-};
+import { CustomPagination } from '../common/CustomPagination/CustomPagination';
 
 export const MentorsList = () => {
   return (
