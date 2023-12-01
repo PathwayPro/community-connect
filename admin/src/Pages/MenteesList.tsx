@@ -5,6 +5,7 @@ import { ListHeading } from '../common/ListHeading/ListHeading';
 export const MenteesList = () => {
   return (
     <List className={styles.list} exporter={false}>
+      <div className={styles.greet}>Hello Evano 👋🏼,</div>
       <ListHeading listName="Mentees" isButton={true} />
 
       <Datagrid rowClick="show" bulkActionButtons={false} className={styles.listRow}>
