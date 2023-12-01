@@ -1,22 +1,12 @@
 import { ShowButton, List, Datagrid, TextField, EmailField, ReferenceField, FunctionField } from 'react-admin';
-
 import styles from '../App.module.scss';
-
-import searchIcon from '../images/icon-search.svg';
+import { ListHeading } from '../common/ListHeading/ListHeading';
 
 export const MenteesList = () => {
   return (
     <List className={styles.list} exporter={false}>
-      <div className={styles.listHeading}>
-        <div className={styles.headingText}>Mentees List</div>
-        <form className={styles.form}>
-          <label htmlFor="searchInput" className={styles.formInputWrapper}>
-            <img src={searchIcon} alt="Search Icon" />
-            <input id="searchInput" className={styles.formInput} placeholder="Search" />
-          </label>
-          <button className={styles.button}>History</button>
-        </form>
-      </div>
+      <ListHeading listName="Mentees" isButton={true} />
+
       <Datagrid rowClick="show" bulkActionButtons={false} className={styles.listRow}>
         <ReferenceField label="Full name" source="userId" reference="users">
           <FunctionField render={(record: Record<string, string>) => `${record.firstName} ${record.lastName}`} />
