@@ -4,7 +4,7 @@ import { dataProvider } from './dataProvider';
 import { authProvider } from './authProvider';
 import { Dashboard } from './Pages/Dashboard';
 import { MenteesList } from './Pages/MenteesList/MenteesList';
-import { MentorsList } from './Pages/MentorsList';
+import { MentorsList } from './Pages/MentorsList/MentorsList';
 import MentorRequestShow from './Components/MentorRequestShow/MentorRequestShow';
 import MentorRequestEdit from './Components/MentorRequestEdit/MentorRequestEdit';
 import MenteeRequestShow from './Components/MenteeRequestsShow/MenteeRequestsShow';
