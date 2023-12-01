@@ -29,6 +29,7 @@ const queryMentees = async (filter, options) => {
   const menteesRequests = await MenteeRequest.findAndCountAll({
     limit: options.limit,
     offset: options.offset,
+    include: MentorRequest,
   });
 
   return menteesRequests;
@@ -88,6 +89,7 @@ const queryMentors = async (filter, options) => {
   const mentorsRequests = await MentorRequest.findAndCountAll({
     limit: options.limit,
     offset: options.offset,
+    include: MenteeRequest,
   });
 
   return mentorsRequests;
