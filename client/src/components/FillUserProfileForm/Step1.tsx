@@ -293,13 +293,13 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
             onChange={languageOnChange}
             onKeyDown={languageOnKeyDown}
           />
-          {languageFields && (
+          {languages && (
             <div className={styles.items}>
               {languageFields.map((item, index) => {
                 return (
                   <>
                     <span key={item.id} className={styles.item}>
-                      {languageFields[index].value}
+                      {languages[index].value}
                       <XIcon className={styles.itemIcon} onClick={() => languageRemove(index)} />
                     </span>
                   </>
