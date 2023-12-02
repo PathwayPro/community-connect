@@ -19,7 +19,7 @@ const dropDownOptions: DropDownOption[] = [
   { label: 'Mentorship', link: 'mentorship/apply' },
   { label: 'Save Resources', link: '/' },
   { label: 'Reset Password', link: 'reset-password' },
-  { label: 'Log Out', link: 'events' },
+  { label: 'Log Out', link: 'logout' },
 ];
 
 interface HeaderAvatarDropDownProps {
@@ -46,12 +46,13 @@ const HeaderAvatarDropDown: FC<HeaderAvatarDropDownProps> = ({ onLogoutClick }) 
   };
 
   const onClickDropDownLink = (to: string) => {
-    if (to === 'events') {
+    if (to === 'logout') {
+      navigate('/');
       onLogoutClick();
+    } else {
+      onCloseDropdown();
+      navigate(to);
     }
-
-    onCloseDropdown();
-    navigate(to);
   };
 
   useEffect(() => {
