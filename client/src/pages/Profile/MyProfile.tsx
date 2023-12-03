@@ -21,6 +21,7 @@ let prevUserProfile: {
   birthDate: string;
   bio: string;
   spokenLanguage: string[];
+  interests: string[];
   linkedInURL: string;
   instagramURL: string;
   twitterURL: string;
@@ -52,6 +53,7 @@ const MyProfile: FC = () => {
       birthDate: state.user.userProfile.birthDate,
       bio: state.user.userProfile.bio,
       spokenLanguage: state.user.userProfile.spokenLanguage,
+      interests: state.user.userProfile.interests,
       linkedInURL: state.user.userProfile.linkedInURL,
       instagramURL: state.user.userProfile.instagramURL,
       twitterURL: state.user.userProfile.twitterURL,
@@ -68,6 +70,7 @@ const MyProfile: FC = () => {
       birthDate: '',
       bio: '',
       spokenLanguage: [],
+      interests: [],
       linkedInURL: '',
       instagramURL: '',
       twitterURL: '',

@@ -18,6 +18,7 @@ interface UserProfile {
   birthDate: string;
   bio: string;
   spokenLanguage: string[];
+  interests: string[];
   linkedInURL: string;
   instagramURL: string;
   twitterURL: string;
