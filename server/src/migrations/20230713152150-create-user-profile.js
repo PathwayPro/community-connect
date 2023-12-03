@@ -53,6 +53,9 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      interests: {
+        type: Sequelize.ARRAY(Sequelize.STRING),
+      },
       bio: {
         type: Sequelize.TEXT,
         allowNull: false,
