@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.route('/countries').get(auth(), utilController.getCountries);
 router.route('/provinces').get(auth(), utilController.getProvinces);
+router.route('/interests').get(auth(), utilController.getInterests);
 
 module.exports = router;
 
