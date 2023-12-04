@@ -57,11 +57,7 @@ const FillUserProfileForm: FC = () => {
   });
 
   const getLanguages = (languages: { value: string; }[]) => {
-    const languagesArray = [];
-    for (const language of languages) {
-      languagesArray.push(language.value);
-    }
-
+    const languagesArray = languages.map((l) => l.value);
     return languagesArray;
   };
 
@@ -71,8 +67,8 @@ const FillUserProfileForm: FC = () => {
   };
 
   const getInterests = (interests: { value: string; }[]) => {
-    const items = interests.map((i) => i.value);
-    return items.join(", ");
+    const interestsArray = interests.map((i) => i.value);
+    return interestsArray;
   };
 
   const [createProfile] = useCreateUserProfileMutation();
@@ -93,10 +89,9 @@ const FillUserProfileForm: FC = () => {
         fieldOfExpertiseString = getExpertises(fieldOfExpertise);
       }
 
-      let interestsString = "";
+      let interestsArray: string[] = [];
       if (interestList) {
-        interestsString = getInterests(interestList);
-        console.log(interestsString);
+        interestsArray = getInterests(interestList);
       }
       // TODO If birthDate were passed, update it to the proper date format (replace new Date())
       const birtDateToDate = birthDate || null;
@@ -105,6 +100,7 @@ const FillUserProfileForm: FC = () => {
         birthDate: birtDateToDate,
         spokenLanguage: languagesArray,
         fieldOfExpertise: fieldOfExpertiseString,
+        interests: interestsArray,
       })
         .unwrap()
         .then((data) => {
