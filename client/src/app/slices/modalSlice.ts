@@ -14,8 +14,12 @@ export const MODAL_TYPE = {
 };
 
 type postData = {
+  id: number;
   name: string;
   content: string;
+  position: string;
+  date: string;
+  onRepostSuccess?: () => void;
 };
 
 type initialStateType = {

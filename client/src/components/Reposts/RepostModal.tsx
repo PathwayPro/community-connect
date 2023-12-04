@@ -1,18 +1,18 @@
-import { FC } from 'react';
+import {FC, useState} from 'react';
 import {Link} from "react-router-dom";
 
 import {useAppDispatch, useAppSelector} from '../../app/hooks';
-import { closeModal } from '../../app/slices/modalSlice';
+import {useCreateRepostMutation} from "../../app/slices/apiSlice";
+import {closeModal} from '../../app/slices/modalSlice';
 import Avatar from "../../common/components/Avatar/Avatar";
 import Button from '../../common/components/Button/Button';
 import IconSVG from '../../common/components/IconSVG/Button/IconSVG';
+import Toast from "../../common/components/Toast/Toast";
 import formatDate from "../../common/utils/formatDateUtils";
 
 import styles from './RepostModal.module.scss';
 
 import defaultProfileImage from '../../images/defaultProfileImg.svg';
-
-
 
 
 export interface RepostModal {
@@ -22,18 +22,41 @@ export interface RepostModal {
 
 const user: RepostModal = {
   imgPath: defaultProfileImage,
-  name: 'Clark Mante',
+  name: 'Mock Data for Debug',
 };
 
 const image = user.imgPath ? user.imgPath : defaultProfileImage;
 
 const RepostModal: FC = () => {
   const dispatch = useAppDispatch();
+  const [showSuccessToast, setShowSuccessToast] = useState(false);
+  const [showErrorToast, setShowErrorToast] = useState(false);
+  const [comment, setComment] = useState('');
   const modalData = useAppSelector((state) => state.modal);
+  const [createRepost] = useCreateRepostMutation();
 
-  const handleSubmit = (event: React.FormEvent) => {
+  let cachedUserFullName: { firstName: string; lastName: string; } | null = null;
+  const userFullName = useAppSelector((state) => {
+    const newUserData = {firstName: state.user.user.firstName, lastName: state.user.user.lastName};
+    if (JSON.stringify(cachedUserFullName) !== JSON.stringify(newUserData)) {
+      cachedUserFullName = newUserData;
+    }
+    return cachedUserFullName ?? {firstName: '', lastName: ''};
+  });
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    // TODO: send post to the BE
+    try {
+      // Call the createRepost mutation with the post ID
+      await createRepost({ postId: modalData.postData?.id, content: comment }).unwrap();
+      console.log('The post was successfuly reposted');
+      setShowSuccessToast(true);
+      modalData.postData?.onRepostSuccess?.();
+      // Here will be th post-repost logic, like showing a success message (toast)
+    } catch (error) {
+      // Handle the error case
+      setShowErrorToast(true);
+      console.error('Failed to repost:', error);
+    }
     closePostModal();
   };
 
@@ -50,7 +73,7 @@ const RepostModal: FC = () => {
         <div className={styles.userInfo}>
           <img src={image} alt="profile" className={styles.image} />
           <div className={styles.textInfo}>
-            <div className={styles.info}>{user.name}</div>
+            <div className={styles.info}>{`${userFullName.firstName} ${userFullName.lastName}`}</div>
             <div className={styles.privacySelector}>
               <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M14.4741 14.4721C14.2401 13.7521 13.5651 13.2211 12.7641 13.2211H11.8641V10.5211C11.8641 10.2824 11.7692 10.0535 11.6005 9.8847C11.4317 9.71591 11.2028 9.62109 10.9641 9.62109H5.56406V7.82109H7.36406C7.60276 7.82109 7.83168 7.72627 8.00046 7.55749C8.16924 7.38871 8.26406 7.15979 8.26406 6.92109V5.12109H10.0641C10.5415 5.12109 10.9993 4.93145 11.3369 4.59389C11.6744 4.25632 11.8641 3.79848 11.8641 3.32109V2.95209C14.5011 4.01409 16.3641 6.59709 16.3641 9.62109C16.3641 11.4931 15.6441 13.1941 14.4741 14.4721ZM8.26406 16.7581C4.70906 16.3171 1.96406 13.2931 1.96406 9.62109C1.96406 9.06309 2.03606 8.52309 2.15306 8.01009L6.46406 12.3211V13.2211C6.46406 13.6985 6.65371 14.1563 6.99127 14.4939C7.32884 14.8315 7.78667 15.0211 8.26406 15.0211M9.16406 0.621094C7.98217 0.621094 6.81184 0.853886 5.71991 1.30618C4.62798 1.75847 3.63583 2.42141 2.8001 3.25713C1.11227 4.94496 0.164063 7.23415 0.164062 9.62109C0.164063 12.008 1.11227 14.2972 2.8001 15.9851C3.63583 16.8208 4.62798 17.4837 5.71991 17.936C6.81184 18.3883 7.98217 18.6211 9.16406 18.6211C11.551 18.6211 13.8402 17.6729 15.528 15.9851C17.2159 14.2972 18.1641 12.008 18.1641 9.62109C18.1641 8.4392 17.9313 7.26887 17.479 6.17694C17.0267 5.08501 16.3638 4.09286 15.528 3.25713C14.6923 2.42141 13.7001 1.75847 12.6082 1.30618C11.5163 0.853886 10.346 0.621094 9.16406 0.621094Z" fill="black"/>
@@ -62,7 +85,7 @@ const RepostModal: FC = () => {
             </div>
           </div>
         </div>
-        <input placeholder="Add a comment" className={styles.input} />
+        <input onChange={(e) => setComment(e.target.value)} value={comment} placeholder="Add a comment" className={styles.input} />
         <div className={styles.inputBtns}>
           <button onClick={(e) => e.preventDefault()}>
             <svg width="32" height="31" viewBox="0 0 32 31" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -86,8 +109,8 @@ const RepostModal: FC = () => {
               <Link to={`/profile/user/1}`} className={styles.name}>
                 {modalData.postData?.name}
               </Link>
-              <span className={styles.position}>Designer</span>
-              <span className={styles.date}>{formatDate(new Date('01-01-2019'))}</span>
+              <span className={styles.position}>{modalData.postData?.position}</span>
+              <span className={styles.date}>{formatDate(new Date(`${modalData.postData?.date}`))}</span>
             </div>
           </div>
           <div className={styles.content}>{modalData.postData?.content}</div>
@@ -95,13 +118,17 @@ const RepostModal: FC = () => {
       </div>
       <div className={styles.btnDiv}>
         <Button
-          label="Post"
+          label="Repost"
           size="small"
           color="orange"
           onClick={handleSubmit}
           isSubmit
           className={styles.postBnt}
         ></Button>
+        {showSuccessToast &&
+          <Toast onToastClick={() => setShowSuccessToast(false)} toastContent="Reposted seccessfully." type="success"/>}
+        {showErrorToast &&
+          <Toast onToastClick={() => setShowErrorToast(false)} toastContent="Failed to repost" type="error"/>}
       </div>
     </form>
   );
