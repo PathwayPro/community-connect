@@ -24,6 +24,10 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
       },
+      content: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,

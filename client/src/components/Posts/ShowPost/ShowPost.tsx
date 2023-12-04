@@ -27,6 +27,7 @@ export interface ShowPostProps {
 const ShowPost: FC<ShowPostProps> = ({id, name, position, date, content, likesCount, repostsCount, commentsCount}) => {
   const dispatch = useAppDispatch();
   const [postLikesCount, setPostLikesCount] = useState(likesCount)
+  const [postRepostCount, setPostRepostCount] = useState(repostsCount)
   const [showToast, setShowToast] = useState(false);
   const [showLikeToast, setShowLikeToast] = useState(false);
   const [showSuccessToast, setShowSuccessToast] = useState(false);
@@ -44,7 +45,10 @@ const ShowPost: FC<ShowPostProps> = ({id, name, position, date, content, likesCo
   };
   const repostPost = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    dispatch(showModal({content: MODAL_TYPE.REPOST, postData: { name, content }}));
+    dispatch(showModal({
+      content: MODAL_TYPE.REPOST,
+      postData: {id, name, content, position, date, onRepostSuccess: () => setPostRepostCount(prev => prev + 1)},
+    }));
     // try {
     //   // Call the createRepost mutation with the post ID
     //   await createRepost({ postId: id }).unwrap();
@@ -97,7 +101,7 @@ const ShowPost: FC<ShowPostProps> = ({id, name, position, date, content, likesCo
           <IconSVG name={'blogCommentIcon'} color="orangeLight" onClick={leaveComment}/>
           <div className={styles.quantity}>{commentsCount || ''}</div>
           <IconSVG name={'blogRepostIcon'} color="orangeLight" size="wide" onClick={repostPost}/>
-          <div className={styles.quantity}>{repostsCount || ''}</div>
+          <div className={styles.quantity}>{postRepostCount || ''}</div>
         </div>
         <div className={styles.repostComment}>
           <IconSVG name={'likeIcon'} color={likeBtnGrey ? 'grey' : 'green'} onClick={likePost}/>

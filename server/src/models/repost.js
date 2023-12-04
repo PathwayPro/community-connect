@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       },
+      content: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
       // include other fields as necessary
     },
     {

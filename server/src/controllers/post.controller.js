@@ -12,7 +12,11 @@ const createRepost = catchAsync(async (req, res) => {
   const repost = await Repost.create({
     originalPostId: req.params.postId,
     userId: req.user.id,
+    content: req.body.content,
   });
+  const post = await Post.findByPk(req.params.postId);
+  post.repostsCount += 1;
+  await post.save();
   res.status(httpStatus.CREATED).send(repost);
 });
 
@@ -46,6 +50,7 @@ const getPosts = catchAsync(async (req, res) => {
             attributes: ['firstName', 'lastName'],
           },
         ],
+        attributes: ['id', 'repostDate', 'content'],
       },
     ],
     order: [
@@ -60,9 +65,9 @@ const getPosts = catchAsync(async (req, res) => {
     id: post.id,
     content: post.content,
     postDate: post.postDate,
-    author: {
+    originalAuthor: {
       name: `${post.author.firstName} ${post.author.lastName}`,
-      position: post.author.UserProfile.fieldOfExpertise, // Make sure to handle null UserProfile if necessary
+      position: post.author.UserProfile ? post.author.UserProfile.fieldOfExpertise : 'Unknown', // Make sure to handle null UserProfile if necessary
     },
     likesCount: post.likesCount,
     repostsCount: post.repostsCount,
@@ -72,7 +77,7 @@ const getPosts = catchAsync(async (req, res) => {
       repostDate: repost.repostDate,
       user: {
         name: `${repost.user.firstName} ${repost.user.lastName}`,
-        position: repost.user.UserProfile.fieldOfExpertise, // Handle null UserProfile if necessary
+        position: repost.user.UserProfile ? repost.user.UserProfile.fieldOfExpertise : 'Unknown', // Handle null UserProfile if necessary
       },
     })),
   }));
@@ -110,6 +115,7 @@ const getPostWithReposts = catchAsync(async (req, res) => {
             attributes: ['firstName', 'lastName'],
           },
         ],
+        attributes: ['id', 'repostDate', 'content'],
       },
     ],
   });
@@ -298,6 +304,7 @@ const getPostsAndRepostsByUserId = catchAsync(async (req, res) => {
         ],
       },
     ],
+    attributes: ['id', 'repostDate', 'content'],
     order: [['id', 'ASC']],
   });
 
@@ -305,11 +312,11 @@ const getPostsAndRepostsByUserId = catchAsync(async (req, res) => {
   const formattedOriginalPosts = originalPosts.map((post) => ({
     id: post.id,
     content: post.content,
-    date: post.createdAt, // assuming you have a createdAt field
+    postDate: post.createdAt, // assuming you have a createdAt field
     likesCount: post.likesCount,
     repostsCount: post.repostsCount,
     commentsCount: post.commentsCount,
-    author: {
+    originalAuthor: {
       name: `${post.author.firstName} ${post.author.lastName}`,
       position: post.author.UserProfile.fieldOfExpertise,
     },
@@ -319,11 +326,17 @@ const getPostsAndRepostsByUserId = catchAsync(async (req, res) => {
   const formattedReposts = reposts.map((repost) => ({
     id: repost.id,
     content: repost.originalPost.content,
-    date: repost.createdAt, // assuming you have a createdAt field
+    repostDate: repost.createdAt, // assuming you have a createdAt field
+    postDate: repost.originalPost.createdAt,
     originalPostId: repost.originalPostId,
-    author: {
+    repostAuthor: {
       name: `${repost.user.firstName} ${repost.user.lastName}`,
       position: repost.user.UserProfile.fieldOfExpertise,
+      content: repost.content,
+    },
+    originalAuthor: {
+      name: `${repost.originalPost.author.firstName} ${repost.originalPost.author.lastName}`,
+      position: repost.originalPost.author.UserProfile.fieldOfExpertise,
     },
     type: 'repost', // to differentiate between posts and reposts
   }));

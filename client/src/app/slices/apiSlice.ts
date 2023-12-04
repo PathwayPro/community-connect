@@ -188,9 +188,10 @@ export const apiSlice = createApi({
     }),
     // Reposts
     createRepost: builder.mutation({
-      query: ({ postId }) => ({
+      query: ({ postId, content }) => ({
         url: `/v1/posts/${postId}/reposts`,
         method: 'POST',
+        body: { content },
       }),
     }),
     // Posts & Reposts by userId

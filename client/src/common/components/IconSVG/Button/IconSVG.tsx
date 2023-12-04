@@ -12,7 +12,7 @@ interface IconSVGProps {
   size?: 'small' | 'medium' | 'big' | 'wide';
   isSubmit?: boolean;
   className?: string;
-  onClick: (e: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>) => void;
+  onClick?: (e: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>) => void;
 }
 /*
   'small'  15 x 15 – for edit pencil
