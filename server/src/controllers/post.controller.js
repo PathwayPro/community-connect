@@ -326,7 +326,7 @@ const getPostsAndRepostsByUserId = catchAsync(async (req, res) => {
   const formattedReposts = reposts.map((repost) => ({
     id: repost.id,
     content: repost.originalPost.content,
-    repostDate: repost.createdAt, // assuming you have a createdAt field
+    repostDate: repost.repostDate, // assuming you have a createdAt field
     postDate: repost.originalPost.createdAt,
     originalPostId: repost.originalPostId,
     repostAuthor: {
@@ -342,7 +342,7 @@ const getPostsAndRepostsByUserId = catchAsync(async (req, res) => {
   }));
 
   // Combine posts and reposts
-  const combinedPosts = [...formattedOriginalPosts, ...formattedReposts].sort((a, b) => a.id - b.id);
+  const combinedPosts = [...formattedOriginalPosts, ...formattedReposts].sort((a, b) => b.id - a.id);
 
   res.send(combinedPosts);
 });
