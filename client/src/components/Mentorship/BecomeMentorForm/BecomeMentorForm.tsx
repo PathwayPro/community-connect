@@ -8,7 +8,6 @@ import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
 import Button from '../../../common/components/Button/Button';
 import Dropdown from '../../../common/components/Dropdown/Dropdown';
 import Input from '../../../common/components/Input/Input';
-import SuccessMessage from '../../../common/components/SuccessMessage/SuccessMessage';
 import { NUMBER_REGEX, ERROR_MESSAGE_NUMBER } from '../../../common/utils/formComponentsUtils';
 import { years, availabilityOptions } from '../../../common/utils/userProfile';
 
@@ -110,19 +109,6 @@ const BecomeMentorForm: FC = () => {
   return (
     <>
       {isLogin && (
-        successMessage
-        ? (
-        <div className={styles.block}>
-          <form className={styles.form}>
-            <div className={styles.successMessageWrapper}>
-              <SuccessMessage
-                heading="Thank you for reaching out!"
-                message="Your application has been successfully submitted and is currently under review."
-              />
-            </div>
-          </form>
-        </div>
-        ) : (
         <div className={styles.block}>
           <form className={styles.form}>
             {loadingMessage && (
@@ -241,7 +227,6 @@ const BecomeMentorForm: FC = () => {
             />
           </form>
         </div>
-        )
       )}
       {!isLogin && (
         <div className={styles.block}>
