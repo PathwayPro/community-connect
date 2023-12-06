@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { FC, useEffect, useState } from 'react';
 import { useFieldArray, Controller } from 'react-hook-form';
 
-import { useGetCountriesQuery, useGetProvincesQuery } from '../../app/slices/apiSlice';
+import { useGetCountriesQuery, useGetProvincesQuery, useGetInterestsQuery } from '../../app/slices/apiSlice';
 import Dropdown from '../../common/components/Dropdown/Dropdown';
 import Input from '../../common/components/Input/Input';
 import Textarea from '../../common/components/Textarea/Textarea';
@@ -11,7 +11,7 @@ import {
   NAME_REGEX,
   ERROR_MESSAGE_NAME,
 } from '../../common/utils/formComponentsUtils';
-import { years, allInterests } from '../../common/utils/userProfile';
+import { years } from '../../common/utils/userProfile';
 
 import { StepAllProps, styles } from './FillUserProfileForm';
 
@@ -109,8 +109,10 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
   // Get countries list
   const [preparedValues, setPreparedValues] = useState([] as OptionType[]);
   const [preparedProvinces, setPreparedProvinces] = useState([] as OptionType[]);
+  const [preparedInterests, setPreparedInterests] = useState([] as OptionType[]);
   const { data: contriesQuery } = useGetCountriesQuery({});
   const { data: provincesQuery } = useGetProvincesQuery({});
+  const { data: interestsQuery } = useGetInterestsQuery({});
 
   useEffect(() => {
     if (!provincesQuery) return;
@@ -134,6 +136,18 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
     setPreparedValues(preparedValues1);
     return;
   }, [contriesQuery]);
+  useEffect(() => {
+    if (!interestsQuery) return;
+    const preparedValues2: OptionType[] = interestsQuery.map((element: Record<string, string>) => {
+      const preparedElement: OptionType = { value: '', label: '' };
+      preparedElement.value = element.name;
+      preparedElement.label = element.name;
+      return preparedElement;
+    });
+    preparedValues2.sort((a, b) => a.label.localeCompare(b.label));
+    setPreparedInterests(preparedValues2);
+    return;
+  }, [interestsQuery]);
 
   // TODO: add file preview
   // TODO: save file to the redux store because when you back / forward files are not saving and you need to upload files again
@@ -297,12 +311,10 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
             <div className={styles.items}>
               {languageFields.map((item, index) => {
                 return (
-                  <>
-                    <span key={item.id} className={styles.item}>
-                      {languages[index].value}
-                      <XIcon className={styles.itemIcon} onClick={() => languageRemove(index)} />
-                    </span>
-                  </>
+                  <span key={item.id} className={styles.item}>
+                    {languages[index].value}
+                    <XIcon className={styles.itemIcon} onClick={() => languageRemove(index)} />
+                  </span>
                 );
               })}
             </div>
@@ -343,12 +355,10 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
           <div className={styles.items}>
             {expertiseFields.map((item, index) => {
               return (
-                <>
-                  <span key={item.id} className={styles.item}>
-                    {expertises[index].value}
-                    <XIcon className={styles.itemIcon} onClick={() => expertiseRemove(index)} />
-                  </span>
-                </>
+                <span key={item.id} className={styles.item}>
+                  {expertises[index].value}
+                  <XIcon className={styles.itemIcon} onClick={() => expertiseRemove(index)} />
+                </span>
               );
             })}
           </div>
@@ -359,7 +369,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
           name={"interestList"}
           id={`${formId}-interestList`}
           label="Interests"
-          options={allInterests}
+          options={preparedInterests}
           className={styles.interests}
           onChange={interestOnChange}
         />
@@ -367,12 +377,10 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
           <div className={styles.items}>
             {interestFields.map((item, index) => {
               return (
-                <>
-                  <span key={item.id} className={styles.item}>
-                    {interests[index].value}
-                    <XIcon className={styles.itemIcon} onClick={() => interestRemove(index)} />
-                  </span>
-                </>
+                <span key={item.id} className={styles.item}>
+                  {interests[index].value}
+                  <XIcon className={styles.itemIcon} onClick={() => interestRemove(index)} />
+                </span>
               );
             })}
           </div>

@@ -13,7 +13,14 @@ const getProvinces = catchAsync(async (req, res) => {
   res.send(provinces);
 });
 
+const getInterests = catchAsync(async (req, res) => {
+  const interests = await utilService.getInterests();
+
+  res.send(interests);
+});
+
 module.exports = {
   getCountries,
   getProvinces,
+  getInterests,
 };

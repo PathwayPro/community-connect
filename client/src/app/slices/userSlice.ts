@@ -8,6 +8,7 @@ interface UserProfile {
   birthDate: string;
   bio: string;
   spokenLanguage: string[];
+  interests: string[];
   linkedInURL: string;
   instagramURL: string;
   twitterURL: string;
@@ -33,6 +34,7 @@ const initialState: UserDataState = {
     birthDate: '',
     bio: '',
     spokenLanguage: [],
+    interests: [],
     linkedInURL: '/',
     instagramURL: '',
     twitterURL: '/',

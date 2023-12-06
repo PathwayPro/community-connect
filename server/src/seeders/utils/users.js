@@ -84,6 +84,11 @@ const fieldOfExpertise = [
 ];
 const years = ['less than 1', 'less than 3', 'less than 5', 'less than 8', 'more than 8'];
 
+const interestsExample = [
+  'AI', 'Back-end development', 'Database management', 'Design', 'Front-end development', 'Full-stack development',
+  'Machine learning', 'Project management', 'Quality assurance', 'UI/UX'
+];
+
 const bioExample = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur congue quam eu scelerisque varius. \
    Vestibulum auctor bibendum ipsum, eu dignissim libero facilisis ac. Praesent tristique tempor mauris. \
    Ut eu interdum nunc. Ut sed porta tellus, sed sagittis nibh. Sed vel vestibulum mi. \
@@ -110,6 +115,7 @@ function generateProfiles(users) {
           ? fieldOfExpertise[index]
           : fieldOfExpertise[Math.floor((index + 1) / 2 / fieldOfExpertise.length)],
       yearsOfExperience: years.length > index ? years[index] : years[2],
+      interests: interestsExample.sort(() => 0.5 - Math.random()).slice(0, 3),
       bio: bioExample,
       linkedInURL: 'https://www.linkedin.com/yourprofile',
       instagramURL: 'https://www.instagram.com/yourprofile',

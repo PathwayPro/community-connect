@@ -81,7 +81,7 @@ export const apiSlice = createApi({
         method: 'POST',
         body: data,
       }),
-      transformResponse: (response: { user: IUser; token: string; roles: Record<'name', string>[] }) => {
+      transformResponse: (response: { user: IUser; token: string; roles: Record<'name', string>[]; }) => {
         const rolesArray = response.roles.map((role) => role.name);
         return { user: { ...response.user, roles: rolesArray }, token: response.token };
       },
@@ -176,6 +176,9 @@ export const apiSlice = createApi({
     getProvinces: builder.query({
       query: () => '/v1/utils/provinces',
     }),
+    getInterests: builder.query({
+      query: () => '/v1/utils/interests',
+    }),
     // Posts
     getPosts: builder.query({
       query: () => '/v1/posts',
@@ -217,6 +220,7 @@ export const {
   useGetUserProfileQuery,
   useGetCountriesQuery,
   useGetProvincesQuery,
+  useGetInterestsQuery,
   useGetPostsQuery,
   useAddLikeToPostMutation,
   useCreateRepostMutation,
