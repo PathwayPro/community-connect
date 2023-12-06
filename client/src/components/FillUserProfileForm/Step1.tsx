@@ -311,12 +311,10 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
             <div className={styles.items}>
               {languageFields.map((item, index) => {
                 return (
-                  <>
-                    <span key={item.id} className={styles.item}>
-                      {languages[index].value}
-                      <XIcon className={styles.itemIcon} onClick={() => languageRemove(index)} />
-                    </span>
-                  </>
+                  <span key={item.id} className={styles.item}>
+                    {languages[index].value}
+                    <XIcon className={styles.itemIcon} onClick={() => languageRemove(index)} />
+                  </span>
                 );
               })}
             </div>
@@ -357,12 +355,10 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
           <div className={styles.items}>
             {expertiseFields.map((item, index) => {
               return (
-                <>
-                  <span key={item.id} className={styles.item}>
-                    {expertises[index].value}
-                    <XIcon className={styles.itemIcon} onClick={() => expertiseRemove(index)} />
-                  </span>
-                </>
+                <span key={item.id} className={styles.item}>
+                  {expertises[index].value}
+                  <XIcon className={styles.itemIcon} onClick={() => expertiseRemove(index)} />
+                </span>
               );
             })}
           </div>
@@ -381,12 +377,10 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
           <div className={styles.items}>
             {interestFields.map((item, index) => {
               return (
-                <>
-                  <span key={item.id} className={styles.item}>
-                    {interests[index].value}
-                    <XIcon className={styles.itemIcon} onClick={() => interestRemove(index)} />
-                  </span>
-                </>
+                <span key={item.id} className={styles.item}>
+                  {interests[index].value}
+                  <XIcon className={styles.itemIcon} onClick={() => interestRemove(index)} />
+                </span>
               );
             })}
           </div>
