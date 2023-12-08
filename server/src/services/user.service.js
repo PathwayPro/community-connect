@@ -26,11 +26,26 @@ const createUser = async (userBody) => {
  */
 const queryUsers = async (filter) => {
   const users = await User.findAndCountAll({
-    filter,
+    where: filter,
+    include: [
+      {
+        model: UserProfile,
+        as: 'userProfile',
+        attributes: ['fieldOfExpertise', 'yearsOfExperience'],
+      },
+    ],
+    attributes: { exclude: ['password'] },
   });
 
-  return users;
+  const result = users.rows.map((user) => ({
+    ...user.dataValues,
+    fieldOfExpertise: user.userProfile ? user.userProfile.fieldOfExpertise : null,
+    yearsOfExperience: user.userProfile ? user.userProfile.yearsOfExperience : null,
+  }));
+
+  return { count: users.count, rows: result };
 };
+
 
 /**
  * Get user by id

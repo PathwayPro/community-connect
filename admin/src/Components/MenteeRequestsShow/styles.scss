@@ -1,17 +1,32 @@
 @use '../../styles/styles';
 
-.MuiTypography-root.title {
-  font-weight: bold;
+.infoSection {
+  margin-bottom: 10px;
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  .emailField {
+    font-weight: bold;
+  }
 }
 
-.MuiTypography-root.statusButton {
-  @include styles.mainText($font-weight: 700);
-  background-color: styles.$purple;
-  color: styles.$white;
-  width: 160px;
-  height: 36px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.messageBox {
+  margin-bottom: 10px;
+  .title {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .messageField {
+    font-weight: normal;
+  }
+}
+
+.applicantBtn {
+  padding: 12px 30px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #FFF5E7;
+  color: styles.$black;
 }

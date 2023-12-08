@@ -9,7 +9,7 @@ const createUser = catchAsync(async (req, res) => {
 });
 
 const getUsers = catchAsync(async (req, res) => {
-  const filter = JSON.parse(req.query.filter);
+  const filter = req.query.filter ? JSON.parse(req.query.filter) : {};
   const result = await userService.queryUsers(filter);
   res.send(result.rows);
 });
@@ -41,6 +41,15 @@ const getProfile = catchAsync(async (req, res) => {
   res.send({ userProfile, user });
 });
 
+const getProfileByUserId = catchAsync(async (req, res) => {
+  const user = await userService.getUserById(req.params.id);
+  const userProfile = await userService.getUserProfileByUserId(req.params.id);
+  if (!userProfile || !user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User Profile not found');
+  }
+  res.send({ userProfile, user });
+});
+
 const createOrUpdateProfile = catchAsync(async (req, res) => {
   const fullUserProfile = await userService.createOrUpdateProfile(req.user.id, req.body);
 
@@ -58,4 +67,5 @@ module.exports = {
   deleteUser,
   createOrUpdateProfile,
   getProfile,
+  getProfileByUserId,
 };
