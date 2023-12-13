@@ -191,7 +191,6 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
 
   return (
     <>
-      <button onClick={(e) => { e.preventDefault(); console.log(preparedProvinces); }}>CHELLO</button>
       <div className={classNames(styles.formRow, styles.column, styles.avatarWrap)}>
         <p className={styles.avatarTitle}>Add Photo</p>
         <label htmlFor={`${formId}-${avatar.name}`} className={styles.avatarLabel}></label>
