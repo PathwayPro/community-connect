@@ -47,13 +47,16 @@ const Home: FC = () => {
   return (
     <Container>
       <div className={styles.page}>
-        <div className={styles.side}>
+        <div className={styles.sideLeft}>
           <UserProfileMini userData={userData} />
           <SuggestedConnections />
           <Resources />
+          <div className={styles.tabletEvents}>
+            <Events itemsToShow={5} />
+          </div>
         </div>
         <ConnectionPosts />
-        <div className={styles.side}>
+        <div className={styles.sideRight}>
           <MentorshipPromo />
           <Events itemsToShow={5} />
         </div>

@@ -21,6 +21,14 @@
   &.normal {
     padding: 26px;
   }
+
+  @media (max-width: 993px) {
+    width: 100%;
+  }
+
+  @include media.media-s {
+    width: 100%;
+  }
 }
 
 .title {
@@ -30,7 +38,7 @@
 
 .subtitle {
   margin-bottom: 1.625rem;
-  margin-top: -10px;
+  margin-top: -15px;
   @include fonts.hintText;
 
   @include media.media-l {

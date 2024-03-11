@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import ButtonLink from '../../common/components/ButtonLink/ButtonLink';
 import SideBlock from '../../common/components/SideBlock/SideBlock';
 
 import Event from './Event/Event';
@@ -42,7 +43,7 @@ const eventList: EventProps[] = [
 const Events: FC<EventsProps> = ({ itemsToShow }) => {
   return (
     <>
-      <SideBlock title="Your Events" paddingWidth="normal" linkTo="/events">
+      <SideBlock title="Your Events" paddingWidth="normal">
         <UserEvents haveEvents={2} />
         <div className={styles.title}>Upcoming Events</div>
         <div className={styles.events}>
@@ -52,6 +53,9 @@ const Events: FC<EventsProps> = ({ itemsToShow }) => {
               .map((event) => (
                 <Event key={event.id} name={event.name} company={event.company} date={event.date} time={event.time} />
               ))}
+        </div>
+        <div className={styles.buttonWrapper}>
+          <ButtonLink label="View all events" size={'small'} color={'orangeLight'} to="/events" />
         </div>
       </SideBlock>
     </>

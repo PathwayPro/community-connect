@@ -4,9 +4,43 @@
   display: flex;
   gap: 1.625rem;
   padding: 16px 0 26px;
+
+  @media (max-width: 1280px) {
+    padding: 26px 0 40px;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 33px 0 26px;
+  }
 }
 
-.side {
+.sideLeft, .sideRight {
   @extend %flex-column;
   row-gap: 1rem;
+}
+
+.sideRight{
+  @media (max-width: 1280px) {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+      display: none;
+  }
+}
+
+.sideLeft > .tabletEvents{
+  display: none;
+
+  @media (max-width: 1280px) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.sideLeft {
+  @media (max-width: 768px) {
+    display: none;
+  }
 }

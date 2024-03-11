@@ -21,7 +21,7 @@ const resourceList: resourceProps[] = [
 
 const Resources: FC = () => {
   return (
-    <SideBlock title="Resources" subtitle="Recent topics" linkTo="/resources">
+    <SideBlock title="Resources" subtitle="Recent topics">
       <div className={styles.resources}>
         {resourceList && resourceList.map((connection) => <Resource key={connection.id} title={connection.title} />)}
       </div>
