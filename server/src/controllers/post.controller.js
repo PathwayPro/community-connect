@@ -361,6 +361,19 @@ const addLikeToPost = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).send({ likesCount: post.likesCount });
 });
 
+const deletePost = catchAsync(async (req, res) => {
+  const { postId } = req.params;
+  const deletedPost = await Post.destroy({
+    where: {
+      id: postId,
+    },
+  });
+  if (!deletedPost) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Post not found');
+  }
+  res.status(httpStatus.OK).send(deletedPost.toString());
+});
+
 module.exports = {
   createPost,
   createRepost,
@@ -370,4 +383,5 @@ module.exports = {
   getPostsByUserId,
   getPostsAndRepostsByUserId,
   addLikeToPost,
+  deletePost,
 };
