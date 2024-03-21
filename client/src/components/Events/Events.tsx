@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
 
 import SideBlock from '../../common/components/SideBlock/SideBlock';
 

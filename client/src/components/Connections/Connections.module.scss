@@ -2,6 +2,34 @@
 @use '../../common/styles/fonts';
 @use '../../common/styles/mixins';
 
+.box {
+  width: 26%;
+  position: relative;
+  margin-bottom: 8px;
+  background: colors.$blue-light;
+  padding: 26px 16px;
+  border-radius: 15px;
+
+  @extend %flex-column-left-center;
+}
+
+.title {
+  @include fonts.bigText;
+}
+
 .connections {
   width: 100%;
+  margin-bottom: 16px;
+
+  @extend %flex-column-center;
+}
+
+.seeMore {
+  position: absolute;
+  bottom: 26px;
+  right: 16px;
+  color: colors.$black;
+  cursor: pointer;
+
+  @include fonts.mainText($font-size: 13px);
 }

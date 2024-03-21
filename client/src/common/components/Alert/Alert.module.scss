@@ -19,9 +19,7 @@
   padding: 20px;
   box-shadow: 0 2px 4px colors.$black-light;
   max-width: 450px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @extend %flex-column-center;
 }
 
 .title {

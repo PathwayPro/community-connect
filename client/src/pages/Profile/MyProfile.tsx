@@ -98,7 +98,9 @@ const MyProfile: FC = () => {
           <Scroll>
             <UserPosts />
           </Scroll>
-          <Connections />
+          <Connections maxSize={0} onSizeChange={function (size: number): void {
+            throw new Error('Function not implemented.');
+          } } />
         </div>
       </div>
     </Container>

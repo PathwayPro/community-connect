@@ -1,12 +1,14 @@
-import classNames from 'classnames';
-import { useEffect, useState, useRef, FC } from 'react';
+import { useState, useEffect, useRef, FC } from 'react';
 
-import { useUploadImageMutation } from '../../app/slices/apiSlice';
 import Alert from '../../common/components/Alert/Alert';
-import Avatar from '../../common/components/Avatar/Avatar';
 import IconSVG from '../../common/components/IconSVG/Button/IconSVG';
 
 import styles from './Images.module.scss';
+
+import Avatar from '../../common/components/Avatar/Avatar';
+import { useUploadImageMutation } from '../../app/slices/apiSlice';
+
+
 
 interface ImagesProps {
   myProfile: boolean;
@@ -15,7 +17,6 @@ interface ImagesProps {
 const Images: FC<ImagesProps> = ({ myProfile }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [alertOpen, setAlertOpen] = useState(false);
-  const [imageClassName, setImageClassName] = useState('');
 
   useEffect(() => {
     if (selectedFile) {
@@ -40,10 +41,10 @@ const Images: FC<ImagesProps> = ({ myProfile }) => {
 
       await uploadImage(formData)
         .unwrap()
-        .then((data) => {
+        .then((data: any) => {
           console.log('File uploaded successfully!', data);
         })
-        .catch((err) => {
+        .catch((err: any) => {
           console.error('Error uploading file:', err);
         });
     }
@@ -52,15 +53,15 @@ const Images: FC<ImagesProps> = ({ myProfile }) => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setSelectedFile(file);
       const img = new Image();
       img.src = URL.createObjectURL(file);
+
       img.onload = () => {
-        if (img.width / img.height < 1) {
-          setImageClassName('contain');
-          setAlertOpen(true);
+        const aspectRatio = img.width / img.height;
+        if (Math.abs(aspectRatio - 28 / 9) <= 0.1) {
+          setSelectedFile(file);
         } else {
-          setImageClassName('cover');
+          setAlertOpen(true);
         }
       };
     }
@@ -72,14 +73,7 @@ const Images: FC<ImagesProps> = ({ myProfile }) => {
 
   return (
     <div className={styles.container}>
-      {selectedFile && (
-        <div
-          className={classNames(styles.backgroundImage, styles[imageClassName])}
-          style={{ backgroundImage: `url(${URL.createObjectURL(selectedFile)})` }}
-        >
-          <img className={styles.hidden} src={URL.createObjectURL(selectedFile)} />
-        </div>
-      )}
+      {selectedFile && <img className={styles.backgroundImage} src={URL.createObjectURL(selectedFile)} />}
 
       <Avatar size="big" borderColor="white" className={styles.profileImage} />
 

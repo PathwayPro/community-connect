@@ -19,13 +19,15 @@ const UserProfile: FC = () => {
     <Container>
       <div className={styles.page}>
         <Images myProfile={false} />
-        <Info userData={userData} myProfile={false} userProfile={true} />
+        <Info useData={userData} myProfile={false} userProfile={true} />
         <div className={styles.socials}>
           <Events itemsToShow={4} />
           <Scroll>
             <UserPosts />
           </Scroll>
-          <Connections />
+          <Connections maxSize={0} onSizeChange={function (): void {
+            throw new Error('Function not implemented.');
+          } } />
         </div>
       </div>
     </Container>

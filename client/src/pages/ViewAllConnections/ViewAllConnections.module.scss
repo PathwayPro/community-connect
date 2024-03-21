@@ -2,9 +2,8 @@
 @use '../../common/styles/mixins';
 
 .page {
-  margin: 20px 0px 55px 0px;
+  margin: 20px 0px 35px 0px;
   gap: 10px;
-  
   @extend %flex-column-center;
 }
 
@@ -13,4 +12,16 @@
   gap: 26px;
 
   @extend %flex-row;
+}
+
+.connectionsOnly {
+  width: 100%;
+}
+
+.connections {
+  width: 72%;
+}
+
+.requests {
+  width: 28%;
 }

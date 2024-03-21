@@ -56,7 +56,7 @@ const ResumeDownloadInputInner = (
         <span className={styles.fileName}>
           {selectedFile ? truncateFileName(selectedFile.name, maxFileNameLength) : 'No selected File'}
         </span>
-        <IconSVG name="deleteIcon" label="Delete file" onClick={onDeleteClick} />
+        <IconSVG name="deleteIcon" label="Delete file" color="black" size="medium" onClick={onDeleteClick} />
       </div>
       {errorMessage && <div className={classNames(styles.message, styles.errorMessage)}>{errorMessage}</div>}
     </>

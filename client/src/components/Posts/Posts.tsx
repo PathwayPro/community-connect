@@ -44,7 +44,7 @@ const Posts: FC<PostsProps> = ({posts}) => {
   const location = useLocation();
   return (
     <div className={styles.posts}>
-      {location.pathname.includes('/my') && <AddPost/>}
+      {location.pathname.includes('/my') && <AddPost imgPath={''}/>}
       {posts?.length &&
         posts?.map((post) => (
           post.type === 'repost'

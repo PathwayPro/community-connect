@@ -120,7 +120,7 @@ const FillUserProfileForm: FC = () => {
   };
 
   return (
-    <form>
+    <form className={styles.form}>
       <Heading tagType="h4" className={styles.title}>
         {step === 1 && 'Welcome!'}
         {step === 2 && 'Social Media'}

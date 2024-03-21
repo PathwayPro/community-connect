@@ -11,6 +11,8 @@ import { ApplyForMentorship, BecomeMentor } from './pages/Mentorship';
 import MyProfile from './pages/Profile/MyProfile';
 import UserProfile from './pages/Profile/UserProfile';
 import Resources from './pages/Resources/Resources';
+import MyConnections from './pages/ViewAllConnections/ViewMyAllConnections';
+import UserConnections from './pages/ViewAllConnections/ViewUserAllConnections';
 import Volunteering from './pages/Volunteering/Volunteering';
 
 const router = createBrowserRouter([
@@ -51,16 +53,24 @@ const router = createBrowserRouter([
         Component: AboutUs,
       },
       {
-        path: 'volunteering',
-        Component: Volunteering,
-      },
-      {
         path: 'profile/my',
         Component: MyProfile,
       },
       {
         path: 'profile/user/:Id',
         Component: UserProfile,
+      },
+      {
+        path: 'volunteering',
+        Component: Volunteering,
+      },
+      {
+        path: 'connections/my',
+        Component: MyConnections,
+      },
+      {
+        path: 'connections/user/:Id',
+        Component: UserConnections,
       },
       {
         path: 'home',

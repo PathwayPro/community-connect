@@ -38,9 +38,9 @@ const footerLinks: footerLinkItem[] = [
 ];
 
 const socialsList: iconProps[] = [
-  { href: '/', type: 'in' },
-  { href: '/', type: 'fb' },
-  { href: '/', type: 'inst' },
+  { href: '/', type: 'in', className: styles.icon },
+  { href: '/', type: 'fb', className: styles.icon },
+  { href: '/', type: 'inst', className: styles.icon },
 ];
 
 const onClickUpButton = () => {
