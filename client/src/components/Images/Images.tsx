@@ -1,6 +1,7 @@
 import classNames from 'classnames';
-import { useState, useRef, FC } from 'react';
+import { useEffect, useState, useRef, FC } from 'react';
 
+import { useUploadImageMutation } from '../../app/slices/apiSlice';
 import Alert from '../../common/components/Alert/Alert';
 import Avatar from '../../common/components/Avatar/Avatar';
 import IconSVG from '../../common/components/IconSVG/Button/IconSVG';
@@ -16,11 +17,35 @@ const Images: FC<ImagesProps> = ({ myProfile }) => {
   const [alertOpen, setAlertOpen] = useState(false);
   const [imageClassName, setImageClassName] = useState('');
 
+  useEffect(() => {
+    if (selectedFile) {
+      handleUpload();
+    }
+  }, [selectedFile]);
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const [uploadImage] = useUploadImageMutation();
 
   const handleButtonClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
+    }
+  };
+
+  const handleUpload = async () => {
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+
+      await uploadImage(formData)
+        .unwrap()
+        .then((data) => {
+          console.log('File uploaded successfully!', data);
+        })
+        .catch((err) => {
+          console.error('Error uploading file:', err);
+        });
     }
   };
 

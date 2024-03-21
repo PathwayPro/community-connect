@@ -1,10 +1,12 @@
 const express = require('express');
+const multer = require('multer');
 const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
 const userValidation = require('../../validations/user.validation');
 const userController = require('../../controllers/user.controller');
 const { getPostsByUserId, getPostsAndRepostsByUserId } = require('../../controllers/post.controller');
 
+const upload = multer({ storage: multer.memoryStorage() });
 const router = express.Router();
 
 router
@@ -17,6 +19,7 @@ router
   .get(auth(), userController.getProfile)
   .post(auth(), validate(userValidation.createProfile), userController.createOrUpdateProfile);
 
+router.route('/firebase').post(auth(), upload.single('file'), userController.uploadFile);
 router.route('/profile/:id').get(auth(), userController.getProfileByUserId);
 
 router
