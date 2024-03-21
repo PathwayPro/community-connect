@@ -20,7 +20,7 @@ export const App = () => (
     authProvider={authProvider}
     authCallbackPage={Dashboard}
     theme={myTheme}
-    defaultTheme="light"
+    // defaultTheme="light"
   >
     <Resource name="dashboard" list={Dashboard} icon={IconDashboard} options={{ label: 'Dashboard' }} />
     <Resource

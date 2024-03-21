@@ -62,6 +62,7 @@
 }
 
 .languageDetail {
+  column-gap: 4px;
   @include fonts.mainText($font-size: 19px);
   @extend %flex-center;
 }

@@ -15,7 +15,7 @@ const createUser = catchAsync(async (req, res) => {
 });
 
 const getUsers = catchAsync(async (req, res) => {
-  const filter = JSON.parse(req.query.filter);
+  const filter = req.query.filter ? JSON.parse(req.query.filter) : {};
   const result = await userService.queryUsers(filter);
   res.send(result.rows);
 });
@@ -39,20 +39,30 @@ const deleteUser = catchAsync(async (req, res) => {
 });
 
 const getProfile = catchAsync(async (req, res) => {
+  const user = await userService.getUserById(req.user.id);
   const userProfile = await userService.getUserProfileByUserId(req.user.id);
-  if (!userProfile) {
+  if (!userProfile || !user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User Profile not found');
   }
-  res.send(userProfile);
+  res.send({ userProfile, user });
+});
+
+const getProfileByUserId = catchAsync(async (req, res) => {
+  const user = await userService.getUserById(req.params.id);
+  const userProfile = await userService.getUserProfileByUserId(req.params.id);
+  if (!userProfile || !user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User Profile not found');
+  }
+  res.send({ userProfile, user });
 });
 
 const createOrUpdateProfile = catchAsync(async (req, res) => {
-  const userProfile = await userService.createOrUpdateProfile(req.user.id, req.body);
+  const fullUserProfile = await userService.createOrUpdateProfile(req.user.id, req.body);
 
   const userRole = await userRoleService.getRoleByName('user');
-  await userRoleService.createUserRole(userProfile.userId, userRole.id);
+  await userRoleService.createOrUpdateUserRole(fullUserProfile.userProfile.userId, userRole.id);
 
-  res.status(httpStatus.CREATED).send(userProfile);
+  res.status(httpStatus.CREATED).send(fullUserProfile);
 });
 
 const uploadFile = catchAsync(async (req, res) => {
@@ -95,4 +105,5 @@ module.exports = {
   createOrUpdateProfile,
   getProfile,
   uploadFile,
+  getProfileByUserId,
 };

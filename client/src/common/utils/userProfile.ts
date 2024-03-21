@@ -12,3 +12,11 @@ export const availabilityOptions = [
   { value: '16 hours', label: '16 hours / month' },
   { value: '20 hours', label: '20 hours / month' },
 ];
+
+export const allInterests = [
+  { value: 'a', label: 'a' },
+  { value: 'b', label: 'b' },
+  { value: 'c', label: 'c' },
+  { value: 'd', label: 'd' },
+  { value: 'e', label: 'e' },
+];

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import classNames from 'classnames';
 import { FC, useState, MouseEvent, KeyboardEvent, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -7,6 +8,7 @@ import { useApplyForMentorshipMutation } from '../../../app/slices/apiSlice';
 import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
 import Button from '../../../common/components/Button/Button';
 import ResumeDownloadInput from '../../../common/components/ResumeDownloadInput/ResumeDownloadInput';
+import SuccessMessage from '../../../common/components/SuccessMessage/SuccessMessage';
 import Textarea from '../../../common/components/Textarea/Textarea';
 import { fileSize, resumeFileFormat } from '../../../common/utils/filesValidation';
 
@@ -26,6 +28,8 @@ const ApplyForMentorshipForm: FC = () => {
   const dispatch = useAppDispatch();
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [progress, setProgress] = useState<number>(0);
+  const [uploadMessage, setUploadMessage] = useState<string>('');
 
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -55,14 +59,33 @@ const ApplyForMentorshipForm: FC = () => {
   const handleDeleteClick = (e: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setSelectedFile(null);
+    setProgress(0);
+    setUploadMessage("");
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (files) {
-      setSelectedFile(files[0]);
-      resume.onChange(e);
-    }
+    if (!files?.length) return;
+    setSelectedFile(files[0]);
+    const formData = new FormData();
+    formData.append('file', files[0]);
+    setUploadMessage("Uploading...");
+    axios.post("http://httpbin.org/post", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      onUploadProgress: (e) => {
+        if (e.progress) setProgress(e.progress * 100);
+      },
+    })
+      .then(() => {
+        setUploadMessage("Upload successful");
+      })
+      .catch(err => {
+        setUploadMessage("Upload failed");
+        console.log(err);
+      });
+    resume.onChange(e);
   };
 
   const [applyMenteeRequest, { isLoading }] = useApplyForMentorshipMutation();
@@ -95,15 +118,25 @@ const ApplyForMentorshipForm: FC = () => {
   return (
     <>
       {isLogin && roles?.includes('user') && (
+        successMessage
+        ? (
+          <div className={styles.block}>
+            <form className={styles.form}>
+              <div className={styles.successMessageWrapper}>
+                <SuccessMessage
+                  heading="Thank you for reaching out!"
+                  message="Your application has been successfully submitted and is currently under review."
+                />
+              </div>
+            </form>
+          </div>
+        ) : (
         <div className={styles.block}>
           <form className={styles.form}>
             {loadingMessage && (
               <div className={classNames(styles.message, styles.loadingMessage)}>{loadingMessage}</div>
             )}
             {errorMessage && <div className={classNames(styles.message, styles.errorMessage)}>{errorMessage}</div>}
-            {successMessage && (
-              <div className={classNames(styles.message, styles.successMessage)}>{successMessage}</div>
-            )}
             <div className={styles.formRow}>
               <label className={styles.applyLabel} htmlFor={`${formId}-${message.name}`}>
                 Tell us why you want a mentor?
@@ -129,11 +162,14 @@ const ApplyForMentorshipForm: FC = () => {
                 errorMessage={errors.resume?.message}
                 ref={resume.ref}
                 className={styles.applyResume}
+                progress={progress}
+                uploadMessage={uploadMessage}
               />
             </div>
             <Button label="Apply" size="small" isSubmit onClick={handleSubmit(onSubmit)} />
           </form>
         </div>
+        )
       )}
       {isLogin && !roles?.includes('user') && (
         <div className={styles.block}>

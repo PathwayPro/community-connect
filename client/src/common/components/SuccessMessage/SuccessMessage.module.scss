@@ -1,0 +1,30 @@
+@use '../../../common/styles/colors';
+@use '../../../common/styles/media';
+@use '../../../common/styles/fonts';
+
+.submitMessage {
+  width: 100%;
+  max-width: 470px;
+  min-height: 237px;
+  background: colors.$orange-light;
+  border-radius: 15px;
+  padding: 40px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+
+  @media (max-width: 896px) {
+    margin: 0 auto;
+  }
+}
+
+.image {
+  text-align: center;
+}
+.text {
+  margin-top: 8px;
+  width: 100%;
+  max-width: 390px;
+  text-align: center;
+}

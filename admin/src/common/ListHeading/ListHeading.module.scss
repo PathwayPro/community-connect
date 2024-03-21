@@ -1,0 +1,53 @@
+.listHeading {
+  padding: 0px 30px;
+  height: 48px;
+  background-color: #ebedf3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headingText {
+  color: #000;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.22px;
+}
+
+.form {
+  display: flex;
+  justify-content: flex-end;
+  width: 464px;
+}
+
+.formInputWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.formInput {
+  margin-left: 8px;
+  //   margin-right: 8px;
+  width: 300px;
+  padding: 12px 0px 12px 12px;
+  border-radius: 8px;
+  border: 1px solid #d5d4dc;
+  background: #fff;
+}
+
+.button {
+  margin-left: 8px;
+  background: #fcbc5c;
+  padding: 0 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: fit-content;
+  white-space: nowrap;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}

@@ -1,22 +1,27 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
 
 import Avatar from '../../common/components/Avatar/Avatar';
 import IconLinkSVG from '../../common/components/IconSVG/Link/IconLinkSVG';
 
 import styles from './UserProfileMini.module.scss';
 
+interface UserFieldOfExp {
+  fieldOfExpertise: string;
+}
+interface UserFullName {
+  firstName: string;
+  lastName: string;
+}
 interface userDataProps {
-  name: string;
-  background: string;
+  userFieldOfExp: UserFieldOfExp;
+  userFullName: UserFullName;
 }
 
-const userData: userDataProps = {
-  name: 'Niloofar Karyar',
-  background: 'UI/UX Designer',
-};
+interface ProfileMiniProps {
+  userData: userDataProps;
+}
 
-const Info: FC = () => {
+const Info: FC<ProfileMiniProps> = ({ userData }) => {
   return (
     <div className={styles.userProfile}>
       <div className={styles.backgroundImage}>
@@ -24,8 +29,8 @@ const Info: FC = () => {
       </div>
       <div className={styles.infoBlock}>
         <div className={styles.mainInfo}>
-          <span>{userData.name}</span>
-          <span className={styles.info}>{userData.background}</span>
+          <span>{`${userData.userFullName.firstName} ${userData.userFullName.lastName}`}</span>
+          <span className={styles.info}>{userData.userFieldOfExp.fieldOfExpertise}</span>
           <IconLinkSVG
             name="editIcon"
             size="small"
@@ -33,14 +38,6 @@ const Info: FC = () => {
             href="/profile/my"
             label="Link to User Profile"
           />
-        </div>
-        <div className={styles.links}>
-          <Link to="/connections" className={styles.link}>
-            Your Connections
-          </Link>
-          <Link to="/" className={styles.link}>
-            Manage Events
-          </Link>
         </div>
       </div>
     </div>

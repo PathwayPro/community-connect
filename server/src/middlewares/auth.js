@@ -9,12 +9,15 @@ const verifyCallback = (req, resolve, reject, requiredRights) => async (err, use
   }
   req.user = user;
   if (requiredRights.length) {
-    let hasRequiredRights;
+    let hasRequiredRights = false;
     if (user.roles) {
       const userRights = {};
       user.roles.forEach((role) => {
         userRights[role.name] = roleRights.get(role.name);
-        hasRequiredRights = requiredRights.every((requiredRight) => userRights[role.name].includes(requiredRight));
+        const roleHasRequiredRights = requiredRights.every((requiredRight) => userRights[role.name].includes(requiredRight));
+        if (roleHasRequiredRights) {
+          hasRequiredRights = true;
+        }
       });
     }
     if (!user.roles || (!hasRequiredRights && req.params.userId !== user.id)) {
@@ -27,12 +30,12 @@ const verifyCallback = (req, resolve, reject, requiredRights) => async (err, use
 
 const auth =
   (...requiredRights) =>
-  async (req, res, next) => {
-    return new Promise((resolve, reject) => {
-      passport.authenticate('jwt', { session: false }, verifyCallback(req, resolve, reject, requiredRights))(req, res, next);
-    })
-      .then(() => next())
-      .catch((err) => next(err));
-  };
+    async (req, res, next) => {
+      return new Promise((resolve, reject) => {
+        passport.authenticate('jwt', { session: false }, verifyCallback(req, resolve, reject, requiredRights))(req, res, next);
+      })
+        .then(() => next())
+        .catch((err) => next(err));
+    };
 
 module.exports = auth;
