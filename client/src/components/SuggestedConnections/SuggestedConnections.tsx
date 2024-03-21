@@ -21,7 +21,7 @@ const suggestedConnectionList: suggestedConnectionProps[] = [
 
 const SuggestedConnections: FC = () => {
   return (
-    <SideBlock title="Suggested Connections">
+    <SideBlock title="Suggested Connections" btnTitle='View all'>
       <div className={styles.connections}>
         {suggestedConnectionList &&
           suggestedConnectionList

@@ -51,9 +51,9 @@ const HeaderNav: FC = () => {
 
   return (
     <>
-      <Heading tagType="h2" className={classNames(styles.title, width > BREAKPOINTS.small && styles.hidden)}>
+      {!isLogin && <Heading tagType="h2" className={classNames(styles.title, width > BREAKPOINTS.small && styles.hidden)}>
         CommunityConnect
-      </Heading>
+      </Heading>}
       <button
         type="button"
         className={classNames(
@@ -63,8 +63,7 @@ const HeaderNav: FC = () => {
         )}
         onClick={onMobileButtonClick}
       />
-      <div
-        className={classNames(
+      <div className={classNames(
           styles.wrapper,
           width <= BREAKPOINTS.small && !isNavDropDownActive && styles.hidden,
           width <= BREAKPOINTS.xsmall && styles.wide
@@ -78,7 +77,7 @@ const HeaderNav: FC = () => {
             }
             onClick={handleMobileDropDownClose}
           >
-            Events
+            News and Events
           </NavLink>
 
           <NavLink

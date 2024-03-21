@@ -5,6 +5,7 @@ import {useGetUserProfileQuery} from '../../app/slices/apiSlice';
 import {setUserData} from '../../app/slices/userSlice';
 import Container from '../../common/components/Container/Container';
 import Scroll from '../../common/components/Scroll/Scroll';
+import useWindowSize, { BREAKPOINTS } from '../../common/utils/useWindowSize';
 import Connections from '../../components/Connections/Connections';
 import Events from '../../components/Events/Events';
 import Images from '../../components/Images/Images';
@@ -30,6 +31,9 @@ let prevUserProfile: {
 } | null = null;
 
 const MyProfile: FC = () => {
+  const windowSize = useWindowSize();
+  const maxNumberItems = windowSize.width > BREAKPOINTS.large ? 4 : 2;
+
   const dispatch = useAppDispatch();
   const { data: profileQuery } = useGetUserProfileQuery({});
 
@@ -91,14 +95,23 @@ const MyProfile: FC = () => {
   return (
     <Container>
       <div className={styles.page}>
-        <Images myProfile={true} />
-        <Info userData={userData} myProfile={true} userProfile={false} />
-        <div className={styles.socials}>
-          <Events itemsToShow={4} />
-          <Scroll>
-            <UserPosts />
-          </Scroll>
-          <Connections />
+        <div className={styles.tabletContainer}>
+          <Images myProfile={true} />
+          <Info userData={userData} myProfile={true} userProfile={false} />
+          <div className={styles.socials}>
+            <Events itemsToShow={maxNumberItems} />
+            <div className={styles.connectionsTablet}>
+              <Events itemsToShow={maxNumberItems} />
+              <Connections />
+            </div>
+            <Scroll>
+              <UserPosts />
+            </Scroll>
+            <div className={styles.mobPosts}>
+              <UserPosts />
+            </div>
+            <Connections />
+          </div>
         </div>
       </div>
     </Container>

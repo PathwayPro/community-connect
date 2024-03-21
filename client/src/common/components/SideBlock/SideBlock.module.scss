@@ -48,4 +48,18 @@
   &:hover {
     text-decoration: underline;
   }
+
+  @include media.media-l {
+    font-weight: 700;
+    text-align: center;
+    margin-left: 0;
+  }
+
+  @include media.media-s {
+    margin-left: auto;
+    margin-top: 16px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+  }
 }

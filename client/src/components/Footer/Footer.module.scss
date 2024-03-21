@@ -76,6 +76,8 @@
 
   @include media.media-s {
     top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
@@ -95,8 +97,6 @@
   }
 
   @include media.media-s {
-    top: -50px;
-    width: 40px;
-    height: 40px;
+    display: none;
   }
 }

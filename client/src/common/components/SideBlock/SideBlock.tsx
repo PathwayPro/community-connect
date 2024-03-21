@@ -6,22 +6,23 @@ import styles from './SideBlock.module.scss';
 
 interface SideBlockProps {
   children: ReactNode;
-  title: string;
+  title?: string;
   subtitle?: string;
   paddingWidth?: 'small' | 'normal';
   linkTo?: string;
+  btnTitle: string;
 }
 
-const SideBlock: FC<SideBlockProps> = ({ children, title, subtitle, paddingWidth = 'small', linkTo }) => {
+const SideBlock: FC<SideBlockProps> = ({ children, title, subtitle, paddingWidth = 'small', linkTo, btnTitle }) => {
   return (
     <>
       <div className={classNames(styles.sideBlock, paddingWidth && styles[paddingWidth])}>
-        <div className={styles.title}>{title}</div>
+        {title && <div className={styles.title}>{title}</div>}
         {subtitle && <div className={styles.subtitle}>{subtitle}</div>}
         {children}
         {linkTo && (
           <Link to={linkTo} className={styles.link}>
-            View all
+            {btnTitle}
           </Link>
         )}
       </div>

@@ -27,26 +27,26 @@
 }
 
 .name {
-  @include fonts.weightText;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
 
   &:hover {
     text-decoration: underline;
   }
 }
 
-.position {
-  @include fonts.hintText($font-size: 16px);
-}
-
-.date {
-  @include fonts.hintText($font-size: 16px);
+.position, .date {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 300;
 }
 
 .content {
   border-bottom: 1px solid colors.$blue-dark;
   padding-bottom: 16px;
-
-  @include fonts.mainText;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .reactions {
@@ -93,7 +93,7 @@
 
 .quantity {
   font-family: Poppins;
-  font-size: 1rem;
+  font-size: 16px;
   font-style: normal;
   font-weight: 300;
   line-height: inherit;

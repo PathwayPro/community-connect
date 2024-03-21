@@ -1,7 +1,38 @@
 @use '../../common/styles/colors';
 @use '../../common/styles/fonts';
 @use '../../common/styles/mixins';
+@use '../../common/styles/media.scss';
 
 .connections {
   width: 100%;
+
+  @include media.media-l {
+    display: none;
+  }
+}
+
+.container{
+  @include media.media-s {
+    width: 100%;
+  }
+}
+
+.connectionsTablet{
+  display: none;
+
+  @include media.media-l {
+    display: block;
+  }
+}
+
+.title{
+  margin: 0rem 0rem 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+
+  @include media.media-l {
+    font-size: 19px;
+    line-height: 24px;
+  }
 }

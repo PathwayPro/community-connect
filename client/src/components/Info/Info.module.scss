@@ -1,6 +1,7 @@
 @use '../../common/styles/colors';
 @use '../../common/styles/fonts';
 @use '../../common/styles/mixins';
+@use '../../common/styles/media';
 
 .personal {
   background: colors.$blue-light;
@@ -9,8 +10,20 @@
   padding: 15px 26px;
   border-radius: 15px;
   position: relative;
+  margin: 13px 0 16px;
 
   @extend %flex-column;
+
+  @include media.media-l {
+    background: none;
+    padding: 0px 40px 15px;
+    margin: 0 0 33px;
+  }
+
+  @include media.media-s {
+    padding: 0px 20px 15px;
+    margin: 0 0 30px;
+  }
 }
 
 .infoButtons {
@@ -19,31 +32,114 @@
 
 .connectionBtns {
   gap: 12px;
-  margin-right: 6px;
+  position: absolute;
+  right: 32px;
+  top: 40px;
   @extend %flex-row-right;
+
+  @include media.media-l {
+    right: 50px;
+    top: 28px;
+
+    > button {
+      &:nth-child(1) {
+        width: 129px;
+        font-size: 16px;
+        line-height: 24px;
+      }
+      &:nth-child(2) {
+        width: 126px;
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+  }
+
+  @include media.media-s {
+    right: auto;
+    top: 95px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    > button {
+      &:nth-child(1) {
+        width: 133px;
+      }
+      &:nth-child(2) {
+        width: 129px;
+      }
+    }
+  }
 }
 
 .mainInfo {
   margin-left: 260px;
   margin-bottom: 1.625rem;
-
   @extend %flex-column;
+
+  @include media.media-l {
+    margin-left: 0px;
+    margin-top: 28px;
+  }
+
+  @include media.media-s {
+    margin-top: 20px;
+  }
+
+  h4 {
+    @include media.media-l {
+      margin-top: 86px;
+      margin-bottom: 18px;
+      font-size: 32px !important;
+      line-height: 32px !important;
+    }
+
+    @include media.media-s {
+      margin-top: 150px;
+      margin-bottom: 6px;
+    }
+  }
+
+  span {
+    &:not(:last-child) {
+      @include media.media-s {
+        margin-bottom: 6px;
+      }
+    }
+  }
 }
 
 .experience {
   @include fonts.hintText($font-size: 19px);
+
+  @include media.media-l {
+    font-size: 16px !important;
+    line-height: 24px !important;
+  }
 }
 
 .editIcon {
   position: absolute;
   top: 26px;
   right: 26px;
+
+  @include media.media-l {
+    right: 40px;
+  }
+
+  @include media.media-s {
+    right: 20px;
+  }
 }
 
 .otherInfo {
   gap: 1rem;
 
   @extend %flex-column;
+
+  @include media.media-l {
+    gap: 16px;
+  }
 }
 
 .infoRow {
@@ -54,17 +150,35 @@
   margin-right: 10px;
 
   @include fonts.weightText($font-size: 19px);
+
+  @include media.media-l {
+    font-size: 16px !important;
+    line-height: 24px !important;
+    font-weight: 500;
+  }
 }
 
 .detail {
   margin: 0;
   @include fonts.mainText($font-size: 19px);
+
+  @include media.media-l {
+    font-size: 16px !important;
+    line-height: 24px !important;
+    font-weight: 500;
+  }
 }
 
 .languageDetail {
   column-gap: 4px;
   @include fonts.mainText($font-size: 19px);
   @extend %flex-center;
+
+  @include media.media-l {
+    font-size: 16px !important;
+    line-height: 24px !important;
+    font-weight: 500;
+  }
 }
 
 .languageItem {
@@ -76,6 +190,14 @@
 
 .socials {
   @extend %flex-row-right;
+
+  @include media.media-l {
+    margin-top: 10px;
+  }
+
+  @include media.media-s {
+    justify-content: center;
+  }
 }
 
 .icons {

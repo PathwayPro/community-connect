@@ -19,6 +19,10 @@
   @extend %flex-left-center;
   flex: 1;
 
+  @include media.media-l {
+    flex: inherit;
+  }
+
   @include media.media-s {
     position: absolute;
     flex-direction: column;
@@ -41,9 +45,13 @@
   display: flex;
   flex-wrap: wrap;
 
+  @include media.media-l {
+    display: none;
+  }
+
   @include media.media-s {
+    display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
   }
 }
 
@@ -65,6 +73,10 @@
     flex-direction: column;
     margin: 20px 0 0;
   }
+
+  @include media.media-l {
+    margin-left: inherit;
+  }
 }
 
 .navButton {
@@ -83,9 +95,9 @@
 
 .mobileButton {
   display: block;
-  width: 24px;
-  height: 20px;
-  background: url('/images/Header/menu.svg') no-repeat 0 0 / cover;
+  width: 18px;
+  height: 12px;
+  background: url('/images/Header/menu-2.svg') no-repeat 0 0 / cover;
   border: none;
   padding: 0;
   cursor: pointer;
@@ -102,19 +114,21 @@
 
 .icons {
   position: relative;
-  top: -6px;
+  top: 50%;
   display: flex;
   gap: 1rem;
 
   @include media.media-s {
-    top: 0;
+    display: none;
+  }
+
+  @include media.media-l {
+    margin-left: auto;
   }
 }
 
 .input {
   background: colors.$white;
-  // width: 100%;
-  // max-width: 300px;
   width: 300px;
   height: 48px;
   margin: 0 1.5rem;
@@ -127,7 +141,7 @@
   @include fonts.mainText;
 }
 
-@media (max-width: 768px) {
+@include media.media-s {
   .input {
     margin: 1rem 1rem;
   }

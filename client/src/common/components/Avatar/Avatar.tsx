@@ -8,7 +8,7 @@ import DEFAULT_AVATAR from '../../../images/defaultProfileImg.svg';
 interface AvatarProps {
   src?: string;
   alt?: string;
-  size?: 'small' | 'medium' | 'big';
+  size?: 'small' | 'medium' | 'big' | 'regular';
   borderColor?: 'yellow' | 'blue' | 'white';
   className?: string;
 }

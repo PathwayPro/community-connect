@@ -8,9 +8,16 @@
   padding: 16px;
   border-radius: 15px;
   background-color: colors.$blue-light;
-
+  margin-bottom: 16px;
+  
   div {
     text-align: center;
     margin-bottom: 1rem;
   }
+}
+
+.title {
+  margin-bottom: 1rem;
+  @include fonts.headingText;
+  text-align: center;
 }

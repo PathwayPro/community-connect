@@ -1,6 +1,7 @@
 @use '../../../common/styles/colors';
 @use '../../../common/styles/fonts';
 @use '../../../common/styles/mixins';
+@use '../../../common/styles/media';
 
 .event {
   @extend %flex-column;
@@ -8,11 +9,35 @@
   padding: 16px;
   border-radius: 15px;
   background-color: colors.$blue-light;
+
+  button {
+    @include media.media-l {
+      font-weight: 600;
+    }
+  }
+}
+
+.eventName  {
+  @include media.media-s {
+    font-size: 16px;
+    line-height: 24px;
+  }
 }
 
 .company {
   margin-bottom: 1rem;
   @include fonts.weightText($font-weight: 300);
+
+  @include media.media-s {
+    margin-bottom: 16px;
+  }
+
+  span {
+    @include media.media-s {
+      font-size: 16px;
+      line-height: 24px;
+    }
+  }
 }
 
 .dateBlock {
@@ -25,12 +50,14 @@
   position: relative;
   padding-left: 26px;
   font-size: 13px;
+  line-height: 18px;
   font-weight: 300;
 
   &::before {
     position: absolute;
     left: 0;
-    top: 0;
+    top: 0; 
+    transform: translateY(-7%);
     bottom: 0;
     width: 18px;
     height: 18px;
@@ -38,6 +65,10 @@
 
   &:first-child {
     margin-bottom: 6px;
+
+    @include media.media-s {
+      margin-bottom: 8px;
+    }
 
     &::before {
       content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M16.9746 18H2.12183V7H16.9746M13.7919 0V2H5.30457V0H3.18274V2H2.12183C0.944213 2 0 2.89 0 4V18C0 18.5304 0.223549 19.0391 0.621469 19.4142C1.01939 19.7893 1.55908 20 2.12183 20H16.9746C17.5374 20 18.0771 19.7893 18.475 19.4142C18.8729 19.0391 19.0964 18.5304 19.0964 18V4C19.0964 2.89 18.1416 2 16.9746 2H15.9137V0' fill='%23E3A953'/%3E%3C/svg%3E");

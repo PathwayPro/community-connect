@@ -83,15 +83,15 @@ const Info: FC<InfoProps> = ({ myProfile, userProfile, userData }) => {
     <div className={styles.personal}>
       {myProfile && <IconSVG name={'editIcon'} className={styles.editIcon} onClick={openModal} />}
       <div className={styles.mainInfo}>
-        <Heading tagType="h4">{`${userData.user.firstName} ${userData.user.lastName}`}</Heading>
-        <span className={styles.experience}>{userData.userProfile.fieldOfExpertise}</span>
-        <span className={styles.experience}>{userData.userProfile.experience}</span>
         {userProfile && (
           <div className={styles.connectionBtns}>
             <Button label={'Message'} size={'small'} color={'orangeLight'} onClick={messageUser}></Button>
             <Button label={'Connect'} size={'small'} color={'orange'} onClick={connectUser}></Button>
           </div>
         )}
+        <Heading tagType="h4">{`${userData.user.firstName} ${userData.user.lastName}`}</Heading>
+        <span className={styles.experience}>{userData.userProfile.fieldOfExpertise}</span>
+        <span className={styles.experience}>{userData.userProfile.experience}</span>
       </div>
       <div className={styles.otherInfo}>
         <div className={styles.infoRow}>

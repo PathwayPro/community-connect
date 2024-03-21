@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useState, useRef, FC } from 'react';
+import { useState, useRef, useEffect, FC } from 'react';
 
 import Alert from '../../common/components/Alert/Alert';
 import Avatar from '../../common/components/Avatar/Avatar';
@@ -15,8 +15,31 @@ const Images: FC<ImagesProps> = ({ myProfile }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [alertOpen, setAlertOpen] = useState(false);
   const [imageClassName, setImageClassName] = useState('');
+  const [avatarSize, setAvatarSize] = useState<'small' | 'medium' | 'big' | 'regular'>('big');
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const checkScreenSize = () => {
+    const screenWidth = window.innerWidth;
+    return screenWidth <= 1200 ? 'regular' : 'big';
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      const screenSize = checkScreenSize();
+      const validSizes = ['big', 'medium', 'small', 'regular'];
+      if (validSizes.includes(screenSize)) {
+        setAvatarSize(screenSize);
+      } else {
+        setAvatarSize('big');
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleButtonClick = () => {
     if (fileInputRef.current) {
@@ -56,7 +79,7 @@ const Images: FC<ImagesProps> = ({ myProfile }) => {
         </div>
       )}
 
-      <Avatar size="big" borderColor="white" className={styles.profileImage} />
+      <Avatar size={avatarSize} borderColor="white" className={styles.profileImage} />
 
       {myProfile && <IconSVG name={'editIcon'} className={styles.editIcon} onClick={handleButtonClick} />}
 

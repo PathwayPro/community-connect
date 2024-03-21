@@ -1,6 +1,7 @@
 @use '../../common/styles/colors';
 @use '../../common/styles/fonts';
 @use '../../common/styles/mixins';
+@use '../../common/styles/media';
 
 .events {
   @extend %flex-column;
@@ -9,6 +10,11 @@
 }
 
 .title {
-  margin: 1rem 0rem;
+  margin: 0rem 0rem 1rem ;
   @include fonts.headingText;
+
+  @include media.media-l {
+    font-size: 19px;
+    line-height: 24px;
+  }
 }

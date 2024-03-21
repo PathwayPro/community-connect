@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import {useLocation} from 'react-router-dom';
 
 import SideBlock from '../../common/components/SideBlock/SideBlock';
 
@@ -40,10 +41,12 @@ const eventList: EventProps[] = [
 ];
 
 const Events: FC<EventsProps> = ({ itemsToShow }) => {
+  const location = useLocation();
+
   return (
     <>
-      <SideBlock title="Your Events" paddingWidth="normal" linkTo="/events">
-        <UserEvents haveEvents={2} />
+      <SideBlock paddingWidth="normal" linkTo="/events" btnTitle='View All Events'>
+        {location.pathname.includes('/home') && <UserEvents haveEvents={2} /> }
         <div className={styles.title}>Upcoming Events</div>
         <div className={styles.events}>
           {eventList &&

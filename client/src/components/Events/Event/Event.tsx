@@ -15,7 +15,7 @@ export interface EventProps {
 const Event: FC<EventProps> = ({ name, company, date, time }) => {
   return (
     <div className={styles.event}>
-      <span>{name}</span>
+      <span className={styles.eventName}>{name}</span>
       <div className={styles.company}>
         <span>From </span>
         <span>{company}</span>

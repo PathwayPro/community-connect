@@ -28,11 +28,13 @@ const connectionList: connectionProps[] = [
 
 const Connections: FC = () => {
   return (
-    <SideBlock title="Connections" linkTo="/connections">
+    <SideBlock linkTo="/connections" btnTitle='View all Connections'>
+      <div className={styles.container}>
+      <div className={styles.title}>Connections</div>
       <div className={styles.connections}>
         {connectionList &&
           connectionList
-            .slice(0, 4)
+            .slice(0, 7)
             .map((connection) => (
               <Connection
                 key={connection.id}
@@ -42,6 +44,21 @@ const Connections: FC = () => {
                 position={connection.position}
               />
             ))}
+      </div>
+      <div className={styles.connectionsTablet}>
+        {connectionList &&
+          connectionList
+            .slice(0, 2)
+            .map((connection) => (
+              <Connection
+                key={connection.id}
+                id={connection.id}
+                imgPath={connection.imgPath ? connection.imgPath : defaultProfileImage}
+                name={connection.name}
+                position={connection.position}
+              />
+            ))}
+      </div>
       </div>
     </SideBlock>
   );

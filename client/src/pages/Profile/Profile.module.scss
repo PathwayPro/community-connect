@@ -1,13 +1,117 @@
 @use '../../common/styles/colors';
 @use '../../common/styles/mixins';
+@use '../../common/styles/media';
 
 .page {
   margin: 20px 0px 80px 0px;
   gap: 10px;
+  @extend %flex-column;
+
+  @include media.media-l {
+    margin: 0px -80px 80px -80px;
+  }
+
+  @include media.media-s {
+    margin: 0px -60px 53px -60px;
+  }
+}
+
+.tabletContainer{
   @extend %flex-column-center;
+     
+  @include media.media-l {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
 }
 
 .socials {
   @extend %flex-row;
   gap: 26px;
+  width: 100%;
+
+  @include media.media-l {
+    padding: 0 40px;
+  }
+
+  @include media.media-s {
+    padding: 0;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  > div{
+    &:nth-child(1),  &:nth-child(3) {
+      flex-basis: 300px;
+    }
+
+    @include media.media-l {
+      &:nth-child(1), &:nth-child(5) {
+        display: none;
+      }
+    }
+
+    @include media.media-s {
+      &:nth-child(1){
+        border-radius: 0;
+      }
+
+      &:nth-child(3) {
+        display: none;
+      }
+
+      &:nth-child(4) {
+        margin: 0 20px;
+      }
+    }
+  }
+}
+
+.connectionsTablet {
+  display: none;
+
+  @include media.media-l {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  @media (max-width: 991px) {
+    > div {
+      &:nth-child(1), &:nth-child(2) {
+        width: 205px;
+        padding: 26px 9.5px;
+      }
+    }
+  }
+
+  @include media.media-s {
+    width: 100%;
+
+    > div {
+      &:nth-child(1), &:nth-child(2) {
+        width: 100%;
+        border-radius: 0;
+      }
+    }  
+  }
+
+  > div{
+    @include media.media-s {
+      width: 100%;
+
+      &:nth-child(1), &:nth-child(2) {
+        padding: 26px 21.5px;
+      }
+    }
+  }
+}
+
+.mobPosts {
+  display: none;
+
+  @include media.media-s {
+    display: block;
+  }
 }

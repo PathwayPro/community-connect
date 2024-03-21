@@ -19,13 +19,21 @@
   background-color: colors.$blue-normal;
   padding: 14px 0;
   position: relative;
+
+  @include media.media-l {
+    padding: 28px 0;
+  }
+
+  @include media.media-s {
+    padding: 16px 0;
+  }
 }
 
 .wrapper {
   display: flex;
   align-items: center;
 
-  @include media.media-s {
+  @include media.media-l {
     justify-content: space-between;
   }
 }
@@ -49,4 +57,21 @@
     width: 24px;
     height: 24px;
   }
+}
+
+.icons {
+  display: none;
+
+  @include media.media-s {
+    position: relative;
+    top: 50%;
+    display: flex;
+    gap: 1rem;
+    padding: 5px 0;
+
+    > a, button {
+      height: 25px !important;
+    }
+  }
+
 }

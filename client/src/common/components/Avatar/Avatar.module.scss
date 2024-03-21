@@ -21,6 +21,11 @@
     height: 200px;
   }
 
+  &.regular {
+    width: 150px;
+    height: 150px;
+  }
+
   &.yellow {
     border-color: colors.$orange-normal;
   }

@@ -11,6 +11,8 @@ const UserEvents: React.FC<UserEventsProps> = ({ haveEvents }) => {
     // <div className={styles.events}>
     <>
       {haveEvents ? (
+        <div>
+        <div className={styles.title}>Your events</div>
         <div className={styles.event}>
           <div>
             You are registered for &nbsp;
@@ -18,6 +20,7 @@ const UserEvents: React.FC<UserEventsProps> = ({ haveEvents }) => {
             &nbsp; events.
           </div>
           <ButtonLink label="Go to Calendar" size={'small'} color={'orange'} />
+        </div>
         </div>
       ) : (
         <div className={styles.event}>
