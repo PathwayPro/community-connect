@@ -12,7 +12,7 @@ interface IconSVGProps {
   size?: 'small' | 'medium' | 'big' | 'wide';
   isSubmit?: boolean;
   className?: string;
-  onClick: (e: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>) => void;
+  onClick?: (e: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>) => void;
 }
 /*
   'small'  15 x 15 – for edit pencil
@@ -23,8 +23,8 @@ interface IconSVGProps {
 const IconSVG: FC<IconSVGProps> = ({
   name,
   label = 'icon',
-  color = 'black',
-  size = 'medium',
+  color,
+  size,
   isSubmit = false,
   className,
   onClick,
@@ -38,7 +38,7 @@ const IconSVG: FC<IconSVGProps> = ({
   };
   return (
     <button
-      className={classNames(className, styles.button, color && styles[color], styles[size])}
+      className={classNames(className, styles.button, color && styles[color], size && styles[size])}
       onClick={onClick}
       onKeyDown={handleKeyDown}
       type={isSubmit ? 'submit' : 'button'}

@@ -11,22 +11,8 @@
     height: 40px;
   }
 
-  &.rnd {
-    border-radius: 50%;
-  }
-
-  &.sqr {
-    width: 40px;
-    height: 40px;
-  }
-
   &.in {
-    &.sqr {
-      background: url('/images/Icon/in-sqr.svg') no-repeat center center / cover;
-    }
-    &.rnd {
-      background: url('/images/Icon/in.svg') no-repeat center center / cover;
-    }
+    background: url('/images/Icon/in.svg') no-repeat center center / cover;
   }
 
   &.fb {
@@ -34,12 +20,7 @@
   }
 
   &.inst {
-    &.sqr {
-      background: url('/images/Icon/inst-sqr.svg') no-repeat center center / cover;
-    }
-    &.rnd {
-      background: url('/images/Icon/inst.svg') no-repeat center center / cover;
-    }
+    background: url('/images/Icon/inst.svg') no-repeat center center / cover;
   }
 
   &.tw {

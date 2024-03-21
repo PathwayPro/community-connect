@@ -22,7 +22,7 @@ interface DropdownProps {
   placeholder?: string;
   isSearchable?: boolean;
   onChange: (value: string | null | undefined) => void;
-  onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   errorMessage?: string;
 }
 

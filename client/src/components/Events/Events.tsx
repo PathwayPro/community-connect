@@ -1,8 +1,9 @@
-import { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
 
 import SideBlock from '../../common/components/SideBlock/SideBlock';
 
 import Event from './Event/Event';
+import UserEvents from './UserEvents/UserEvents';
 
 import styles from './Events.module.scss';
 
@@ -40,16 +41,20 @@ const eventList: EventProps[] = [
 
 const Events: FC<EventsProps> = ({ itemsToShow }) => {
   return (
-    <SideBlock title="Upcoming Events" paddingWidth="normal" linkTo="/events">
-      <div className={styles.events}>
-        {eventList &&
-          eventList
-            .slice(0, itemsToShow)
-            .map((event) => (
-              <Event key={event.id} name={event.name} company={event.company} date={event.date} time={event.time} />
-            ))}
-      </div>
-    </SideBlock>
+    <>
+      <SideBlock title="Your Events" paddingWidth="normal" linkTo="/events">
+        <UserEvents haveEvents={2} />
+        <div className={styles.title}>Upcoming Events</div>
+        <div className={styles.events}>
+          {eventList &&
+            eventList
+              .slice(0, itemsToShow)
+              .map((event) => (
+                <Event key={event.id} name={event.name} company={event.company} date={event.date} time={event.time} />
+              ))}
+        </div>
+      </SideBlock>
+    </>
   );
 };
 

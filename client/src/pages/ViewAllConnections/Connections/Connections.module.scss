@@ -1,0 +1,35 @@
+@use '../../../common/styles/colors';
+@use '../../../common/styles/fonts';
+@use '../../../common/styles/mixins';
+
+.box {
+  overflow-y: auto;
+}
+
+.title {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+
+  @include fonts.bigText($font-size: 33px);
+}
+
+.scroll
+{
+  margin-bottom: 8px;
+  background: colors.$blue-light;
+  padding: 40px 45px;
+  border-radius: 15px;
+}
+
+.connections {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.connection {
+  border-bottom: 1px solid colors.$blue-dark-hover;
+  padding-bottom: 10px;
+  margin-bottom: 16px;
+  width: 32%;
+}

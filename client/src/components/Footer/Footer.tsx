@@ -29,15 +29,18 @@ const footerLinks: footerLinkItem[] = [
     ],
   },
   {
-    heading: 'Contacts',
-    list: [{ label: 'immigranttechiesab@gmail.com', link: 'mailto:immigranttechiesab@gmail.com', external: true }],
+    heading: 'Community Connect',
+    list: [
+      { label: 'About Us', link: '/about' },
+      { label: 'Contact Us', link: '/contact-us' },
+    ],
   },
 ];
 
 const socialsList: iconProps[] = [
-  { href: '/', type: 'in' },
-  { href: '/', type: 'fb' },
-  { href: '/', type: 'inst' },
+  { href: '/', type: 'in', className: styles.icon },
+  { href: '/', type: 'fb', className: styles.icon },
+  { href: '/', type: 'inst', className: styles.icon },
 ];
 
 const onClickUpButton = () => {

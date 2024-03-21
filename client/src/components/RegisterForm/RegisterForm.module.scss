@@ -6,6 +6,7 @@
 .form {
   display: inline-flex;
   flex-direction: column;
+  padding: 5rem;
 }
 
 .formTitle {
@@ -121,4 +122,24 @@
 .errorMessage {
   color: colors.$error;
   text-align: center;
+}
+
+.agreementErrorMessage {
+  color: colors.$error;
+  font-family: Poppins;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 18px;
+  padding-left: 20px;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    left: 65px;
+    background: url('../../images/Icon/error.svg') no-repeat center center / cover;
+  }
 }

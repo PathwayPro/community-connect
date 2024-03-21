@@ -16,19 +16,23 @@ module.exports = (sequelize, DataTypes) => {
 
   UserProfile.init(
     {
+      // TODO: Change the data types from BLOB to string for the following field and update the rest of the files:
       backgroundImage: DataTypes.BLOB,
+      // TODO: Change the data types from BLOB to string for the following field and update the rest of the files:
       image: DataTypes.BLOB,
       birthDate: DataTypes.DATE,
       isBirthDateVisible: DataTypes.BOOLEAN,
       spokenLanguage: DataTypes.ARRAY(DataTypes.STRING),
       fieldOfExpertise: DataTypes.TEXT,
       yearsOfExperience: DataTypes.STRING,
+      interests: DataTypes.ARRAY(DataTypes.STRING),
       bio: DataTypes.TEXT,
       linkedInURL: DataTypes.STRING,
       instagramURL: DataTypes.STRING,
       twitterURL: DataTypes.STRING,
       githubURL: DataTypes.STRING,
       behanceURL: DataTypes.STRING,
+      // TODO: Change the data types from BLOB to string for the following field and update the rest of the files:
       resume: DataTypes.BLOB,
       timeInCanada: DataTypes.STRING,
       goal: DataTypes.TEXT,

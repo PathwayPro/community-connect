@@ -1,4 +1,5 @@
 import { FC } from 'react';
+
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -7,8 +8,27 @@ import IconLinkSVG from '../../common/components/IconSVG/Link/IconLinkSVG';
 
 import styles from './UserProfileMini.module.scss';
 
+
 const Info: FC = () => {
   const userData = useSelector((state: any) => state.userProfile);
+
+interface UserFieldOfExp {
+  fieldOfExpertise: string;
+}
+interface UserFullName {
+  firstName: string;
+  lastName: string;
+}
+interface userDataProps {
+  userFieldOfExp: UserFieldOfExp;
+  userFullName: UserFullName;
+}
+
+interface ProfileMiniProps {
+  userData: userDataProps;
+}
+
+const Info: FC<ProfileMiniProps> = ({ userData }) => {
 
   return (
     <div className={styles.userProfile}>
@@ -17,8 +37,9 @@ const Info: FC = () => {
       </div>
       <div className={styles.infoBlock}>
         <div className={styles.mainInfo}>
-          <span>{`${userData.firstName} ${userData.lastName}`}</span>
-          <span className={styles.info}>{userData.fieldOfExpertise}</span>
+          <span>{`${userData.userFullName.firstName} ${userData.userFullName.lastName}`}</span>
+          <span className={styles.info}>{userData.userFieldOfExp.fieldOfExpertise}</span>
+
           <IconLinkSVG
             name="editIcon"
             size="small"
@@ -35,6 +56,7 @@ const Info: FC = () => {
             Manage Events
           </Link>
         </div>
+
       </div>
     </div>
   );

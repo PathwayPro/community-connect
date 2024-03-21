@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { format } from 'date-fns';
 import { FC, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -6,11 +7,38 @@ import { useAppDispatch } from '../../app/hooks';
 import { useGetProvincesQuery } from '../../app/slices/apiSlice';
 import { showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
-import Heading from '../../common/components/Heading/Heading';
 import Icon, { iconProps } from '../../common/components/Icon/Icon';
-import IconSVG from '../../common/components/IconSVG/Button/IconSVG';
 
 import styles from './Info.module.scss';
+import IconSVG from '../../common/components/IconSVG/Button/IconSVG';
+
+interface userDataProps {
+  name: string;
+  background: string;
+  experience: string;
+  location: string;
+  birthday: Date;
+  bio: string;
+  language: string[];
+  socialsList: iconProps[];
+}
+
+const userData: userDataProps = {
+  name: 'Niloofar Karyar',
+  background: 'UI/UX Designer',
+  experience: '7 Years Experience',
+  location: 'Alberta',
+  birthday: new Date('1990-01-01'),
+  bio: 'Ut ullam numquam voluptas amet dolores incidunt. Dolorum temporibus exercitationem. Perspiciatis saepe velit eos illo atque ut consequatur. At dignissimos esse doloribus dicta ut. Reiciendis at quae a sed et laboriosam commodi cupiditate. Odit rerum illo assumenda nulla dolores harum eius beatae perspiciatis.',
+  language: ['English', 'Farsi'],
+  socialsList: [
+    { href: '/', type: 'be', className: styles.roundIcons },
+    { href: '/', type: 'git', className: styles.squareIcons },
+    { href: '/', type: 'tw', className: styles.roundIcons },
+    { href: '/', type: 'in', className: styles.roundIcons },
+    // { href: '/', type: 'inst', className: styles.roundIcons },
+  ],
+};
 
 interface InfoProps {
   myProfile: boolean;
@@ -48,20 +76,26 @@ const Info: FC<InfoProps> = ({ myProfile, userProfile }) => {
 
   const openModal = (e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.KeyboardEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    dispatch(showModal({ content: MODAL_TYPE.FILL_USER_PROFILE, closeOnOverlayClick: false }));
+    dispatch(showModal({ content: MODAL_TYPE.FILL_USER_PROFILE }));
   };
+
   const messageUser = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     e.preventDefault();
     dispatch(showModal({ content: MODAL_TYPE.WRITE_MESSAGE }));
   };
+
   const connectUser = () => console.log('connect');
 
   return (
     <div className={styles.personal}>
       {myProfile && <IconSVG name={'editIcon'} className={styles.editIcon} onClick={openModal} />}
-      <div className={styles.mainInfo}>
-        <Heading tagType="h4">{`${userData.firstName} ${userData.lastName}`}</Heading>
-        <span className={styles.experience}>{userData.fieldOfExpertise}</span>
+
+      <div className={styles.infoButtons}>
+        <div className={styles.mainInfo}>
+          <div className={styles.name}>{userData.name}</div>
+          <div className={styles.experience}>{userData.background}</div>
+          <div className={styles.experience}>{userData.experience}</div>
+        </div>
         {userProfile && (
           <div className={styles.connectionBtns}>
             <Button label={'Message'} size={'small'} color={'orangeLight'} onClick={messageUser}></Button>
@@ -71,38 +105,38 @@ const Info: FC<InfoProps> = ({ myProfile, userProfile }) => {
       </div>
       <div className={styles.otherInfo}>
         <div className={styles.infoRow}>
-          <span className={styles.title}>Location :</span>
-          <span className={styles.detail}>{provinceName}</span>
+          <div className={styles.title}>Location :</div>
+          <div className={styles.detail}>{userData.location}</div>
         </div>
         <div className={styles.infoRow}>
-          <span className={styles.title}>Birthday :</span>
+          <div className={styles.title}>Birthday :</div>
           <div className={styles.detail}>
-            {format(new Date(birthDate.getTime() + birthDate.getTimezoneOffset() * 60000), 'MMMM d, yyyy')}
+            {format(
+              new Date(userData.birthday.getTime() + userData.birthday.getTimezoneOffset() * 60000),
+              'MMMM d, yyyy'
+            )}
           </div>
         </div>
         <div className={styles.infoRow}>
-          <span className={styles.title}>Bio&nbsp;:</span>
-          <p className={styles.detail}>{userData.bio}</p>
+          <div className={styles.title}>Bio&nbsp;:</div>
+          <div className={styles.detail}>{userData.bio}</div>
         </div>
         <div className={styles.infoRow}>
-          <span className={styles.title}>Spoken language :</span>
+          <div className={styles.title}>Spoken language :</div>
           <div className={styles.languageDetail}>
-            {userData.spokenLanguage &&
-              userData.spokenLanguage.map((item: string) => {
-                return (
-                  <span key={item} className={styles.languageItem}>
-                    {item}
-                  </span>
-                );
-              })}
+            {userData.language.map((item, index) => {
+              return (
+                <div key={index} className={styles.languageItem}>
+                  {item}
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className={styles.socials}>
-          {socialsList &&
-            socialsList.map((item) => {
-              if (!item.href) return;
-              return <Icon key={item.type} href={item.href} type={item.type} className={styles.icons} />;
-            })}
+          {userData.socialsList.map((item) => (
+            <Icon key={item.type} href={item.href} type={item.type} className={item.className} />
+          ))}
         </div>
       </div>
     </div>

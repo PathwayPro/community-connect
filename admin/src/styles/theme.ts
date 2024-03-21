@@ -4,13 +4,13 @@ export const myTheme = {
   ...defaultTheme,
   palette: {
     primary: {
-      main: '#5932ea',
+      main: '#374983',
     },
     secondary: {
-      main: '#F97794',
+      main: '#374983',
     },
     error: {
-      main: '#c83532',
+      main: '#374983',
     },
   },
   typography: {
@@ -32,9 +32,11 @@ export const myTheme = {
     RaMenu: {
       styleOverrides: {
         root: {
+          margin: '40px 0px',
+          backgroundColor: '#E1E4EC',
+          borderRadius: '8px',
           '&.RaMenu-open': {
-            paddingLeft: '20px',
-            paddingRight: '20px',
+            padding: '5px 5px',
           },
         },
       },
@@ -42,16 +44,17 @@ export const myTheme = {
     RaMenuItemLink: {
       styleOverrides: {
         root: {
-          borderRadius: '10px',
-          margin: '5px 0',
+          borderRadius: '8px',
+          margin: '1px 0',
+          color: '#000 !important',
+          padding: '10px',
           '&:hover': {
-            backgroundColor: '#F97794',
+            backgroundColor: '#FCBC5C',
           },
           '&.RaMenuItemLink-active': {
-            backgroundColor: '#5932ea',
-            color: '#ffffff !important',
+            backgroundColor: '#FCBC5C',
             '&:hover': {
-              backgroundColor: '#5932ea',
+              backgroundColor: '#FCBC5C',
             },
           },
         },

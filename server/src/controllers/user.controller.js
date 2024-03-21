@@ -1,7 +1,13 @@
+/* eslint-disable no-console */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/no-extraneous-dependencies */
 const httpStatus = require('http-status');
+const { initializeApp, cert } = require('firebase-admin/app');
+const { getStorage, getDownloadURL } = require('firebase-admin/storage');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
 const { userService, userRoleService } = require('../services');
+const serviceAccount = require('../config/serviceAccountKey');
 
 const createUser = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
@@ -9,7 +15,7 @@ const createUser = catchAsync(async (req, res) => {
 });
 
 const getUsers = catchAsync(async (req, res) => {
-  const filter = JSON.parse(req.query.filter);
+  const filter = req.query.filter ? JSON.parse(req.query.filter) : {};
   const result = await userService.queryUsers(filter);
   res.send(result.rows);
 });
@@ -33,20 +39,61 @@ const deleteUser = catchAsync(async (req, res) => {
 });
 
 const getProfile = catchAsync(async (req, res) => {
+  const user = await userService.getUserById(req.user.id);
   const userProfile = await userService.getUserProfileByUserId(req.user.id);
-  if (!userProfile) {
+  if (!userProfile || !user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User Profile not found');
   }
-  res.send(userProfile);
+  res.send({ userProfile, user });
+});
+
+const getProfileByUserId = catchAsync(async (req, res) => {
+  const user = await userService.getUserById(req.params.id);
+  const userProfile = await userService.getUserProfileByUserId(req.params.id);
+  if (!userProfile || !user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User Profile not found');
+  }
+  res.send({ userProfile, user });
 });
 
 const createOrUpdateProfile = catchAsync(async (req, res) => {
-  const userProfile = await userService.createOrUpdateProfile(req.user.id, req.body);
+  const fullUserProfile = await userService.createOrUpdateProfile(req.user.id, req.body);
 
   const userRole = await userRoleService.getRoleByName('user');
-  await userRoleService.createUserRole(userProfile.userId, userRole.id);
+  await userRoleService.createOrUpdateUserRole(fullUserProfile.userProfile.userId, userRole.id);
 
-  res.status(httpStatus.CREATED).send({ profile: userProfile, role: userRole });
+  res.status(httpStatus.CREATED).send(fullUserProfile);
+});
+
+const uploadFile = catchAsync(async (req, res) => {
+  console.log('req.file', serviceAccount);
+  initializeApp({
+    credential: cert(serviceAccount),
+    storageBucket: 'gs://community-connect-1c332.appspot.com',
+  });
+
+  const storage = getStorage();
+  const bucket = storage.bucket();
+
+  const { file } = req;
+  if (file) {
+    const blob = bucket.file(file.originalname);
+
+    const blobWriter = blob.createWriteStream({
+      metadata: {
+        contentType: file.mimetype,
+      },
+    });
+    blobWriter.on('error', (err) => console.log(err));
+    blobWriter.on('finish', () => {
+      const fileRef = bucket.file(file.originalname);
+      getDownloadURL(fileRef).then((url) => {
+        // TODO: Save the file URL in DB
+        res.status(200).json({ message: 'File uploaded successfully!', url });
+      });
+    });
+    blobWriter.end(file.buffer);
+  }
 });
 
 module.exports = {
@@ -57,4 +104,6 @@ module.exports = {
   deleteUser,
   createOrUpdateProfile,
   getProfile,
+  uploadFile,
+  getProfileByUserId,
 };

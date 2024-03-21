@@ -114,4 +114,8 @@
       @include disabled-styles;
     }
   }
+
+  &.grey {
+    background-color: colors.$white-normal-hover;
+  }
 }

@@ -1,6 +1,5 @@
 const httpStatus = require('http-status');
-const { Province } = require('../models');
-const { Country } = require('../models');
+const { Country, Interest, Province } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 const getCountries = async () => {
@@ -21,7 +20,17 @@ const getProvinces = async () => {
   }
 };
 
+const getInterests = async () => {
+  try {
+    const interests = await Interest.findAll({ attributes: ['id', 'name'] });
+    return interests;
+  } catch (error) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Failed to retrieve interests');
+  }
+};
+
 module.exports = {
   getProvinces,
   getCountries,
+  getInterests,
 };

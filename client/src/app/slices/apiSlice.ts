@@ -81,7 +81,7 @@ export const apiSlice = createApi({
         method: 'POST',
         body: data,
       }),
-      transformResponse: (response: { user: IUser; token: string; roles: Record<'name', string>[] }) => {
+      transformResponse: (response: { user: IUser; token: string; roles: Record<'name', string>[]; }) => {
         const rolesArray = response.roles.map((role) => role.name);
         return { user: { ...response.user, roles: rolesArray }, token: response.token };
       },
@@ -165,12 +165,49 @@ export const apiSlice = createApi({
       }),
     }),
 
+    getUserProfile: builder.query({
+      query: () => '/v1/users/profile',
+    }),
+
     // Utils
     getCountries: builder.query({
       query: () => '/v1/utils/countries',
     }),
+    // Firebase
+    uploadImage: builder.mutation({
+      query: (data) => ({
+        url: `/v1/users/firebase`,
+        method: 'POST',
+        body: data,
+      }),
+    }),
     getProvinces: builder.query({
       query: () => '/v1/utils/provinces',
+    }),
+    getInterests: builder.query({
+      query: () => '/v1/utils/interests',
+    }),
+    // Posts
+    getPosts: builder.query({
+      query: () => '/v1/posts',
+    }),
+    addLikeToPost: builder.mutation({
+      query: (postId) => ({
+        url: `/v1/posts/${postId}/like`,
+        method: 'POST',
+      }),
+    }),
+    // Reposts
+    createRepost: builder.mutation({
+      query: ({ postId, content }) => ({
+        url: `/v1/posts/${postId}/reposts`,
+        method: 'POST',
+        body: { content },
+      }),
+    }),
+    // Posts & Reposts by userId
+    getUserContent: builder.query({
+      query: (userId) => `/v1/users/${userId}/content`,
     }),
   }),
 });
@@ -184,10 +221,17 @@ export const {
   useVerifyEmailMutation,
   useForgotPasswordMutation,
   useResetPasswordMutation,
-  useLogoutQuery,
+  useLazyLogoutQuery,
   useApplyForMentorshipMutation,
   useBecomeMentorMutation,
   useCreateUserProfileMutation,
+  useGetUserProfileQuery,
   useGetCountriesQuery,
+  useUploadImageMutation,
   useGetProvincesQuery,
-} = apiSlice;
+  useGetInterestsQuery,
+  useGetPostsQuery,
+  useAddLikeToPostMutation,
+  useCreateRepostMutation,
+  useGetUserContentQuery,
+};

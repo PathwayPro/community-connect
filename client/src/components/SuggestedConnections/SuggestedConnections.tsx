@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import ButtonLink from '../../common/components/ButtonLink/ButtonLink';
 import SideBlock from '../../common/components/SideBlock/SideBlock';
 
 import SuggestedConnection from './SuggestedConnection/SuggestedConnection';
@@ -33,6 +34,9 @@ const SuggestedConnections: FC = () => {
                 position={connection.position}
               />
             ))}
+      </div>
+      <div className={styles.buttonWrapper}>
+        <ButtonLink label="View all connections" size={'small'} color={'orangeLight'} to="/" />
       </div>
     </SideBlock>
   );

@@ -1,19 +1,60 @@
 @use '../../styles/colors';
+@use '../../styles/fonts';
 @use '../../styles/mixins';
 
 .container {
-  position: relative;
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1000;
 }
 
 .toast {
-  background-color: colors.$orange-light-hover;
-  border-radius: 5px;
-  position: absolute;
-  top: 15px;
-  right: 0px;
-  width: 200px;
-  height: 65px;
-  cursor: pointer;
-
   @extend %flex-center;
+  align-items: center;
+  border-radius: 5px;
+  min-width: 324px;
+  min-height: 48px;
+  cursor: pointer;
+  padding: 8px 16px;
+  transition: opacity 0.3s, visibility 0.3s;
+
+  &.info {
+    background-color: colors.$blue-light;
+    color: colors.$black;
+  }
+
+  &.success {
+    background-color: colors.$success-bg;
+    color: colors.$black;
+  }
+
+  &.warning {
+    background-color: colors.$orange-light;
+    color: colors.$black;
+  }
+
+  &.error {
+    background-color: colors.$error-bg;
+    color: colors.$black;
+  }
+
+  .icon {
+    margin-right: 12px;
+  }
+
+  .message {
+    flex: 1;
+    text-align: center;
+  }
+
+  .close-button {
+    margin-left: 12px;
+    cursor: pointer;
+  }
+}
+
+.toastHidden {
+  opacity: 0;
+  visibility: hidden;
 }

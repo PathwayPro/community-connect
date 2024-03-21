@@ -1,12 +1,13 @@
 import { FC, useState } from 'react';
-import { useForm, UseFormRegister, UseFormSetValue, SubmitHandler, FieldErrors, Control } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useForm, UseFormRegister, UseFormSetValue, UseFormWatch, SubmitHandler, FieldErrors, Control } from 'react-hook-form';
 
 import { useAppDispatch } from '../../app/hooks';
 import { useCreateUserProfileMutation } from '../../app/slices/apiSlice';
 import { setUserRole } from '../../app/slices/authSlice';
 import { closeModal } from '../../app/slices/modalSlice';
-import { setUserProfile } from '../../app/slices/userProfileSlice';
+import { setUserData } from '../../app/slices/userSlice';
+
 import Button from '../../common/components/Button/Button';
 import Heading from '../../common/components/Heading/Heading';
 import { ERROR_MESSAGES } from '../../common/utils/errors';
@@ -34,6 +35,7 @@ export interface StepRegisterProps extends StepGeneralProps {
 
 export interface StepAllProps extends StepControlProps, StepRegisterProps {
   setValue: UseFormSetValue<IFormInput>;
+  watch: UseFormWatch<IFormInput>;
 }
 
 const formId = 'fillUserProfile';
@@ -49,6 +51,7 @@ const FillUserProfileForm: FC = () => {
     control,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<IFormInput>({
     mode: 'onChange',
@@ -57,31 +60,59 @@ const FillUserProfileForm: FC = () => {
     },
   });
 
+  const getLanguages = (languages: { value: string; }[]) => {
+    const languagesArray = languages.map((l) => l.value);
+    return languagesArray;
+  };
+
+  const getExpertises = (expertises: { value: string; }[]) => {
+    const items = expertises.map((e) => e.value);
+    return items.join(", ");
+  };
+
+  const getInterests = (interests: { value: string; }[]) => {
+    const interestsArray = interests.map((i) => i.value);
+    return interestsArray;
+  };
+
   const [createProfile] = useCreateUserProfileMutation();
 
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
     if (step != 4) {
       setStep((prevStep) => prevStep + 1);
     } else {
-      const { spokenLanguage, ...profileData } = values;
+      const { birthDate, spokenLanguage, fieldOfExpertise, interestList, ...profileData } = values;
 
-      const laguagesArray = spokenLanguage ? spokenLanguage?.replaceAll(' ', '').split(',') : [];
+      // const laguagesArray = spokenLanguage ? spokenLanguage?.replaceAll(' ', '').split(',') : [];
+      let languagesArray: string[] = [];
+      if (spokenLanguage) {
+        languagesArray = getLanguages(spokenLanguage);
+      }
 
-      const dataToSend = {
+      let fieldOfExpertiseString = "";
+      if (fieldOfExpertise) {
+        fieldOfExpertiseString = getExpertises(fieldOfExpertise);
+      }
+
+      let interestsArray: string[] = [];
+      if (interestList) {
+        interestsArray = getInterests(interestList);
+      }
+      // TODO If birthDate were passed, update it to the proper date format (replace new Date())
+      const birtDateToDate = birthDate || null;
+      await createProfile({
         ...profileData,
-        spokenLanguage: laguagesArray,
-      };
-      delete dataToSend.image;
-      delete dataToSend.resume;
-
-      await createProfile({ ...profileData, spokenLanguage: laguagesArray })
+        birthDate: birtDateToDate,
+        spokenLanguage: languagesArray,
+        fieldOfExpertise: fieldOfExpertiseString,
+        interests: interestsArray,
+      })
         .unwrap()
-        .then((response) => {
-          dispatch(setUserProfile(dataToSend));
-          dispatch(setUserRole(response.role.name));
+        .then((data) => {
+          // TODO: save profile data to the store
           dispatch(closeModal());
-
-          navigate('/home');
+          dispatch(setUserData(data));
+          console.log(data);
         })
         .catch((error) => {
           if (error?.data?.message) {
@@ -94,7 +125,7 @@ const FillUserProfileForm: FC = () => {
   };
 
   return (
-    <form>
+    <form className={styles.form}>
       <Heading tagType="h4" className={styles.title}>
         {step === 1 && 'Welcome!'}
         {step === 2 && 'Social Media'}
@@ -105,7 +136,14 @@ const FillUserProfileForm: FC = () => {
       <ProgressBar step={step} />
       <div className={styles.content}>
         {step === 1 && (
-          <Step1 register={register} formId={formId} errors={errors} control={control} setValue={setValue} />
+          <Step1
+            register={register}
+            formId={formId}
+            errors={errors}
+            control={control}
+            setValue={setValue}
+            watch={watch}
+          />
         )}
         {step === 2 && <Step2 register={register} formId={formId} errors={errors} />}
         {step === 3 && <Step3 register={register} formId={formId} errors={errors} />}

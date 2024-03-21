@@ -6,7 +6,7 @@ export interface IFormInput {
   isBirthDateVisible?: boolean;
   githubURL?: string;
   goal?: string;
-  fieldOfExpertise?: string;
+  fieldOfExpertise?: { value: string; }[];
   firstName: string;
   instagramURL?: string;
   lastName: string;
@@ -14,8 +14,9 @@ export interface IFormInput {
   provinceId?: number;
   countryId?: number;
   resume?: FileList;
-  spokenLanguage?: string;
+  spokenLanguage?: { value: string; }[];
   twitterURL?: string;
-  timeInCanada?: string;
-  yearsOfExperience?: string;
+  timeInCanada?: number;
+  yearsOfExperience?: number;
+  interestList?: { value: string; }[];
 }

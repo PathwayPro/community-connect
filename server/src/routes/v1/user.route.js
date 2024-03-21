@@ -1,9 +1,12 @@
 const express = require('express');
+const multer = require('multer');
 const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
 const userValidation = require('../../validations/user.validation');
 const userController = require('../../controllers/user.controller');
+const { getPostsByUserId, getPostsAndRepostsByUserId } = require('../../controllers/post.controller');
 
+const upload = multer({ storage: multer.memoryStorage() });
 const router = express.Router();
 
 router
@@ -16,11 +19,19 @@ router
   .get(auth(), userController.getProfile)
   .post(auth(), validate(userValidation.createProfile), userController.createOrUpdateProfile);
 
+router.route('/firebase').post(auth(), upload.single('file'), userController.uploadFile);
+router.route('/profile/:id').get(auth(), userController.getProfileByUserId);
+
 router
-  .route('/:userId')
+  .route('/:id')
   .get(auth('getUsers'), validate(userValidation.getUser), userController.getUser)
   .patch(auth('manageUsers'), validate(userValidation.updateUser), userController.updateUser)
   .delete(auth('manageUsers'), validate(userValidation.deleteUser), userController.deleteUser);
+
+// Get all posts by a specific user
+router.route('/:userId/posts').get(auth(), getPostsByUserId);
+// Get all posts and reposts by a specific user
+router.route('/:userId/content').get(auth(), getPostsAndRepostsByUserId);
 
 module.exports = router;
 

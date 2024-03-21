@@ -20,7 +20,7 @@ const getUsers = {
 
 const getUser = {
   params: Joi.object().keys({
-    id: Joi.string().custom(objectId),
+    id: Joi.number().integer(),
   }),
 };
 
@@ -48,7 +48,8 @@ const createProfile = {
     spokenLanguage: Joi.array().allow('', null).items(Joi.string()).optional(),
     fieldOfExpertise: Joi.string().required(),
     yearsOfExperience: Joi.string().required(),
-    bio: Joi.string().required(),
+    interests: Joi.array().allow('', null).items(Joi.string()).optional(),
+    bio: Joi.string().allow('').optional(),
     linkedInURL: Joi.string().allow('').uri().optional(),
     instagramURL: Joi.string().allow('').uri().optional(),
     twitterURL: Joi.string().allow('').uri().optional(),

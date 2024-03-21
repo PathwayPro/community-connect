@@ -3,6 +3,10 @@
 @use '../../common/styles/fonts';
 @use '../../common/styles/media';
 
+.form {
+  padding: 5rem;
+}
+
 .title {
   margin-bottom: 20px;
   text-align: center;
@@ -50,6 +54,7 @@
 
 .formFieldWide {
   width: 614px;
+
   @include media.media-s {
     width: 300px;
   }
@@ -142,4 +147,36 @@
 
 .avatar {
   @extend %visually-hidden;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.items {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin: 4px 0 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  background-color: colors.$orange-normal;
+  padding: 0px 12px;
+  margin-left: 1px;
+  border-radius: 16px;
+  color: white;
+}
+
+.itemIcon {
+  margin-bottom: -0.05rem;
+  cursor: pointer;
+}
+
+.interests {
+  width: auto;
 }

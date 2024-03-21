@@ -1,9 +1,8 @@
 import classNames from 'classnames';
 import { FC, useEffect, useState } from 'react';
-import { Controller } from 'react-hook-form';
-
-import { useGetCountriesQuery } from '../../app/slices/apiSlice';
+import { useFieldArray, Controller } from 'react-hook-form';
 import { useGetProvincesQuery } from '../../app/slices/apiSlice';
+import { useGetCountriesQuery, useGetProvincesQuery, useGetInterestsQuery } from '../../app/slices/apiSlice';
 import Dropdown from '../../common/components/Dropdown/Dropdown';
 import Input from '../../common/components/Input/Input';
 import Textarea from '../../common/components/Textarea/Textarea';
@@ -11,50 +10,144 @@ import { fileSize, imageFileFormat } from '../../common/utils/filesValidation';
 import {
   NAME_REGEX,
   ERROR_MESSAGE_NAME,
-  BIRTHDATE_REGEX,
-  ERROR_MESSAGE_BIRTHDATE,
-  LANGUAGES_REGEX,
-  LANGUAGES_MESSAGE_NAME,
 } from '../../common/utils/formComponentsUtils';
 import { years } from '../../common/utils/userProfile';
 
 import { StepAllProps, styles } from './FillUserProfileForm';
+
+import { ReactComponent as XIcon } from '../../images/Icon/x.svg';
 
 interface OptionType {
   value: string;
   label: string;
 }
 
-const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }) => {
-  const [preparedCountries, setPreparedCountries] = useState([] as OptionType[]);
+const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, watch }) => {
+  const {
+    fields: languageFields,
+    append: languageAppend,
+    remove: languageRemove,
+  } = useFieldArray({
+    control,
+    name: "spokenLanguage",
+  });
+  const {
+    fields: expertiseFields,
+    append: expertiseAppend,
+    remove: expertiseRemove,
+  } = useFieldArray({
+    control,
+    name: "fieldOfExpertise",
+    rules: {
+      required: "Field of expertise is required",
+    },
+  });
+  const {
+    fields: interestFields,
+    append: interestAppend,
+    remove: interestRemove,
+  } = useFieldArray({
+    control,
+    name: "interestList",
+  });
+
+  const languages = watch("spokenLanguage");
+  const expertises = watch("fieldOfExpertise");
+  const interests = watch("interestList");
+
+  const [language, setLanguage] = useState('');
+  const languageOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setLanguage(value);
+  };
+  const languageOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const { key } = e;
+    const trimmedInput = language.trim();
+
+    if ((key === ',' || key === "Enter") && trimmedInput.length) {
+      e.preventDefault();
+      if (!findDuplicate(trimmedInput, languages)) return;
+      languageAppend({ value: trimmedInput });
+      setLanguage('');
+    }
+  };
+
+  const [expertise, setExpertise] = useState('');
+  const expertiseOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setExpertise(value);
+  };
+  const expertiseOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const { key } = e;
+    const trimmedInput = expertise.trim();
+
+    if ((key === ',' || key === "Enter") && trimmedInput.length) {
+      e.preventDefault();
+      if (!findDuplicate(trimmedInput, expertises)) return;
+      expertiseAppend({ value: trimmedInput });
+      setExpertise('');
+    }
+  };
+
+  const interestOnChange = (newValue: any) => {
+    if (!findDuplicate(newValue, interests)) return;
+    interestAppend({ value: newValue });
+  };
+
+  const findDuplicate = (input: string, array: { value: string; }[] | undefined) => {
+    const newArray = [];
+    if (array === undefined) return true;
+    for (const item of array) {
+      newArray.push(item.value);
+    }
+    if (newArray.includes(input)) {
+      return false;
+    }
+    return true;
+  };
+
+  // Get countries list
+  const [preparedValues, setPreparedValues] = useState([] as OptionType[]);
   const [preparedProvinces, setPreparedProvinces] = useState([] as OptionType[]);
-
-  const { data: countriesQuery } = useGetCountriesQuery({});
+  const [preparedInterests, setPreparedInterests] = useState([] as OptionType[]);
+  const { data: contriesQuery } = useGetCountriesQuery({});
   const { data: provincesQuery } = useGetProvincesQuery({});
-
-  useEffect(() => {
-    if (!countriesQuery) return;
-    const preparedCountriesList: OptionType[] = countriesQuery
-      .map((element: Record<string, string>) => {
-        const preparedElement: OptionType = { value: '', label: '' };
-        preparedElement.value = element.id;
-        preparedElement.label = element.country;
-        return preparedElement;
-      })
-      .sort((a: OptionType, b: OptionType) => a.label.localeCompare(b.label));
-    setPreparedCountries(preparedCountriesList);
-  }, [countriesQuery]);
+  const { data: interestsQuery } = useGetInterestsQuery({});
 
   useEffect(() => {
     if (!provincesQuery) return;
-    const preparedProvincesList: OptionType[] = provincesQuery.map((element: Record<string, string>) => {
+    const preparedProvinces: OptionType[] = provincesQuery.map((element: Record<string, string>) => {
+      const preparedElement: OptionType = { value: '', label: '' };
+      preparedElement.value = element.id;
+      preparedElement.label = `${element.provinceAndTerritory}, ${element.abbreviation}`;
+      return preparedElement;
+    });
+    setPreparedProvinces(preparedProvinces);
+  }, [provincesQuery]);
+  useEffect(() => {
+    if (!contriesQuery) return;
+    const preparedValues1: OptionType[] = contriesQuery.map((element: Record<string, string>) => {
       const preparedElement: OptionType = { value: '', label: '' };
       preparedElement.value = element.id;
       preparedElement.label = element.provinceAndTerritory;
       return preparedElement;
     });
-    setPreparedProvinces(preparedProvincesList);
-  }, [provincesQuery]);
+    preparedValues1.sort((a, b) => a.label.localeCompare(b.label));
+    setPreparedValues(preparedValues1);
+    return;
+  }, [contriesQuery]);
+  useEffect(() => {
+    if (!interestsQuery) return;
+    const preparedValues2: OptionType[] = interestsQuery.map((element: Record<string, string>) => {
+      const preparedElement: OptionType = { value: '', label: '' };
+      preparedElement.value = element.name;
+      preparedElement.label = element.name;
+      return preparedElement;
+    });
+    preparedValues2.sort((a, b) => a.label.localeCompare(b.label));
+    setPreparedInterests(preparedValues2);
+    return;
+  }, [interestsQuery]);
 
   // TODO: add file preview
   // TODO: save file to the redux store because when you back / forward files are not saving and you need to upload files again
@@ -89,46 +182,12 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
   });
 
   const birthDate = register('birthDate', {
-    pattern: {
-      value: BIRTHDATE_REGEX,
-      message: ERROR_MESSAGE_BIRTHDATE,
-    },
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-      let { value } = e.target;
-      if (
-        (e.nativeEvent instanceof InputEvent && e.nativeEvent.inputType === 'deleteContentBackward') ||
-        (e.nativeEvent instanceof KeyboardEvent && e.nativeEvent.key === 'Backspace')
-      ) {
-        return;
-      }
-      // TODO: fix unexpected behaviour: if delete some numbers from from year and month string will be updated incorrectly
-      value = value.replace(/[^0-9]/g, ''); // allow only numbers
-      if (value.length >= 4) {
-        value = value.slice(0, 4) + '/' + value.slice(4);
-
-        if (value.length >= 7) {
-          value = value.slice(0, 7) + '/' + value.slice(7);
-        }
-      }
-
-      setValue('birthDate', value);
+      setValue('birthDate', e.target.value);
     },
   });
 
-  const spokenLanguage = register('spokenLanguage', {
-    pattern: {
-      value: LANGUAGES_REGEX,
-      message: LANGUAGES_MESSAGE_NAME,
-    },
-  });
-
-  const fieldOfExpertise = register('fieldOfExpertise', {
-    required: 'Field of expertise is required',
-  });
-
-  const bio = register('bio', {
-    required: 'Bio is required',
-  });
+  const bio = register('bio', {});
 
   return (
     <>
@@ -213,7 +272,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
             name={birthDate.name}
             id={`${formId}-${birthDate.name}`}
             label="Date of Birth"
-            placeholder="yyyy/mm/dd"
+            type="date"
             className={styles.formField}
             onChange={(e) => birthDate.onChange(e)}
             onBlur={birthDate.onBlur}
@@ -238,28 +297,60 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
           </fieldset>
         </div>
 
-        <Input
-          name={spokenLanguage.name}
-          id={`${formId}-${spokenLanguage.name}`}
-          label="Spoken languages"
-          placeholder="List separated by commas"
-          className={styles.formField}
-          onChange={spokenLanguage.onChange}
-          onBlur={spokenLanguage.onBlur}
-          ref={spokenLanguage.ref}
-          errorMessage={errors.spokenLanguage?.message}
-        />
+        <div className={styles.column}>
+          <Input
+            label="Spoken languages"
+            name={"spokenLanguage"}
+            id={`${formId}-spokenLanguage`}
+            value={language}
+            placeholder="List separated by commas"
+            className={styles.formField}
+            onChange={languageOnChange}
+            onKeyDown={languageOnKeyDown}
+          />
+          {languages && (
+            <div className={styles.items}>
+              {languageFields.map((item, index) => {
+                return (
+                  <span key={item.id} className={styles.item}>
+                    {languages[index].value}
+                    <XIcon className={styles.itemIcon} onClick={() => languageRemove(index)} />
+                  </span>
+                );
+              })}
+            </div>
+          )}
+        </div>
       </div>
-      <div className={styles.formRow}>
+      <Controller
+        name="yearsOfExperience"
+        control={control}
+        rules={{
+          required: 'Years of experience are required',
+        }}
+        render={({ field }) => (
+          <Dropdown
+            name={field.name}
+            id={`${formId}-${field.name}`}
+            label="Years of experience *"
+            options={years}
+            className={styles.formField}
+            onChange={field.onChange}
+            onBlur={field.onBlur}
+            errorMessage={errors.yearsOfExperience?.message}
+          />
+        )}
+      />
+      <div className={styles.column}>
         <Input
-          name={fieldOfExpertise.name}
-          id={`${formId}-${fieldOfExpertise.name}`}
           label="Field of expertise *"
-          className={styles.formField}
-          onChange={fieldOfExpertise.onChange}
-          onBlur={fieldOfExpertise.onBlur}
-          ref={fieldOfExpertise.ref}
-          errorMessage={errors.fieldOfExpertise?.message}
+          name={"fieldOfExpertise"}
+          id={`${formId}-fieldOfExpertise`}
+          value={expertise}
+          placeholder="List separated by commas"
+          onChange={expertiseOnChange}
+          onKeyDown={expertiseOnKeyDown}
+          errorMessage={errors.fieldOfExpertise?.root?.message}
         />
         <Controller
           name="yearsOfExperience"
@@ -279,20 +370,52 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue }
               errorMessage={errors.yearsOfExperience?.message}
             />
           )}
+        {expertises && (
+          <div className={styles.items}>
+            {expertiseFields.map((item, index) => {
+              return (
+                <span key={item.id} className={styles.item}>
+                  {expertises[index].value}
+                  <XIcon className={styles.itemIcon} onClick={() => expertiseRemove(index)} />
+                </span>
+              );
+            })}
+          </div>
+        )}
+      </div>
+      <div className={styles.column}>
+        <Dropdown
+          name={"interestList"}
+          id={`${formId}-interestList`}
+          label="Interests"
+          options={preparedInterests}
+          className={styles.interests}
+          onChange={interestOnChange}
         />
+        {interests && (
+          <div className={styles.items}>
+            {interestFields.map((item, index) => {
+              return (
+                <span key={item.id} className={styles.item}>
+                  {interests[index].value}
+                  <XIcon className={styles.itemIcon} onClick={() => interestRemove(index)} />
+                </span>
+              );
+            })}
+          </div>
+        )}
       </div>
       <div className={styles.formRow}>
         <Textarea
           name={bio.name}
           id={`${formId}-${bio.name}`}
-          label="Bio *"
+          label="Bio"
           rows={3}
           placeholder="Please provide a brief description about yourself."
           className={styles.formField}
           onChange={bio.onChange}
           onBlur={bio.onBlur}
           ref={bio.ref}
-          errorMessage={errors.bio?.message}
         />
       </div>
     </>

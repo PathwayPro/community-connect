@@ -6,11 +6,14 @@ const { Role, UserRole, User } = require('../models');
  * @param {number} roleId
  * @returns {Promise<UserRole>}
  */
-const createUserRole = async (userId, roleId) => {
+const createOrUpdateUserRole = async (userId, roleId) => {
   const createdAt = new Date();
   const updatedAt = new Date();
 
-  return UserRole.create({ userId, roleId, createdAt, updatedAt });
+  return UserRole.findOrCreate({
+    where: { userId, roleId },
+    defaults: { createdAt, updatedAt }
+  });
 };
 
 /**
@@ -43,7 +46,7 @@ const getRolesByUserId = async (userId) => {
 };
 
 module.exports = {
-  createUserRole,
+  createOrUpdateUserRole,
   getRoleByName,
   getRolesByUserId,
 };
