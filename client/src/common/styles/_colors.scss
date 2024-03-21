@@ -1,11 +1,14 @@
 // General
 $black: #000000;
-$black-light: rgba($color: $black, $alpha: 0.5);
+$black-light: rgba(
+  $color: $black,
+  $alpha: 0.5,
+);
 $white: #ffffff;
 $grey-light: #d5d4dc;
 $grey-dark: #636366;
 $grey: #8b849b;
-$green-dark: #719A63;
+$green-dark: #719a63;
 
 $error: #c83532;
 $error-bg: #fbefef;
@@ -59,3 +62,7 @@ $white-dark: #b6bcbc;
 $white-dark-hover: #929797;
 $white-dark-active: #6d7171;
 $white-darker: #555858;
+
+// icons
+$icon-red: #b70b0b;
+$icon-green: #719a63;

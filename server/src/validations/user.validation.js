@@ -12,17 +12,15 @@ const createUser = {
 
 const getUsers = {
   query: Joi.object().keys({
-    name: Joi.string(),
-    role: Joi.string(),
-    sortBy: Joi.string(),
-    limit: Joi.number().integer(),
-    page: Joi.number().integer(),
+    filter: Joi.string(),
+    range: Joi.string().optional(),
+    sort: Joi.string().optional(),
   }),
 };
 
 const getUser = {
   params: Joi.object().keys({
-    id: Joi.string().custom(objectId),
+    id: Joi.number().integer(),
   }),
 };
 
@@ -42,18 +40,21 @@ const updateUser = {
 
 const createProfile = {
   body: Joi.object().keys({
+    firstName: Joi.string().required(),
+    lastName: Joi.string().required(),
     image: Joi.any().optional(),
-    birthDate: Joi.date().optional(),
+    birthDate: Joi.date().allow(null).optional(),
     isBirthDateVisible: Joi.boolean().optional(),
-    spokenLanguage: Joi.array().items(Joi.string()).optional(),
+    spokenLanguage: Joi.array().allow('', null).items(Joi.string()).optional(),
     fieldOfExpertise: Joi.string().required(),
     yearsOfExperience: Joi.string().required(),
-    bio: Joi.string().required(),
-    linkedInURL: Joi.string().uri().optional(),
-    instaURL: Joi.string().uri().optional(),
-    twitterURL: Joi.string().uri().optional(),
-    githubURL: Joi.string().uri().optional(),
-    behanceURL: Joi.string().uri().optional(),
+    interests: Joi.array().allow('', null).items(Joi.string()).optional(),
+    bio: Joi.string().allow('').optional(),
+    linkedInURL: Joi.string().allow('').uri().optional(),
+    instagramURL: Joi.string().allow('').uri().optional(),
+    twitterURL: Joi.string().allow('').uri().optional(),
+    githubURL: Joi.string().allow('').uri().optional(),
+    behanceURL: Joi.string().allow('').uri().optional(),
     resume: Joi.any().optional(),
     timeInCanada: Joi.string().optional(),
     goal: Joi.string().optional(),

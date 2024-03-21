@@ -1,38 +1,33 @@
-import { FC, useState } from 'react';
+import {FC} from 'react';
 
+import {useAppSelector} from "../../app/hooks";
 import Container from '../../common/components/Container/Container';
+import Scroll from '../../common/components/Scroll/Scroll';
 import Connections from '../../components/Connections/Connections';
 import Events from '../../components/Events/Events';
 import Images from '../../components/Images/Images';
 import Info from '../../components/Info/Info';
-import Posts from '../../components/Posts/Posts';
+import UserPosts from '../../components/UserPosts/UserPosts';
 
 import styles from './Profile.module.scss';
 
 const UserProfile: FC = () => {
 
-  // max height for the sections is 1000px
-  const [maxSize, setMaxSize] = useState<number>(1000);
-
-  const handleSizeChange = (size: number) => {
-    // min height for the sections is 360px
-    if (size < maxSize && size < 360) {
-      setMaxSize(360);
-    }
-    else if (size < maxSize) {
-      setMaxSize(size);
-    }
-  };
+  const userData = useAppSelector((state) => state.user);
 
   return (
     <Container>
       <div className={styles.page}>
         <Images myProfile={false} />
-        <Info myProfile={false} userProfile={true} />
+        <Info useData={userData} myProfile={false} userProfile={true} />
         <div className={styles.socials}>
-          <Events maxSize={maxSize} onSizeChange={handleSizeChange} />
-          <Posts myProfile={false} maxSize={maxSize} onSizeChange={handleSizeChange} />
-          <Connections maxSize={maxSize} onSizeChange={handleSizeChange} />
+          <Events itemsToShow={4} />
+          <Scroll>
+            <UserPosts />
+          </Scroll>
+          <Connections maxSize={0} onSizeChange={function (): void {
+            throw new Error('Function not implemented.');
+          } } />
         </div>
       </div>
     </Container>

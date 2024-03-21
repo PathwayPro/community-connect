@@ -29,8 +29,11 @@ const footerLinks: footerLinkItem[] = [
     ],
   },
   {
-    heading: 'Contacts',
-    list: [{ label: 'immigranttechiesab@gmail.com', link: 'mailto:immigranttechiesab@gmail.com', external: true }],
+    heading: 'Community Connect',
+    list: [
+      { label: 'About Us', link: '/about' },
+      { label: 'Contact Us', link: '/contact-us' },
+    ],
   },
 ];
 

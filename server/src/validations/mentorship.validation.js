@@ -6,6 +6,21 @@ const applyForMentorship = {
   }),
 };
 
+const updateMenteeRequest = {
+  body: Joi.object().keys({
+    status: Joi.string().required(),
+    id: Joi.number().required(),
+  }),
+};
+
+const getMenteesRequests = {
+  query: Joi.object().keys({
+    filter: Joi.string(),
+    range: Joi.string().optional(),
+    sort: Joi.string().optional(),
+  }),
+};
+
 const becomeMentor = {
   body: Joi.object().keys({
     fieldOfExpertise: Joi.string().required(),
@@ -16,7 +31,18 @@ const becomeMentor = {
   }),
 };
 
+const getMentorsRequests = {
+  query: Joi.object().keys({
+    filter: Joi.string(),
+    range: Joi.string().optional(),
+    sort: Joi.string().optional(),
+  }),
+};
+
 module.exports = {
   applyForMentorship,
   becomeMentor,
+  updateMenteeRequest,
+  getMenteesRequests,
+  getMentorsRequests,
 };

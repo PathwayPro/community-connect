@@ -1,99 +1,79 @@
-import { FC, useRef, useEffect } from 'react';
+import {FC} from 'react';
+import {useLocation} from 'react-router-dom';
 
-import Scroll from '../../common/components/Scroll/Scroll';
+import ShowRepost from "../Reposts/ShowRepost/ShowRepost";
 
 import AddPost from './AddPost/AddPost';
 import ShowPost from './ShowPost/ShowPost';
 
 import styles from './Posts.module.scss';
 
-import defaultProfileImage from '../../images/Main/defaultProfileImg.svg';
-
-interface PostProps {
+export interface PostWithRepostsProps {
   id: number;
-  date: Date;
   content: string;
+  postDate: string; // or Date if you want it to be a Date object
+  repostDate:string;
+  repostAuthor: {
+    name: string;
+    position: string;
+    content: string;
+  };
+  originalAuthor: {
+    name: string;
+    position: string;
+  };
+  likesCount: number;
+  repostsCount: number;
+  commentsCount: number;
+  reposts: Array<{
+    id: number;
+    repostDate: string; // or Date if you want it to be a Date object
+    user: {
+      name: string;
+      position: string;
+    };
+  }>;
+  type: string;
 }
-const posts: PostProps[] = [
-  {
-    id: 1,
-    date: new Date('2023-01-01'),
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl.',
-  },
-  {
-    id: 2,
-    date: new Date(),
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl.',
-  },
-  {
-    id: 3,
-    date: new Date('2022-10-21'),
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl.',
-  },
-  {
-    id: 4,
-    date: new Date('2023-2-28'),
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl. Nulla euismod, nisl eget ultricies aliquam, quam nisl tincidunt nunc, quis aliquet nisl nunc quis nisl.',
-  },
-];
-
-interface userInfoProps {
-  imgPath?: string;
-  name: string;
-  position: string;
-}
-
-const userInfo: userInfoProps = {
-  imgPath: defaultProfileImage,
-  name: 'Clark Mante',
-  position: 'Technician',
-};
 
 interface PostsProps {
-  myProfile: boolean;
-  maxSize: number;
-  onSizeChange: (size: number) => void;
+  posts: PostWithRepostsProps[];
 }
 
-const Posts: FC<PostsProps> = ({
-  myProfile,
-  maxSize,
-  onSizeChange,
-}) => {
-
-  const postsRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (postsRef.current) {
-      const posts = postsRef.current;
-      const postsHeight = posts.clientHeight;
-      onSizeChange(postsHeight);
-    }
-  }, [onSizeChange]);
-
-return (
-  <div className={posts.length > 0 ? styles.box : styles.emptyBox}>
-    <Scroll className={styles.scroll} height={maxSize}>
-      <div className={styles.posts} ref={postsRef}>
-        {myProfile && <AddPost imgPath={userInfo.imgPath ? userInfo.imgPath : defaultProfileImage} />}
-        {posts.length > 0 && posts.map((post) => (
-          <ShowPost
-            key={post.id}
-            imgPath={userInfo.imgPath ? userInfo.imgPath : defaultProfileImage}
-            name={userInfo.name}
-            position={userInfo.position}
-            date={post.date}
-            content={post.content}
-          />
+const Posts: FC<PostsProps> = ({posts}) => {
+  const location = useLocation();
+  return (
+    <div className={styles.posts}>
+      {location.pathname.includes('/my') && <AddPost imgPath={''}/>}
+      {posts?.length &&
+        posts?.map((post) => (
+          post.type === 'repost'
+            ? <ShowRepost
+              id={post.id}
+              key={post.id}
+              repostName={post.repostAuthor.name}
+              repostPosition={post.repostAuthor.position}
+              repostContent={post.repostAuthor.content}
+              postDate={post.postDate}
+              repostDate={post.repostDate}
+              originalPostAuthorName={post.originalAuthor.name}
+              originalPostAuthorPosition={post.originalAuthor.position} content={post.content}
+              likesCount={post.likesCount}
+              repostsCount={post.repostsCount} commentsCount={post.commentsCount}/>
+            : <ShowPost
+              id={post.id}
+              key={post.id}
+              name={post.originalAuthor.name}
+              position={post.originalAuthor.position}
+              date={post.postDate}
+              content={post.content}
+              likesCount={post.likesCount}
+              repostsCount={post.repostsCount}
+              commentsCount={post.commentsCount}
+            />
         ))}
-      </div>
-    </Scroll>
-  </div>
-);
+    </div>
+  );
 };
 
 export default Posts;

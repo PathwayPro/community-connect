@@ -1,6 +1,8 @@
 import { FC, useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// import SideBlock from '../../common/components/SideBlock/SideBlock';
+
 import Connection from './Connection/Connection';
 
 import styles from './Connections.module.scss';
@@ -17,11 +19,12 @@ interface connectionProps {
 const connectionList: connectionProps[] = [
   { id: 1, imgPath: defaultProfileImage, name: 'Clark Mante', position: 'Technician' },
   { id: 2, imgPath: defaultProfileImage, name: 'Adam Kenedi', position: 'Developer' },
-  { id: 3, imgPath: '', name: 'Hana Allen', position: 'Designer' },
-  { id: 4, imgPath: '', name: 'Hana Allen', position: 'Designer' },
-  { id: 5, imgPath: '', name: 'Hana Allen', position: 'Designer' },
-  { id: 6, imgPath: '', name: 'Hana Allen', position: 'Designer' },
-  { id: 7, imgPath: '', name: 'Hana Allen', position: 'Designer' },
+  { id: 3, imgPath: defaultProfileImage, name: 'Hana Allen', position: 'Designer' },
+  { id: 4, imgPath: defaultProfileImage, name: 'Geoffrey Donnelly', position: 'Developer' },
+  { id: 5, imgPath: defaultProfileImage, name: 'Ivanov Ivan', position: 'Manager' },
+  { id: 6, imgPath: defaultProfileImage, name: 'Tom Jerry', position: 'Testing' },
+  { id: 7, imgPath: defaultProfileImage, name: 'Alen Ford', position: 'Developer' },
+  { id: 8, imgPath: defaultProfileImage, name: 'Mark Smith', position: 'Developer' },
 ];
 
 interface ConnectionsProps {

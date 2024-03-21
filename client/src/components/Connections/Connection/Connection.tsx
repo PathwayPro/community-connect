@@ -1,9 +1,11 @@
 import classNames from 'classnames';
 import { FC } from 'react';
 
-import Button from '../../../common/components/Button/Button';
+// import Avatar from '../../../common/components/Avatar/Avatar';
+import ButtonLink from '../../../common/components/ButtonLink/ButtonLink';
 
 import styles from './Connection.module.scss';
+import Button from '../../../common/components/Button/Button';
 
 export interface connectionProps {
   className?: string;
@@ -30,8 +32,9 @@ const Connection: FC<connectionProps> = ({
       <div className={styles.connection}>
         <img src={imgPath} alt="connection img" className={styles.image} />
         <div className={styles.info}>
-          <div>{name}</div>
-          <div className={styles.position}>{position}</div>
+          <span>{name}</span>
+          <span className={styles.position}>{position}</span>
+          <ButtonLink label={'View Profile'} size={'small'} color={'orange'} to={`/profile/user/${id}`}></ButtonLink>
         </div>
       </div>
       <div className={isRequest ? styles.twoBtns : styles.singleBtn}>

@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import React, { MouseEvent, KeyboardEvent } from 'react';
 
+import { truncateFileName } from '../../../common/utils/truncateUtils';
 import useWindowSize, { BREAKPOINTS } from '../../../common/utils/useWindowSize';
-import IconSVG from '../IconSVG/IconSVG';
+import IconSVG from '../IconSVG/Button/IconSVG';
 
 import styles from './ResumeDownloadInput.module.scss';
 
@@ -15,20 +16,12 @@ interface FileInputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onDeleteClick: (e: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>) => void;
   selectedFile: File | null;
+  progress: number;
+  uploadMessage: string;
 }
 
-const truncateFileName = (fileName: string, maxLength: number): string => {
-  if (fileName.length <= maxLength) {
-    return fileName;
-  }
-
-  const fileFormat = fileName.split('.').pop();
-  const truncatedName = fileName.slice(0, maxLength - 4);
-  return `${truncatedName}[...].${fileFormat}`;
-};
-
 const ResumeDownloadInputInner = (
-  { title, name, id, className = '', errorMessage, onChange, onDeleteClick, selectedFile }: FileInputProps,
+  { title, name, id, className = '', errorMessage, onChange, onDeleteClick, selectedFile, progress, uploadMessage }: FileInputProps,
   ref: React.ForwardedRef<HTMLInputElement>
 ) => {
   const windowSize = useWindowSize();
@@ -38,7 +31,7 @@ const ResumeDownloadInputInner = (
     <>
       {title && <p className={styles.title}>{title}</p>}
       <label htmlFor={id} className={classNames(styles.label, className)} />
-      <div className={styles.inputWrap}>
+      <div className={classNames(styles.inputWrap, selectedFile ? styles.fileUploaded : "")}>
         <input
           type="file"
           id={id}
@@ -48,6 +41,18 @@ const ResumeDownloadInputInner = (
           onChange={onChange}
           ref={ref}
         />
+        <div className={styles.uploadStatus}>
+          {uploadMessage && (
+            <div className={classNames(
+              styles.uploadMessage,
+              uploadMessage === "Upload successful" && styles.successUpload,
+              uploadMessage === "Upload failed" && styles.errorUpload
+            )}>
+              {uploadMessage}
+            </div>
+          )}
+          {progress > 0 && <progress className={styles.uploadProgress} max="100" value={progress} />}
+        </div>
         <span className={styles.fileName}>
           {selectedFile ? truncateFileName(selectedFile.name, maxFileNameLength) : 'No selected File'}
         </span>

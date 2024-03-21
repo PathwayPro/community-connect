@@ -2,13 +2,11 @@ import { FC } from 'react';
 
 import { useAppDispatch } from '../../../app/hooks';
 import { showModal, MODAL_TYPE } from '../../../app/slices/modalSlice';
+import Avatar from '../../../common/components/Avatar/Avatar';
 
 import styles from './AddPost.module.scss';
 
-interface AddPostProps {
-  imgPath: string;
-}
-const AddPost: FC<AddPostProps> = ({ imgPath }) => {
+const AddPost: FC = () => {
   const dispatch = useAppDispatch();
 
   const openPostModal = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -18,7 +16,7 @@ const AddPost: FC<AddPostProps> = ({ imgPath }) => {
 
   return (
     <div className={styles.newPost}>
-      <img src={imgPath} alt="profile" className={styles.image} />
+      <Avatar size="medium" className={styles.image} />
       <input type="text" placeholder="What is in your mind ?" className={styles.input} onClick={openPostModal} />
     </div>
   );

@@ -14,10 +14,7 @@
 }
 
 .image {
-  border: 2px solid colors.$orange-normal;
-  border-radius: 50%;
-  width: 70px;
-  height: 70px;
+  flex-shrink: 0;
 }
 
 .input {

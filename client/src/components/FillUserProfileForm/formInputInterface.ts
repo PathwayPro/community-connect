@@ -1,21 +1,22 @@
 export interface IFormInput {
-  avatar?: FileList;
+  image?: FileList;
   bio?: string;
   behanceURL?: string;
   birthDate?: string;
-  isBirthdayVisible?: boolean;
+  isBirthDateVisible?: boolean;
   githubURL?: string;
   goal?: string;
-  fieldOfExpertise?: string;
+  fieldOfExpertise?: { value: string; }[];
   firstName: string;
   instagramURL?: string;
   lastName: string;
   linkedInURL?: string;
-  province?: string;
-  originCountry?: string;
+  provinceId?: string;
+  countryId?: string;
   resume?: FileList;
-  spokenLanguage?: string;
+  spokenLanguage?: { value: string; }[];
   twitterURL?: string;
   timeInCanada?: number;
   yearsOfExperience?: number;
+  interestList?: { value: string; }[];
 }

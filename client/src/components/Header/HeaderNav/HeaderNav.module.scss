@@ -4,7 +4,7 @@
 @use '../../../common/styles/media';
 
 @mixin margin-right {
-  margin-right: 3.5rem;
+  margin-right: 2.5rem;
 
   @include media.media-xl {
     margin-right: 2rem;
@@ -43,13 +43,13 @@
 
   @include media.media-s {
     flex-direction: column;
+    margin-bottom: 10px;
   }
 }
 
 .navLink {
   @include fonts.navText;
   @include margin-right;
-  text-decoration: none;
 
   &.active,
   &.pending {
@@ -98,4 +98,37 @@
 
 .hidden {
   display: none;
+}
+
+.icons {
+  position: relative;
+  top: -6px;
+  display: flex;
+  gap: 1rem;
+
+  @include media.media-s {
+    top: 0;
+  }
+}
+
+.input {
+  background: colors.$white;
+  // width: 100%;
+  // max-width: 300px;
+  width: 300px;
+  height: 48px;
+  margin: 0 1.5rem;
+  padding: 12px;
+  border: 1px solid #d5d4dc;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+
+  @include fonts.mainText;
+}
+
+@media (max-width: 768px) {
+  .input {
+    margin: 1rem 1rem;
+  }
 }

@@ -1,11 +1,12 @@
-import { useState, useRef, FC } from 'react';
+import { useState, useEffect, useRef, FC } from 'react';
 
 import Alert from '../../common/components/Alert/Alert';
-import IconSVG from '../../common/components/IconSVG/IconSVG';
+import IconSVG from '../../common/components/IconSVG/Button/IconSVG';
 
 import styles from './Images.module.scss';
 
-import defaultProfileImage from '../../images/Main/defaultProfileImg.svg';
+import Avatar from '../../common/components/Avatar/Avatar';
+import { useUploadImageMutation } from '../../app/slices/apiSlice';
 
 
 
@@ -17,11 +18,35 @@ const Images: FC<ImagesProps> = ({ myProfile }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [alertOpen, setAlertOpen] = useState(false);
 
+  useEffect(() => {
+    if (selectedFile) {
+      handleUpload();
+    }
+  }, [selectedFile]);
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const [uploadImage] = useUploadImageMutation();
 
   const handleButtonClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
+    }
+  };
+
+  const handleUpload = async () => {
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+
+      await uploadImage(formData)
+        .unwrap()
+        .then((data: any) => {
+          console.log('File uploaded successfully!', data);
+        })
+        .catch((err: any) => {
+          console.error('Error uploading file:', err);
+        });
     }
   };
 
@@ -46,14 +71,11 @@ const Images: FC<ImagesProps> = ({ myProfile }) => {
     setAlertOpen(false);
   };
 
-  const isProfileImageAvailable = false;
-  const source = !isProfileImageAvailable ? defaultProfileImage : '';
-
   return (
     <div className={styles.container}>
       {selectedFile && <img className={styles.backgroundImage} src={URL.createObjectURL(selectedFile)} />}
 
-      <img className={styles.profileImage} src={source} alt="Your Image" />
+      <Avatar size="big" borderColor="white" className={styles.profileImage} />
 
       {myProfile && <IconSVG name={'editIcon'} className={styles.editIcon} onClick={handleButtonClick} />}
 
@@ -67,8 +89,8 @@ const Images: FC<ImagesProps> = ({ myProfile }) => {
       <Alert
         isOpen={alertOpen}
         onClose={closeAlert}
-        title="Image Aspect Ratio Error!"
-        content="Please choose an image that is 1320 x 250  pixels."
+        title="Image Aspect Ratio Suggestion"
+        content="Please choose an image that is rectangular"
       />
     </div>
   );

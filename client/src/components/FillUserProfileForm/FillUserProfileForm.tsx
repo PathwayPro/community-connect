@@ -1,10 +1,13 @@
 import { FC, useState } from 'react';
-import { useForm, UseFormRegister, UseFormSetValue, SubmitHandler, FieldErrors, Control } from 'react-hook-form';
+import { useForm, UseFormRegister, UseFormSetValue, UseFormWatch, SubmitHandler, FieldErrors, Control } from 'react-hook-form';
 
 import { useAppDispatch } from '../../app/hooks';
+import { useCreateUserProfileMutation } from '../../app/slices/apiSlice';
 import { closeModal } from '../../app/slices/modalSlice';
+import { setUserData } from '../../app/slices/userSlice';
 import Button from '../../common/components/Button/Button';
 import Heading from '../../common/components/Heading/Heading';
+import { ERROR_MESSAGES } from '../../common/utils/errors';
 
 import { IFormInput } from './formInputInterface';
 import ProgressBar from './ProgressBar/ProgressBar';
@@ -29,6 +32,7 @@ export interface StepRegisterProps extends StepGeneralProps {
 
 export interface StepAllProps extends StepControlProps, StepRegisterProps {
   setValue: UseFormSetValue<IFormInput>;
+  watch: UseFormWatch<IFormInput>;
 }
 
 const formId = 'fillUserProfile';
@@ -36,26 +40,82 @@ const formId = 'fillUserProfile';
 const FillUserProfileForm: FC = () => {
   const dispatch = useAppDispatch();
   const [step, setStep] = useState(1);
+  const [errorMessage, setErrorMessage] = useState('');
+
   const {
     register,
     control,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<IFormInput>({
     mode: 'onChange',
     defaultValues: {
-      isBirthdayVisible: false,
+      isBirthDateVisible: false,
     },
   });
 
-  // TODO: send data to backend
+  const getLanguages = (languages: { value: string; }[]) => {
+    const languagesArray = languages.map((l) => l.value);
+    return languagesArray;
+  };
+
+  const getExpertises = (expertises: { value: string; }[]) => {
+    const items = expertises.map((e) => e.value);
+    return items.join(", ");
+  };
+
+  const getInterests = (interests: { value: string; }[]) => {
+    const interestsArray = interests.map((i) => i.value);
+    return interestsArray;
+  };
+
+  const [createProfile] = useCreateUserProfileMutation();
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
     if (step != 4) {
       setStep((prevStep) => prevStep + 1);
     } else {
-      console.log(values);
-      dispatch(closeModal());
+      const { birthDate, spokenLanguage, fieldOfExpertise, interestList, ...profileData } = values;
+
+      // const laguagesArray = spokenLanguage ? spokenLanguage?.replaceAll(' ', '').split(',') : [];
+      let languagesArray: string[] = [];
+      if (spokenLanguage) {
+        languagesArray = getLanguages(spokenLanguage);
+      }
+
+      let fieldOfExpertiseString = "";
+      if (fieldOfExpertise) {
+        fieldOfExpertiseString = getExpertises(fieldOfExpertise);
+      }
+
+      let interestsArray: string[] = [];
+      if (interestList) {
+        interestsArray = getInterests(interestList);
+      }
+      // TODO If birthDate were passed, update it to the proper date format (replace new Date())
+      const birtDateToDate = birthDate || null;
+      await createProfile({
+        ...profileData,
+        birthDate: birtDateToDate,
+        spokenLanguage: languagesArray,
+        fieldOfExpertise: fieldOfExpertiseString,
+        interests: interestsArray,
+      })
+        .unwrap()
+        .then((data) => {
+          // TODO: save profile data to the store
+          dispatch(closeModal());
+          dispatch(setUserData(data));
+          console.log(data);
+        })
+        .catch((error) => {
+          if (error?.data?.message) {
+            setErrorMessage(error?.data?.message);
+          } else {
+            setErrorMessage(ERROR_MESSAGES.SERVER_ERROR);
+          }
+        });
     }
   };
 
@@ -67,10 +127,18 @@ const FillUserProfileForm: FC = () => {
         {step === 3 && 'Resume / CV'}
         {step === 4 && 'Your Goal'}
       </Heading>
+      {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
       <ProgressBar step={step} />
       <div className={styles.content}>
         {step === 1 && (
-          <Step1 register={register} formId={formId} errors={errors} control={control} setValue={setValue} />
+          <Step1
+            register={register}
+            formId={formId}
+            errors={errors}
+            control={control}
+            setValue={setValue}
+            watch={watch}
+          />
         )}
         {step === 2 && <Step2 register={register} formId={formId} errors={errors} />}
         {step === 3 && <Step3 register={register} formId={formId} errors={errors} />}

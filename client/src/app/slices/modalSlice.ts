@@ -8,20 +8,31 @@ export const MODAL_TYPE = {
   SEND_CONFIRMATION_EMAIL: 'sendConfirmationEmail',
   VERIFY_EMAIL: 'verifyEmail',
   FILL_USER_PROFILE: 'fillUserProfile',
-  CONFIRM_EMAIL: 'confirmEmail',
   WRITE_POST: 'writePost',
   WRITE_MESSAGE: 'writeMessage',
+  REPOST: 'repost',
+};
+
+type postData = {
+  id: number;
+  name: string;
+  content: string;
+  position: string;
+  date: string;
+  onRepostSuccess?: () => void;
 };
 
 type initialStateType = {
   content: string;
   isOpen: boolean;
   closeOnOverlayClick: boolean;
+  postData?: postData;
 };
 
 type payloadType = {
   content: string;
   closeOnOverlayClick?: boolean;
+  postData?: postData;
 };
 
 type actionType = {
@@ -48,6 +59,7 @@ const modalSlice = createSlice({
       state.content = action.payload.content;
       state.isOpen = true;
       state.closeOnOverlayClick = action.payload.closeOnOverlayClick ?? initialState.closeOnOverlayClick;
+      state.postData = action.payload.postData;
     },
   },
 });

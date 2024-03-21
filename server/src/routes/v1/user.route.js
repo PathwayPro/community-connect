@@ -1,9 +1,12 @@
 const express = require('express');
+const multer = require('multer');
 const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
 const userValidation = require('../../validations/user.validation');
 const userController = require('../../controllers/user.controller');
+const { getPostsByUserId, getPostsAndRepostsByUserId } = require('../../controllers/post.controller');
 
+const upload = multer({ storage: multer.memoryStorage() });
 const router = express.Router();
 
 router
@@ -16,11 +19,19 @@ router
   .get(auth(), userController.getProfile)
   .post(auth(), validate(userValidation.createProfile), userController.createOrUpdateProfile);
 
+router.route('/firebase').post(auth(), upload.single('file'), userController.uploadFile);
+router.route('/profile/:id').get(auth(), userController.getProfileByUserId);
+
 router
-  .route('/:userId')
+  .route('/:id')
   .get(auth('getUsers'), validate(userValidation.getUser), userController.getUser)
   .patch(auth('manageUsers'), validate(userValidation.updateUser), userController.updateUser)
   .delete(auth('manageUsers'), validate(userValidation.deleteUser), userController.deleteUser);
+
+// Get all posts by a specific user
+router.route('/:userId/posts').get(auth(), getPostsByUserId);
+// Get all posts and reposts by a specific user
+router.route('/:userId/content').get(auth(), getPostsAndRepostsByUserId);
 
 module.exports = router;
 
@@ -272,6 +283,10 @@ module.exports = router;
  *           schema:
  *             type: object
  *             properties:
+ *               firstName:
+ *                 type: string
+ *               lastName:
+ *                 type: string
  *               image:
  *                 type: string
  *                 format: binary
@@ -293,7 +308,7 @@ module.exports = router;
  *               linkedInURL:
  *                 type: string
  *                 format: uri
- *               instaURL:
+ *               instagramURL:
  *                 type: string
  *                 format: uri
  *               twitterURL:
@@ -317,6 +332,8 @@ module.exports = router;
  *               provinceId:
  *                 type: integer
  *             example:
+ *               firstName: "John"
+ *               lastName: "Doe"
  *               birthDate: "1990-12-31"
  *               isBirthDateVisible: true
  *               spokenLanguage: ["English", "Spanish"]
@@ -324,7 +341,7 @@ module.exports = router;
  *               yearsOfExperience: "10"
  *               bio: "I am a web developer"
  *               linkedInURL: "https://linkedin.com/in/my-profile"
- *               instaURL: "https://instagram.com/my-profile"
+ *               instagramURL: "https://instagram.com/my-profile"
  *               twitterURL: "https://twitter.com/my-profile"
  *               githubURL: "https://github.com/my-profile"
  *               behanceURL: "https://behance.net/my-profile"

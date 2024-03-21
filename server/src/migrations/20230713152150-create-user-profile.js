@@ -53,6 +53,9 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      interests: {
+        type: Sequelize.ARRAY(Sequelize.STRING),
+      },
       bio: {
         type: Sequelize.TEXT,
         allowNull: false,
@@ -60,7 +63,7 @@ module.exports = {
       linkedInURL: {
         type: Sequelize.STRING,
       },
-      instaURL: {
+      instagramURL: {
         type: Sequelize.STRING,
       },
       twitterURL: {

@@ -1,5 +1,6 @@
 const httpStatus = require('http-status');
 const { User } = require('../models');
+const db = require('../models');
 const { UserProfile } = require('../models');
 const ApiError = require('../utils/ApiError');
 
@@ -21,16 +22,30 @@ const createUser = async (userBody) => {
 /**
  * Query for users
  * @param {Object} filter - filter
- * @param {Object} options - Query options
- * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
- * @param {number} [options.limit] - Maximum number of results per page (default = 10)
- * @param {number} [options.page] - Current page (default = 1)
  * @returns {Promise<QueryResult>}
  */
-const queryUsers = async (filter, options) => {
-  const users = await User.paginate(filter, options);
-  return users;
+const queryUsers = async (filter) => {
+  const users = await User.findAndCountAll({
+    where: filter,
+    include: [
+      {
+        model: UserProfile,
+        as: 'userProfile',
+        attributes: ['fieldOfExpertise', 'yearsOfExperience'],
+      },
+    ],
+    attributes: { exclude: ['password'] },
+  });
+
+  const result = users.rows.map((user) => ({
+    ...user.dataValues,
+    fieldOfExpertise: user.userProfile ? user.userProfile.fieldOfExpertise : null,
+    yearsOfExperience: user.userProfile ? user.userProfile.yearsOfExperience : null,
+  }));
+
+  return { count: users.count, rows: result };
 };
+
 
 /**
  * Get user by id
@@ -90,15 +105,35 @@ const deleteUserById = async (userId) => {
  * @returns {Promise<UserProfile>}
  */
 const createOrUpdateProfile = async (userId, updateBody) => {
-  const [userProfile, created] = await UserProfile.findOrCreate({
-    where: { userId },
-    defaults: updateBody,
-  });
-  if (!created) {
-    Object.assign(userProfile, updateBody);
-    await userProfile.save();
+  const t = await db.sequelize.transaction();
+  const { firstName, lastName, ...profileData } = updateBody;
+  const createdAt = new Date();
+  const updatedAt = new Date();
+
+  try {
+    const [userProfile, created] = await UserProfile.findOrCreate({
+      where: { userId },
+      defaults: { ...profileData, createdAt, updatedAt },
+      transaction: t,
+    });
+    if (!created) {
+      Object.assign(userProfile, { ...profileData, updatedAt });
+      await userProfile.save();
+    }
+
+    const user = await getUserById(userId);
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.updatedAt = updatedAt;
+    if (user.changed('firstName', firstName) || user.changed('lastName', lastName)) {
+      await user.save({ transaction: t });
+    }
+    t.commit();
+    return { userProfile, user };
+  } catch (error) {
+    t.rollback();
+    throw new ApiError(httpStatus.NOT_FOUND, 'Failed to save profile updates');
   }
-  return userProfile;
 };
 
 const getUserProfileByUserId = async (userId) => {

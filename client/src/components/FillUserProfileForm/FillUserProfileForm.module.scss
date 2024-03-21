@@ -54,16 +54,31 @@
 
 .formFieldWide {
   width: 614px;
+
   @include media.media-s {
     width: 300px;
   }
 }
 
 .errorMessage {
+  padding-left: 1.2rem;
   @include fonts.hintText($color: colors.$error);
+  text-align: center;
 
   &::before {
+    content: '';
     background: url('/images/Icon/error.svg') no-repeat center center / cover;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    position: relative;
+    left: -6px;
+    top: 2px;
+
+    @include media.media-s {
+      width: 11px;
+      height: 11px;
+    }
   }
 }
 
@@ -125,35 +140,43 @@
   height: var(--size);
   margin-bottom: 7px;
   padding: 26px;
-  background: colors.$orange-light url('/images/FillUserProfileForm/avatar.svg') no-repeat center;
+  background: colors.$orange-light url('/images/defaultProfileImg.svg') no-repeat center;
   border-radius: 15px;
   cursor: pointer;
 }
 
 .avatar {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
+  @extend %visually-hidden;
 }
 
-.avatarMessage {
-  padding-left: 1.2rem;
+.column {
+  display: flex;
+  flex-direction: column;
+}
 
-  &::before {
-    content: '';
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    position: relative;
-    left: -6px;
-    top: 2px;
+.items {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin: 4px 0 0;
+}
 
-    @include media.media-s {
-      width: 11px;
-      height: 11px;
-    }
-  }
+.item {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  background-color: colors.$orange-normal;
+  padding: 0px 12px;
+  margin-left: 1px;
+  border-radius: 16px;
+  color: white;
+}
+
+.itemIcon {
+  margin-bottom: -0.05rem;
+  cursor: pointer;
+}
+
+.interests {
+  width: auto;
 }

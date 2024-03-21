@@ -1,0 +1,114 @@
+/* light */
+@font-face {
+  font-family: 'poppins';
+  src: url('/styles/fonts/poppins-light-webfont.woff') format('woff');
+  src: url('/styles/fonts/poppins-light-webfont.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* regular */
+@font-face {
+  font-family: 'poppins';
+  src: url('src/styles/fonts/poppins-regular-webfont.woff') format('woff');
+  src: url('src/styles/fonts/poppins-regular-webfont.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* medium */
+@font-face {
+  font-family: 'poppins';
+  src: url('src/styles/fonts/Poppins-Medium.woff') format('woff');
+  src: url('src/styles/fonts/Poppins-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* bold */
+@font-face {
+  font-family: 'poppins';
+  src: url('src/common/styles/fonts/poppins-bold-webfont.woff') format('woff');
+  src: url('src/common/styles/fonts/poppins-bold-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+//Colors
+$black: #000000;
+$purple: #5932ea;
+$seconadry: #f97794;
+$white: #ffffff;
+
+// Fonts
+%font-family {
+  font-family: 'poppins', sans-serif;
+}
+
+@mixin mainText($font-size: 16px, $font-weight: 500, $line-height: 1.5, $color: $black) {
+  @extend %font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
+}
+
+@mixin hintText($font-size: 0.8rem, $font-weight: 300, $color: $black, $line-height: 1.25) {
+  @extend %font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
+}
+
+@mixin headingText($font-weight: 700, $line-height: 1.5) {
+  @extend %font-family;
+  font-weight: $font-weight;
+  line-height: $line-height;
+}
+
+@mixin bigText($font-size: 16px, $font-weight: 700, $line-height: 1.5) {
+  @extend %font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+}
+
+@mixin buttonText($font-size: 1.18rem, $font-weight: 700, $color: $black) {
+  @extend %font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: 1;
+  color: $color;
+}
+
+body,
+html {
+  margin: 0;
+  @include mainText;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+code {
+  @extend %font-family;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  font-family: inherit;
+}
