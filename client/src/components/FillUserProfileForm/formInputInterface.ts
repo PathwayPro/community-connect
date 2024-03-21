@@ -11,8 +11,8 @@ export interface IFormInput {
   instagramURL?: string;
   lastName: string;
   linkedInURL?: string;
-  provinceId?: string;
-  countryId?: string;
+  provinceId?: number;
+  countryId?: number;
   resume?: FileList;
   spokenLanguage?: { value: string; }[];
   twitterURL?: string;

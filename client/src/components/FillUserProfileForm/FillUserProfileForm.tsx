@@ -1,10 +1,13 @@
 import { FC, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm, UseFormRegister, UseFormSetValue, UseFormWatch, SubmitHandler, FieldErrors, Control } from 'react-hook-form';
 
 import { useAppDispatch } from '../../app/hooks';
 import { useCreateUserProfileMutation } from '../../app/slices/apiSlice';
+import { setUserRole } from '../../app/slices/authSlice';
 import { closeModal } from '../../app/slices/modalSlice';
 import { setUserData } from '../../app/slices/userSlice';
+
 import Button from '../../common/components/Button/Button';
 import Heading from '../../common/components/Heading/Heading';
 import { ERROR_MESSAGES } from '../../common/utils/errors';
@@ -39,6 +42,7 @@ const formId = 'fillUserProfile';
 
 const FillUserProfileForm: FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -72,6 +76,7 @@ const FillUserProfileForm: FC = () => {
   };
 
   const [createProfile] = useCreateUserProfileMutation();
+
   const onSubmit: SubmitHandler<IFormInput> = async (values) => {
     if (step != 4) {
       setStep((prevStep) => prevStep + 1);

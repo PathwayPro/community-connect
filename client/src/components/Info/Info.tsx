@@ -1,8 +1,10 @@
 /* eslint-disable max-len */
 import { format } from 'date-fns';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { useAppDispatch } from '../../app/hooks';
+import { useGetProvincesQuery } from '../../app/slices/apiSlice';
 import { showModal, MODAL_TYPE } from '../../app/slices/modalSlice';
 import Button from '../../common/components/Button/Button';
 import Icon, { iconProps } from '../../common/components/Icon/Icon';
@@ -43,8 +45,34 @@ interface InfoProps {
   userProfile: boolean;
 }
 
+interface Province {
+  id: number;
+  provinceAndTerritory: string;
+}
+
 const Info: FC<InfoProps> = ({ myProfile, userProfile }) => {
+  const userData = useSelector((state: any) => state.userProfile);
+  const { data: provinces } = useGetProvincesQuery({});
+  const [provinceName, setProvinceName] = useState<string | null>(null);
+  const birthDate = new Date(userData.birthDate);
   const dispatch = useAppDispatch();
+
+  const socialsList: iconProps[] = [
+    { href: userData.behanceURL, type: 'be' },
+    { href: userData.githubURL, type: 'git' },
+    { href: userData.twitterURL, type: 'tw' },
+    { href: userData.linkedInURL, type: 'in' },
+    { href: userData.instagramURL, type: 'inst' },
+  ];
+
+  useEffect(() => {
+    if (provinces) {
+      const foundProvince = provinces.find((province: Province) => province.id === userData.provinceId);
+      if (foundProvince) {
+        setProvinceName(foundProvince.provinceAndTerritory);
+      }
+    }
+  }, [provinces, userData.provinceId]);
 
   const openModal = (e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.KeyboardEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -61,6 +89,7 @@ const Info: FC<InfoProps> = ({ myProfile, userProfile }) => {
   return (
     <div className={styles.personal}>
       {myProfile && <IconSVG name={'editIcon'} className={styles.editIcon} onClick={openModal} />}
+
       <div className={styles.infoButtons}>
         <div className={styles.mainInfo}>
           <div className={styles.name}>{userData.name}</div>

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC, useEffect, useState } from 'react';
 import { useFieldArray, Controller } from 'react-hook-form';
-
+import { useGetProvincesQuery } from '../../app/slices/apiSlice';
 import { useGetCountriesQuery, useGetProvincesQuery, useGetInterestsQuery } from '../../app/slices/apiSlice';
 import Dropdown from '../../common/components/Dropdown/Dropdown';
 import Input from '../../common/components/Input/Input';
@@ -129,7 +129,7 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
     const preparedValues1: OptionType[] = contriesQuery.map((element: Record<string, string>) => {
       const preparedElement: OptionType = { value: '', label: '' };
       preparedElement.value = element.id;
-      preparedElement.label = element.country;
+      preparedElement.label = element.provinceAndTerritory;
       return preparedElement;
     });
     preparedValues1.sort((a, b) => a.label.localeCompare(b.label));
@@ -237,10 +237,11 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
           render={({ field }) => (
             <Dropdown
               name={field.name}
-              id={`${formId}-${field.name}`}
+              id={`${field.name}`}
               label="Country of origin"
-              options={preparedValues}
+              options={preparedCountries}
               className={styles.formField}
+              isSearchable
               onChange={field.onChange}
               onBlur={field.onBlur}
               errorMessage={errors.countryId?.message}
@@ -253,10 +254,11 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
           render={({ field }) => (
             <Dropdown
               name={field.name}
-              id={`${formId}-${field.name}`}
+              id={`${field.name}`}
               label="Province"
               options={preparedProvinces}
               className={styles.formField}
+              isSearchable
               onChange={field.onChange}
               onBlur={field.onBlur}
               errorMessage={errors.provinceId?.message}
@@ -350,6 +352,24 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
           onKeyDown={expertiseOnKeyDown}
           errorMessage={errors.fieldOfExpertise?.root?.message}
         />
+        <Controller
+          name="yearsOfExperience"
+          control={control}
+          rules={{
+            required: 'Years of experience are required',
+          }}
+          render={({ field }) => (
+            <Dropdown
+              name={field.name}
+              id={`${field.name}`}
+              label="Years of experience *"
+              options={years}
+              className={styles.formField}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+              errorMessage={errors.yearsOfExperience?.message}
+            />
+          )}
         {expertises && (
           <div className={styles.items}>
             {expertiseFields.map((item, index) => {
@@ -384,8 +404,6 @@ const Step1: FC<StepAllProps> = ({ formId, errors, register, control, setValue, 
             })}
           </div>
         )}
-
-
       </div>
       <div className={styles.formRow}>
         <Textarea

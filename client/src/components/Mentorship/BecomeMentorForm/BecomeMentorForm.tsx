@@ -175,7 +175,7 @@ const BecomeMentorForm: FC = () => {
                 render={({ field }) => (
                   <Dropdown
                     name={field.name}
-                    id={`${formId}-${field.name}`}
+                    id={`${field.name}`}
                     label="Years of experience *"
                     options={years}
                     className={styles.formField}
@@ -206,7 +206,7 @@ const BecomeMentorForm: FC = () => {
                 render={({ field }) => (
                   <Dropdown
                     name={field.name}
-                    id={`${formId}-${field.name}`}
+                    id={`${field.name}`}
                     label="Availability (hours a month) *"
                     options={availabilityOptions}
                     className={styles.formField}

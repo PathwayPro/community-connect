@@ -15,9 +15,12 @@ import HeaderDropDown from '../HeaderDropDown/HeaderDropDown';
 
 import styles from './HeaderNav.module.scss';
 
-const HeaderNav: FC = () => {
+interface HeaderNavProps {
+  isLogin: boolean;
+}
+
+const HeaderNav: FC<HeaderNavProps> = ({ isLogin }) => {
   const [isNavDropDownActive, setNavDropDownActive] = useState(false);
-  const isLogin = useAppSelector((state) => state.auth.login);
   const dispatch = useAppDispatch();
   const [trigger] = useLazyLogoutQuery({});
 

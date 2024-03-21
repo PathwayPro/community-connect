@@ -173,7 +173,6 @@ export const apiSlice = createApi({
     getCountries: builder.query({
       query: () => '/v1/utils/countries',
     }),
-
     // Firebase
     uploadImage: builder.mutation({
       query: (data) => ({

@@ -21,7 +21,7 @@ const goals = [
   { value: 'networking', label: 'Networking' },
 ];
 
-const Step4: FC<StepControlProps> = ({ formId, errors, control }) => {
+const Step4: FC<StepControlProps> = ({ errors, control }) => {
   return (
     <>
       <div className={styles.formRow}>
@@ -31,7 +31,7 @@ const Step4: FC<StepControlProps> = ({ formId, errors, control }) => {
           render={({ field }) => (
             <Dropdown
               name={field.name}
-              id={`${formId}-${field.name}`}
+              id={`${field.name}`}
               label="How long have you been in Canada?"
               options={years}
               className={styles.formFieldWide}
@@ -49,7 +49,7 @@ const Step4: FC<StepControlProps> = ({ formId, errors, control }) => {
           render={({ field }) => (
             <Dropdown
               name={field.name}
-              id={`${formId}-${field.name}`}
+              id={`${field.name}`}
               label="What is your goal to join the Community Connect?"
               options={goals}
               className={styles.formFieldWide}

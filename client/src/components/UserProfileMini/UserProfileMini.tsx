@@ -1,9 +1,16 @@
 import { FC } from 'react';
 
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import Avatar from '../../common/components/Avatar/Avatar';
 import IconLinkSVG from '../../common/components/IconSVG/Link/IconLinkSVG';
 
 import styles from './UserProfileMini.module.scss';
+
+
+const Info: FC = () => {
+  const userData = useSelector((state: any) => state.userProfile);
 
 interface UserFieldOfExp {
   fieldOfExpertise: string;
@@ -22,15 +29,17 @@ interface ProfileMiniProps {
 }
 
 const Info: FC<ProfileMiniProps> = ({ userData }) => {
+
   return (
     <div className={styles.userProfile}>
       <div className={styles.backgroundImage}>
-        <Avatar size="medium" borderColor="blue" className={styles.profileImage} />
+        <Avatar src={userData.image} size="medium" borderColor="blue" className={styles.profileImage} />
       </div>
       <div className={styles.infoBlock}>
         <div className={styles.mainInfo}>
           <span>{`${userData.userFullName.firstName} ${userData.userFullName.lastName}`}</span>
           <span className={styles.info}>{userData.userFieldOfExp.fieldOfExpertise}</span>
+
           <IconLinkSVG
             name="editIcon"
             size="small"
@@ -39,6 +48,15 @@ const Info: FC<ProfileMiniProps> = ({ userData }) => {
             label="Link to User Profile"
           />
         </div>
+        <div className={styles.links}>
+          <Link to="/connections" className={styles.link}>
+            Your Connections
+          </Link>
+          <Link to="/events" className={styles.link}>
+            Manage Events
+          </Link>
+        </div>
+
       </div>
     </div>
   );
